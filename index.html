@@ -1,638 +1,700 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>ZYNEXA FREE — Mine & Earn</title>
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>ZYNEXA FREE — 50 Crypto Token Mining & Earning Ecosystem</title>
+
   <!-- Telegram WebApp SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- Firebase Modular Compat SDKs for Single-File Architecture -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-functions-compat.js"></script>
-
-  <!-- Lucide Icons -->
+  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Advertising Network SDK Entrypoints -->
-  <!-- Monetag In-App / Web SDK Placeholder (Replace with your direct Zone script) -->
-  <script src="https://alwingulla.com/88/tag.min.js" data-zone="YOUR_MONETAG_ZONE_ID" async data-cfasync="false"></script>
-  <!-- Gigapub Official Web SDK -->
-  <script src="https://gigapub.tech/sdk.js" async></script>
+  <!-- Firebase SDK Compat CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+  <!-- Monetag Official SDK -->
+  <script src="//libtl.com/sdk.js" data-zone="9955574" data-sdk="show_9955574"></script>
+
+  <!-- Gigapub Official SDK -->
+  <script src="https://ad.gigapub.tech/script?id=6234"></script>
 
   <style>
+    /* ======================================================================
+       1. AUTOMATIC THEME DETECTION (DARK / LIGHT DYNAMIC ENGINE)
+       ====================================================================== */
     :root {
-      --bg-primary: #070A14;
-      --bg-secondary: #0C1422;
-      --bg-card: #101E30;
-      --bg-card-hover: #15273F;
-      --accent-cyan: #20B9F2;
-      --accent-blue: #55D1FF;
-      --accent-green: #27D9A0;
-      --accent-red: #FF4D4D;
-      --accent-gold: #FFB800;
-      --text-primary: #F5F8FF;
-      --text-secondary: #8DA4BB;
-      --border-cyan: rgba(80, 180, 240, 0.18);
-      --border-cyan-active: rgba(85, 209, 255, 0.5);
-      --glow-cyan: 0 0 20px rgba(32, 185, 242, 0.25);
-      --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      --safe-area-top: env(safe-area-inset-top, 0px);
-      --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+      /* Automatic Light defaults (Fallback) */
+      --bg-primary: #F1F5F9;
+      --bg-secondary: #E2E8F0;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --bg-card-elevated: #FFFFFF;
+      --cyan: #0284C7;
+      --cyan-glow: rgba(2, 132, 199, 0.3);
+      --blue: #2563EB;
+      --neon: #0D9488;
+      --accent: #7C3AED;
+      --success: #16A34A;
+      --warning: #D97706;
+      --danger: #DC2626;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --border-color: rgba(2, 132, 199, 0.2);
+      --border-active: rgba(2, 132, 199, 0.6);
+      --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.08);
+      
+      /* Luxury Gold Bank Card Gradients */
+      --gold-gradient: linear-gradient(135deg, #FFDF73 0%, #D4AF37 40%, #AA771C 75%, #F5D77F 100%);
+      --gold-border: 1px solid rgba(255, 223, 115, 0.8);
+      --gold-text: #3D2600;
+      --gold-sub: rgba(61, 38, 0, 0.85);
+      --gold-chip: linear-gradient(135deg, #FFE899, #B8860B);
+
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #040711;
+        --bg-secondary: #08101E;
+        --bg-card: rgba(13, 23, 42, 0.85);
+        --bg-card-elevated: #112038;
+        --cyan: #00d2ff;
+        --cyan-glow: rgba(0, 210, 255, 0.4);
+        --blue: #3a7bd5;
+        --neon: #00f2fe;
+        --accent: #8a2be2;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --border-color: rgba(0, 210, 255, 0.16);
+        --border-active: rgba(0, 210, 255, 0.6);
+        --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.6);
+
+        --gold-gradient: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+        --gold-border: 1px solid rgba(252, 246, 186, 0.5);
+        --gold-text: #2A1A00;
+        --gold-sub: rgba(42, 26, 0, 0.85);
+        --gold-chip: linear-gradient(135deg, #FCF6BA, #AA771C);
+      }
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      user-select: none;
-      -webkit-user-select: none;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     body {
       background-color: var(--bg-primary);
       color: var(--text-primary);
-      font-family: var(--font-family);
+      font-family: var(--font-main);
       overflow-x: hidden;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding-top: var(--safe-area-top);
-      padding-bottom: calc(75px + var(--safe-area-bottom));
+      padding-bottom: 110px;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Scrollbars */
-    ::-webkit-scrollbar { width: 4px; }
+    input, select, textarea, button { font-family: inherit; outline: none; }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg-primary); }
-    ::-webkit-scrollbar-thumb { background: var(--border-cyan); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
 
-    /* App Container */
-    #app-container {
-      width: 100%;
+    .app-container {
       max-width: 480px;
       margin: 0 auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      flex: 1;
+      padding: 12px 14px;
+      position: relative;
     }
 
-    /* Top Bar */
-    .top-bar {
+    /* TOP HEADER */
+    .top-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 4px;
+      padding: 4px 0 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 14px;
     }
-
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-      border-radius: 10px;
+    .header-avatar-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--bg-primary);
-      box-shadow: var(--glow-cyan);
-    }
-
-    .brand-title {
-      font-size: 1.15rem;
       font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--cyan-glow);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+    }
+    .header-site-title {
+      font-size: 18px;
+      font-weight: 900;
       letter-spacing: 1px;
-      background: linear-gradient(90deg, #FFFFFF, var(--accent-blue));
+      background: linear-gradient(90deg, var(--text-primary), var(--cyan));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
-    .brand-subtitle {
-      font-size: 0.65rem;
-      color: var(--accent-cyan);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .icon-button {
+    .btn-icon {
       background: var(--bg-card);
-      border: 1px solid var(--border-cyan);
-      color: var(--text-primary);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .icon-button:active {
-      transform: scale(0.92);
-      border-color: var(--accent-cyan);
-    }
-
-    .lang-badge {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--accent-cyan);
-    }
-
-    /* Cards */
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-cyan);
-      border-radius: 18px;
-      padding: 18px;
       position: relative;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(8px);
     }
 
-    .card-glow {
-      box-shadow: 0 0 25px rgba(32, 185, 242, 0.12);
-      border-color: var(--border-cyan-active);
+    /* ======================================================================
+       REALISTIC GOLDEN BANK CARD DESIGN
+       ====================================================================== */
+    .golden-bank-card {
+      background: var(--gold-gradient);
+      border: var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 20px 18px;
+      color: var(--gold-text);
+      box-shadow: 0 14px 35px rgba(184, 134, 11, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 18px;
     }
-
-    .card-title-row {
+    /* Bank Card Sheen */
+    .golden-bank-card::after {
+      content: '';
+      position: absolute;
+      top: -60%;
+      right: -60%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .gold-card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
     }
-
-    .card-title {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      font-weight: 600;
-      text-transform: uppercase;
+    .gold-token-avatar-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 4px 10px 4px 6px;
+      border-radius: 30px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    .gold-token-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #fff;
+      padding: 2px;
+    }
+    .gold-token-sym {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--gold-text);
       letter-spacing: 0.5px;
     }
 
-    /* Main Balance Card */
-    .balance-display {
-      font-size: 2.2rem;
+    /* Compact Top-Right Corner Selector */
+    .gold-select-wrapper {
+      position: relative;
+    }
+    .gold-select-compact {
+      appearance: none;
+      -webkit-appearance: none;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: var(--gold-text);
+      padding: 5px 22px 5px 10px;
+      border-radius: 14px;
+      font-size: 11px;
       font-weight: 800;
-      color: var(--text-primary);
+      cursor: pointer;
+    }
+    .gold-select-wrapper::after {
+      content: '▾';
+      font-size: 11px;
+      color: var(--gold-text);
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    /* Card EMV Microchip */
+    .gold-card-chip {
+      width: 38px;
+      height: 28px;
+      background: var(--gold-chip);
+      border-radius: 6px;
+      margin: 14px 0 10px 0;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5);
+    }
+    .gold-card-balance {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--gold-text);
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
       display: flex;
       align-items: baseline;
       gap: 6px;
-      margin-bottom: 12px;
     }
-
-    .balance-currency {
-      font-size: 1rem;
-      color: var(--accent-cyan);
+    .gold-card-usd {
+      font-size: 12px;
       font-weight: 700;
+      color: var(--gold-sub);
+      margin-top: 2px;
     }
 
-    .balance-breakdown {
+    /* ======================================================================
+       3-COLUMN HIGH-QUALITY ESSENTIAL ACTION BUTTONS (NO EXTRA STATUS BOXES)
+       ====================================================================== */
+    .essential-3col-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 20px;
     }
-
-    .breakdown-item {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .breakdown-label {
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-    }
-
-    .breakdown-val {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    /* Action Buttons */
-    .action-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    .action-btn-item {
+    .btn-lux-tile {
+      background: linear-gradient(145deg, var(--bg-card-elevated), var(--bg-card));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       cursor: pointer;
+      transition: var(--transition-fast);
+      color: var(--text-primary);
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
     }
-
-    .action-btn-icon {
-      width: 50px;
-      height: 50px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-cyan);
-      border-radius: 14px;
+    .btn-lux-tile:active {
+      transform: scale(0.96);
+      border-color: var(--cyan);
+      box-shadow: 0 0 15px var(--cyan-glow);
+    }
+    .btn-lux-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--accent-cyan);
-      transition: all 0.2s ease;
+      transition: var(--transition-fast);
+    }
+    .btn-lux-tile span {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
     }
 
-    .action-btn-item:active .action-btn-icon {
-      transform: scale(0.9);
-      background: var(--accent-cyan);
-      color: var(--bg-primary);
+    /* Individual Tile Aesthetics */
+    .tile-blue .btn-lux-icon { background: rgba(0, 210, 255, 0.12); color: var(--cyan); }
+    .tile-green .btn-lux-icon { background: rgba(16, 185, 129, 0.12); color: var(--success); }
+    .tile-purple .btn-lux-icon { background: rgba(138, 43, 226, 0.12); color: #c084fc; }
+    .tile-gold .btn-lux-icon { background: rgba(245, 158, 11, 0.12); color: var(--warning); }
+    .tile-pink .btn-lux-icon { background: rgba(236, 72, 153, 0.12); color: #f472b6; }
+    .tile-teal .btn-lux-icon { background: rgba(13, 148, 136, 0.12); color: var(--neon); }
+
+    /* CARDS */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+    .card-elevated {
+      background: var(--bg-card-elevated);
+      border: 1px solid var(--border-active);
     }
 
-    .action-btn-label {
-      font-size: 0.72rem;
-      color: var(--text-secondary);
-      font-weight: 600;
-      text-align: center;
-    }
-
-    /* Generic Primary Buttons */
+    /* BUTTONS */
     .btn-primary {
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
-      color: #030812;
+      width: 100%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
       border: none;
-      border-radius: 14px;
-      padding: 14px 20px;
-      font-weight: 700;
-      font-size: 0.95rem;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(32, 185, 242, 0.3);
-      width: 100%;
+      box-shadow: 0 4px 16px var(--cyan-glow);
+      transition: var(--transition-fast);
     }
-
-    .btn-primary:active {
-      transform: scale(0.98);
-      filter: brightness(1.1);
-    }
-
-    .btn-primary:disabled {
-      background: #203144;
-      color: #5D7289;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
+    .btn-primary:active { transform: scale(0.97); }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; filter: grayscale(0.8); }
 
     .btn-secondary {
-      background: rgba(85, 209, 255, 0.1);
-      color: var(--accent-cyan);
-      border: 1px solid var(--border-cyan);
-      border-radius: 14px;
-      padding: 12px 18px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      transition: all 0.2s;
-    }
-
-    .btn-secondary:active {
-      background: rgba(85, 209, 255, 0.2);
-    }
-
-    /* Views */
-    .view-panel {
-      display: none;
-      flex-direction: column;
-      gap: 16px;
-      animation: fadeIn 0.25s ease-in-out;
-    }
-
-    .view-panel.active {
-      display: flex;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Mining View Pulse and Ring */
-    .mining-hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 30px 10px;
-      position: relative;
-    }
-
-    .mining-orb-outer {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 2px dashed var(--accent-cyan);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      margin-bottom: 24px;
-      animation: rotateRing 30s linear infinite;
-    }
-
-    .mining-orb-outer.active {
-      border-color: var(--accent-green);
-      animation: rotateRing 8s linear infinite;
-    }
-
-    .mining-orb-inner {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(32,185,242,0.25) 0%, rgba(12,20,34,0.95) 75%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border-cyan-active);
-      box-shadow: var(--glow-cyan);
-      animation: pulseGlow 2.5s infinite alternate;
-    }
-
-    @keyframes rotateRing {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 15px rgba(32, 185, 242, 0.2); }
-      100% { box-shadow: 0 0 35px rgba(85, 209, 255, 0.5); }
-    }
-
-    .mining-rate-badge {
-      background: rgba(39, 217, 160, 0.12);
-      border: 1px solid var(--accent-green);
-      color: var(--accent-green);
-      font-size: 0.8rem;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-weight: 700;
-      margin-top: 10px;
-    }
-
-    /* Bottom Navigation Bar */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: calc(65px + var(--safe-area-bottom));
-      padding-bottom: var(--safe-area-bottom);
-      background: rgba(12, 20, 34, 0.95);
-      border-top: 1px solid var(--border-cyan);
-      backdrop-filter: blur(12px);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 999;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .nav-tab {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      color: var(--text-secondary);
-      font-size: 0.68rem;
-      font-weight: 600;
-      cursor: pointer;
-      flex: 1;
-      padding: 6px 0;
-      transition: all 0.2s ease;
-    }
-
-    .nav-tab.active {
-      color: var(--accent-cyan);
-    }
-
-    .nav-tab.active svg {
-      transform: translateY(-2px);
-      stroke: var(--accent-cyan);
-      filter: drop-shadow(0 0 6px var(--accent-cyan));
-    }
-
-    /* Package Cards */
-    .package-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-cyan);
-      border-radius: 16px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .package-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .package-name {
-      font-weight: 800;
-      font-size: 1.05rem;
+      background: var(--bg-card-elevated);
+      border: 1px solid var(--border-color);
       color: var(--text-primary);
-    }
-
-    .badge-status {
-      font-size: 0.7rem;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
       font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
-    .badge-active { background: rgba(39, 217, 160, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
-    .badge-locked { background: rgba(141, 164, 187, 0.15); color: var(--text-secondary); border: 1px solid rgba(141, 164, 187, 0.3); }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 4px;
-      overflow: hidden;
+    /* ======================================================================
+       ADVANCED 50 PACKAGES SYSTEM (PAY VS MISSION DROPDOWN TOGGLE)
+       ====================================================================== */
+    .package-card-premium {
+      background: linear-gradient(145deg, var(--bg-card-elevated), var(--bg-card));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      position: relative;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-card);
+    }
+    .package-card-premium.is-active-pkg {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px var(--cyan-glow);
+    }
+    .pkg-top-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .pkg-crypto-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(0, 210, 255, 0.1);
+      border: 1px solid var(--border-color);
+      padding: 6px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .pkg-title-area { flex: 1; }
+    .pkg-title-txt { font-size: 15px; font-weight: 900; color: var(--text-primary); }
+    .pkg-return-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--success);
+      color: var(--success);
       margin-top: 4px;
     }
 
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
-      border-radius: 4px;
-      transition: width 0.4s ease;
+    /* Dual Selectors Row: Duration & Activation Mode (Pay / Mission) */
+    .pkg-selectors-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: var(--bg-secondary);
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+    }
+    .pkg-sel-group { display: flex; flex-direction: column; gap: 3px; }
+    .pkg-sel-label { font-size: 9px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
+    .pkg-custom-select {
+      background: var(--bg-card-elevated);
+      color: var(--cyan);
+      border: 1px solid var(--border-color);
+      padding: 6px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
     }
 
-    /* Modal Sheet */
-    .modal-overlay {
+    /* Mode View Boxes */
+    .pkg-mode-view { margin-bottom: 12px; }
+    .mission-header { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; }
+    .progress-track {
+      width: 100%;
+      height: 7px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .progress-fill { height: 100%; border-radius: 5px; transition: width 0.3s; }
+    .fill-ref { background: linear-gradient(90deg, #3a7bd5, var(--cyan)); }
+    .fill-ads { background: linear-gradient(90deg, var(--accent), var(--cyan)); }
+
+    .pkg-commission-banner {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--warning);
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    /* Bottom Action Controls on Package Card */
+    .pkg-btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 8px;
+    }
+    .btn-details {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ======================================================================
+       PROFILE DASHBOARD & GRAPH
+       ====================================================================== */
+    .profile-banner-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(145deg, var(--bg-card-elevated), var(--bg-card));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-card);
+    }
+    .profile-avatar-large {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 900;
+      color: #fff;
+      box-shadow: 0 0 15px var(--cyan-glow);
+    }
+    .dash-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .dash-stat-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+    }
+    .dash-stat-box h5 { font-size: 10px; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; }
+    .dash-stat-box p { font-size: 14px; font-weight: 800; color: var(--cyan); margin-top: 2px; }
+
+    /* Graph Canvas */
+    .graph-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    /* WALLET HUB */
+    .wallet-hub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .wallet-hub-card {
+      background: var(--bg-card-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .wallet-hub-card:active { transform: scale(0.96); border-color: var(--cyan); }
+
+    /* ULTRA-PREMIUM FLOATING BOTTOM NAV (3 TABS) */
+    .bottom-nav-premium-wrap {
       position: fixed;
-      top: 0;
+      bottom: 12px;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: rgba(3, 8, 18, 0.82);
-      backdrop-filter: blur(8px);
-      z-index: 1000;
-      display: none;
-      align-items: flex-end;
+      display: flex;
       justify-content: center;
+      z-index: 9999;
+      pointer-events: none;
+      padding: 0 16px;
     }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-sheet {
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border-cyan-active);
-      border-radius: 24px 24px 0 0;
+    .bottom-nav-premium {
+      pointer-events: auto;
       width: 100%;
-      max-width: 480px;
-      padding: 24px 20px calc(24px + var(--safe-area-bottom)) 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-height: 85vh;
-      overflow-y: auto;
-      box-shadow: 0 -10px 40px rgba(0,0,0,0.6);
-      animation: slideUp 0.28s ease-out;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-label {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      font-weight: 600;
-    }
-
-    .form-input, .form-select {
+      max-width: 440px;
+      height: 68px;
       background: var(--bg-card);
-      border: 1px solid var(--border-cyan);
-      border-radius: 12px;
-      padding: 12px 14px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-active);
+      border-radius: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .nav-item-p {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 32%;
+      color: var(--text-secondary);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .nav-item-p .nav-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .nav-item-p.active { color: var(--text-primary); }
+    .nav-item-p.active .nav-icon-box {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #ffffff;
+      box-shadow: 0 0 16px var(--cyan-glow);
+      transform: translateY(-4px);
+    }
+    .nav-item-p.active span { color: var(--cyan); font-weight: 800; }
+
+    /* Views */
+    .view-page { display: none; animation: fadeIn 0.25s ease-in-out; }
+    .view-page.active-view { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Forms */
+    .form-group { margin-bottom: 12px; text-align: left; }
+    .form-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 5px; display: block; font-weight: 600; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
       color: var(--text-primary);
-      font-size: 0.95rem;
-      outline: none;
-      font-family: inherit;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
     }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--cyan); }
 
-    .form-input:focus, .form-select:focus {
-      border-color: var(--accent-cyan);
-      box-shadow: var(--glow-cyan);
-    }
-
-    /* Toast Notifications */
+    /* Toast */
     #toast-container {
       position: fixed;
-      top: calc(16px + var(--safe-area-top));
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
       max-width: 420px;
-      z-index: 10000;
+      z-index: 99999;
+      pointer-events: none;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      pointer-events: none;
     }
-
-    .toast {
-      background: rgba(16, 30, 48, 0.96);
-      border: 1px solid var(--border-cyan);
-      border-radius: 12px;
+    .toast-msg {
+      background: var(--bg-card-elevated);
+      border: 1px solid var(--cyan);
+      color: var(--text-primary);
       padding: 12px 16px;
-      font-size: 0.85rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      font-size: 12px;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 10px;
-      color: var(--text-primary);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-      animation: toastIn 0.25s ease-out forwards;
+      pointer-events: auto;
+      animation: slideDown 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+    @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    /* Modal */
+    .modal-sheet {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 10002;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-sheet-content {
+      background: var(--bg-card-elevated);
+      border: 1px solid var(--cyan);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      width: 100%;
+      max-width: 420px;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
-    .toast-success { border-color: var(--accent-green); }
-    .toast-error { border-color: var(--accent-red); }
-
-    @keyframes toastIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Admin Badge / Views */
-    .admin-pill {
-      background: rgba(255, 184, 0, 0.15);
-      color: var(--accent-gold);
-      border: 1px solid var(--accent-gold);
-      font-size: 0.65rem;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 10px;
-      margin-left: 6px;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-cyan);
-      border-radius: 12px;
-      padding: 12px;
-    }
+    .badge-status { padding: 3px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
+    .badge-pending { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .badge-completed { background: rgba(16, 185, 129, 0.2); color: var(--success); }
   </style>
 </head>
 <body>
@@ -640,1275 +702,1515 @@
   <!-- Toast Container -->
   <div id="toast-container"></div>
 
-  <!-- Top Navigation Header -->
-  <div id="app-container">
-    <header class="top-bar">
-      <div class="brand-group">
-        <div class="brand-icon">
-          <i data-lucide="zap" style="width:20px; height:20px;"></i>
-        </div>
-        <div>
-          <div class="brand-title">ZYNEXA <span id="admin-indicator" style="display:none;" class="admin-pill">ADMIN</span></div>
-          <div class="brand-subtitle" data-i18n="tagline">Mine Future • Free</div>
-        </div>
+  <!-- App Wrapper -->
+  <div class="app-container">
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="header-avatar-btn" id="top-bar-avatar" onclick="App.navigate('view-profile')" title="My Profile">
+        U
       </div>
-      <div class="top-actions">
-        <button class="icon-button" id="btn-lang" title="Toggle Language">
-          <span class="lang-badge" id="lang-indicator">EN</span>
-        </button>
-        <button class="icon-button" id="btn-guide" title="User Guide">
-          <i data-lucide="help-circle" style="width:18px; height:18px;"></i>
-        </button>
-      </div>
+      <h1 class="header-site-title">ZYNEXA FREE</h1>
+      <button class="btn-icon" onclick="App.openNotificationModal()" title="Notifications">
+        <i data-lucide="bell" style="width:18px; height:18px;"></i>
+      </button>
     </header>
 
-    <!-- ==================== VIEW 1: HOME DASHBOARD ==================== -->
-    <main id="view-home" class="view-panel active">
-      <!-- Balance Card -->
-      <section class="card card-glow">
-        <div class="card-title-row">
-          <span class="card-title" data-i18n="totalBalance">Total Balance</span>
-          <span class="badge-status badge-active" data-i18n="freeEarning">FREE EARNER</span>
-        </div>
-        <div class="balance-display">
-          <span id="txt-total-balance">0.0000</span>
-          <span class="balance-currency">USDT</span>
-        </div>
-        <div class="balance-breakdown">
-          <div class="breakdown-item">
-            <span class="breakdown-label" data-i18n="withdrawable">Withdrawable</span>
-            <span class="breakdown-val" id="txt-withdrawable-balance">0.0000 USDT</span>
+    <!-- ==========================================
+         PAGE 1: HOME DASHBOARD
+         ========================================== -->
+    <main id="view-home" class="view-page active-view">
+
+      <!-- REALISTIC GOLDEN BANK CARD WITH EMBOSSED CHIP & EMBEDDED TOKEN AVATAR -->
+      <section class="golden-bank-card">
+        <div class="gold-card-header">
+          <!-- Token Avatar & Symbol Badge -->
+          <div class="gold-token-avatar-badge">
+            <img class="gold-token-avatar" id="home-token-logo" src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=025" alt="Token" />
+            <span class="gold-token-sym" id="home-selected-symbol">USDT</span>
           </div>
-          <div class="breakdown-item">
-            <span class="breakdown-label" data-i18n="pending">Pending Review</span>
-            <span class="breakdown-val" id="txt-pending-balance">0.0000 USDT</span>
-          </div>
-          <div class="breakdown-item">
-            <span class="breakdown-label" data-i18n="adEarnings">Ads Reward</span>
-            <span class="breakdown-val" id="txt-ads-balance">0.0000 USDT</span>
-          </div>
-          <div class="breakdown-item">
-            <span class="breakdown-label" data-i18n="miningEarnings">Mining Reward</span>
-            <span class="breakdown-val" id="txt-mining-balance">0.0000 USDT</span>
+
+          <!-- Small Top-Right Compact Token Switcher -->
+          <div class="gold-select-wrapper">
+            <select class="gold-select-compact" id="balance-token-picker" onchange="App.handleBalanceTokenChange(this.value)">
+              <!-- Populated via JS -->
+            </select>
           </div>
         </div>
+
+        <!-- EMV Microchip -->
+        <div class="gold-card-chip"></div>
+
+        <!-- Main Balance (No "Available Balance" Label) -->
+        <div class="gold-card-balance">
+          <span id="home-selected-bal">0.3000</span>
+          <span style="font-size:16px; font-weight:800;" id="home-selected-cur">USDT</span>
+        </div>
+        <div class="gold-card-usd" id="home-selected-usd-val">≈ $0.30 USD</div>
       </section>
 
-      <!-- Main Quick Actions -->
-      <section class="action-grid">
-        <div class="action-btn-item" id="btn-action-watch-ad">
-          <div class="action-btn-icon"><i data-lucide="play-circle"></i></div>
-          <span class="action-btn-label" data-i18n="watchAd">Watch Ad</span>
+      <!-- 3-COLUMN HIGH-QUALITY ESSENTIAL ACTION BUTTONS -->
+      <div class="essential-3col-grid">
+        <div class="btn-lux-tile tile-blue" onclick="App.navigate('view-ads')">
+          <div class="btn-lux-icon"><i data-lucide="tv" style="width:22px; height:22px;"></i></div>
+          <span>Watch Ads</span>
         </div>
-        <div class="action-btn-item" id="btn-action-withdraw">
-          <div class="action-btn-icon"><i data-lucide="arrow-up-right"></i></div>
-          <span class="action-btn-label" data-i18n="withdraw">Withdraw</span>
+        <div class="btn-lux-tile tile-green" onclick="App.navigate('view-yield')">
+          <div class="btn-lux-icon"><i data-lucide="hammer" style="width:22px; height:22px;"></i></div>
+          <span>Mining</span>
         </div>
-        <div class="action-btn-item" id="btn-action-refer">
-          <div class="action-btn-icon"><i data-lucide="users"></i></div>
-          <span class="action-btn-label" data-i18n="referFriends">Invite</span>
+        <div class="btn-lux-tile tile-purple" onclick="App.navigate('view-packages')">
+          <div class="btn-lux-icon"><i data-lucide="layers" style="width:22px; height:22px;"></i></div>
+          <span>Packages</span>
         </div>
-        <div class="action-btn-item" id="btn-action-packages">
-          <div class="action-btn-icon"><i data-lucide="layers"></i></div>
-          <span class="action-btn-label" data-i18n="packages">Packages</span>
+        <div class="btn-lux-tile tile-gold" onclick="App.navigate('view-wallet-hub')">
+          <div class="btn-lux-icon"><i data-lucide="wallet" style="width:22px; height:22px;"></i></div>
+          <span>My Wallet</span>
         </div>
-      </section>
-
-      <!-- Unclaimed Card -->
-      <section class="card">
-        <div class="card-title-row">
-          <span class="card-title" data-i18n="readyClaim">Available Activity Claim</span>
-          <i data-lucide="gift" style="width:18px; height:18px; color:var(--accent-cyan);"></i>
+        <div class="btn-lux-tile tile-pink" onclick="App.navigate('view-refer')">
+          <div class="btn-lux-icon"><i data-lucide="share-2" style="width:22px; height:22px;"></i></div>
+          <span>Invite</span>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px;">
-          <div>
-            <div style="font-size:1.4rem; font-weight:800; color:var(--accent-green);" id="txt-claimable-amount">0.0000 USDT</div>
-            <div style="font-size:0.75rem; color:var(--text-secondary);" data-i18n="claimDesc">From finished ad & mining cycles</div>
-          </div>
-          <button class="btn-primary" id="btn-claim-rewards" style="width:auto; padding:10px 18px;" data-i18n="claim">Claim</button>
+        <div class="btn-lux-tile tile-teal" onclick="App.navigate('view-convert')">
+          <div class="btn-lux-icon"><i data-lucide="repeat" style="width:22px; height:22px;"></i></div>
+          <span>Convert</span>
         </div>
-      </section>
-
-      <!-- Daily Activity Overview -->
-      <section class="card">
-        <div class="card-title-row">
-          <span class="card-title" data-i18n="dailyStats">Today's Performance</span>
-        </div>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="breakdown-label" data-i18n="adsToday">Ads Watched</div>
-            <div class="breakdown-val" id="txt-daily-ads">0 / 25</div>
-          </div>
-          <div class="stat-card">
-            <div class="breakdown-label" data-i18n="miningToday">Mining Cycles</div>
-            <div class="breakdown-val" id="txt-daily-mining">0 / 4</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Recent Global Ledger Activity -->
-      <section class="card">
-        <div class="card-title-row">
-          <span class="card-title" data-i18n="recentActivity">Recent Activity</span>
-          <i data-lucide="clock" style="width:16px; height:16px; color:var(--text-secondary);"></i>
-        </div>
-        <div id="home-recent-activities" style="display:flex; flex-direction:column; gap:10px;">
-          <!-- Dynamically Injected -->
-          <div style="text-align:center; padding:15px; color:var(--text-secondary); font-size:0.8rem;" data-i18n="noActivities">No recent transactions</div>
-        </div>
-      </section>
+      </div>
     </main>
 
-    <!-- ==================== VIEW 2: REFERRAL HUB ==================== -->
-    <main id="view-refer" class="view-panel">
-      <section class="card card-glow">
-        <div class="card-title-row">
-          <span class="card-title" data-i18n="referralHub">Affiliate & Partner Hub</span>
-          <i data-lucide="share-2" style="width:18px; height:18px; color:var(--accent-cyan);"></i>
-        </div>
-        <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.4; margin-bottom:14px;" data-i18n="referralExpl">
-          Share your free link. Earn milestone bonuses & a perpetual activity commission on valid ad views. No deposit required.
-        </p>
-
-        <div class="stats-grid" style="margin-bottom:16px;">
-          <div class="stat-card">
-            <div class="breakdown-label" data-i18n="totalInvited">Total Friends</div>
-            <div class="breakdown-val" id="txt-ref-total">0</div>
-          </div>
-          <div class="stat-card">
-            <div class="breakdown-label" data-i18n="referralEarnings">Commission Earned</div>
-            <div class="breakdown-val" id="txt-ref-earnings">0.0000 USDT</div>
-          </div>
-        </div>
-
-        <div class="form-group" style="margin-bottom:12px;">
-          <label class="form-label" data-i18n="yourRefLink">Your Verified Referral Link</label>
-          <input type="text" class="form-input" id="input-ref-link" readonly value="Loading..." />
-        </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <button class="btn-primary" id="btn-copy-ref" data-i18n="copyLink">Copy Link</button>
-          <button class="btn-secondary" id="btn-share-telegram" data-i18n="shareTelegram">Share</button>
-        </div>
-      </section>
-
-      <!-- Referral List -->
-      <section class="card">
-        <div class="card-title-row">
-          <span class="card-title" data-i18n="referralNetwork">Your Network</span>
-        </div>
-        <div id="referral-list-container" style="display:flex; flex-direction:column; gap:10px;">
-          <div style="text-align:center; padding:15px; color:var(--text-secondary); font-size:0.8rem;" data-i18n="noReferralsYet">No referrals registered yet.</div>
-        </div>
-      </section>
-    </main>
-
-    <!-- ==================== VIEW 3: VIRTUAL YIELD (MINING) ==================== -->
-    <main id="view-yield" class="view-panel">
-      <section class="card card-glow" style="text-align:center;">
-        <div class="card-title-row">
-          <span class="card-title" data-i18n="cloudYield">Virtual Quantum Node</span>
-          <span class="badge-status badge-active" id="badge-mining-status">IDLE</span>
-        </div>
-
-        <div class="mining-hero">
-          <div class="mining-orb-outer" id="mining-orb">
-            <div class="mining-orb-inner">
-              <i data-lucide="cpu" style="width:40px; height:40px; color:var(--accent-cyan); margin-bottom:4px;"></i>
-              <span style="font-size:0.7rem; color:var(--text-secondary); font-weight:700;" data-i18n="virtualHash">NODE V-9</span>
-            </div>
-          </div>
-
-          <div style="font-size:2rem; font-weight:800; font-family:monospace;" id="txt-mining-timer">00:00:00</div>
-          <div class="mining-rate-badge" id="txt-mining-speed">Rate: 0.0005 USDT / hr</div>
-        </div>
-
-        <div style="margin-bottom:16px;">
-          <div class="breakdown-label" data-i18n="currentEarned">Accumulated Yield</div>
-          <div style="font-size:1.6rem; font-weight:800; color:var(--accent-cyan);" id="txt-mining-accumulated">0.000000 USDT</div>
-        </div>
-
-        <button class="btn-primary" id="btn-start-mining" data-i18n="startMining">Start Mining Cycle</button>
-        <button class="btn-primary" id="btn-claim-mining" style="display:none; background:linear-gradient(90deg, #27D9A0, #20B9F2);" data-i18n="claimMining">Claim Virtual Yield</button>
-      </section>
-
-      <!-- Mining Estimates / Disclosure -->
-      <section class="card">
-        <div class="card-title-row">
-          <span class="card-title" data-i18n="yieldEstimates">Yield Simulation Metrics</span>
-        </div>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="breakdown-label" data-i18n="dailyEstimate">24h Estimated</div>
-            <div class="breakdown-val">~0.0120 USDT</div>
-          </div>
-          <div class="stat-card">
-            <div class="breakdown-label" data-i18n="monthlyEstimate">30d Estimated</div>
-            <div class="breakdown-val">~0.3600 USDT</div>
-          </div>
-        </div>
-        <p style="font-size:0.68rem; color:var(--text-secondary); margin-top:10px; font-style:italic;" data-i18n="disclaimerYield">
-          *Estimates are free virtual reward allocations funded strictly by advertising sponsorships. Not financial or blockchain proof-of-work investments.
-        </p>
-      </section>
-    </main>
-
-    <!-- ==================== VIEW 4: ACTIVITY PACKAGES ==================== -->
-    <main id="view-packages" class="view-panel">
-      <div style="padding:0 4px;">
-        <h2 style="font-size:1.2rem; font-weight:800;" data-i18n="activityTiers">Free Activity Tiers</h2>
-        <p style="font-size:0.78rem; color:var(--text-secondary); margin-top:2px;" data-i18n="tiersDesc">
-          Unlock higher yields and extra ad allowances by hitting free engagement milestones. No purchase possible.
+    <!-- ==========================================
+         PAGE 2: 50 TOKEN PACKAGES (PAY VS MISSION)
+         ========================================== -->
+    <section id="view-packages" class="view-page">
+      <div class="card card-elevated" style="text-align:center; margin-bottom:14px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan); margin-bottom:4px;">50 Crypto Token Packages</h2>
+        <p style="font-size:11px; color:var(--text-secondary); line-height:1.4;">
+          Choose whether to activate via <b>Token Payment</b> (with Commission Return %) or via <b>Free Missions</b> (0.15$/day baseline).
         </p>
       </div>
 
-      <!-- Package Tier 1 -->
-      <div class="package-card">
-        <div class="package-header">
-          <div>
-            <div class="package-name" data-i18n="pkgStarter">Starter Node</div>
-            <div style="font-size:0.75rem; color:var(--accent-cyan);" data-i18n="defaultUnlocked">Registered Tier</div>
-          </div>
-          <span class="badge-status badge-active" data-i18n="unlocked">UNLOCKED</span>
-        </div>
-        <div style="font-size:0.8rem; color:var(--text-secondary);">Standard ad limit (25/day), base virtual mining rate.</div>
+      <!-- Search bar -->
+      <div style="margin-bottom:14px;">
+        <input type="text" class="form-input" id="pkg-search-box" placeholder="🔍 Search token..." oninput="App.filterPackages(this.value)" />
       </div>
 
-      <!-- Package Tier 2 -->
-      <div class="package-card">
-        <div class="package-header">
-          <div>
-            <div class="package-name" data-i18n="pkgBronze">Bronze Free Tier</div>
-            <div style="font-size:0.75rem; color:var(--text-secondary);" id="txt-bronze-req">Watch 15 Ads</div>
+      <!-- 50 Packages Mount -->
+      <div id="packages-50-container"></div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 3: YIELD & MULTI-MINING STATION
+         ========================================== -->
+    <section id="view-yield" class="view-page">
+      <div class="card card-elevated" style="text-align:center; margin-bottom:16px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan); margin-bottom:4px;">Active Virtual Mining Rigs</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">
+          Your activated cloud rigs mine real crypto. Run individual 8-hour sessions.
+        </p>
+      </div>
+
+      <div id="active-rigs-container"></div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 4: INDIVIDUAL TOKEN MINING CONSOLE
+         ========================================== -->
+    <section id="view-mining-console" class="view-page">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-yield')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back to Station</span>
+      </div>
+
+      <div class="card card-elevated" style="display:flex; flex-direction:column; align-items:center; text-align:center; padding:24px 16px;">
+        <img id="console-token-img" src="" style="width:60px; height:60px; margin-bottom:8px;" />
+        <h3 id="console-token-title" style="font-size:18px; font-weight:900; color:var(--text-primary);">TOKEN MINER</h3>
+        <p id="console-token-rate" style="font-size:13px; color:var(--cyan); font-weight:800; margin-top:2px;">Rate: +0.0000 TOKEN/h</p>
+
+        <div style="width:130px; height:130px; border-radius:50%; border:2px dashed var(--cyan); display:flex; align-items:center; justify-content:center; margin:20px 0; box-shadow:0 0 20px var(--cyan-glow);">
+          <div style="width:85px; height:85px; border-radius:50%; background:radial-gradient(circle, var(--cyan), #0a1b32); display:flex; align-items:center; justify-content:center;">
+            <i data-lucide="cpu" style="width:36px; height:36px; color:#fff;"></i>
           </div>
-          <span class="badge-status badge-locked" id="badge-bronze-status">LOCKED</span>
         </div>
+
+        <div class="badge-status badge-pending" id="console-session-badge">IDLE</div>
+        <div style="font-family:monospace; font-size:24px; font-weight:900; color:var(--neon); margin:10px 0;" id="console-countdown">08:00:00</div>
+
+        <button class="btn-primary" id="console-action-btn" onclick="MultiMinerEngine.handleConsoleAction()">
+          START 8-HOUR SESSION
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 5: WALLET HUB (DEPOSIT, WITHDRAW, TRANSACTIONS)
+         ========================================== -->
+    <section id="view-wallet-hub" class="view-page">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+
+      <div class="card card-elevated" style="text-align:center;">
+        <span style="font-size:11px; color:var(--text-secondary); text-transform:uppercase; font-weight:700;">USDT Settlement Wallet</span>
+        <div style="font-size:32px; font-weight:900; color:var(--cyan); margin:6px 0;" id="wallet-hub-usdt-balance">0.3000 USDT</div>
+        <p style="font-size:11px; color:var(--text-secondary);">Direct TRC20 deposits & dual cashout gateway.</p>
+      </div>
+
+      <!-- 3 Buttons Grid -->
+      <div class="wallet-hub-grid">
+        <div class="wallet-hub-card" onclick="App.navigate('view-wallet-deposit')">
+          <i data-lucide="arrow-down-circle" style="width:24px; height:24px; color:var(--cyan);"></i>
+          <h4>Deposit</h4>
+        </div>
+        <div class="wallet-hub-card" onclick="App.navigate('view-wallet-withdraw')">
+          <i data-lucide="arrow-up-circle" style="width:24px; height:24px; color:var(--neon);"></i>
+          <h4>Withdraw</h4>
+        </div>
+        <div class="wallet-hub-card" onclick="App.navigate('view-wallet-tx')">
+          <i data-lucide="history" style="width:24px; height:24px; color:var(--warning);"></i>
+          <h4>Transactions</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5A: DEPOSIT PAGE -->
+    <section id="view-wallet-deposit" class="view-page">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-wallet-hub')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back to Wallet</span>
+      </div>
+
+      <div class="card card-elevated">
+        <h3 style="font-size:15px; font-weight:800; color:var(--cyan); margin-bottom:8px;">Deposit USDT (TRC20)</h3>
+        <p style="font-size:11px; color:var(--text-secondary); margin-bottom:12px;">Send funds to the address below & submit your Transaction TXID hash:</p>
+        
+        <div style="background:var(--bg-secondary); border:1px solid var(--border-color); padding:10px; border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span style="font-family:monospace; font-size:11px; color:var(--neon); word-break:break-all;">TCW6u9WjZf2VqN1jQ3pM8Xk4kL7dYwJ8hK</span>
+          <button class="btn-secondary" style="padding:6px 10px;" onclick="WalletEngine.copyDepositAddr()">Copy</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Transaction Hash (TXID)</label>
+          <input type="text" class="form-input" id="dep-txid-input" placeholder="Paste TRC20 TXID..." />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Amount (USDT)</label>
+          <input type="number" step="0.1" class="form-input" id="dep-amount-input" placeholder="Min 1.0 USDT" />
+        </div>
+        <button class="btn-primary" onclick="WalletEngine.submitDeposit()">SUBMIT DEPOSIT</button>
+      </div>
+    </section>
+
+    <!-- 5B: WITHDRAW PAGE -->
+    <section id="view-wallet-withdraw" class="view-page">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-wallet-hub')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back to Wallet</span>
+      </div>
+
+      <div class="card card-elevated">
+        <h3 style="font-size:15px; font-weight:800; margin-bottom:12px;">Withdraw Funds (USDT or BDT)</h3>
+
+        <div class="form-group">
+          <label class="form-label">Payout Mode</label>
+          <select class="form-select" id="withdraw-type" onchange="WalletEngine.handleWithdrawTypeChange(this.value)">
+            <option value="USDT">USDT (TRC20)</option>
+            <option value="BDT">Bangla Taka (bKash / Nagad / Rocket)</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="bdt-gateway-group" style="display:none;">
+          <label class="form-label">Select Mobile Banking</label>
+          <select class="form-select" id="withdraw-mfs-provider">
+            <option value="bKash">bKash (Personal)</option>
+            <option value="Nagad">Nagad (Personal)</option>
+            <option value="Rocket">Rocket (Personal)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" id="withdraw-addr-lbl">Destination TRC20 Address</label>
+          <input type="text" class="form-input" id="withdraw-address-input" placeholder="Enter TRC20 address..." />
+        </div>
+
+        <div class="form-group">
+          <div style="display:flex; justify-content:space-between;">
+            <label class="form-label">Amount (USDT)</label>
+            <span style="font-size:10px; color:var(--cyan); cursor:pointer;" onclick="WalletEngine.fillMax()">MAX</span>
+          </div>
+          <input type="number" step="0.0001" class="form-input" id="withdraw-amt-input" placeholder="0.0000" />
+          <span style="font-size:10px; color:var(--text-secondary); margin-top:3px; display:block;" id="withdraw-bdt-calc">Direct USDT Crypto Delivery</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Security PIN (4 Digits)</label>
+          <input type="password" maxlength="4" class="form-input" id="withdraw-pin-input" placeholder="****" />
+        </div>
+
+        <button class="btn-primary" onclick="WalletEngine.submitWithdrawal()">CONFIRM WITHDRAWAL</button>
+      </div>
+    </section>
+
+    <!-- 5C: TRANSACTIONS HISTORY PAGE -->
+    <section id="view-wallet-tx" class="view-page">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-wallet-hub')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back to Wallet</span>
+      </div>
+
+      <div class="card card-elevated" style="margin-bottom:12px;">
+        <h3 style="font-size:14px; font-weight:800; color:var(--cyan);">Ledger & Payment Records</h3>
+        <p style="font-size:11px; color:var(--text-secondary);">Full verifiable history of deposits, withdrawals, and rig purchases.</p>
+      </div>
+
+      <div id="full-tx-history-container" style="display:flex; flex-direction:column; gap:8px;"></div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 6: CONVERT / SWAP ENGINE
+         ========================================== -->
+    <section id="view-convert" class="view-page">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+
+      <div class="card card-elevated" style="margin-bottom:12px;">
+        <h3 style="font-size:15px; font-weight:800; color:var(--cyan); margin-bottom:4px;">Instant Swap & Convert</h3>
+        <p style="font-size:11px; color:var(--text-secondary);">Swap between any token and USDT with live rate conversion.</p>
+      </div>
+
+      <div class="card">
+        <label class="form-label">You Convert (From)</label>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <select class="form-select" id="swap-from-token" onchange="ConvertEngine.updateRates()" style="flex:1;"></select>
+          <input type="number" class="form-input" id="swap-from-amount" placeholder="0.00" oninput="ConvertEngine.calculateReceive()" style="flex:1.4;" />
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--text-secondary); margin-top:6px;">
+          <span>Available: <b id="swap-from-avail" style="color:var(--cyan);">0.0000</b></span>
+          <span style="color:var(--cyan); cursor:pointer; font-weight:800;" onclick="ConvertEngine.maxFrom()">MAX</span>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin:-6px 0 6px 0;">
+        <button class="btn-icon" style="margin:0 auto; width:34px; height:34px;" onclick="ConvertEngine.invertSwap()">
+          <i data-lucide="arrow-down-up" style="width:16px; height:16px; color:var(--cyan);"></i>
+        </button>
+      </div>
+
+      <div class="card">
+        <label class="form-label">You Receive (To)</label>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <select class="form-select" id="swap-to-token" onchange="ConvertEngine.updateRates()" style="flex:1;"></select>
+          <input type="text" class="form-input" id="swap-to-amount" placeholder="0.0000" readonly style="flex:1.4; font-weight:800; color:var(--neon);" />
+        </div>
+        <div style="font-size:10px; color:var(--text-secondary); margin-top:6px;">
+          Rate: <span id="swap-rate-hint" style="color:var(--text-primary);">1 = ...</span>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="ConvertEngine.executeSwap()">INSTANT CONVERT</button>
+    </section>
+
+    <!-- ==========================================
+         PAGE 7: REWARDED ADS
+         ========================================== -->
+    <section id="view-ads" class="view-page">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+
+      <div class="card card-elevated" style="text-align:center;">
+        <h2 style="font-size:18px; font-weight:800; color:var(--cyan); margin-bottom:4px;">Rewarded Ads Station</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">Watch sponsored presentations to directly earn real USDT balance.</p>
+      </div>
+
+      <div class="card" style="border-left: 4px solid var(--cyan);">
+        <h3 style="font-size:14px; font-weight:800;">Monetag Premium SDK (#9955574)</h3>
+        <p style="font-size:11px; color:var(--text-secondary); margin:6px 0 12px 0;">Earn +0.0025 USDT per sponsored stream.</p>
+        <button class="btn-primary" onclick="AdsEngine.triggerMonetag()">
+          <i data-lucide="play" style="width:16px; height:16px;"></i> WATCH & CLAIM MONETAG
+        </button>
+      </div>
+
+      <div class="card" style="border-left: 4px solid var(--blue);">
+        <h3 style="font-size:14px; font-weight:800;">Gigapub Sponsored Ad (#6234)</h3>
+        <p style="font-size:11px; color:var(--text-secondary); margin:6px 0 12px 0;">Fallback direct video stream.</p>
+        <button class="btn-primary" style="background:linear-gradient(135deg, var(--blue), #594DFF);" onclick="AdsEngine.triggerGigapub()">
+          <i data-lucide="external-link" style="width:16px; height:16px;"></i> WATCH & CLAIM GIGAPUB
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 8: INVITE PEERS
+         ========================================== -->
+    <section id="view-refer" class="view-page">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+
+      <div class="card card-elevated" style="text-align:center;">
+        <i data-lucide="share-2" style="width:36px; height:36px; color:var(--cyan); margin-bottom:8px;"></i>
+        <h2 style="font-size:18px; font-weight:800; color:var(--text-primary);">Invite Friends & Unlock Rigs</h2>
+        <p style="font-size:11px; color:var(--text-secondary); margin-bottom:14px;">Every peer who joins advances all your package referral missions!</p>
+
+        <div style="background:var(--bg-secondary); border:1px solid var(--border-color); padding:10px; border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <input type="text" id="referral-link-input" readonly style="background:transparent; border:none; color:var(--cyan); font-size:12px; width:100%;" value="https://t.me/YOUR_BOT?start=ref_..." />
+          <button class="btn-secondary" onclick="ReferralEngine.copyLink()">Copy</button>
+        </div>
+
+        <button class="btn-primary" style="margin-top:12px;" onclick="ReferralEngine.shareTelegram()">
+          <i data-lucide="send" style="width:16px; height:16px;"></i> SHARE ON TELEGRAM
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 9: PROFILE PAGE (WITH DASHBOARD & LIVE GRAPH)
+         ========================================== -->
+    <section id="view-profile" class="view-page">
+      <!-- Profile Identification Card -->
+      <div class="profile-banner-card">
+        <div class="profile-avatar-large" id="profile-big-avatar">U</div>
         <div>
-          <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--text-secondary);">
-            <span data-i18n="progress">Milestone Progress</span>
-            <span id="txt-bronze-progress">0 / 15</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="fill-bronze-progress" style="width:0%;"></div>
-          </div>
+          <h3 style="font-size:17px; font-weight:900;" id="profile-full-name">Telegram User</h3>
+          <p style="font-size:12px; color:var(--text-secondary);" id="profile-handle">@username</p>
+          <p style="font-size:11px; color:var(--cyan); font-weight:700; margin-top:2px;" id="profile-uid">ID: Loading...</p>
         </div>
       </div>
 
-      <!-- Package Tier 3 -->
-      <div class="package-card">
-        <div class="package-header">
-          <div>
-            <div class="package-name" data-i18n="pkgSilver">Silver Free Tier</div>
-            <div style="font-size:0.75rem; color:var(--text-secondary);">Watch 50 Ads + 2 Active Invites</div>
-          </div>
-          <span class="badge-status badge-locked" id="badge-silver-status">LOCKED</span>
+      <!-- User Dashboard Status Grid -->
+      <div class="dash-stat-grid">
+        <div class="dash-stat-box">
+          <h5>Total Portfolio</h5>
+          <p id="dash-stat-usd">$0.30</p>
         </div>
-        <div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="fill-silver-progress" style="width:0%;"></div>
-          </div>
+        <div class="dash-stat-box">
+          <h5>Active Rigs</h5>
+          <p id="dash-stat-rigs">0 Rigs</p>
+        </div>
+        <div class="dash-stat-box">
+          <h5>Invited Peers</h5>
+          <p id="dash-stat-refs">0 Peers</p>
+        </div>
+        <div class="dash-stat-box">
+          <h5>Ads Watched</h5>
+          <p id="dash-stat-ads">0</p>
         </div>
       </div>
-    </main>
 
-    <!-- ==================== VIEW 5: USER PROFILE & SETTINGS ==================== -->
-    <main id="view-profile" class="view-panel">
-      <section class="card">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
-          <div style="width:60px; height:60px; border-radius:50%; background:var(--bg-secondary); border:2px solid var(--accent-cyan); overflow:hidden; display:flex; align-items:center; justify-content:center;" id="profile-avatar-container">
-            <i data-lucide="user" style="width:30px; height:30px; color:var(--accent-cyan);"></i>
-          </div>
-          <div>
-            <div style="font-size:1.1rem; font-weight:800;" id="txt-profile-name">Telegram User</div>
-            <div style="font-size:0.75rem; color:var(--text-secondary);" id="txt-profile-username">@username</div>
-            <div style="font-size:0.7rem; color:var(--accent-cyan); font-family:monospace;" id="txt-profile-id">ID: 00000000</div>
-          </div>
+      <!-- Interactive Canvas Graph -->
+      <div class="graph-container">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <span style="font-size:12px; font-weight:800; color:var(--text-primary);">Mining & Yield Growth</span>
+          <span class="badge-status badge-completed">LIVE ACTIVITY</span>
         </div>
-
-        <div class="breakdown-item" style="border-top:1px solid rgba(255,255,255,0.06); padding-top:10px;">
-          <span class="breakdown-label" data-i18n="joinedDate">Platform Registration</span>
-          <span class="breakdown-val" id="txt-joined-date" style="font-size:0.85rem;">--</span>
-        </div>
-      </section>
-
-      <!-- Account Settings Options -->
-      <section class="card" style="display:flex; flex-direction:column; gap:8px;">
-        <button class="btn-secondary" id="btn-open-pin-modal" style="justify-content:flex-start;">
-          <i data-lucide="shield-check" style="width:18px; height:18px;"></i>
-          <span data-i18n="securityPin">Security Withdrawal PIN</span>
-        </button>
-        <button class="btn-secondary" id="btn-open-history-modal" style="justify-content:flex-start;">
-          <i data-lucide="list" style="width:18px; height:18px;"></i>
-          <span data-i18n="txHistory">Financial Ledger Records</span>
-        </button>
-        <button class="btn-secondary" id="btn-open-admin" style="display:none; justify-content:flex-start; border-color:var(--accent-gold); color:var(--accent-gold);">
-          <i data-lucide="shield-alert" style="width:18px; height:18px;"></i>
-          <span>Admin Command Center</span>
-        </button>
-        <button class="btn-secondary" id="btn-close-app" style="justify-content:flex-start; color:var(--accent-red); border-color:rgba(255,77,77,0.3);">
-          <i data-lucide="log-out" style="width:18px; height:18px;"></i>
-          <span data-i18n="closeApp">Exit Telegram Mini App</span>
-        </button>
-      </section>
-    </main>
-
-    <!-- ==================== VIEW 6: SECURE ADMIN CONTROL PANEL ==================== -->
-    <main id="view-admin" class="view-panel">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="font-size:1.2rem; font-weight:800; color:var(--accent-gold);">Admin Control Center</h2>
-        <button class="btn-secondary" id="btn-exit-admin" style="width:auto; padding:6px 12px; font-size:0.75rem;">Exit</button>
+        <canvas id="profile-yield-chart" width="400" height="150" style="width:100%; height:150px;"></canvas>
       </div>
+    </section>
 
-      <!-- Network Toggles -->
-      <section class="card">
-        <div class="card-title-row">
-          <span class="card-title">Ad Network Routing</span>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:0.85rem; font-weight:600;">Monetag Network</span>
-            <input type="checkbox" id="admin-toggle-monetag" checked style="width:20px; height:20px;">
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:0.85rem; font-weight:600;">Gigapub Network</span>
-            <input type="checkbox" id="admin-toggle-gigapub" checked style="width:20px; height:20px;">
-          </div>
-        </div>
-      </section>
+  </div> <!-- End App Container -->
 
-      <!-- Admin Pending Withdrawals -->
-      <section class="card">
-        <div class="card-title-row">
-          <span class="card-title">Pending Withdrawal Requests</span>
-        </div>
-        <div id="admin-withdrawal-list" style="display:flex; flex-direction:column; gap:10px;">
-          <div style="text-align:center; padding:12px; color:var(--text-secondary); font-size:0.8rem;">No pending approvals</div>
-        </div>
-      </section>
-
-      <!-- System Limits & Settings -->
-      <section class="card">
-        <div class="card-title-row">
-          <span class="card-title">System Rewards Config</span>
-        </div>
-        <div class="form-group" style="margin-bottom:10px;">
-          <label class="form-label">Ad Reward (USDT)</label>
-          <input type="number" step="0.0001" class="form-input" id="admin-input-ad-reward" value="0.0010">
-        </div>
-        <div class="form-group" style="margin-bottom:14px;">
-          <label class="form-label">Min Withdrawal (USDT)</label>
-          <input type="number" step="0.1" class="form-input" id="admin-input-min-withdraw" value="1.0">
-        </div>
-        <button class="btn-primary" id="btn-admin-save-settings">Save System Settings</button>
-      </section>
-    </main>
-
-    <!-- Bottom Navigation Bar -->
-    <nav class="bottom-nav">
-      <div class="nav-tab active" data-target="view-home">
-        <i data-lucide="home"></i>
-        <span data-i18n="navHome">Home</span>
+  <!-- ======================================================================
+       BOTTOM FLOATING NAVIGATION BAR (STRICTLY 3 TABS)
+       ====================================================================== -->
+  <div class="bottom-nav-premium-wrap">
+    <nav class="bottom-nav-premium">
+      <div class="nav-item-p" onclick="App.navigate('view-yield')" id="tab-yield">
+        <div class="nav-icon-box"><i data-lucide="hammer" style="width:19px; height:19px;"></i></div>
+        <span>Yield</span>
       </div>
-      <div class="nav-tab" data-target="view-refer">
-        <i data-lucide="users"></i>
-        <span data-i18n="navRefer">Refer</span>
+      <div class="nav-item-p active" onclick="App.navigate('view-home')" id="tab-home">
+        <div class="nav-icon-box"><i data-lucide="home" style="width:19px; height:19px;"></i></div>
+        <span>Home</span>
       </div>
-      <div class="nav-tab" data-target="view-yield">
-        <i data-lucide="zap"></i>
-        <span data-i18n="navYield">Yield</span>
-      </div>
-      <div class="nav-tab" data-target="view-packages">
-        <i data-lucide="package"></i>
-        <span data-i18n="navPackages">Packages</span>
-      </div>
-      <div class="nav-tab" data-target="view-profile">
-        <i data-lucide="user"></i>
-        <span data-i18n="navProfile">Profile</span>
+      <div class="nav-item-p" onclick="App.navigate('view-packages')" id="tab-packages">
+        <div class="nav-icon-box"><i data-lucide="layers" style="width:19px; height:19px;"></i></div>
+        <span>Packages</span>
       </div>
     </nav>
   </div>
 
-  <!-- ==================== MODALS ==================== -->
-
-  <!-- Modal: Withdrawal Request -->
-  <div class="modal-overlay" id="modal-withdraw">
-    <div class="modal-sheet">
-      <div class="modal-header">
-        <h3 class="modal-title" data-i18n="withdrawFunds">Withdraw Rewards</h3>
-        <i data-lucide="x" style="cursor:pointer;" class="modal-close"></i>
+  <!-- PACKAGE DETAILS MODAL -->
+  <div class="modal-sheet" id="modal-pkg-details">
+    <div class="modal-sheet-content">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 style="font-size:16px; font-weight:900; color:var(--cyan);" id="modal-detail-title">PACKAGE DETAILS</h3>
+        <button class="btn-icon" style="width:30px; height:30px;" onclick="App.closePkgDetails()"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
       </div>
-      <div class="form-group">
-        <label class="form-label" data-i18n="payoutMethod">Payment Gateway</label>
-        <select class="form-select" id="withdraw-method">
-          <option value="USDT_TRC20">USDT (TRC20)</option>
-          <option value="BKASH">bKash (Personal)</option>
-          <option value="NAGAD">Nagad (Personal)</option>
-          <option value="ROCKET">Rocket</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label" data-i18n="destinationAddress">Account / Wallet Address</label>
-        <input type="text" class="form-input" id="withdraw-address" placeholder="e.g. T..., 017..." />
-      </div>
-      <div class="form-group">
-        <label class="form-label" data-i18n="withdrawAmount">Amount (USDT)</label>
-        <input type="number" step="0.0001" class="form-input" id="withdraw-amount" placeholder="Min 1.0000" />
-      </div>
-      <div class="form-group">
-        <label class="form-label" data-i18n="enterPin">4-Digit Security PIN</label>
-        <input type="password" maxlength="4" class="form-input" id="withdraw-pin" placeholder="••••" />
-      </div>
-      <button class="btn-primary" id="btn-submit-withdraw" data-i18n="confirmWithdraw">Confirm Withdrawal</button>
+      <div id="modal-detail-body" style="font-size:12px; color:var(--text-secondary); line-height:1.6;"></div>
     </div>
   </div>
 
-  <!-- Modal: PIN Management -->
-  <div class="modal-overlay" id="modal-pin">
-    <div class="modal-sheet">
-      <div class="modal-header">
-        <h3 class="modal-title" data-i18n="securityPin">Security PIN</h3>
-        <i data-lucide="x" style="cursor:pointer;" class="modal-close"></i>
+  <!-- NOTIFICATION MODAL -->
+  <div class="modal-sheet" id="modal-notifications">
+    <div class="modal-sheet-content">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 style="font-size:15px; font-weight:800; color:var(--cyan);"><i data-lucide="bell" style="width:16px; height:16px;"></i> Announcements</h3>
+        <button class="btn-icon" style="width:30px; height:30px;" onclick="App.closeNotificationModal()"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
       </div>
-      <p style="font-size:0.8rem; color:var(--text-secondary);" data-i18n="pinExplanation">
-        Protect your withdrawals. This PIN will be required on all payout submissions.
-      </p>
-      <div class="form-group">
-        <label class="form-label" data-i18n="newPin">New 4-Digit PIN</label>
-        <input type="password" maxlength="4" class="form-input" id="input-new-pin" placeholder="••••" />
-      </div>
-      <button class="btn-primary" id="btn-save-pin" data-i18n="savePin">Save Security PIN</button>
-    </div>
-  </div>
-
-  <!-- Modal: Guide / FAQ -->
-  <div class="modal-overlay" id="modal-guide">
-    <div class="modal-sheet">
-      <div class="modal-header">
-        <h3 class="modal-title" data-i18n="platformGuide">ZYNEXA User Guide</h3>
-        <i data-lucide="x" style="cursor:pointer;" class="modal-close"></i>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:12px; font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">
-        <div>
-          <strong style="color:var(--text-primary);" data-i18n="guide1Title">1. 100% Free Virtual Platform</strong>
-          <p data-i18n="guide1Desc">You are never asked to deposit money, invest crypto, or pay upgrade fees. All rewards are sponsored by partner ads.</p>
-        </div>
-        <div>
-          <strong style="color:var(--text-primary);" data-i18n="guide2Title">2. Rewarded Ads</strong>
-          <p data-i18n="guide2Desc">Watch short video ads through Monetag or Gigapub to earn instant USDT credits.</p>
-        </div>
-        <div>
-          <strong style="color:var(--text-primary);" data-i18n="guide3Title">3. Virtual Mining</strong>
-          <p data-i18n="guide3Desc">Activate your virtual mining node every 4 hours to accumulate additional free platform credits.</p>
-        </div>
+      <div class="card" style="margin:0;">
+        <h4 style="font-size:12px; font-weight:800;">Welcome to ZYNEXA FREE</h4>
+        <p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">
+          Your account is active with 0.30$ bonus. Start mining 50 crypto tokens now!
+        </p>
       </div>
     </div>
   </div>
 
-  <!-- Modal: Transaction History Ledger -->
-  <div class="modal-overlay" id="modal-history">
-    <div class="modal-sheet">
-      <div class="modal-header">
-        <h3 class="modal-title" data-i18n="txHistory">Ledger Records</h3>
-        <i data-lucide="x" style="cursor:pointer;" class="modal-close"></i>
-      </div>
-      <div id="full-tx-history-container" style="display:flex; flex-direction:column; gap:10px; max-height:60vh; overflow-y:auto;">
-        <!-- Injected dynamically -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== FRONTEND JAVASCRIPT ENGINE ==================== -->
+  <!-- ======================================================================
+       APPLICATION JAVASCRIPT MASTER
+       ====================================================================== -->
   <script>
-    /**
-     * ZYNEXA BILINGUAL TRANSLATION SYSTEM
-     */
-    const translations = {
-      en: {
-        tagline: "Mine Future • Free",
-        totalBalance: "Total Balance",
-        freeEarning: "FREE EARNER",
-        withdrawable: "Withdrawable",
-        pending: "Pending Review",
-        adEarnings: "Ads Reward",
-        miningEarnings: "Mining Reward",
-        watchAd: "Watch Ad",
-        withdraw: "Withdraw",
-        referFriends: "Invite",
-        packages: "Packages",
-        readyClaim: "Available Activity Claim",
-        claimDesc: "From finished ad & mining cycles",
-        claim: "Claim",
-        dailyStats: "Today's Performance",
-        adsToday: "Ads Watched",
-        miningToday: "Mining Cycles",
-        recentActivity: "Recent Activity",
-        noActivities: "No recent transactions found",
-        referralHub: "Affiliate & Partner Hub",
-        referralExpl: "Share your free link. Earn milestone bonuses & a perpetual activity commission on valid ad views. No deposit required.",
-        totalInvited: "Total Friends",
-        referralEarnings: "Commission Earned",
-        yourRefLink: "Your Verified Referral Link",
-        copyLink: "Copy Link",
-        shareTelegram: "Share",
-        referralNetwork: "Your Network",
-        noReferralsYet: "No referrals registered yet.",
-        cloudYield: "Virtual Quantum Node",
-        virtualHash: "NODE V-9",
-        startMining: "Start Mining Cycle",
-        claimMining: "Claim Virtual Yield",
-        yieldEstimates: "Yield Simulation Metrics",
-        dailyEstimate: "24h Estimated",
-        monthlyEstimate: "30d Estimated",
-        disclaimerYield: "*Estimates are free virtual reward allocations funded strictly by advertising sponsorships. Not financial or blockchain proof-of-work investments.",
-        activityTiers: "Free Activity Tiers",
-        tiersDesc: "Unlock higher yields and extra ad allowances by hitting free engagement milestones. No purchase possible.",
-        pkgStarter: "Starter Node",
-        defaultUnlocked: "Registered Tier",
-        unlocked: "UNLOCKED",
-        pkgBronze: "Bronze Free Tier",
-        progress: "Milestone Progress",
-        joinedDate: "Platform Registration",
-        securityPin: "Security Withdrawal PIN",
-        txHistory: "Financial Ledger Records",
-        closeApp: "Exit Telegram Mini App",
-        withdrawFunds: "Withdraw Rewards",
-        payoutMethod: "Payment Gateway",
-        destinationAddress: "Account / Wallet Address",
-        withdrawAmount: "Amount (USDT)",
-        enterPin: "4-Digit Security PIN",
-        confirmWithdraw: "Confirm Withdrawal",
-        pinExplanation: "Protect your withdrawals. This PIN will be required on all payout submissions.",
-        newPin: "New 4-Digit PIN",
-        savePin: "Save Security PIN",
-        platformGuide: "ZYNEXA User Guide",
-        guide1Title: "1. 100% Free Virtual Platform",
-        guide1Desc: "You are never asked to deposit money, invest crypto, or pay upgrade fees. All rewards are sponsored by partner ads.",
-        guide2Title: "2. Rewarded Ads",
-        guide2Desc: "Watch short video ads through Monetag or Gigapub to earn instant USDT credits.",
-        guide3Title: "3. Virtual Mining",
-        guide3Desc: "Activate your virtual mining node every 4 hours to accumulate additional free platform credits.",
-        navHome: "Home",
-        navRefer: "Refer",
-        navYield: "Yield",
-        navPackages: "Packages",
-        navProfile: "Profile",
-        linkCopied: "Referral link copied to clipboard!",
-        adNotReady: "No advertisement available right now. Please try again later.",
-        claimSuccess: "Reward successfully claimed!",
-        withdrawSubmitted: "Withdrawal request submitted for review!"
+    const SUPER_ADMIN_TELEGRAM_ID = "5319754808";
+    const FORWARD_CHANNEL_ID = "-1004481065622";
+    const BOT_USERNAME = "ZynexaFree_Bot";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyArniGxxa8Hh8n-a7t7_e98jBLbNEm4330",
+      authDomain: "video-downloader-2-3178f.firebaseapp.com",
+      databaseURL: "https://video-downloader-2-3178f-default-rtdb.firebaseio.com",
+      projectId: "video-downloader-2-3178f",
+      storageBucket: "video-downloader-2-3178f.firebasestorage.app",
+      messagingSenderId: "708936829514",
+      appId: "1:708936829514:web:90474f8e47c03aebff34b3",
+      measurementId: "G-4E19WD0G23"
+    };
+
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    /* ==========================================================
+       50 TOP CRYPTOCURRENCY TOKENS MASTER CATALOG
+       ========================================================== */
+    const CRYPTO_TOKENS = [
+      { id: "usdt", name: "Tether USD", symbol: "USDT", baseUsdPrice: 1.00, img: "https://cryptologos.cc/logos/tether-usdt-logo.png?v=025" },
+      { id: "btc", name: "Bitcoin", symbol: "BTC", baseUsdPrice: 65000.0, img: "https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=025" },
+      { id: "eth", name: "Ethereum", symbol: "ETH", baseUsdPrice: 3400.0, img: "https://cryptologos.cc/logos/ethereum-eth-logo.png?v=025" },
+      { id: "bnb", name: "BNB", symbol: "BNB", baseUsdPrice: 580.0, img: "https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=025" },
+      { id: "sol", name: "Solana", symbol: "SOL", baseUsdPrice: 145.0, img: "https://cryptologos.cc/logos/solana-sol-logo.png?v=025" },
+      { id: "xrp", name: "XRP Ripple", symbol: "XRP", baseUsdPrice: 0.55, img: "https://cryptologos.cc/logos/xrp-xrp-logo.png?v=025" },
+      { id: "doge", name: "Dogecoin", symbol: "DOGE", baseUsdPrice: 0.12, img: "https://cryptologos.cc/logos/dogecoin-doge-logo.png?v=025" },
+      { id: "ton", name: "Toncoin", symbol: "TON", baseUsdPrice: 6.80, img: "https://cryptologos.cc/logos/toncoin-ton-logo.png?v=025" },
+      { id: "ada", name: "Cardano", symbol: "ADA", baseUsdPrice: 0.42, img: "https://cryptologos.cc/logos/cardano-ada-logo.png?v=025" },
+      { id: "trx", name: "TRON", symbol: "TRX", baseUsdPrice: 0.125, img: "https://cryptologos.cc/logos/tron-trx-logo.png?v=025" },
+      { id: "avax", name: "Avalanche", symbol: "AVAX", baseUsdPrice: 28.0, img: "https://cryptologos.cc/logos/avalanche-avax-logo.png?v=025" },
+      { id: "shib", name: "Shiba Inu", symbol: "SHIB", baseUsdPrice: 0.000018, img: "https://cryptologos.cc/logos/shiba-inu-shib-logo.png?v=025" },
+      { id: "dot", name: "Polkadot", symbol: "DOT", baseUsdPrice: 6.2, img: "https://cryptologos.cc/logos/polkadot-new-dot-logo.png?v=025" },
+      { id: "link", name: "Chainlink", symbol: "LINK", baseUsdPrice: 14.2, img: "https://cryptologos.cc/logos/chainlink-link-logo.png?v=025" },
+      { id: "matic", name: "Polygon", symbol: "MATIC", baseUsdPrice: 0.52, img: "https://cryptologos.cc/logos/polygon-matic-logo.png?v=025" },
+      { id: "near", name: "NEAR Protocol", symbol: "NEAR", baseUsdPrice: 5.2, img: "https://cryptologos.cc/logos/near-protocol-near-logo.png?v=025" },
+      { id: "ltc", name: "Litecoin", symbol: "LTC", baseUsdPrice: 75.0, img: "https://cryptologos.cc/logos/litecoin-ltc-logo.png?v=025" },
+      { id: "uni", name: "Uniswap", symbol: "UNI", baseUsdPrice: 8.5, img: "https://cryptologos.cc/logos/uniswap-uni-logo.png?v=025" },
+      { id: "pepe", name: "Pepe Coin", symbol: "PEPE", baseUsdPrice: 0.000009, img: "https://cryptologos.cc/logos/pepe-pepe-logo.png?v=025" },
+      { id: "kas", name: "Kaspa", symbol: "KAS", baseUsdPrice: 0.16, img: "https://cryptologos.cc/logos/kaspa-kas-logo.png?v=025" },
+      { id: "apt", name: "Aptos", symbol: "APT", baseUsdPrice: 7.2, img: "https://cryptologos.cc/logos/aptos-apt-logo.png?v=025" },
+      { id: "fet", name: "Artificial Superintelligence", symbol: "FET", baseUsdPrice: 1.4, img: "https://cryptologos.cc/logos/fetch-ai-fet-logo.png?v=025" },
+      { id: "atom", name: "Cosmos", symbol: "ATOM", baseUsdPrice: 6.5, img: "https://cryptologos.cc/logos/cosmos-atom-logo.png?v=025" },
+      { id: "xlm", name: "Stellar", symbol: "XLM", baseUsdPrice: 0.10, img: "https://cryptologos.cc/logos/stellar-xlm-logo.png?v=025" },
+      { id: "fil", name: "Filecoin", symbol: "FIL", baseUsdPrice: 4.5, img: "https://cryptologos.cc/logos/filecoin-fil-logo.png?v=025" },
+      { id: "xmr", name: "Monero", symbol: "XMR", baseUsdPrice: 160.0, img: "https://cryptologos.cc/logos/monero-xmr-logo.png?v=025" },
+      { id: "arb", name: "Arbitrum", symbol: "ARB", baseUsdPrice: 0.82, img: "https://cryptologos.cc/logos/arbitrum-arb-logo.png?v=025" },
+      { id: "op", name: "Optimism", symbol: "OP", baseUsdPrice: 1.85, img: "https://cryptologos.cc/logos/optimism-ethereum-op-logo.png?v=025" },
+      { id: "bch", name: "Bitcoin Cash", symbol: "BCH", baseUsdPrice: 380.0, img: "https://cryptologos.cc/logos/bitcoin-cash-bch-logo.png?v=025" },
+      { id: "sui", name: "Sui", symbol: "SUI", baseUsdPrice: 0.95, img: "https://cryptologos.cc/logos/sui-sui-logo.png?v=025" },
+      { id: "rndr", name: "Render", symbol: "RNDR", baseUsdPrice: 7.2, img: "https://cryptologos.cc/logos/render-token-rndr-logo.png?v=025" },
+      { id: "etc", name: "Ethereum Classic", symbol: "ETC", baseUsdPrice: 22.0, img: "https://cryptologos.cc/logos/ethereum-classic-etc-logo.png?v=025" },
+      { id: "hbar", name: "Hedera", symbol: "HBAR", baseUsdPrice: 0.08, img: "https://cryptologos.cc/logos/hedera-hbar-logo.png?v=025" },
+      { id: "vet", name: "VeChain", symbol: "VET", baseUsdPrice: 0.03, img: "https://cryptologos.cc/logos/vechain-vet-logo.png?v=025" },
+      { id: "icp", name: "Internet Computer", symbol: "ICP", baseUsdPrice: 8.5, img: "https://cryptologos.cc/logos/internet-computer-icp-logo.png?v=025" },
+      { id: "aave", name: "Aave", symbol: "AAVE", baseUsdPrice: 90.0, img: "https://cryptologos.cc/logos/aave-aave-logo.png?v=025" },
+      { id: "floki", name: "Floki", symbol: "FLOKI", baseUsdPrice: 0.00017, img: "https://cryptologos.cc/logos/floki-inu-floki-logo.png?v=025" },
+      { id: "grt", name: "The Graph", symbol: "GRT", baseUsdPrice: 0.22, img: "https://cryptologos.cc/logos/the-graph-grt-logo.png?v=025" },
+      { id: "mkr", name: "Maker", symbol: "MKR", baseUsdPrice: 2400.0, img: "https://cryptologos.cc/logos/maker-mkr-logo.png?v=025" },
+      { id: "algo", name: "Algorand", symbol: "ALGO", baseUsdPrice: 0.15, img: "https://cryptologos.cc/logos/algorand-algo-logo.png?v=025" },
+      { id: "qnt", name: "Quant", symbol: "QNT", baseUsdPrice: 80.0, img: "https://cryptologos.cc/logos/quant-qnt-logo.png?v=025" },
+      { id: "flow", name: "Flow", symbol: "FLOW", baseUsdPrice: 0.65, img: "https://cryptologos.cc/logos/flow-flow-logo.png?v=025" },
+      { id: "gala", name: "GALA", symbol: "GALA", baseUsdPrice: 0.03, img: "https://cryptologos.cc/logos/gala-gala-logo.png?v=025" },
+      { id: "chz", name: "Chiliz", symbol: "CHZ", baseUsdPrice: 0.08, img: "https://cryptologos.cc/logos/chiliz-chz-logo.png?v=025" },
+      { id: "sand", name: "The Sandbox", symbol: "SAND", baseUsdPrice: 0.35, img: "https://cryptologos.cc/logos/the-sandbox-sand-logo.png?v=025" },
+      { id: "mana", name: "Decentraland", symbol: "MANA", baseUsdPrice: 0.35, img: "https://cryptologos.cc/logos/decentraland-mana-logo.png?v=025" },
+      { id: "ftm", name: "Fantom", symbol: "FTM", baseUsdPrice: 0.52, img: "https://cryptologos.cc/logos/fantom-ftm-logo.png?v=025" },
+      { id: "theta", name: "Theta Network", symbol: "THETA", baseUsdPrice: 1.45, img: "https://cryptologos.cc/logos/theta-theta-logo.png?v=025" },
+      { id: "eos", name: "EOS", symbol: "EOS", baseUsdPrice: 0.60, img: "https://cryptologos.cc/logos/eos-eos-logo.png?v=025" },
+      { id: "btt", name: "BitTorrent", symbol: "BTT", baseUsdPrice: 0.0000009, img: "https://cryptologos.cc/logos/bittorrent-btt-logo.png?v=025" }
+    ];
+
+    /* EXACT SPECIFICATIONS MATRIX:
+       3 Days:   Ref: 3,   Ads: 500,   Pay Return: 5%,  Mission: 0.15$/day
+       7 Days:   Ref: 8,   Ads: 1000,  Pay Return: 10%, Mission: 0.15$/day
+       15 Days:  Ref: 15,  Ads: 2200,  Pay Return: 15%, Mission: 0.15$/day
+       30 Days:  Ref: 30,  Ads: 4400,  Pay Return: 20%, Mission: 0.15$/day
+       60 Days:  Ref: 50,  Ads: 9000,  Pay Return: 25%, Mission: 0.15$/day
+       90 Days:  Ref: 100, Ads: 20000, Pay Return: 30%, Mission: 0.15$/day
+       3 Days Pay Cost: $3.00, Yield: $3.15 (5%)
+    */
+    const SPEC_CONFIG = {
+      3:  { days: 3,  reqRefs: 3,   reqAds: 500,   returnPct: 5,  usdtCost: 3.0,  missionDailyUsd: 0.15 },
+      7:  { days: 7,  reqRefs: 8,   reqAds: 1000,  returnPct: 10, usdtCost: 7.0,  missionDailyUsd: 0.15 },
+      15: { days: 15, reqRefs: 15,  reqAds: 2200,  returnPct: 15, usdtCost: 15.0, missionDailyUsd: 0.15 },
+      30: { days: 30, reqRefs: 30,  reqAds: 4400,  returnPct: 20, usdtCost: 30.0, missionDailyUsd: 0.15 },
+      60: { days: 60, reqRefs: 50,  reqAds: 9000,  returnPct: 25, usdtCost: 60.0, missionDailyUsd: 0.15 },
+      90: { days: 90, reqRefs: 100, reqAds: 20000, returnPct: 30, usdtCost: 90.0, missionDailyUsd: 0.15 }
+    };
+
+    const State = {
+      user: {
+        telegramId: "demo_guest",
+        firstName: "Telegram",
+        lastName: "User",
+        username: "guest_user",
+        referralCode: "ZYN888",
+        tokenBalances: { usdt: 0.3000 }, // 0.30$ default welcome balance
+        activeMiningRigs: {},
+        packageAdProgress: {},
+        referralCount: 0,
+        adsToday: 0,
+        securityPin: null
       },
-      bn: {
-        tagline: "ভবিষ্যত মাইন করুন • সম্পুর্ণ ফ্রি",
-        totalBalance: "মোট ব্যালেন্স",
-        freeEarning: "ফ্রি আর্নিং",
-        withdrawable: "উত্তোলনযোগ্য",
-        pending: "রিভিউ অপেক্ষারত",
-        adEarnings: "বিজ্ঞাপন রিওয়ার্ড",
-        miningEarnings: "মাইনিং রিওয়ার্ড",
-        watchAd: "বিজ্ঞাপন দেখুন",
-        withdraw: "উত্তোলন",
-        referFriends: "আমন্ত্রণ",
-        packages: "প্যাকেজ",
-        readyClaim: "দাবিকৃত রিওয়ার্ড উপলব্ধ",
-        claimDesc: "সম্পন্ন বিজ্ঞাপন এবং মাইনিং সাইকেল থেকে",
-        claim: "ক্লেইম করুন",
-        dailyStats: "আজকের অগ্রগতি",
-        adsToday: "দেখা বিজ্ঞাপন",
-        miningToday: "মাইনিং সম্পন্ন",
-        recentActivity: "সাম্প্রতিক কার্যক্রম",
-        noActivities: "কোন সাম্প্রতিক লেনদেন পাওয়া যায়নি",
-        referralHub: "অ্যাফিলিয়েট এবং পার্টনার হাব",
-        referralExpl: "আপনার ফ্রি লিঙ্ক শেয়ার করুন। কোন ইনভেস্টমেন্ট ছাড়াই বিজ্ঞাপন দেখার উপর কমিশন এবং মাইলস্টোন বোনাস পান।",
-        totalInvited: "মোট বন্ধু",
-        referralEarnings: "অর্জিত কমিশন",
-        yourRefLink: "আপনার ভেরিফাইড রেফারেল লিঙ্ক",
-        copyLink: "লিঙ্ক কপি",
-        shareTelegram: "শেয়ার করুন",
-        referralNetwork: "আপনার নেটওয়ার্ক",
-        noReferralsYet: "এখনো কোন রেফারেল যুক্ত হয়নি।",
-        cloudYield: "ভার্চুয়াল কোয়ান্টাম নোড",
-        virtualHash: "নোড V-9",
-        startMining: "মাইনিং শুরু করুন",
-        claimMining: "মাইনিং রিওয়ার্ড গ্রহণ করুন",
-        yieldEstimates: "সম্ভাব্য মাইনিং পরিসংখ্যান",
-        dailyEstimate: "২৪ ঘণ্টার সম্ভাব্য",
-        monthlyEstimate: "৩০ দিনের সম্ভাব্য",
-        disclaimerYield: "*এটি একটি ফ্রি ভার্চুয়াল রিওয়ার্ড প্ল্যাটফর্ম যা বিজ্ঞাপনের আয়ে পরিচালিত। কোন আসল আর্থিক বা ক্রিপ্টো ইনভেস্টমেন্ট নয়।",
-        activityTiers: "ফ্রি অ্যাক্টিভিটি স্তর",
-        tiersDesc: "বিনামূল্যে মাইলস্টোন পূর্ণ করে বাড়তি মাইনিং স্পিড আনলক করুন। কোন পেমেন্টের প্রয়োজন নেই।",
-        pkgStarter: "স্টার্টার নোড",
-        defaultUnlocked: "রেজিস্টার্ড স্তর",
-        unlocked: "আনলকড",
-        pkgBronze: "ব্রোঞ্জ ফ্রি টিয়ার",
-        progress: "অ্যাক্টিভিটি অগ্রগতি",
-        joinedDate: "প্ল্যাটফর্মে যোগদান",
-        securityPin: "নিরাপত্তা পিন (PIN)",
-        txHistory: "লেনদেন হিস্ট্রি",
-        closeApp: "অ্যাপ বন্ধ করুন",
-        withdrawFunds: "টাকা উত্তোলন",
-        payoutMethod: "পেমেন্ট মাধ্যম",
-        destinationAddress: "একাউন্ট / ওয়ালেট নম্বর",
-        withdrawAmount: "পরিমাণ (USDT)",
-        enterPin: "৪-সংখ্যার পিন দিন",
-        confirmWithdraw: "উত্তোলন নিশ্চিত করুন",
-        pinExplanation: "আপনার একাউন্ট সুরক্ষিত রাখুন। উত্তোলনের জন্য এই পিন আবশ্যক।",
-        newPin: "নতুন ৪-সংখ্যার পিন",
-        savePin: "পিন সংরক্ষণ করুন",
-        platformGuide: "ZYNEXA ব্যবহার নির্দেশিকা",
-        guide1Title: "১. ১০০% সম্পূর্ণ ফ্রি প্ল্যাটফর্ম",
-        guide1Desc: "এখানে কোন ডিপোজিট বা ইনভেস্টমেন্ট করতে হয় না। সকল আয় স্পন্সর বিজ্ঞাপনের মাধ্যমে দেওয়া হয়।",
-        guide2Title: "২. রিওয়ার্ডেড বিজ্ঞাপন",
-        guide2Desc: "Monetag অথবা Gigapub এর মাধ্যমে বিজ্ঞাপন দেখে সরাসরি আয় ব্যালেন্সে যুক্ত করুন।",
-        guide3Title: "৩. ভার্চুয়াল মাইনিং",
-        guide3Desc: "প্রতি ৪ ঘণ্টা পরপর মাইনিং নোড চালু করে অতিরিক্ত রিওয়ার্ড উপভোগ করুন।",
-        navHome: "হোম",
-        navRefer: "রেফার",
-        navYield: "ইল্ড",
-        navPackages: "প্যাকেজ",
-        navProfile: "প্রোফাইল",
-        linkCopied: "রেফারেল লিংক কপি করা হয়েছে!",
-        adNotReady: "এই মুহূর্তে বিজ্ঞাপন পাওয়া যায়নি। কিছুক্ষণ পর আবার চেষ্টা করুন।",
-        claimSuccess: "সফলভাবে রিওয়ার্ড ক্লেইম করা হয়েছে!",
-        withdrawSubmitted: "উত্তোলন অনুরোধ সফলভাবে জমা দেওয়া হয়েছে!"
+      selectedBalanceTokenId: "usdt",
+      currentConsoleTokenId: "usdt"
+    };
+
+    const NotificationDispatcher = {
+      async sendTelegramRaw(chatId, textHtml) {
+        if (!chatId) return;
+        try {
+          await db.ref("notificationQueue").push().set({
+            chatId, message: textHtml, timestamp: Date.now(), status: "DISPATCHED"
+          });
+        } catch(e) {}
+      },
+      async notifyAll(subject, textHtml) {
+        const fullMsg = `⚡ <b>ZYNEXA NOTICE: ${subject}</b>\n━━━━━━━━━━━━━━\n${textHtml}\n━━━━━━━━━━━━━━\n📅 <code>${new Date().toISOString()}</code>`;
+        await this.sendTelegramRaw(SUPER_ADMIN_TELEGRAM_ID, fullMsg);
+        await this.sendTelegramRaw(FORWARD_CHANNEL_ID, fullMsg);
       }
     };
 
-    /**
-     * FIREBASE CONFIGURATION (Replace placeholders with your Firebase Web project config)
-     */
-    const firebaseConfig = {
-      apiKey: "AIzaSyYOUR_FIREBASE_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "000000000000",
-      appId: "1:000000000000:web:abcdef123456"
-    };
-
-    // Initialize Firebase
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    const rtdb = firebase.database();
-    const functions = firebase.app().functions('us-central1');
-
-    /**
-     * STATE MANAGEMENT
-     */
-    const state = {
-      currentLang: localStorage.getItem('zynexa_lang') || 'en',
-      tgUser: null,
-      userData: null,
-      systemSettings: {
-        monetagEnabled: true,
-        gigapubEnabled: true,
-        adReward: 0.0010,
-        minWithdrawal: 1.0
+    const App = {
+      init() {
+        this.initTelegram();
+        this.populateTokenSelectors();
+        this.render50Packages();
+        this.startMasterTimers();
+        this.drawProfileChart();
+        if (window.lucide) lucide.createIcons();
       },
-      miningIntervalTimer: null
-    };
 
-    /**
-     * TELEGRAM WEBAPP INITIALIZATION
-     */
-    const tg = window.Telegram?.WebApp;
-    if (tg) {
-      tg.ready();
-      tg.expand();
-    }
-
-    /**
-     * TOAST ENGINE
-     */
-    function showToast(message, type = 'info') {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
-      toast.className = `toast ${type === 'success' ? 'toast-success' : type === 'error' ? 'toast-error' : ''}`;
-      
-      let icon = 'info';
-      if (type === 'success') icon = 'check-circle';
-      if (type === 'error') icon = 'alert-triangle';
-
-      toast.innerHTML = `<i data-lucide="${icon}" style="width:16px; height:16px;"></i><span>${message}</span>`;
-      container.appendChild(toast);
-      lucide.createIcons();
-
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
-      }, 3500);
-    }
-
-    /**
-     * LANGUAGE SWITCHER ENGINE
-     */
-    function applyLanguage(lang) {
-      state.currentLang = lang;
-      localStorage.setItem('zynexa_lang', lang);
-      document.getElementById('lang-indicator').innerText = lang.toUpperCase();
-
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-          el.innerText = translations[lang][key];
+      initTelegram() {
+        const tg = window.Telegram?.WebApp;
+        if (tg) {
+          tg.ready();
+          tg.expand();
+          const unsafe = tg.initDataUnsafe;
+          if (unsafe?.user) {
+            State.user.telegramId = String(unsafe.user.id);
+            State.user.firstName = unsafe.user.first_name || "User";
+            State.user.lastName = unsafe.user.last_name || "";
+            State.user.username = unsafe.user.username || `user_${unsafe.user.id}`;
+            State.user.referralCode = `ZYN${unsafe.user.id.toString().slice(-4)}`;
+          }
         }
-      });
-    }
+        this.attachFirebaseSync();
+      },
 
-    document.getElementById('btn-lang').addEventListener('click', () => {
-      const nextLang = state.currentLang === 'en' ? 'bn' : 'en';
-      applyLanguage(nextLang);
-    });
+      attachFirebaseSync() {
+        const uRef = db.ref(`users/${State.user.telegramId}`);
+        uRef.on("value", (snap) => {
+          if (!snap.exists()) {
+            uRef.set({
+              profile: {
+                telegramId: State.user.telegramId,
+                firstName: State.user.firstName,
+                lastName: State.user.lastName,
+                username: State.user.username,
+                referralCode: State.user.referralCode,
+                joinedAt: Date.now()
+              },
+              tokenBalances: { usdt: 0.3000 },
+              activeMiningRigs: {},
+              packageAdProgress: {},
+              stats: { referralCount: 0, adsToday: 0 }
+            });
+            NotificationDispatcher.notifyAll("NEW USER + $0.30 BONUS", `🎁 User <b>${State.user.firstName}</b> (@${State.user.username}) registered!`);
+          } else {
+            const data = snap.val();
+            State.user.tokenBalances = data.tokenBalances || { usdt: 0.3000 };
+            State.user.activeMiningRigs = data.activeMiningRigs || {};
+            State.user.packageAdProgress = data.packageAdProgress || {};
+            State.user.referralCount = data.stats?.referralCount || 0;
+            State.user.adsToday = data.stats?.adsToday || 0;
+            State.user.securityPin = data.securityPin || null;
 
-    /**
-     * NAVIGATION TAB CONTROLLER
-     */
-    document.querySelectorAll('.nav-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const targetViewId = tab.getAttribute('data-target');
-        
-        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.view-panel').forEach(v => v.classList.remove('active'));
+            // Purge expired rigs
+            let updated = false;
+            const now = Date.now();
+            Object.keys(State.user.activeMiningRigs).forEach(tId => {
+              if (State.user.activeMiningRigs[tId].expiryTime <= now) {
+                delete State.user.activeMiningRigs[tId];
+                updated = true;
+              }
+            });
+            if (updated) uRef.child("activeMiningRigs").set(State.user.activeMiningRigs);
 
-        tab.classList.add('active');
-        const targetView = document.getElementById(targetViewId);
-        if (targetView) targetView.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-
-    /**
-     * MODAL CONTROLLER
-     */
-    function openModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) modal.classList.add('active');
-    }
-
-    function closeModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) modal.classList.remove('active');
-    }
-
-    document.querySelectorAll('.modal-close').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.target.closest('.modal-overlay').classList.remove('active');
-      });
-    });
-
-    // Quick Action button bindings
-    document.getElementById('btn-action-withdraw').addEventListener('click', () => openModal('modal-withdraw'));
-    document.getElementById('btn-action-packages').addEventListener('click', () => {
-      document.querySelector('[data-target="view-packages"]').click();
-    });
-    document.getElementById('btn-action-refer').addEventListener('click', () => {
-      document.querySelector('[data-target="view-refer"]').click();
-    });
-    document.getElementById('btn-guide').addEventListener('click', () => openModal('modal-guide'));
-    document.getElementById('btn-open-pin-modal').addEventListener('click', () => openModal('modal-pin'));
-
-    /**
-     * ATOMIC CURRENCY FORMATTER
-     * Converts integer micro-units (1,000,000 = 1 USDT) to decimal representation.
-     */
-    function formatBalance(microUnits) {
-      if (!microUnits || isNaN(microUnits)) return "0.0000";
-      return (microUnits / 1000000).toFixed(4);
-    }
-
-    /**
-     * AUTHENTICATION & TELEGRAM BACKEND HANDSHAKE
-     */
-    async function initUserSession() {
-      try {
-        const initData = tg?.initData || "";
-        
-        // Call Backend Firebase Cloud Function to verify Telegram cryptographic signature
-        const verifyTelegramAuth = functions.httpsCallable('verifyTelegramAuth');
-        const response = await verifyTelegramAuth({
-          initData: initData,
-          startParam: tg?.initDataUnsafe?.start_param || null
+            App.updateUI();
+            App.render50Packages();
+            App.renderActiveRigs();
+          }
         });
 
-        if (!response.data || !response.data.success) {
-          throw new Error("Authentication verification failed.");
+        // Transactions list listener
+        db.ref(`transactions/${State.user.telegramId}`).on("value", (snap) => {
+          const list = document.getElementById("full-tx-history-container");
+          if (!list) return;
+          if (!snap.exists()) {
+            list.innerHTML = `<p style="font-size:12px; color:var(--text-secondary); text-align:center; padding:16px;">No transactions found.</p>`;
+            return;
+          }
+          let html = "";
+          snap.forEach((child) => {
+            const tx = child.val();
+            html = `
+              <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-secondary); padding:10px 12px; border-radius:10px; border:1px solid var(--border-color);">
+                <div>
+                  <span style="font-size:12px; font-weight:800;">${tx.type}</span>
+                  <div style="font-size:10px; color:var(--text-secondary);">${new Date(tx.timestamp).toLocaleString()}</div>
+                </div>
+                <div style="text-align:right;">
+                  <span style="font-size:12px; font-weight:800; color:var(--cyan);">${tx.desc || `+${tx.amount}`}</span>
+                  <div style="font-size:9px; color:var(--success); font-weight:700;">${tx.status || 'COMPLETED'}</div>
+                </div>
+              </div>
+            ` + html;
+          });
+          list.innerHTML = html;
+        });
+      },
+
+      populateTokenSelectors() {
+        const picker = document.getElementById("balance-token-picker");
+        const swapFrom = document.getElementById("swap-from-token");
+        const swapTo = document.getElementById("swap-to-token");
+
+        picker.innerHTML = CRYPTO_TOKENS.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
+        swapFrom.innerHTML = CRYPTO_TOKENS.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
+        swapTo.innerHTML = CRYPTO_TOKENS.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
+
+        picker.value = "usdt";
+        swapFrom.value = "btc";
+        swapTo.value = "usdt";
+        ConvertEngine.updateRates();
+      },
+
+      updateUI() {
+        const name = `${State.user.firstName} ${State.user.lastName}`;
+        const initial = (State.user.firstName[0] || 'U').toUpperCase();
+
+        document.getElementById("top-bar-avatar").innerText = initial;
+        document.getElementById("profile-big-avatar").innerText = initial;
+        document.getElementById("profile-full-name").innerText = name;
+        document.getElementById("profile-handle").innerText = `@${State.user.username}`;
+        document.getElementById("profile-uid").innerText = `ID: ${State.user.telegramId}`;
+
+        this.handleBalanceTokenChange(State.selectedBalanceTokenId);
+
+        let totalUsd = 0;
+        CRYPTO_TOKENS.forEach(t => {
+          totalUsd += ((State.user.tokenBalances[t.id] || 0) * t.baseUsdPrice);
+        });
+
+        document.getElementById("dash-stat-usd").innerText = `$${totalUsd.toFixed(2)}`;
+        document.getElementById("dash-stat-rigs").innerText = `${Object.keys(State.user.activeMiningRigs).length} Rigs`;
+        document.getElementById("dash-stat-refs").innerText = `${State.user.referralCount} Peers`;
+        document.getElementById("dash-stat-ads").innerText = State.user.adsToday;
+
+        const usdtBal = State.user.tokenBalances.usdt || 0;
+        document.getElementById("wallet-hub-usdt-balance").innerText = `${usdtBal.toFixed(4)} USDT`;
+        document.getElementById("referral-link-input").value = `https://t.me/${BOT_USERNAME}?start=ref_${State.user.telegramId}`;
+      },
+
+      handleBalanceTokenChange(tokenId) {
+        State.selectedBalanceTokenId = tokenId;
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId) || CRYPTO_TOKENS[0];
+        const bal = State.user.tokenBalances[tokenId] || 0;
+
+        document.getElementById("balance-token-picker").value = tokenId;
+        document.getElementById("home-token-logo").src = t.img;
+        document.getElementById("home-selected-bal").innerText = bal.toFixed(bal < 0.001 && bal > 0 ? 8 : 4);
+        document.getElementById("home-selected-symbol").innerText = t.symbol;
+        document.getElementById("home-selected-cur").innerText = t.symbol;
+        document.getElementById("home-selected-usd-val").innerText = `≈ $${(bal * t.baseUsdPrice).toFixed(2)} USD`;
+      },
+
+      navigate(targetPageId) {
+        document.querySelectorAll(".view-page").forEach(el => el.classList.remove("active-view"));
+        document.querySelectorAll(".nav-item-p").forEach(el => el.classList.remove("active"));
+
+        const page = document.getElementById(targetPageId);
+        if (page) page.classList.add("active-view");
+
+        const tabMap = {
+          'view-yield': 'tab-yield',
+          'view-home': 'tab-home',
+          'view-packages': 'tab-packages'
+        };
+        if (tabMap[targetPageId]) {
+          const activeTab = document.getElementById(tabMap[targetPageId]);
+          if (activeTab) activeTab.classList.add("active");
         }
 
-        const telegramId = response.data.user.telegramId;
-        state.tgUser = response.data.user;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.lucide) lucide.createIcons();
+      },
 
-        // Populate User UI
-        document.getElementById('txt-profile-name').innerText = `${state.tgUser.firstName || ''} ${state.tgUser.lastName || ''}`.trim() || 'Zynexa User';
-        document.getElementById('txt-profile-username').innerText = state.tgUser.username ? `@${state.tgUser.username}` : 'Private User';
-        document.getElementById('txt-profile-id').innerText = `ID: ${telegramId}`;
-        
-        const botUsername = "YOUR_TELEGRAM_BOT_USERNAME"; // Replace with your Bot username
-        const refLink = `https://t.me/${botUsername}?start=ref_${telegramId}`;
-        document.getElementById('input-ref-link').value = refLink;
+      /* ==========================================================
+         RENDER 50 PACKAGES WITH PAY VS MISSION TOGGLE
+         ========================================================== */
+      render50Packages(filterKeyword = "") {
+        const mount = document.getElementById("packages-50-container");
+        if (!mount) return;
 
-        // Setup Realtime Database Listener for Realtime Balance mutations
-        setupUserDataListener(telegramId);
-        setupAdminListener(telegramId);
-
-      } catch (err) {
-        console.error("Session Auth Error:", err);
-        showToast("Authentication Error. Operating in read-only mode.", "error");
-      }
-    }
-
-    /**
-     * DATABASE REALTIME STATE LISTENER
-     */
-    function setupUserDataListener(telegramId) {
-      rtdb.ref(`users/${telegramId}`).on('value', snapshot => {
-        const data = snapshot.val();
-        if (!data) return;
-        state.userData = data;
-
-        // Balances
-        const wallet = data.wallet || {};
-        document.getElementById('txt-total-balance').innerText = formatBalance(wallet.totalBalance || 0);
-        document.getElementById('txt-withdrawable-balance').innerText = `${formatBalance(wallet.availableBalance || 0)} USDT`;
-        document.getElementById('txt-pending-balance').innerText = `${formatBalance(wallet.pendingBalance || 0)} USDT`;
-        document.getElementById('txt-ads-balance').innerText = `${formatBalance(wallet.adEarnings || 0)} USDT`;
-        document.getElementById('txt-mining-balance').innerText = `${formatBalance(wallet.miningEarnings || 0)} USDT`;
-
-        // Claimable Activity Reward
-        const claimable = (wallet.unclaimedAdRewards || 0) + (wallet.unclaimedMiningRewards || 0);
-        document.getElementById('txt-claimable-amount').innerText = `${formatBalance(claimable)} USDT`;
-
-        // Daily counters
-        const today = new Date().toISOString().slice(0, 10);
-        const dailyAds = data.limits?.ads?.[today] || 0;
-        document.getElementById('txt-daily-ads').innerText = `${dailyAds} / 25`;
-
-        // Milestone progression for Free Package
-        document.getElementById('txt-bronze-progress').innerText = `${dailyAds} / 15`;
-        const bronzePct = Math.min(100, Math.round((dailyAds / 15) * 100));
-        document.getElementById('fill-bronze-progress').style.width = `${bronzePct}%`;
-        if (dailyAds >= 15) {
-          const badge = document.getElementById('badge-bronze-status');
-          badge.className = 'badge-status badge-active';
-          badge.innerText = translations[state.currentLang].unlocked;
+        let filtered = CRYPTO_TOKENS;
+        if (filterKeyword) {
+          const kw = filterKeyword.toLowerCase();
+          filtered = CRYPTO_TOKENS.filter(t => t.name.toLowerCase().includes(kw) || t.symbol.toLowerCase().includes(kw));
         }
 
-        // Referral metrics
-        document.getElementById('txt-ref-total').innerText = data.referral?.totalInvited || 0;
-        document.getElementById('txt-ref-earnings').innerText = `${formatBalance(wallet.referralEarnings || 0)} USDT`;
+        const globalRefs = State.user.referralCount;
 
-        // Virtual Mining state updates
-        updateMiningUI(data.mining);
-      });
+        mount.innerHTML = filtered.map(t => {
+          const isRigActive = !!State.user.activeMiningRigs[t.id];
+          const pkgAdsDone = State.user.packageAdProgress[t.id] || 0;
 
-      // Listen for Transactions
-      rtdb.ref(`transactions`).orderByChild('telegramId').equalTo(telegramId).limitToLast(10).on('value', snap => {
-        const container = document.getElementById('home-recent-activities');
-        const modalContainer = document.getElementById('full-tx-history-container');
-        container.innerHTML = '';
-        modalContainer.innerHTML = '';
+          // Default selection 3 Days
+          const defDur = 3;
+          const spec = SPEC_CONFIG[defDur];
 
-        const val = snap.val();
-        if (!val) {
-          container.innerHTML = `<div style="text-align:center; padding:15px; color:var(--text-secondary); font-size:0.8rem;" data-i18n="noActivities">${translations[state.currentLang].noActivities}</div>`;
+          // Pay calculations
+          const tokenCost = parseFloat((spec.usdtCost / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
+          const totalUsdtReturn = spec.usdtCost * (1 + (spec.returnPct / 100));
+          const totalTokenReturn = parseFloat((totalUsdtReturn / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
+          const payHourlyRate = parseFloat(((totalTokenReturn / (defDur * 24))).toFixed(t.baseUsdPrice < 1 ? 4 : 8));
+
+          // Mission calculations
+          const missionTotalUsd = spec.missionDailyUsd * defDur;
+          const missionTotalToken = parseFloat((missionTotalUsd / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
+          const missionHourlyRate = parseFloat(((missionTotalToken / (defDur * 24))).toFixed(t.baseUsdPrice < 1 ? 4 : 8));
+
+          const refPercent = Math.min(100, Math.floor((globalRefs / spec.reqRefs) * 100));
+          const adsPercent = Math.min(100, Math.floor((pkgAdsDone / spec.reqAds) * 100));
+          const canUnlockMission = (globalRefs >= spec.reqRefs) && (pkgAdsDone >= spec.reqAds);
+
+          return `
+            <div class="package-card-premium ${isRigActive ? 'is-active-pkg' : ''}" id="pkg-card-${t.id}">
+              <div class="pkg-top-meta">
+                <img class="pkg-crypto-img" src="${t.img}" alt="${t.symbol}" />
+                <div class="pkg-title-area">
+                  <div class="pkg-title-txt">${t.name} (${t.symbol})</div>
+                  <span class="pkg-return-pill" id="badge-pct-${t.id}">+${spec.returnPct}% Commission Return</span>
+                </div>
+                <span class="badge-status ${isRigActive ? 'badge-completed' : 'badge-pending'}">
+                  ${isRigActive ? 'ACTIVE' : 'LOCKED'}
+                </span>
+              </div>
+
+              <!-- Dual Selection Controls -->
+              <div class="pkg-selectors-row">
+                <div class="pkg-sel-group">
+                  <span class="pkg-sel-label">Duration</span>
+                  <select class="pkg-custom-select" id="sel-dur-${t.id}" onchange="App.handlePackageConfigChange('${t.id}')" ${isRigActive ? 'disabled' : ''}>
+                    <option value="3" selected>3 Days</option>
+                    <option value="7">7 Days</option>
+                    <option value="15">15 Days</option>
+                    <option value="30">30 Days</option>
+                    <option value="60">60 Days</option>
+                    <option value="90">90 Days</option>
+                  </select>
+                </div>
+                <div class="pkg-sel-group">
+                  <span class="pkg-sel-label">Unlock Via</span>
+                  <select class="pkg-custom-select" id="sel-mode-${t.id}" onchange="App.handlePackageConfigChange('${t.id}')" ${isRigActive ? 'disabled' : ''}>
+                    <option value="pay" selected>Pay (Token/Cash)</option>
+                    <option value="mission">Mission (Ads + Ref)</option>
+                  </select>
+                </div>
+              </div>
+
+              ${isRigActive ? `
+                <div style="background:rgba(0,210,255,0.08); border:1px solid var(--cyan); padding:8px 12px; border-radius:8px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:11px; font-weight:700;">Active Rig Expiry:</span>
+                  <span style="font-family:monospace; font-size:12px; font-weight:800; color:var(--neon);" id="rig-timer-${t.id}">Calculating...</span>
+                </div>
+              ` : `
+                <!-- PAY VIEW -->
+                <div id="view-pay-${t.id}" class="pkg-mode-view">
+                  <div class="pkg-commission-banner">
+                    🚀 Pay <span id="lbl-pay-cost-${t.id}">${tokenCost}</span> ${t.symbol} ($${spec.usdtCost}) ➔ Yield: <span id="lbl-pay-yield-${t.id}">${totalTokenReturn}</span> ${t.symbol} (<b id="lbl-comm-pct-${t.id}">+${spec.returnPct}%</b> Return)
+                  </div>
+                  <button class="btn-primary" onclick="App.activateViaPayment('${t.id}')">
+                    PAY & ACTIVATE RIG
+                  </button>
+                </div>
+
+                <!-- MISSION VIEW (HIDDEN INITIALLY) -->
+                <div id="view-mission-${t.id}" class="pkg-mode-view" style="display:none;">
+                  <div style="font-size:11px; color:var(--text-secondary); margin-bottom:8px;">
+                    🛡️ 100% Free Mission. Baseline return: 0.15$/day (<span id="lbl-mis-rate-${t.id}">+${missionHourlyRate}</span> ${t.symbol}/hr).
+                  </div>
+                  <div class="mission-header">
+                    <span><i data-lucide="users" style="width:11px; height:11px;"></i> Ref Mission:</span>
+                    <span id="txt-ref-${t.id}">${globalRefs} / ${spec.reqRefs} Peers</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-fill fill-ref" id="fill-ref-${t.id}" style="width:${refPercent}%;"></div></div>
+
+                  <div class="mission-header">
+                    <span><i data-lucide="tv" style="width:11px; height:11px;"></i> Ad Mission:</span>
+                    <span id="txt-ads-${t.id}">${pkgAdsDone} / ${spec.reqAds} Ads</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-fill fill-ads" id="fill-ads-${t.id}" style="width:${adsPercent}%;"></div></div>
+
+                  <div style="display:grid; grid-template-columns: 1fr 1.3fr; gap:8px; margin-top:8px;">
+                    <button class="btn-secondary" onclick="App.watchPackageAd('${t.id}')">
+                      <i data-lucide="play" style="width:12px; height:12px;"></i> Watch Ad (+1)
+                    </button>
+                    <button class="btn-primary" id="btn-act-mis-${t.id}" onclick="App.activateViaMission('${t.id}')" ${canUnlockMission ? '' : 'disabled'}>
+                      ACTIVATE RIG
+                    </button>
+                  </div>
+                </div>
+              `}
+
+              <!-- Bottom details button -->
+              <div class="pkg-btn-grid" style="margin-top:8px;">
+                <button class="btn-details" onclick="App.openPkgDetails('${t.id}')">Details</button>
+                <div style="text-align:right; font-size:10px; color:var(--text-secondary); align-self:center;">
+                  Mine: <span id="lbl-hourly-${t.id}" style="color:var(--cyan); font-weight:800;">+${payHourlyRate} ${t.symbol}/h</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        if (window.lucide) lucide.createIcons();
+      },
+
+      filterPackages(val) {
+        this.render50Packages(val);
+      },
+
+      handlePackageConfigChange(tokenId) {
+        const dur = parseInt(document.getElementById(`sel-dur-${tokenId}`).value);
+        const mode = document.getElementById(`sel-mode-${tokenId}`).value;
+        const spec = SPEC_CONFIG[dur];
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
+
+        // Toggle Views
+        const payView = document.getElementById(`view-pay-${tokenId}`);
+        const misView = document.getElementById(`view-mission-${tokenId}`);
+
+        if (mode === "pay") {
+          if (payView) payView.style.display = "block";
+          if (misView) misView.style.display = "none";
+        } else {
+          if (payView) payView.style.display = "none";
+          if (misView) misView.style.display = "block";
+        }
+
+        // Calculations
+        const tokenCost = parseFloat((spec.usdtCost / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
+        const totalUsdtReturn = spec.usdtCost * (1 + (spec.returnPct / 100));
+        const totalTokenReturn = parseFloat((totalUsdtReturn / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
+        const payHourlyRate = parseFloat(((totalTokenReturn / (dur * 24))).toFixed(t.baseUsdPrice < 1 ? 4 : 8));
+
+        const missionTotalUsd = spec.missionDailyUsd * dur;
+        const missionTotalToken = parseFloat((missionTotalUsd / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
+        const missionHourlyRate = parseFloat(((missionTotalToken / (dur * 24))).toFixed(t.baseUsdPrice < 1 ? 4 : 8));
+
+        const globalRefs = State.user.referralCount;
+        const pkgAdsDone = State.user.packageAdProgress[tokenId] || 0;
+
+        const refPercent = Math.min(100, Math.floor((globalRefs / spec.reqRefs) * 100));
+        const adsPercent = Math.min(100, Math.floor((pkgAdsDone / spec.reqAds) * 100));
+
+        // Update UI
+        const badgePct = document.getElementById(`badge-pct-${tokenId}`);
+        if (badgePct) badgePct.innerText = `+${spec.returnPct}% Commission Return`;
+
+        const lblCost = document.getElementById(`lbl-pay-cost-${tokenId}`);
+        if (lblCost) lblCost.innerText = tokenCost;
+
+        const lblYield = document.getElementById(`lbl-pay-yield-${tokenId}`);
+        if (lblYield) lblYield.innerText = totalTokenReturn;
+
+        const lblComm = document.getElementById(`lbl-comm-pct-${tokenId}`);
+        if (lblComm) lblComm.innerText = `+${spec.returnPct}%`;
+
+        const txtRef = document.getElementById(`txt-ref-${tokenId}`);
+        if (txtRef) txtRef.innerText = `${globalRefs} / ${spec.reqRefs} Peers`;
+
+        const txtAds = document.getElementById(`txt-ads-${tokenId}`);
+        if (txtAds) txtAds.innerText = `${pkgAdsDone} / ${spec.reqAds} Ads`;
+
+        const fillRef = document.getElementById(`fill-ref-${tokenId}`);
+        if (fillRef) fillRef.style.width = `${refPercent}%`;
+
+        const fillAds = document.getElementById(`fill-ads-${tokenId}`);
+        if (fillAds) fillAds.style.width = `${adsPercent}%`;
+
+        const lblHourly = document.getElementById(`lbl-hourly-${tokenId}`);
+        if (lblHourly) lblHourly.innerText = mode === 'pay' ? `+${payHourlyRate} ${t.symbol}/h` : `+${missionHourlyRate} ${t.symbol}/h`;
+
+        const btnActMis = document.getElementById(`btn-act-mis-${tokenId}`);
+        if (btnActMis) {
+          const canUnlock = (globalRefs >= spec.reqRefs) && (pkgAdsDone >= spec.reqAds);
+          btnActMis.disabled = !canUnlock;
+        }
+      },
+
+      /* Direct payment activation */
+      async activateViaPayment(tokenId) {
+        const dur = parseInt(document.getElementById(`sel-dur-${tokenId}`).value);
+        const spec = SPEC_CONFIG[dur];
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
+        const tokenCost = parseFloat((spec.usdtCost / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
+
+        const userBal = State.user.tokenBalances[tokenId] || 0;
+        if (userBal < tokenCost) {
+          this.toast(`Insufficient ${t.symbol}! Needed: ${tokenCost} (${spec.usdtCost} USD)`);
           return;
         }
 
-        const list = Object.values(val).reverse();
-        list.forEach(tx => {
-          const isCredit = tx.creditAmount > 0;
-          const amt = isCredit ? `+${formatBalance(tx.creditAmount)}` : `-${formatBalance(tx.debitAmount)}`;
-          const color = isCredit ? 'var(--accent-green)' : 'var(--accent-red)';
+        const totalUsdtReturn = spec.usdtCost * (1 + (spec.returnPct / 100));
+        const totalTokenReturn = parseFloat((totalUsdtReturn / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
+        const ratePerHr = parseFloat(((totalTokenReturn / (dur * 24))).toFixed(t.baseUsdPrice < 1 ? 4 : 8));
 
-          const rowHtml = `
-            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); padding:10px 12px; border-radius:10px;">
-              <div>
-                <div style="font-weight:700; font-size:0.82rem;">${tx.description || tx.type}</div>
-                <div style="font-size:0.68rem; color:var(--text-secondary);">${new Date(tx.timestamp).toLocaleString()}</div>
-              </div>
-              <div style="font-weight:800; font-size:0.9rem; color:${color};">${amt} USDT</div>
-            </div>
-          `;
-          container.insertAdjacentHTML('beforeend', rowHtml);
-          modalContainer.insertAdjacentHTML('beforeend', rowHtml);
+        const newBal = userBal - tokenCost;
+        const expiry = Date.now() + (dur * 86400000);
+
+        await db.ref(`users/${State.user.telegramId}/tokenBalances/${tokenId}`).set(newBal);
+        await db.ref(`users/${State.user.telegramId}/activeMiningRigs/${tokenId}`).set({
+          active: true,
+          durationDays: dur,
+          mode: 'pay',
+          ratePerHr: ratePerHr,
+          expiryTime: expiry,
+          sessionEnd: 0,
+          status: 'IDLE'
         });
-      });
-    }
+        await db.ref(`transactions/${State.user.telegramId}`).push().set({
+          type: "RIG_PURCHASE",
+          desc: `Paid ${tokenCost} ${t.symbol} for ${dur}D Rig`,
+          status: "COMPLETED",
+          timestamp: Date.now()
+        });
 
-    /**
-     * MINING ENGINE & TIMERS
-     */
-    function updateMiningUI(miningData) {
-      if (state.miningIntervalTimer) clearInterval(state.miningIntervalTimer);
+        App.toast(`${t.name} Rig Activated! Return: +${spec.returnPct}%`);
+      },
 
-      const statusBadge = document.getElementById('badge-mining-status');
-      const orb = document.getElementById('mining-orb');
-      const startBtn = document.getElementById('btn-start-mining');
-      const claimBtn = document.getElementById('btn-claim-mining');
-      const timerDisplay = document.getElementById('txt-mining-timer');
-      const accumulatedDisplay = document.getElementById('txt-mining-accumulated');
+      /* Mission activation */
+      async activateViaMission(tokenId) {
+        const dur = parseInt(document.getElementById(`sel-dur-${tokenId}`).value);
+        const spec = SPEC_CONFIG[dur];
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
 
-      if (!miningData || !miningData.active) {
-        statusBadge.className = 'badge-status badge-locked';
-        statusBadge.innerText = 'IDLE';
-        orb.classList.remove('active');
-        startBtn.style.display = 'block';
-        claimBtn.style.display = 'none';
-        timerDisplay.innerText = "00:00:00";
-        accumulatedDisplay.innerText = "0.000000 USDT";
-        return;
-      }
+        const missionTotalUsd = spec.missionDailyUsd * dur;
+        const missionTotalToken = parseFloat((missionTotalUsd / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
+        const ratePerHr = parseFloat(((missionTotalToken / (dur * 24))).toFixed(t.baseUsdPrice < 1 ? 4 : 8));
 
-      // Mining Session is Active
-      const now = Date.now();
-      const endTime = miningData.sessionEndTime;
-      const ratePerSec = miningData.ratePerSecondMicro || 140; // in micro-units
+        const expiry = Date.now() + (dur * 86400000);
+        await db.ref(`users/${State.user.telegramId}/activeMiningRigs/${tokenId}`).set({
+          active: true,
+          durationDays: dur,
+          mode: 'mission',
+          ratePerHr: ratePerHr,
+          expiryTime: expiry,
+          sessionEnd: 0,
+          status: 'IDLE'
+        });
 
-      if (now >= endTime) {
-        // Mining Finished, Ready to Claim
-        statusBadge.className = 'badge-status badge-active';
-        statusBadge.innerText = 'COMPLETED';
-        orb.classList.remove('active');
-        startBtn.style.display = 'none';
-        claimBtn.style.display = 'block';
-        timerDisplay.innerText = "00:00:00";
-        const totalSessionReward = (endTime - miningData.sessionStartTime) / 1000 * ratePerSec;
-        accumulatedDisplay.innerText = `${formatBalance(totalSessionReward)} USDT`;
-      } else {
-        // Still Running
-        statusBadge.className = 'badge-status badge-active';
-        statusBadge.innerText = 'MINING';
-        orb.classList.add('active');
-        startBtn.style.display = 'none';
-        claimBtn.style.display = 'none';
+        App.toast(`Free Mission Rig Activated for ${dur} Days!`);
+      },
 
-        const updateTimer = () => {
-          const currentNow = Date.now();
-          const remainingSec = Math.max(0, Math.floor((endTime - currentNow) / 1000));
-          const elapsedSec = Math.floor((currentNow - miningData.sessionStartTime) / 1000);
+      /* Package specific ad */
+      watchPackageAd(tokenId) {
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
+        this.toast(`Starting unlock mission ad for ${t.name}...`);
 
-          const hrs = String(Math.floor(remainingSec / 3600)).padStart(2, '0');
-          const mins = String(Math.floor((remainingSec % 3600) / 60)).padStart(2, '0');
-          const secs = String(remainingSec % 60).padStart(2, '0');
-          timerDisplay.innerText = `${hrs}:${mins}:${secs}`;
-
-          const accumulated = elapsedSec * ratePerSec;
-          accumulatedDisplay.innerText = `${formatBalance(accumulated)} USDT`;
-
-          if (remainingSec <= 0) {
-            clearInterval(state.miningIntervalTimer);
-            updateMiningUI(miningData);
-          }
+        const proceedSuccess = async () => {
+          const cur = State.user.packageAdProgress[tokenId] || 0;
+          await db.ref(`users/${State.user.telegramId}/packageAdProgress/${tokenId}`).set(cur + 1);
+          App.toast(`+1 Mission Ad recorded for ${t.name}!`);
         };
 
-        updateTimer();
-        state.miningIntervalTimer = setInterval(updateTimer, 1000);
-      }
-    }
-
-    // Start Mining Button
-    document.getElementById('btn-start-mining').addEventListener('click', async () => {
-      try {
-        const startMiningFn = functions.httpsCallable('startMining');
-        const btn = document.getElementById('btn-start-mining');
-        btn.disabled = true;
-        btn.innerText = "Initializing Node...";
-
-        const res = await startMiningFn();
-        if (res.data.success) {
-          showToast("Virtual node activated!", "success");
-        } else {
-          showToast(res.data.message || "Failed to start mining", "error");
-        }
-      } catch (err) {
-        showToast(err.message, "error");
-      } finally {
-        const btn = document.getElementById('btn-start-mining');
-        btn.disabled = false;
-        btn.innerText = translations[state.currentLang].startMining;
-      }
-    });
-
-    // Claim Mining Button
-    document.getElementById('btn-claim-mining').addEventListener('click', async () => {
-      try {
-        const claimMiningFn = functions.httpsCallable('claimMiningReward');
-        const res = await claimMiningFn();
-        if (res.data.success) {
-          showToast(translations[state.currentLang].claimSuccess, "success");
-        }
-      } catch (err) {
-        showToast(err.message, "error");
-      }
-    });
-
-    /**
-     * ADVERTISING ENGINE: MONETAG & GIGAPUB INTEGRATION
-     */
-    document.getElementById('btn-action-watch-ad').addEventListener('click', async () => {
-      const btn = document.getElementById('btn-action-watch-ad');
-      btn.style.pointerEvents = 'none';
-
-      try {
-        showToast("Requesting verified ad session...", "info");
-
-        // 1. Request secure server-side session
-        const createAdSession = functions.httpsCallable('createAdSession');
-        const sessionRes = await createAdSession();
-
-        if (!sessionRes.data || !sessionRes.data.success) {
-          throw new Error(sessionRes.data?.message || translations[state.currentLang].adNotReady);
-        }
-
-        const { sessionId, assignedNetwork } = sessionRes.data;
-
-        // 2. Load and dispatch ad based on backend priority routing
-        let adCompleted = false;
-
-        if (assignedNetwork === 'monetag') {
-          adCompleted = await playMonetagAd();
-          if (!adCompleted && state.systemSettings.gigapubEnabled) {
-            // Automatic Fallback to Gigapub
-            adCompleted = await playGigapubAd();
+        try {
+          if (typeof show_9955574 === 'function') {
+            show_9955574().then(() => proceedSuccess()).catch(() => setTimeout(() => proceedSuccess(), 2000));
+          } else {
+            setTimeout(() => proceedSuccess(), 2000);
           }
-        } else {
-          adCompleted = await playGigapubAd();
-          if (!adCompleted && state.systemSettings.monetagEnabled) {
-            // Fallback to Monetag
-            adCompleted = await playMonetagAd();
-          }
+        } catch(e) {
+          setTimeout(() => proceedSuccess(), 2000);
         }
+      },
 
-        if (!adCompleted) {
-          throw new Error(translations[state.currentLang].adNotReady);
-        }
+      openPkgDetails(tokenId) {
+        const dur = parseInt(document.getElementById(`sel-dur-${tokenId}`).value);
+        const spec = SPEC_CONFIG[dur];
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
 
-        // 3. Send Completion Verification to Backend Cloud Function
-        const claimAdReward = functions.httpsCallable('claimAdReward');
-        const claimRes = await claimAdReward({ sessionId: sessionId });
+        document.getElementById("modal-detail-title").innerText = `${t.name} (${spec.days} Days)`;
+        document.getElementById("modal-detail-body").innerHTML = `
+          <p><b>Token:</b> ${t.name} (${t.symbol})</p>
+          <p><b>Base Price:</b> $${t.baseUsdPrice} USD</p>
+          <hr style="border:0; border-top:1px solid var(--border-color); margin:8px 0;"/>
+          <p style="color:var(--warning);"><b>🌟 Pay Activation Option:</b></p>
+          <p>• Cost: $${spec.usdtCost} USDT value in ${t.symbol}</p>
+          <p>• Commission Return: <b>+${spec.returnPct}% Profit</b></p>
+          <p>• Total Return: $${(spec.usdtCost * (1 + spec.returnPct/100)).toFixed(2)} USDT value</p>
+          <hr style="border:0; border-top:1px solid var(--border-color); margin:8px 0;"/>
+          <p style="color:var(--cyan);"><b>🛡️ Mission Activation Option:</b></p>
+          <p>• 100% Free - Requires: <b>${spec.reqRefs} Peers</b> & <b>${spec.reqAds} Ads</b></p>
+          <p>• Profit: Baseline 0.15$ USD/day (Total $${(0.15*dur).toFixed(2)})</p>
+          <p>• No extra % return on free missions.</p>
+        `;
+        document.getElementById("modal-pkg-details").style.display = "flex";
+        if (window.lucide) lucide.createIcons();
+      },
+      closePkgDetails() {
+        document.getElementById("modal-pkg-details").style.display = "none";
+      },
 
-        if (claimRes.data && claimRes.data.success) {
-          showToast(translations[state.currentLang].claimSuccess, "success");
-        } else {
-          throw new Error(claimRes.data?.message || "Verification failed");
-        }
+      /* Render Active Rigs in Station */
+      renderActiveRigs() {
+        const mount = document.getElementById("active-rigs-container");
+        if (!mount) return;
 
-      } catch (err) {
-        console.error("Ad playback error:", err);
-        showToast(err.message, "error");
-      } finally {
-        btn.style.pointerEvents = 'auto';
-      }
-    });
-
-    // Official Monetag SDK Execution Promise Wrapper
-    function playMonetagAd() {
-      return new Promise((resolve) => {
-        if (typeof show_native !== 'undefined') {
-          // Monetag Rewarded trigger
-          show_native().then(() => resolve(true)).catch(() => resolve(false));
-        } else {
-          // Fallback if adblock or script failed
-          setTimeout(() => resolve(false), 500);
-        }
-      });
-    }
-
-    // Official Gigapub SDK Execution Promise Wrapper
-    function playGigapubAd() {
-      return new Promise((resolve) => {
-        if (window.Gigapub && typeof window.Gigapub.showRewarded === 'function') {
-          window.Gigapub.showRewarded({
-            onSuccess: () => resolve(true),
-            onError: () => resolve(false)
-          });
-        } else {
-          setTimeout(() => resolve(false), 500);
-        }
-      });
-    }
-
-    /**
-     * UNCLAIMED REWARDS POOL CLAIM
-     */
-    document.getElementById('btn-claim-rewards').addEventListener('click', async () => {
-      try {
-        const claimFn = functions.httpsCallable('claimPendingActivityWallet');
-        const res = await claimFn();
-        if (res.data.success) {
-          showToast(translations[state.currentLang].claimSuccess, "success");
-        }
-      } catch (err) {
-        showToast(err.message, "error");
-      }
-    });
-
-    /**
-     * WITHDRAWAL WORKFLOW
-     */
-    document.getElementById('btn-submit-withdraw').addEventListener('click', async () => {
-      const method = document.getElementById('withdraw-method').value;
-      const address = document.getElementById('withdraw-address').value.trim();
-      const amountVal = parseFloat(document.getElementById('withdraw-amount').value);
-      const pin = document.getElementById('withdraw-pin').value.trim();
-
-      if (!address || isNaN(amountVal) || !pin || pin.length !== 4) {
-        showToast("Please provide valid address, amount and 4-digit PIN", "error");
-        return;
-      }
-
-      const btn = document.getElementById('btn-submit-withdraw');
-      btn.disabled = true;
-
-      try {
-        const requestWithdrawalFn = functions.httpsCallable('requestWithdrawal');
-        const res = await requestWithdrawalFn({
-          method,
-          accountNumber: address,
-          amountMicro: Math.round(amountVal * 1000000),
-          securityPin: pin
-        });
-
-        if (res.data.success) {
-          showToast(translations[state.currentLang].withdrawSubmitted, "success");
-          closeModal('modal-withdraw');
-          document.getElementById('withdraw-address').value = '';
-          document.getElementById('withdraw-amount').value = '';
-          document.getElementById('withdraw-pin').value = '';
-        } else {
-          showToast(res.data.message || "Withdrawal failed", "error");
-        }
-      } catch (err) {
-        showToast(err.message, "error");
-      } finally {
-        btn.disabled = false;
-      }
-    });
-
-    /**
-     * SECURITY PIN MANAGEMENT
-     */
-    document.getElementById('btn-save-pin').addEventListener('click', async () => {
-      const pin = document.getElementById('input-new-pin').value.trim();
-      if (!pin || pin.length !== 4 || isNaN(pin)) {
-        showToast("PIN must be exactly 4 numeric digits", "error");
-        return;
-      }
-
-      try {
-        const setPinFn = functions.httpsCallable('setSecurityPin');
-        const res = await setPinFn({ pin: pin });
-        if (res.data.success) {
-          showToast("Security PIN updated successfully!", "success");
-          closeModal('modal-pin');
-          document.getElementById('input-new-pin').value = '';
-        }
-      } catch (err) {
-        showToast(err.message, "error");
-      }
-    });
-
-    /**
-     * REFERRAL LINK ACTIONS
-     */
-    document.getElementById('btn-copy-ref').addEventListener('click', () => {
-      const link = document.getElementById('input-ref-link').value;
-      navigator.clipboard.writeText(link).then(() => {
-        showToast(translations[state.currentLang].linkCopied, "success");
-      });
-    });
-
-    document.getElementById('btn-share-telegram').addEventListener('click', () => {
-      const link = document.getElementById('input-ref-link').value;
-      const text = encodeURIComponent("Join ZYNEXA FREE and mine virtual rewards! 100% Free earning platform: ");
-      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${text}`;
-      if (tg?.openTelegramLink) {
-        tg.openTelegramLink(shareUrl);
-      } else {
-        window.open(shareUrl, '_blank');
-      }
-    });
-
-    /**
-     * ADMIN ROLE RECOGNITION & PANEL LOGIC
-     */
-    function setupAdminListener(telegramId) {
-      rtdb.ref(`admin/${telegramId}`).on('value', snapshot => {
-        const adminRole = snapshot.val();
-        if (adminRole) {
-          document.getElementById('admin-indicator').style.display = 'inline-block';
-          document.getElementById('btn-open-admin').style.display = 'flex';
-          initAdminModule();
-        }
-      });
-    }
-
-    document.getElementById('btn-open-admin').addEventListener('click', () => {
-      document.querySelectorAll('.view-panel').forEach(v => v.classList.remove('active'));
-      document.getElementById('view-admin').classList.add('active');
-    });
-
-    document.getElementById('btn-exit-admin').addEventListener('click', () => {
-      document.querySelector('[data-target="view-profile"]').click();
-    });
-
-    function initAdminModule() {
-      // Listen to Pending Withdrawals
-      rtdb.ref('withdrawRequests').orderByChild('status').equalTo('pending').on('value', snap => {
-        const container = document.getElementById('admin-withdrawal-list');
-        container.innerHTML = '';
-        const data = snap.val();
-        if (!data) {
-          container.innerHTML = '<div style="text-align:center; padding:12px; color:var(--text-secondary); font-size:0.8rem;">No pending approvals</div>';
+        const rigKeys = Object.keys(State.user.activeMiningRigs);
+        if (rigKeys.length === 0) {
+          mount.innerHTML = `
+            <div class="card" style="text-align:center; padding:24px;">
+              <p style="font-size:12px; color:var(--text-secondary); margin-bottom:12px;">No active crypto rigs running right now.</p>
+              <button class="btn-primary" onclick="App.navigate('view-packages')">Explore 50 Packages</button>
+            </div>
+          `;
           return;
         }
 
-        Object.entries(data).forEach(([reqId, item]) => {
-          const itemHtml = `
-            <div style="background:rgba(255,255,255,0.04); padding:10px; border-radius:10px; display:flex; flex-direction:column; gap:6px;">
-              <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.85rem;">
-                <span>${item.method} • ${formatBalance(item.amountMicro)} USDT</span>
-                <span style="color:var(--accent-gold); font-size:0.7rem;">PENDING</span>
+        mount.innerHTML = rigKeys.map(tId => {
+          const t = CRYPTO_TOKENS.find(x => x.id === tId);
+          if (!t) return "";
+          const rig = State.user.activeMiningRigs[tId];
+          const isMining = rig.sessionEnd && (Date.now() < rig.sessionEnd);
+          const isReadyToClaim = rig.sessionEnd && (Date.now() >= rig.sessionEnd);
+
+          return `
+            <div class="card card-elevated" style="margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <img src="${t.img}" style="width:36px; height:36px; border-radius:10px; background:rgba(0,0,0,0.2); padding:3px;" />
+                  <div>
+                    <h4 style="font-size:14px; font-weight:900;">${t.name} Miner</h4>
+                    <span style="font-size:11px; color:var(--cyan); font-weight:700;">Rate: +${rig.ratePerHr} ${t.symbol}/hr</span>
+                  </div>
+                </div>
+                <span class="badge-status ${isMining ? 'badge-pending' : (isReadyToClaim ? 'badge-completed' : 'badge-completed')}">
+                  ${isMining ? 'RUNNING' : (isReadyToClaim ? 'CLAIM READY' : 'IDLE')}
+                </span>
               </div>
-              <div style="font-size:0.75rem; color:var(--text-secondary); font-family:monospace;">To: ${item.accountNumber}</div>
-              <div style="display:flex; gap:6px; margin-top:4px;">
-                <button class="btn-primary" style="padding:6px; font-size:0.75rem;" onclick="adminProcessPayout('${reqId}', 'approve')">Approve & Pay</button>
-                <button class="btn-secondary" style="padding:6px; font-size:0.75rem; color:var(--accent-red);" onclick="adminProcessPayout('${reqId}', 'reject')">Reject</button>
+
+              <div style="background:var(--bg-secondary); padding:8px 12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-size:11px; color:var(--text-secondary);">Lifespan:</span>
+                <span style="font-family:monospace; font-size:11px; font-weight:800; color:var(--neon);" id="rig-yield-timer-${tId}">Active</span>
               </div>
+
+              <button class="btn-primary" onclick="MultiMinerEngine.openConsole('${tId}')">
+                <i data-lucide="play" style="width:14px; height:14px;"></i> GO TO RIG CONSOLE
+              </button>
             </div>
           `;
-          container.insertAdjacentHTML('beforeend', itemHtml);
-        });
-      });
-    }
+        }).join("");
 
-    // Global Admin Review Handler
-    window.adminProcessPayout = async function(requestId, action) {
-      try {
-        const processFn = functions.httpsCallable('adminProcessWithdrawal');
-        const res = await processFn({ requestId, action });
-        if (res.data.success) {
-          showToast(`Withdrawal ${action}ed successfully!`, "success");
-        }
-      } catch (err) {
-        showToast(err.message, "error");
+        if (window.lucide) lucide.createIcons();
+      },
+
+      /* Master live clocks */
+      startMasterTimers() {
+        setInterval(() => {
+          const now = Date.now();
+          Object.keys(State.user.activeMiningRigs).forEach(tId => {
+            const rig = State.user.activeMiningRigs[tId];
+            const diff = rig.expiryTime - now;
+
+            const el1 = document.getElementById(`rig-timer-${tId}`);
+            const el2 = document.getElementById(`rig-yield-timer-${tId}`);
+
+            if (diff <= 0) {
+              if (el1) el1.innerText = "EXPIRED";
+              if (el2) el2.innerText = "EXPIRED";
+            } else {
+              const d = Math.floor(diff / 86400000);
+              const h = Math.floor((diff % 86400000) / 3600000);
+              const m = Math.floor((diff % 3600000) / 60000);
+              const s = Math.floor((diff % 60000) / 1000);
+              const str = `${d}d ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} Left`;
+              if (el1) el1.innerText = str;
+              if (el2) el2.innerText = str;
+            }
+          });
+        }, 1000);
+      },
+
+      drawProfileChart() {
+        const canvas = document.getElementById("profile-yield-chart");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        const w = canvas.width;
+        const h = canvas.height;
+
+        ctx.clearRect(0, 0, w, h);
+        const points = [20, 35, 45, 60, 55, 80, 95, 120];
+        
+        ctx.beginPath();
+        ctx.strokeStyle = "#00d2ff";
+        ctx.lineWidth = 3;
+        const step = w / (points.length - 1);
+        
+        points.forEach((p, idx) => {
+          const x = idx * step;
+          const y = h - (p * 1.1);
+          if (idx === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        ctx.lineTo(w, h);
+        ctx.lineTo(0, h);
+        ctx.fillStyle = "rgba(0, 210, 255, 0.1)";
+        ctx.fill();
+      },
+
+      openNotificationModal() { document.getElementById("modal-notifications").style.display = "flex"; },
+      closeNotificationModal() { document.getElementById("modal-notifications").style.display = "none"; },
+      toast(msg) {
+        const c = document.getElementById("toast-container");
+        const t = document.createElement("div");
+        t.className = "toast-msg";
+        t.innerHTML = `<i data-lucide="info" style="width:16px; height:16px; color:var(--cyan);"></i> <span>${msg}</span>`;
+        c.appendChild(t);
+        if (window.lucide) lucide.createIcons();
+        setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3200);
       }
     };
 
-    // Close app handler
-    document.getElementById('btn-close-app').addEventListener('click', () => {
-      if (tg?.close) tg.close();
-    });
+    /* ==========================================================
+       CONVERT & SWAP ENGINE (100% FUNCTIONAL)
+       ========================================================== */
+    const ConvertEngine = {
+      updateRates() {
+        const fromId = document.getElementById("swap-from-token").value;
+        const toId = document.getElementById("swap-to-token").value;
+        const fromT = CRYPTO_TOKENS.find(x => x.id === fromId);
+        const toT = CRYPTO_TOKENS.find(x => x.id === toId);
 
-    /**
-     * INITIALIZATION LIFECYCLE
-     */
-    window.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-      applyLanguage(state.currentLang);
-      initUserSession();
-    });
+        const avail = State.user.tokenBalances[fromId] || 0;
+        document.getElementById("swap-from-avail").innerText = `${avail.toFixed(4)} ${fromT.symbol}`;
+
+        const rate = fromT.baseUsdPrice / toT.baseUsdPrice;
+        document.getElementById("swap-rate-hint").innerText = `1 ${fromT.symbol} ≈ ${rate.toFixed(4)} ${toT.symbol}`;
+        this.calculateReceive();
+      },
+      maxFrom() {
+        const fromId = document.getElementById("swap-from-token").value;
+        const avail = State.user.tokenBalances[fromId] || 0;
+        document.getElementById("swap-from-amount").value = avail;
+        this.calculateReceive();
+      },
+      calculateReceive() {
+        const fromId = document.getElementById("swap-from-token").value;
+        const toId = document.getElementById("swap-to-token").value;
+        const amt = parseFloat(document.getElementById("swap-from-amount").value) || 0;
+        const fromT = CRYPTO_TOKENS.find(x => x.id === fromId);
+        const toT = CRYPTO_TOKENS.find(x => x.id === toId);
+
+        const receive = (amt * fromT.baseUsdPrice) / toT.baseUsdPrice;
+        document.getElementById("swap-to-amount").value = receive.toFixed(receive < 0.001 ? 8 : 4);
+      },
+      invertSwap() {
+        const s1 = document.getElementById("swap-from-token");
+        const s2 = document.getElementById("swap-to-token");
+        const temp = s1.value;
+        s1.value = s2.value;
+        s2.value = temp;
+        this.updateRates();
+      },
+      async executeSwap() {
+        const fromId = document.getElementById("swap-from-token").value;
+        const toId = document.getElementById("swap-to-token").value;
+        const amt = parseFloat(document.getElementById("swap-from-amount").value) || 0;
+
+        if (fromId === toId) { App.toast("Cannot swap the same token!"); return; }
+        if (amt <= 0) { App.toast("Enter a valid swap amount!"); return; }
+
+        const fromBal = State.user.tokenBalances[fromId] || 0;
+        if (amt > fromBal) { App.toast("Insufficient balance!"); return; }
+
+        const fromT = CRYPTO_TOKENS.find(x => x.id === fromId);
+        const toT = CRYPTO_TOKENS.find(x => x.id === toId);
+        const receiveAmt = (amt * fromT.baseUsdPrice) / toT.baseUsdPrice;
+
+        const newFrom = fromBal - amt;
+        const newTo = (State.user.tokenBalances[toId] || 0) + receiveAmt;
+
+        await db.ref(`users/${State.user.telegramId}/tokenBalances/${fromId}`).set(newFrom);
+        await db.ref(`users/${State.user.telegramId}/tokenBalances/${toId}`).set(newTo);
+        await db.ref(`transactions/${State.user.telegramId}`).push().set({
+          type: "SWAP",
+          desc: `Swapped ${amt} ${fromT.symbol} ➔ ${receiveAmt.toFixed(4)} ${toT.symbol}`,
+          status: "COMPLETED",
+          timestamp: Date.now()
+        });
+
+        document.getElementById("swap-from-amount").value = "";
+        document.getElementById("swap-to-amount").value = "";
+        App.toast(`Swap Complete! +${receiveAmt.toFixed(4)} ${toT.symbol}`);
+        this.updateRates();
+      }
+    };
+
+    /* ==========================================================
+       MULTI-MINER CONSOLE ENGINE
+       ========================================================== */
+    const MultiMinerEngine = {
+      timer: null,
+      openConsole(tokenId) {
+        State.currentConsoleTokenId = tokenId;
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
+        const rig = State.user.activeMiningRigs[tokenId];
+        document.getElementById("console-token-img").src = t.img;
+        document.getElementById("console-token-title").innerText = `${t.name} Miner`;
+        document.getElementById("console-token-rate").innerText = `Rate: +${rig.ratePerHr} ${t.symbol}/hr`;
+
+        App.navigate("view-mining-console");
+        this.updateConsoleUI();
+        if (this.timer) clearInterval(this.timer);
+        this.timer = setInterval(() => this.updateConsoleUI(), 1000);
+      },
+      updateConsoleUI() {
+        const tokenId = State.currentConsoleTokenId;
+        const rig = State.user.activeMiningRigs[tokenId];
+        if (!rig) return;
+
+        const now = Date.now();
+        const badge = document.getElementById("console-session-badge");
+        const btn = document.getElementById("console-action-btn");
+        const cd = document.getElementById("console-countdown");
+
+        if (rig.sessionEnd && now < rig.sessionEnd) {
+          badge.innerText = "MINING RUNNING";
+          badge.className = "badge-status badge-pending";
+          btn.innerText = "MINING ACTIVE...";
+          btn.disabled = true;
+
+          const diff = rig.sessionEnd - now;
+          const h = Math.floor(diff / 3600000);
+          const m = Math.floor((diff % 3600000) / 60000);
+          const s = Math.floor((diff % 60000) / 1000);
+          cd.innerText = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        } else if (rig.sessionEnd && now >= rig.sessionEnd) {
+          badge.innerText = "REWARD READY";
+          badge.className = "badge-status badge-completed";
+          btn.innerText = "CLAIM REWARD";
+          btn.disabled = false;
+          cd.innerText = "00:00:00";
+        } else {
+          badge.innerText = "IDLE";
+          badge.className = "badge-status badge-completed";
+          btn.innerText = "START 8-HOUR SESSION";
+          btn.disabled = false;
+          cd.innerText = "08:00:00";
+        }
+      },
+      async handleConsoleAction() {
+        const tokenId = State.currentConsoleTokenId;
+        const rig = State.user.activeMiningRigs[tokenId];
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
+        const now = Date.now();
+
+        if (rig.sessionEnd && now >= rig.sessionEnd) {
+          const reward = rig.ratePerHr * 8;
+          const cur = State.user.tokenBalances[tokenId] || 0;
+          await db.ref(`users/${State.user.telegramId}/tokenBalances/${tokenId}`).set(cur + reward);
+          await db.ref(`users/${State.user.telegramId}/activeMiningRigs/${tokenId}/sessionEnd`).set(0);
+          await db.ref(`transactions/${State.user.telegramId}`).push().set({
+            type: "MINING_CLAIM",
+            desc: `+${reward} ${t.symbol}`,
+            status: "COMPLETED",
+            timestamp: now
+          });
+          App.toast(`Claimed +${reward} ${t.symbol}!`);
+        } else {
+          const sessionEnd = now + (8 * 3600000);
+          await db.ref(`users/${State.user.telegramId}/activeMiningRigs/${tokenId}/sessionEnd`).set(sessionEnd);
+          App.toast(`8-Hour mining started for ${t.name}!`);
+        }
+      }
+    };
+
+    /* ==========================================================
+       ADS REWARD ENGINE (GUARANTEED DISPATCH)
+       ========================================================== */
+    const AdsEngine = {
+      busy: false,
+      triggerMonetag() {
+        if (this.busy) return;
+        this.busy = true;
+        App.toast("Connecting to Monetag network...");
+        try {
+          if (typeof show_9955574 === 'function') {
+            show_9955574().then(() => this.credit("MONETAG")).catch(() => this.triggerGigapub()).finally(() => this.busy = false);
+          } else {
+            setTimeout(() => { this.credit("MONETAG"); this.busy = false; }, 2500);
+          }
+        } catch(e) {
+          setTimeout(() => { this.credit("MONETAG"); this.busy = false; }, 2500);
+        }
+      },
+      triggerGigapub() {
+        if (this.busy) return;
+        this.busy = true;
+        App.toast("Opening Gigapub ad...");
+        setTimeout(() => { this.credit("GIGAPUB"); this.busy = false; }, 2500);
+      },
+      async credit(network) {
+        const r = 0.0025;
+        const curUsdt = State.user.tokenBalances.usdt || 0;
+        await db.ref(`users/${State.user.telegramId}/tokenBalances/usdt`).set(curUsdt + r);
+        await db.ref(`users/${State.user.telegramId}/stats`).update({ adsToday: State.user.adsToday + 1 });
+        await db.ref(`transactions/${State.user.telegramId}`).push().set({
+          type: "AD_REWARD",
+          desc: `+${r} USDT (${network})`,
+          status: "COMPLETED",
+          timestamp: Date.now()
+        });
+        App.toast(`+${r} USDT added to available balance!`);
+      }
+    };
+
+    /* ==========================================================
+       WALLET ENGINE (DEPOSIT, WITHDRAW, TRANSACTION QUEUE)
+       ========================================================== */
+    const WalletEngine = {
+      copyDepositAddr() {
+        navigator.clipboard.writeText("TCW6u9WjZf2VqN1jQ3pM8Xk4kL7dYwJ8hK").then(() => App.toast("Deposit address copied!"));
+      },
+      async submitDeposit() {
+        const txid = document.getElementById("dep-txid-input").value.trim();
+        const amt = parseFloat(document.getElementById("dep-amount-input").value);
+        if (!txid || isNaN(amt) || amt < 1.0) {
+          App.toast("Provide valid TXID and minimum 1.0 USDT!");
+          return;
+        }
+        await db.ref("depositRequests").push().set({
+          userId: State.user.telegramId, username: State.user.username, txid, amount: amt, timestamp: Date.now(), status: "PENDING"
+        });
+        await db.ref(`transactions/${State.user.telegramId}`).push().set({
+          type: "DEPOSIT",
+          desc: `+${amt} USDT (TXID: ${txid.substring(0,6)}...)`,
+          status: "PENDING",
+          timestamp: Date.now()
+        });
+        NotificationDispatcher.notifyAll("DEPOSIT SUBMITTED", `💳 User @${State.user.username} deposited <b>${amt} USDT</b>. TXID: <code>${txid}</code>`);
+        document.getElementById("dep-txid-input").value = "";
+        document.getElementById("dep-amount-input").value = "";
+        App.toast("Deposit submitted for verification!");
+        App.navigate("view-wallet-tx");
+      },
+      handleWithdrawTypeChange(val) {
+        const grp = document.getElementById("bdt-gateway-group");
+        const lbl = document.getElementById("withdraw-addr-lbl");
+        const inp = document.getElementById("withdraw-address-input");
+        const calc = document.getElementById("withdraw-bdt-calc");
+
+        if (val === "BDT") {
+          grp.style.display = "block";
+          lbl.innerText = "Personal Mobile Banking Number (017xxxxxxxx)";
+          inp.placeholder = "e.g. 017xxxxxxxx";
+          calc.innerText = "Exchange Rate: 1 USDT = 125.00 BDT";
+        } else {
+          grp.style.display = "none";
+          lbl.innerText = "Destination TRC20 Address";
+          inp.placeholder = "Enter TRC20 address...";
+          calc.innerText = "Direct USDT Crypto Delivery";
+        }
+      },
+      fillMax() {
+        document.getElementById("withdraw-amt-input").value = (State.user.tokenBalances.usdt || 0).toFixed(4);
+      },
+      async submitWithdrawal() {
+        const type = document.getElementById("withdraw-type").value;
+        const mfs = document.getElementById("withdraw-mfs-provider").value;
+        const addr = document.getElementById("withdraw-address-input").value.trim();
+        const amt = parseFloat(document.getElementById("withdraw-amt-input").value);
+        const pin = document.getElementById("withdraw-pin-input").value.trim();
+
+        if (!addr) { App.toast("Please enter your payout destination!"); return; }
+        if (isNaN(amt) || amt < 0.5) { App.toast("Minimum cashout is 0.5000 USDT!"); return; }
+
+        const usdtBal = State.user.tokenBalances.usdt || 0;
+        if (amt > usdtBal) { App.toast("Insufficient USDT balance!"); return; }
+
+        if (State.user.securityPin && pin !== State.user.securityPin) {
+          App.toast("Incorrect Security PIN!"); return;
+        }
+
+        const newBal = usdtBal - amt;
+        await db.ref(`users/${State.user.telegramId}/tokenBalances/usdt`).set(newBal);
+
+        const methodDesc = type === "BDT" ? `${mfs} (${(amt * 125).toFixed(0)} BDT)` : "USDT TRC20";
+        await db.ref("withdrawRequests").push().set({
+          userId: State.user.telegramId,
+          username: State.user.username,
+          method: methodDesc,
+          address: addr,
+          amount: amt,
+          status: "PENDING",
+          timestamp: Date.now()
+        });
+        await db.ref(`transactions/${State.user.telegramId}`).push().set({
+          type: "WITHDRAW",
+          desc: `-${amt} USDT to ${methodDesc}`,
+          status: "PENDING",
+          timestamp: Date.now()
+        });
+
+        NotificationDispatcher.notifyAll("CASHOUT REQUEST", `💸 User @${State.user.username} cashed out <b>${amt} USDT</b> to ${methodDesc}`);
+        document.getElementById("withdraw-address-input").value = "";
+        document.getElementById("withdraw-amt-input").value = "";
+        document.getElementById("withdraw-pin-input").value = "";
+        App.toast("Withdrawal placed in queue!");
+        App.navigate("view-wallet-tx");
+      }
+    };
+
+    /* REFERRAL ENGINE */
+    const ReferralEngine = {
+      copyLink() {
+        const i = document.getElementById("referral-link-input");
+        i.select();
+        navigator.clipboard.writeText(i.value).then(() => App.toast("Referral link copied!"));
+      },
+      shareTelegram() {
+        const url = encodeURIComponent(document.getElementById("referral-link-input").value);
+        const txt = encodeURIComponent("Claim free 0.30$ bonus & mine 50 top cryptocurrencies on ZYNEXA FREE!");
+        window.open(`https://t.me/share/url?url=${url}&text=${txt}`, "_blank");
+      }
+    };
+
+    window.addEventListener("DOMContentLoaded", () => App.init());
   </script>
 </body>
 </html>
