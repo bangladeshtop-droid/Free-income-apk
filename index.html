@@ -326,10 +326,28 @@
       justify-content: center;
       transition: var(--transition-fast);
     }
-    .btn-lux-tile span {
+    .btn-lux-tile span:not(.free-ribbon) {
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.2px;
+    }
+    .free-ribbon {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      z-index: 3;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #3D2600;
+      background: linear-gradient(180deg, #FFE38A 0%, #F5B942 52%, #C4891A 100%);
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 999px;
+      padding: 2px 6px;
+      line-height: 1.2;
+      box-shadow: 0 4px 10px rgba(180,83,9,0.35), inset 0 1px 0 rgba(255,255,255,0.7);
+      pointer-events: none;
     }
 
     /* Individual Tile Aesthetics */
@@ -1322,26 +1340,40 @@
     body.crash-immersive .app-container { max-width: 480px; padding: 0 0 12px; }
 
     .crash-wrap {
-      background: #070b14;
+      background:
+        radial-gradient(120% 80% at 80% 0%, rgba(244,63,94,0.16), transparent 46%),
+        radial-gradient(90% 70% at 0% 100%, rgba(56,189,248,0.12), transparent 50%),
+        #070b14;
       min-height: 100dvh;
-      padding: 8px 10px 16px;
+      padding: 8px 10px 18px;
       color: #F8FAFC;
+      overflow-x: hidden;
     }
     .crash-top {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 8px; padding: 6px 2px 10px;
+      gap: 8px; padding: 4px 2px 8px;
     }
     .crash-back {
       display: flex; align-items: center; gap: 6px; cursor: pointer;
       color: #FCA5A5; font-size: 12px; font-weight: 800; min-height: 44px;
     }
-    .crash-bal {
+    .crash-top-meta { display: flex; align-items: center; gap: 8px; }
+    .crash-players {
+      min-height: 44px;
       background: linear-gradient(180deg, #1e293b, #0f172a);
-      border: 1px solid rgba(251,191,36,0.3);
-      border-radius: 12px; padding: 8px 12px; text-align: right;
+      border: 1px solid rgba(94,234,212,0.28);
+      border-radius: 12px; padding: 6px 10px; text-align: center;
+    }
+    .crash-players b { display: block; color: #5EEAD4; font-size: 13px; font-family: "JetBrains Mono", monospace; }
+    .crash-players span { font-size: 8px; color: #94A3B8; font-weight: 800; letter-spacing: 0.6px; }
+    .crash-bal {
+      background: linear-gradient(180deg, #2a2110, #0f172a);
+      border: 1px solid rgba(251,191,36,0.38);
+      border-radius: 12px; padding: 6px 10px; text-align: right;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
     }
     .crash-bal b { color: #FDE68A; font-size: 13px; font-family: "JetBrains Mono", monospace; }
-    .crash-bal span { display: block; font-size: 9px; color: #94A3B8; font-weight: 700; }
+    .crash-bal span { display: block; font-size: 8px; color: #94A3B8; font-weight: 800; letter-spacing: 0.5px; }
     .crash-history {
       display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 10px;
       -webkit-overflow-scrolling: touch;
@@ -1355,12 +1387,12 @@
     .crash-pill.mid { color: #C084FC; background: rgba(168,85,247,0.16); }
     .crash-pill.high { color: #FBBF24; background: rgba(251,191,36,0.16); }
     .crash-stage {
-      position: relative; height: 230px; border-radius: 18px; overflow: hidden;
+      position: relative; height: 210px; border-radius: 20px; overflow: hidden;
       background:
-        radial-gradient(circle at 80% 20%, rgba(244,63,94,0.18), transparent 40%),
-        linear-gradient(180deg, #10182a 0%, #0b1220 100%);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: inset 0 0 40px rgba(0,0,0,0.35);
+        radial-gradient(circle at 82% 18%, rgba(244,63,94,0.22), transparent 42%),
+        linear-gradient(180deg, #142038 0%, #0b1220 100%);
+      border: 1px solid rgba(253,230,138,0.18);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12);
     }
     #crash-canvas { width: 100%; height: 100%; display: block; }
     .crash-mult {
@@ -1368,7 +1400,7 @@
       transform: translateY(-50%);
       text-align: center; pointer-events: none; z-index: 3;
       font-family: Orbitron, sans-serif;
-      font-size: 42px; font-weight: 900; letter-spacing: 1px;
+      font-size: 40px; font-weight: 900; letter-spacing: 1px;
       color: #fff;
       text-shadow: 0 0 24px rgba(56,189,248,0.45);
     }
@@ -1379,43 +1411,45 @@
       font-size: 10px; font-weight: 800; letter-spacing: 1px;
       color: #94A3B8; text-transform: uppercase;
     }
-    .crash-live {
-      margin: 10px 0 8px; max-height: 72px; overflow-y: auto;
-      display: flex; flex-direction: column; gap: 4px;
-    }
-    .crash-live-row {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 11px; padding: 6px 8px; border-radius: 8px;
-      background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.06);
-    }
-    .crash-live-row .win { color: #34D399; font-weight: 800; }
-    .crash-live-row .lose { color: #F87171; font-weight: 800; }
-    .crash-bets {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    }
+    .crash-bets { display: block; margin-top: 10px; }
     .crash-bet-panel {
-      background: linear-gradient(180deg, #151c2e, #0d1322);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 10px;
+      background: linear-gradient(180deg, #1a2238 0%, #101827 100%);
+      border: 1px solid rgba(253,230,138,0.22);
+      border-radius: 18px; padding: 12px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.08);
     }
-    .crash-amt-row { display: flex; gap: 6px; align-items: center; }
+    .crash-amt-row { display: flex; gap: 8px; align-items: center; }
     .crash-amt-btn {
-      width: 36px; height: 36px; min-width: 36px;
-      border-radius: 10px; border: 1px solid rgba(255,255,255,0.12);
-      background: #1e293b; color: #fff; font-weight: 900; cursor: pointer;
+      width: 44px; height: 44px; min-width: 44px;
+      border-radius: 12px; border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, #334155, #1e293b); color: #fff; font-weight: 900; cursor: pointer;
     }
     .crash-amt-input {
-      flex: 1; min-width: 0; height: 36px; text-align: center;
-      border-radius: 10px; border: 1px solid rgba(251,191,36,0.25);
-      background: #0b1220; color: #FDE68A; font-weight: 800; font-size: 13px;
+      flex: 1; min-width: 0; height: 44px; text-align: center;
+      border-radius: 12px; border: 1px solid rgba(251,191,36,0.32);
+      background: #0b1220; color: #FDE68A; font-weight: 800; font-size: 16px;
+    }
+    .crash-quick {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px;
+    }
+    .crash-quick button {
+      height: 32px; border-radius: 9px; border: 1px solid rgba(255,255,255,0.1);
+      background: #1e293b; color: #CBD5E1; font-size: 10px; font-weight: 800; cursor: pointer;
+    }
+    .crash-toggles {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px;
     }
     .crash-toggle-row {
       display: flex; align-items: center; justify-content: space-between;
-      margin-top: 8px; font-size: 10px; font-weight: 800; color: #94A3B8;
+      gap: 6px; min-height: 40px;
+      background: rgba(15,23,42,0.7);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; padding: 8px 10px;
+      font-size: 10px; font-weight: 800; color: #94A3B8;
     }
     .crash-switch {
       width: 36px; height: 20px; border-radius: 99px; border: none;
-      background: #334155; position: relative; cursor: pointer; padding: 0;
+      background: #334155; position: relative; cursor: pointer; padding: 0; flex-shrink: 0;
     }
     .crash-switch.on { background: #059669; }
     .crash-switch i {
@@ -1425,20 +1459,54 @@
     }
     .crash-switch.on i { transform: translateX(16px); }
     .crash-cash-input {
-      width: 58px; height: 28px; border-radius: 8px; text-align: center;
-      border: 1px solid rgba(255,255,255,0.1); background: #0b1220; color: #5EEAD4;
-      font-size: 11px; font-weight: 800;
+      width: 62px; height: 32px; border-radius: 8px; text-align: center;
+      border: 1px solid rgba(94,234,212,0.28); background: #0b1220; color: #5EEAD4;
+      font-size: 12px; font-weight: 800;
     }
     .crash-action {
-      width: 100%; margin-top: 10px; min-height: 44px; border: none; cursor: pointer;
-      border-radius: 12px; font-weight: 900; font-size: 12px; letter-spacing: 0.4px; color: #fff;
-      background: linear-gradient(180deg, #22c55e, #15803d);
-      box-shadow: 0 5px 0 #14532d;
+      width: 100%; margin-top: 10px; min-height: 48px; border: none; cursor: pointer;
+      border-radius: 14px; font-weight: 900; font-size: 14px; letter-spacing: 0.6px; color: #fff;
+      background: linear-gradient(180deg, #34d399, #059669);
+      box-shadow: 0 6px 0 #14532d, 0 12px 20px rgba(5,150,105,0.28);
     }
-    .crash-action.wait { background: linear-gradient(180deg, #64748b, #334155); box-shadow: 0 5px 0 #1e293b; }
-    .crash-action.cash { background: linear-gradient(180deg, #f59e0b, #d97706); box-shadow: 0 5px 0 #92400e; color: #111; }
+    .crash-action.wait { background: linear-gradient(180deg, #64748b, #334155); box-shadow: 0 6px 0 #1e293b; }
+    .crash-action.cash { background: linear-gradient(180deg, #fbbf24, #d97706); box-shadow: 0 6px 0 #92400e; color: #111; }
     .crash-action.busy { opacity: 0.7; pointer-events: none; }
     .crash-action:disabled { opacity: 0.55; cursor: not-allowed; }
+    .crash-board {
+      margin-top: 10px;
+      background: linear-gradient(180deg, #151c2e, #0d1322);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .crash-tabs {
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: rgba(15,23,42,0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .crash-tab {
+      min-height: 44px; border: none; cursor: pointer;
+      background: transparent; color: #94A3B8;
+      font-size: 11px; font-weight: 900; letter-spacing: 0.6px;
+    }
+    .crash-tab.on {
+      color: #FDE68A;
+      background: linear-gradient(180deg, rgba(251,191,36,0.16), transparent);
+      box-shadow: inset 0 -2px 0 #FBBF24;
+    }
+    .crash-live {
+      margin: 0; max-height: 150px; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .crash-live-row {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 8px; font-size: 11px; padding: 9px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .crash-live-row:last-child { border-bottom: none; }
+    .crash-live-row .win { color: #34D399; font-weight: 800; }
+    .crash-live-row .lose { color: #F87171; font-weight: 800; }
     @media (prefers-reduced-motion: reduce) {
       .loader-orb, .loader-plane, .loader-bar > i { animation: none; }
     }
@@ -1527,6 +1595,7 @@
       <!-- 3-COLUMN HIGH-QUALITY ESSENTIAL ACTION BUTTONS -->
       <div class="essential-3col-grid">
         <div class="btn-lux-tile tile-blue" onclick="App.navigate('view-ads')">
+          <span class="free-ribbon">Free</span>
           <div class="btn-lux-icon"><i data-lucide="tv" style="width:22px; height:22px;"></i></div>
           <span data-i18n="watchAds">Watch Ads</span>
         </div>
@@ -1543,6 +1612,7 @@
           <span data-i18n="wallet">My Wallet</span>
         </div>
         <div class="btn-lux-tile tile-pink" onclick="App.navigate('view-refer')">
+          <span class="free-ribbon">Free</span>
           <div class="btn-lux-icon"><i data-lucide="share-2" style="width:22px; height:22px;"></i></div>
           <span data-i18n="invite">Invite</span>
         </div>
@@ -1551,14 +1621,17 @@
           <span data-i18n="convert">Convert</span>
         </div>
         <div class="btn-lux-tile tile-orange" onclick="App.navigate('view-checkin')">
+          <span class="free-ribbon">Free</span>
           <div class="btn-lux-icon"><i data-lucide="calendar-check" style="width:22px; height:22px;"></i></div>
           <span data-i18n="checkin">Daily Check</span>
         </div>
         <div class="btn-lux-tile tile-indigo" onclick="App.navigate('view-quiz')">
+          <span class="free-ribbon">Free</span>
           <div class="btn-lux-icon"><i data-lucide="help-circle" style="width:22px; height:22px;"></i></div>
           <span data-i18n="quiz">Quiz Game</span>
         </div>
         <div class="btn-lux-tile tile-rose" onclick="App.navigate('view-visiting')">
+          <span class="free-ribbon">Free</span>
           <div class="btn-lux-icon"><i data-lucide="globe" style="width:22px; height:22px;"></i></div>
           <span data-i18n="visiting">Visiting</span>
         </div>
@@ -1794,7 +1867,7 @@
 
       <div class="card card-elevated" style="margin-bottom:12px;">
         <h3 style="font-size:14px; font-weight:800; color:var(--cyan);">Ledger & Payment Records</h3>
-        <p style="font-size:11px; color:var(--text-secondary);">Full verifiable history of deposits, withdrawals, and rig purchases.</p>
+        <p style="font-size:11px; color:var(--text-secondary);">Deposit, withdraw, and transfer history only.</p>
       </div>
 
       <div id="full-tx-history-container" style="display:flex; flex-direction:column; gap:8px;"></div>
@@ -2165,9 +2238,15 @@
             <i data-lucide="arrow-left" style="width:16px; height:16px;"></i>
             <span>Lobby</span>
           </div>
-          <div class="crash-bal">
-            <span>USDT BALANCE</span>
-            <b id="crash-usdt-bal">0.0000</b>
+          <div class="crash-top-meta">
+            <div class="crash-players">
+              <span>PLAYERS</span>
+              <b id="crash-player-count">0</b>
+            </div>
+            <div class="crash-bal">
+              <span>USDT BALANCE</span>
+              <b id="crash-usdt-bal">0.0000</b>
+            </div>
           </div>
         </div>
         <div class="crash-history" id="crash-history"></div>
@@ -2176,7 +2255,6 @@
           <div class="crash-status" id="crash-status">WAITING</div>
           <div class="crash-mult" id="crash-mult">1.00x</div>
         </div>
-        <div class="crash-live" id="crash-live"></div>
         <div class="crash-bets">
           <div class="crash-bet-panel">
             <div class="crash-amt-row">
@@ -2184,32 +2262,31 @@
               <input class="crash-amt-input" id="crash-bet-1" type="number" step="0.01" min="0.01" value="0.10" />
               <button class="crash-amt-btn" type="button" onclick="CrashEngine.nudgeBet(1,1)">+</button>
             </div>
-            <div class="crash-toggle-row">
-              <span>Auto Bet</span>
-              <button class="crash-switch" id="crash-auto-1" type="button" onclick="CrashEngine.toggleAuto(1)"><i></i></button>
+            <div class="crash-quick">
+              <button type="button" onclick="CrashEngine.setBet(0.10)">0.10</button>
+              <button type="button" onclick="CrashEngine.setBet(0.50)">0.50</button>
+              <button type="button" onclick="CrashEngine.setBet(1)">1.00</button>
+              <button type="button" onclick="CrashEngine.setBet('max')">MAX</button>
             </div>
-            <div class="crash-toggle-row">
-              <span>Auto Cashout</span>
-              <input class="crash-cash-input" id="crash-cash-1" type="number" step="0.1" min="1.01" value="2.00" />
+            <div class="crash-toggles">
+              <div class="crash-toggle-row">
+                <span>Auto Bet</span>
+                <button class="crash-switch" id="crash-auto-1" type="button" onclick="CrashEngine.toggleAuto(1)"><i></i></button>
+              </div>
+              <div class="crash-toggle-row">
+                <span>Auto Cashout</span>
+                <input class="crash-cash-input" id="crash-cash-1" type="number" step="0.1" min="1.01" value="2.00" />
+              </div>
             </div>
             <button class="crash-action" id="crash-act-1" type="button" onclick="CrashEngine.act(1)">BET</button>
           </div>
-          <div class="crash-bet-panel">
-            <div class="crash-amt-row">
-              <button class="crash-amt-btn" type="button" onclick="CrashEngine.nudgeBet(2,-1)">-</button>
-              <input class="crash-amt-input" id="crash-bet-2" type="number" step="0.01" min="0.01" value="0.10" />
-              <button class="crash-amt-btn" type="button" onclick="CrashEngine.nudgeBet(2,1)">+</button>
-            </div>
-            <div class="crash-toggle-row">
-              <span>Auto Bet</span>
-              <button class="crash-switch" id="crash-auto-2" type="button" onclick="CrashEngine.toggleAuto(2)"><i></i></button>
-            </div>
-            <div class="crash-toggle-row">
-              <span>Auto Cashout</span>
-              <input class="crash-cash-input" id="crash-cash-2" type="number" step="0.1" min="1.01" value="2.00" />
-            </div>
-            <button class="crash-action" id="crash-act-2" type="button" onclick="CrashEngine.act(2)">BET</button>
+        </div>
+        <div class="crash-board">
+          <div class="crash-tabs">
+            <button class="crash-tab on" id="crash-tab-all" type="button" onclick="CrashEngine.setBoard('all')">ALL BET</button>
+            <button class="crash-tab" id="crash-tab-my" type="button" onclick="CrashEngine.setBoard('my')">MY BET</button>
           </div>
+          <div class="crash-live" id="crash-live"></div>
         </div>
       </div>
     </section>
@@ -2496,6 +2573,12 @@
       }
       if (!rows.length) {
         list.innerHTML = `<p style="font-size:12px; color:var(--text-secondary); text-align:center; padding:16px;">No transactions found.</p>`;
+        return;
+      }
+      const WALLET_TX_TYPES = { DEPOSIT: 1, WITHDRAW: 1, TRANSFER_OUT: 1, TRANSFER_IN: 1 };
+      rows = rows.filter((tx) => WALLET_TX_TYPES[String(tx.type || "").toUpperCase()]);
+      if (!rows.length) {
+        list.innerHTML = `<p style="font-size:12px; color:var(--text-secondary); text-align:center; padding:16px;">No deposit, withdraw, or transfer records.</p>`;
         return;
       }
       rows.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
@@ -3467,13 +3550,15 @@
       driving: false,
       round: null,
       seats: {
-        1: { amount: 0, active: false, cashed: false, pending: false, busy: false, auto: false },
-        2: { amount: 0, active: false, cashed: false, pending: false, busy: false, auto: false }
+        1: { amount: 0, active: false, cashed: false, pending: false, busy: false, auto: false }
       },
       anim: 0,
       lastPhase: "",
       lastRoundId: 0,
       liveRows: [],
+      myRows: [],
+      board: "all",
+      playerCount: 0,
       bindGlobal() {
         if (this.bound) return;
         this.bound = true;
@@ -3589,37 +3674,38 @@
         if (data.roundId !== this.lastRoundId) {
           this.lastRoundId = data.roundId;
           const onCrash = document.getElementById("view-crash") && document.getElementById("view-crash").classList.contains("active-view");
-          [1, 2].forEach((s) => {
-            const seat = this.seats[s];
-            seat.active = false;
-            seat.cashed = false;
-            seat.amount = 0;
-            if (seat.pending || (seat.auto && onCrash && data.phase === "waiting")) {
-              seat.pending = false;
-              this.placeBet(s, true);
-            }
-          });
+          const seat = this.seats[1];
+          seat.active = false;
+          seat.cashed = false;
+          seat.amount = 0;
+          if (seat.pending || (seat.auto && onCrash && data.phase === "waiting")) {
+            seat.pending = false;
+            this.placeBet(1, true);
+          }
           this.liveRows = this.fakeLive(data.roundId);
+          this.playerCount = this.liveRows.length + (seat.active || seat.pending ? 1 : 0);
+          this.updatePlayerCount();
         }
         if (data.phase === "crashed" && this.lastPhase === "flying") {
-          [1, 2].forEach((s) => {
-            const seat = this.seats[s];
-            if (seat.active && !seat.cashed) {
-              seat.active = false;
-              this.liveRows.unshift({ name: "You", amt: seat.amount, result: "lose", mult: data.crashPoint });
-            }
-          });
+          const seat = this.seats[1];
+          if (seat.active && !seat.cashed) {
+            seat.active = false;
+            const row = { name: "You", amt: seat.amount, result: "lose", mult: data.crashPoint, mine: true };
+            this.liveRows.unshift(row);
+            this.myRows.unshift(row);
+          }
         }
         this.lastPhase = data.phase;
         this.renderHistory();
         this.renderLive();
         this.renderButtons();
+        this.updatePlayerCount();
       },
       fakeLive(id) {
-        const names = ["SkyAce", "NovaUSDT", "PilotX", "MoonBet", "CrashKing", "LuckyJet", "AeroPro", "GoldWing"];
+        const names = ["SkyAce", "NovaUSDT", "PilotX", "MoonBet", "CrashKing", "LuckyJet", "AeroPro", "GoldWing", "JetMax", "CryptoFly"];
         let x = (Number(id) * 9301 + 49297) % 233280;
         const rnd = () => { x = (x * 9301 + 49297) % 233280; return x / 233280; };
-        const n = 4 + Math.floor(rnd() * 4);
+        const n = 6 + Math.floor(rnd() * 8);
         const rows = [];
         for (let i = 0; i < n; i++) {
           rows.push({
@@ -3628,6 +3714,7 @@
             result: "live"
           });
         }
+        this.playerCount = n;
         return rows;
       },
       enter() {
@@ -3637,6 +3724,7 @@
         this.renderHistory();
         this.renderLive();
         this.renderButtons();
+        this.updatePlayerCount();
       },
       leave() {
         document.body.classList.remove("crash-immersive");
@@ -3664,10 +3752,30 @@
           return `<span class="crash-pill ${cls}">${n.toFixed(2)}x</span>`;
         }).join("");
       },
+      updatePlayerCount() {
+        const el = document.getElementById("crash-player-count");
+        if (!el) return;
+        const extra = (this.seats[1].active || this.seats[1].pending) ? 1 : 0;
+        const n = Math.max(this.playerCount || this.liveRows.length, this.liveRows.length) + (this.liveRows.some(r => r.mine) ? 0 : extra);
+        el.innerText = String(n);
+      },
+      setBoard(mode) {
+        this.board = mode === "my" ? "my" : "all";
+        const allTab = document.getElementById("crash-tab-all");
+        const myTab = document.getElementById("crash-tab-my");
+        if (allTab) allTab.classList.toggle("on", this.board === "all");
+        if (myTab) myTab.classList.toggle("on", this.board === "my");
+        this.renderLive();
+      },
       renderLive() {
         const mount = document.getElementById("crash-live");
         if (!mount) return;
-        const rows = this.liveRows.slice(0, 6);
+        const src = this.board === "my" ? this.myRows : this.liveRows;
+        const rows = src.slice(0, 12);
+        if (!rows.length) {
+          mount.innerHTML = `<div class="crash-live-row"><span>${this.board === "my" ? "No personal bets yet" : "Waiting for bets"}</span><span>—</span></div>`;
+          return;
+        }
         mount.innerHTML = rows.map((r) => {
           let right = Number(r.amt).toFixed(2) + " USDT";
           if (r.result === "win") right = `<span class="win">+${(Number(r.amt) * Number(r.mult)).toFixed(2)}</span>`;
@@ -3700,32 +3808,31 @@
         this.renderButtons();
       },
       renderButtons() {
-        [1, 2].forEach((s) => {
-          const btn = document.getElementById("crash-act-" + s);
-          const sw = document.getElementById("crash-auto-" + s);
-          if (!btn) return;
-          const seat = this.seats[s];
-          const r = this.round || { phase: "waiting" };
-          btn.className = "crash-action";
-          if (seat.busy) {
-            btn.classList.add("busy");
-            btn.innerText = "...";
-            return;
-          }
-          if (r.phase === "flying" && seat.active && !seat.cashed) {
-            btn.classList.add("cash");
-            btn.innerText = "CASH OUT " + this.currentMult().toFixed(2) + "x";
-          } else if (seat.pending) {
-            btn.classList.add("wait");
-            btn.innerText = "CANCEL WAIT";
-          } else if (r.phase === "waiting" && seat.active) {
-            btn.classList.add("wait");
-            btn.innerText = "CANCEL BET";
-          } else {
-            btn.innerText = "BET";
-          }
-          if (sw) sw.classList.toggle("on", !!seat.auto);
-        });
+        const s = 1;
+        const btn = document.getElementById("crash-act-" + s);
+        const sw = document.getElementById("crash-auto-" + s);
+        if (!btn) return;
+        const seat = this.seats[s];
+        const r = this.round || { phase: "waiting" };
+        btn.className = "crash-action";
+        if (seat.busy) {
+          btn.classList.add("busy");
+          btn.innerText = "...";
+          return;
+        }
+        if (r.phase === "flying" && seat.active && !seat.cashed) {
+          btn.classList.add("cash");
+          btn.innerText = "CASH OUT " + this.currentMult().toFixed(2) + "x";
+        } else if (seat.pending) {
+          btn.classList.add("wait");
+          btn.innerText = "CANCEL WAIT";
+        } else if (r.phase === "waiting" && seat.active) {
+          btn.classList.add("wait");
+          btn.innerText = "CANCEL BET";
+        } else {
+          btn.innerText = "BET";
+        }
+        if (sw) sw.classList.toggle("on", !!seat.auto);
       },
       nudgeBet(seat, dir) {
         const el = document.getElementById("crash-bet-" + seat);
@@ -3733,6 +3840,15 @@
         let v = parseFloat(el.value) || 0.1;
         v = Math.max(0.01, +(v + dir * 0.1).toFixed(2));
         el.value = v.toFixed(2);
+      },
+      setBet(v) {
+        const el = document.getElementById("crash-bet-1");
+        if (!el) return;
+        if (v === "max") {
+          el.value = Math.max(0.01, Number(State.user.tokenBalances.usdt || 0)).toFixed(2);
+          return;
+        }
+        el.value = Number(v).toFixed(2);
       },
       toggleAuto(seat) {
         this.seats[seat].auto = !this.seats[seat].auto;
@@ -3790,9 +3906,11 @@
         s.pending = false;
         s.amount = amt;
         s.busy = false;
-        const tx = { type: "CRASH_BET", desc: "Crash bet " + amt.toFixed(4) + " USDT (seat " + seat + ")", status: "PENDING", timestamp: Date.now() };
-        await fbPush("transactions/" + State.user.telegramId, tx);
-        pushLocalTx(tx);
+        const row = { name: "You", amt: amt, result: "live", mine: true };
+        this.liveRows.unshift(row);
+        this.myRows.unshift(row);
+        this.updatePlayerCount();
+        this.renderLive();
         App.updateUI();
         this.refreshBalance();
         this.renderButtons();
@@ -3829,10 +3947,9 @@
         const next = +(bal + win).toFixed(6);
         State.user.tokenBalances.usdt = next;
         await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
-        const tx = { type: "CRASH_WIN", desc: "Crash cashout " + m.toFixed(2) + "x +" + win.toFixed(4) + " USDT", status: "COMPLETED", timestamp: Date.now() };
-        await fbPush("transactions/" + State.user.telegramId, tx);
-        pushLocalTx(tx);
-        this.liveRows.unshift({ name: "You", amt: s.amount, result: "win", mult: m });
+        const row = { name: "You", amt: s.amount, result: "win", mult: m, mine: true };
+        this.liveRows.unshift(row);
+        this.myRows.unshift(row);
         s.busy = false;
         App.updateUI();
         this.refreshBalance();
@@ -3844,12 +3961,11 @@
         const r = this.round;
         if (!r || r.phase !== "flying") return;
         const m = this.currentMult();
-        [1, 2].forEach((seat) => {
-          const s = this.seats[seat];
-          if (!s.active || s.cashed || s.busy) return;
-          const target = parseFloat((document.getElementById("crash-cash-" + seat) || {}).value) || 0;
-          if (target >= 1.01 && m >= target) this.cashout(seat);
-        });
+        const seat = 1;
+        const s = this.seats[seat];
+        if (!s.active || s.cashed || s.busy) return;
+        const target = parseFloat((document.getElementById("crash-cash-" + seat) || {}).value) || 0;
+        if (target >= 1.01 && m >= target) this.cashout(seat);
       },
       paint() {
         const page = document.getElementById("view-crash");
