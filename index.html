@@ -8,6 +8,10 @@
   <!-- Telegram WebApp SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -52,7 +56,9 @@
       --gold-sub: rgba(61, 38, 0, 0.85);
       --gold-chip: linear-gradient(135deg, #FFE899, #B8860B);
 
-      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-main: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --bkash: #E2136E;
+      --bkash-dark: #C20E5C;
       --radius-sm: 10px;
       --radius-md: 16px;
       --radius-lg: 24px;
@@ -275,16 +281,16 @@
     /* ======================================================================
        3-COLUMN HIGH-QUALITY ESSENTIAL ACTION BUTTONS (NO EXTRA STATUS BOXES)
        ====================================================================== */
-    .essential-3col-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+     .essential-3col-grid {
+       display: grid;
+       grid-template-columns: repeat(3, 1fr);
+       gap: 10px;
+       margin-bottom: 20px;
+     }
     .btn-lux-tile {
-      background: linear-gradient(145deg, var(--bg-card-elevated), var(--bg-card));
+      background: linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
       border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
+      border-radius: 18px;
       padding: 16px 8px;
       display: flex;
       flex-direction: column;
@@ -294,14 +300,22 @@
       transition: var(--transition-fast);
       color: var(--text-primary);
       text-align: center;
-      box-shadow: var(--shadow-card);
+      box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.12);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .btn-lux-tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 0%, rgba(255,255,255,0.18), transparent 55%);
+      pointer-events: none;
     }
     .btn-lux-tile:active {
       transform: scale(0.96);
       border-color: var(--cyan);
-      box-shadow: 0 0 15px var(--cyan-glow);
+      box-shadow: 0 0 18px var(--cyan-glow);
     }
     .btn-lux-icon {
       width: 42px;
@@ -381,17 +395,42 @@
        ADVANCED 50 PACKAGES SYSTEM (PAY VS MISSION DROPDOWN TOGGLE)
        ====================================================================== */
     .package-card-premium {
-      background: linear-gradient(145deg, var(--bg-card-elevated), var(--bg-card));
-      border: 1px solid var(--border-color);
+      background: var(--gold-gradient);
+      border: var(--gold-border);
       border-radius: var(--radius-lg);
       padding: 16px;
       position: relative;
       margin-bottom: 16px;
-      box-shadow: var(--shadow-card);
+      box-shadow: 0 14px 32px rgba(184, 134, 11, 0.38), inset 0 1px 2px rgba(255,255,255,0.55);
+      color: var(--gold-text);
+      overflow: hidden;
     }
+    .package-card-premium::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -40%;
+      width: 120%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(255,255,255,0.32) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .package-card-premium > * { position: relative; z-index: 2; }
+    .package-card-premium .pkg-title-txt { color: var(--gold-text); }
+    .package-card-premium .pkg-sel-label { color: var(--gold-sub); }
+    .package-card-premium .pkg-custom-select {
+      background: rgba(0,0,0,0.18);
+      color: var(--gold-text);
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    .package-card-premium .pkg-selectors-row { background: rgba(0,0,0,0.12); }
+    .package-card-premium .mission-header,
+    .package-card-premium .pkg-btn-grid,
+    .package-card-premium .btn-details { color: var(--gold-text); }
+    .package-card-premium .progress-track { background: rgba(0,0,0,0.22); }
     .package-card-premium.is-active-pkg {
-      border-color: var(--cyan);
-      box-shadow: 0 0 20px var(--cyan-glow);
+      border-color: #F5D77F;
+      box-shadow: 0 0 24px rgba(212, 175, 55, 0.55), inset 0 1px 2px rgba(255,255,255,0.6);
     }
     .pkg-top-meta {
       display: flex;
@@ -695,6 +734,472 @@
     .badge-status { padding: 3px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
     .badge-pending { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
     .badge-completed { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+
+    input, textarea, select { user-select: text; -webkit-user-select: text; }
+
+    /* Card flip */
+    .card-flip-scene { perspective: 1400px; margin-bottom: 18px; touch-action: pan-y; }
+    .card-flip-inner {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      min-height: 220px;
+    }
+    .card-flip-inner.is-flipped { transform: rotateY(180deg); }
+    .card-face-front, .card-face-back {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .card-face-back {
+      position: absolute;
+      inset: 0;
+      transform: rotateY(180deg);
+    }
+    .golden-bank-card { margin-bottom: 0; min-height: 220px; }
+    .gold-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 10px;
+      position: relative;
+      z-index: 2;
+    }
+    .gold-swipe-hint {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--gold-sub);
+      letter-spacing: 0.3px;
+    }
+    .all-token-chip-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      position: relative;
+      z-index: 3;
+    }
+    .all-token-chip-label {
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: #08332E;
+    }
+    .gold-card-chip-btn {
+      width: 44px;
+      height: 32px;
+      background: linear-gradient(135deg, #5EEAD4 0%, #0F766E 45%, #2DD4BF 100%);
+      border-radius: 6px;
+      border: 1px solid rgba(6, 78, 59, 0.45);
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.55), 0 3px 8px rgba(15,118,110,0.45);
+      position: relative;
+      overflow: hidden;
+    }
+    .gold-card-chip-btn::before, .gold-card-chip-btn::after {
+      content: '';
+      position: absolute;
+      background: rgba(6, 78, 59, 0.28);
+    }
+    .gold-card-chip-btn::before {
+      left: 14px; top: 3px; bottom: 3px; width: 1px;
+      box-shadow: 8px 0 0 rgba(6, 78, 59, 0.28), 16px 0 0 rgba(6, 78, 59, 0.28);
+    }
+    .gold-card-chip-btn::after {
+      top: 10px; left: 3px; right: 3px; height: 1px;
+      box-shadow: 0 10px 0 rgba(6, 78, 59, 0.28);
+    }
+    .gold-card-chip { display: none; }
+
+    .card-back-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 2;
+    }
+    .card-back-photo {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.55);
+      background: linear-gradient(135deg, #0F766E, #2563EB);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #fff;
+      font-size: 16px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .card-back-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .card-back-name { font-size: 15px; font-weight: 900; color: var(--gold-text); }
+    .card-pan-row, .card-cvvp-row {
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+      background: rgba(0,0,0,0.12);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 10px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+    }
+    .card-pan-label, .card-cvvp-label {
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold-sub);
+    }
+    .card-pan-num {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--gold-text);
+      margin-top: 2px;
+    }
+    .card-cvvp-num {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: var(--gold-text);
+    }
+
+    .wallet-hub-grid { grid-template-columns: repeat(2, 1fr); }
+    .hold-confirm-btn {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+    .hold-confirm-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 0%;
+      background: rgba(255,255,255,0.28);
+      pointer-events: none;
+    }
+    .hold-confirm-btn span { position: relative; z-index: 1; }
+
+    .xfer-owner-box {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--success);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      margin-top: 8px;
+    }
+    .xfer-owner-box.show { display: flex; }
+    .xfer-owner-photo {
+      width: 40px; height: 40px; border-radius: 50%;
+      object-fit: cover; background: linear-gradient(135deg, var(--cyan), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 900; overflow: hidden; flex-shrink: 0;
+    }
+    .xfer-owner-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .ads-bank-card {
+      background: var(--gold-gradient);
+      border: var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      color: var(--gold-text);
+      box-shadow: 0 12px 28px rgba(184, 134, 11, 0.32);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .ads-bank-card::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -40%;
+      width: 120%; height: 140%;
+      background: radial-gradient(circle, rgba(255,255,255,0.28) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .ads-bank-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; position: relative; z-index: 2; }
+    .ads-bank-logo {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: rgba(0,0,0,0.18); display: flex; align-items: center; justify-content: center;
+      color: var(--gold-text); overflow: hidden; font-weight: 900;
+    }
+    .ads-bank-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .ads-meta-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;
+      margin: 10px 0; position: relative; z-index: 2;
+    }
+    .ads-meta-box {
+      background: rgba(0,0,0,0.14);
+      border-radius: 8px; padding: 6px 4px; text-align: center;
+    }
+    .ads-meta-box h6 { font-size: 8px; font-weight: 800; text-transform: uppercase; color: var(--gold-sub); }
+    .ads-meta-box p { font-size: 11px; font-weight: 900; margin-top: 2px; }
+    .ads-pbar-row { margin-bottom: 7px; position: relative; z-index: 2; }
+    .ads-pbar-lab { display: flex; justify-content: space-between; font-size: 9px; font-weight: 800; margin-bottom: 3px; }
+    .watch-now-btn {
+      width: 100%; border: none; cursor: pointer;
+      background: linear-gradient(135deg, #0F766E, #134E4A);
+      color: #ECFDF5; font-weight: 900; font-size: 13px;
+      padding: 12px; border-radius: 12px; position: relative; z-index: 2;
+    }
+    .watch-now-btn:disabled { opacity: 0.45; filter: grayscale(0.6); cursor: not-allowed; }
+
+    .support-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .visit-card {
+      background: var(--bg-card-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px; margin-bottom: 12px;
+    }
+    .visit-card-head { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .visit-thumb {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0;
+    }
+    .checkin-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 12px 0; }
+    .checkin-day {
+      aspect-ratio: 1; border-radius: 10px;
+      background: var(--bg-secondary); border: 1px solid var(--border-color);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 800;
+    }
+    .checkin-day.done { border-color: var(--success); background: rgba(16,185,129,0.15); color: var(--success); }
+    .checkin-day.today { border-color: var(--cyan); }
+
+    .quiz-opt {
+      width: 100%; text-align: left; margin-bottom: 8px;
+      background: var(--bg-secondary); border: 1px solid var(--border-color);
+      color: var(--text-primary); padding: 12px; border-radius: 10px;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+    }
+    .quiz-opt.correct { border-color: var(--success); background: rgba(16,185,129,0.18); }
+    .quiz-opt.wrong { border-color: var(--danger); background: rgba(239,68,68,0.15); }
+
+    .lang-row {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--bg-card-elevated); border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 12px 14px; margin-bottom: 10px;
+    }
+    .lang-left { display: flex; align-items: center; gap: 10px; }
+    .lang-flag { font-size: 22px; width: 32px; text-align: center; }
+    .lang-toggle {
+      width: 44px; height: 24px; border-radius: 12px; border: none; cursor: pointer;
+      background: var(--bg-secondary); position: relative;
+    }
+    .lang-toggle.on { background: var(--cyan); }
+    .lang-toggle span {
+      position: absolute; top: 3px; left: 3px; width: 18px; height: 18px;
+      border-radius: 50%; background: #fff; transition: left 0.2s;
+    }
+    .lang-toggle.on span { left: 23px; }
+
+    .token-row {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer;
+    }
+    .token-row img { width: 32px; height: 32px; border-radius: 50%; background: #fff; padding: 2px; }
+
+    #ad-overlay {
+      display: none; position: fixed; inset: 0; z-index: 20000;
+      background: rgba(4,7,17,0.94); align-items: center; justify-content: center;
+      flex-direction: column; color: #fff; text-align: center; padding: 24px;
+    }
+    #ad-overlay.show { display: flex; }
+    .ad-count {
+      width: 96px; height: 96px; border-radius: 50%;
+      border: 3px solid var(--cyan); display: flex; align-items: center; justify-content: center;
+      font-size: 32px; font-weight: 900; margin-bottom: 12px;
+      box-shadow: 0 0 24px var(--cyan-glow);
+    }
+    .page-back {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 12px; cursor: pointer;
+    }
+
+    .card-face-back {
+      background:
+        radial-gradient(120% 80% at 0% 0%, rgba(255,255,255,0.42), transparent 46%),
+        radial-gradient(90% 70% at 100% 100%, rgba(170,119,28,0.55), transparent 50%),
+        linear-gradient(145deg, #F8E7A1 0%, #D4AF37 28%, #AA771C 58%, #F5D77F 82%, #C9A227 100%);
+      box-shadow:
+        0 18px 40px rgba(120, 80, 8, 0.45),
+        inset 0 1px 0 rgba(255,255,255,0.7),
+        inset 0 -8px 18px rgba(90, 50, 0, 0.18);
+      transform: rotateY(180deg) translateZ(1px);
+    }
+    .card-face-back::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; top: 18px;
+      height: 38px;
+      background: linear-gradient(90deg, #1a1204, #3b2a0a 20%, #1a1204 50%, #4a3410 80%, #1a1204);
+      opacity: 0.92;
+      z-index: 1;
+    }
+    .card-back-user { margin-top: 52px; }
+    .card-pan-row, .card-cvvp-row {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .card-secret-main { flex: 1; min-width: 0; }
+    .card-hide-btn {
+      width: 34px; height: 34px; min-width: 34px;
+      border-radius: 10px;
+      border: 1px solid rgba(61,38,0,0.28);
+      background: rgba(255,255,255,0.28);
+      color: var(--gold-text);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+    }
+    .card-pan-num, .card-cvvp-num {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.35);
+    }
+    .card-hologram {
+      position: absolute; right: 14px; top: 64px; width: 46px; height: 46px; border-radius: 50%;
+      background: conic-gradient(from 40deg, #7dd3fc, #f9a8d4, #fde68a, #86efac, #7dd3fc);
+      opacity: 0.55; filter: blur(0.2px); z-index: 2;
+      box-shadow: 0 0 12px rgba(255,255,255,0.35);
+    }
+
+    .wallet-review-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 12px; padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .wallet-review-row:last-child { border-bottom: none; }
+    .wallet-review-k { font-size: 11px; color: var(--text-secondary); font-weight: 700; }
+    .wallet-review-v { font-size: 13px; font-weight: 800; text-align: right; word-break: break-all; }
+    .sent-hold-btn {
+      width: 100%;
+      border: none;
+      color: #fff;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: 2px;
+      padding: 16px;
+      border-radius: 16px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #E2136E, #9D174D);
+      box-shadow: 0 10px 24px rgba(226,19,110,0.35);
+      user-select: none;
+    }
+    .sent-hold-fill {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 0%;
+      background: rgba(255,255,255,0.28);
+      pointer-events: none;
+    }
+    .sent-hold-btn span { position: relative; z-index: 1; }
+
+    .bkash-popup {
+      display: none; position: fixed; inset: 0; z-index: 30000;
+      background: rgba(8,4,12,0.72);
+      align-items: center; justify-content: center; padding: 18px;
+    }
+    .bkash-popup.show { display: flex; }
+    .bkash-slip {
+      width: 100%; max-width: 360px;
+      background: #fff; color: #111827; border-radius: 18px;
+      overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      font-family: Inter, sans-serif;
+    }
+    .bkash-slip-top {
+      background: linear-gradient(180deg, #E2136E, #C20E5C);
+      color: #fff; text-align: center; padding: 22px 16px 18px;
+    }
+    .bkash-logo-mark {
+      width: 54px; height: 54px; margin: 0 auto 8px;
+      border-radius: 16px; background: #fff; color: #E2136E;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 22px;
+    }
+    .bkash-ok {
+      width: 58px; height: 58px; margin: 8px auto 10px;
+      border-radius: 50%; background: #16A34A;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 6px rgba(22,163,74,0.18);
+    }
+    .bkash-slip-body { padding: 16px 18px 8px; }
+    .bkash-row {
+      display: flex; justify-content: space-between; gap: 10px;
+      padding: 8px 0; border-bottom: 1px dashed #E5E7EB; font-size: 12px;
+    }
+    .bkash-row span { color: #6B7280; }
+    .bkash-row b { color: #111827; text-align: right; }
+    .bkash-slip-foot { padding: 8px 18px 16px; text-align: center; }
+    .bkash-close {
+      width: 100%; border: none; background: #E2136E; color: #fff;
+      font-weight: 800; padding: 12px; border-radius: 12px; cursor: pointer;
+    }
+
+    .tile-blue { background: linear-gradient(160deg, rgba(2,132,199,0.22), rgba(37,99,235,0.08)); border-color: rgba(2,132,199,0.35); }
+    .tile-green { background: linear-gradient(160deg, rgba(16,185,129,0.22), rgba(5,150,105,0.08)); border-color: rgba(16,185,129,0.35); }
+    .tile-purple { background: linear-gradient(160deg, rgba(139,92,246,0.22), rgba(124,58,237,0.08)); border-color: rgba(139,92,246,0.35); }
+    .tile-gold { background: linear-gradient(160deg, rgba(245,158,11,0.26), rgba(180,83,9,0.1)); border-color: rgba(245,158,11,0.4); }
+    .tile-pink { background: linear-gradient(160deg, rgba(236,72,153,0.22), rgba(219,39,119,0.08)); border-color: rgba(236,72,153,0.35); }
+    .tile-teal { background: linear-gradient(160deg, rgba(13,148,136,0.22), rgba(15,118,110,0.08)); border-color: rgba(13,148,136,0.35); }
+    .tile-orange { background: linear-gradient(160deg, rgba(249,115,22,0.24), rgba(194,65,12,0.08)); border-color: rgba(249,115,22,0.38); }
+    .tile-indigo { background: linear-gradient(160deg, rgba(99,102,241,0.22), rgba(67,56,202,0.08)); border-color: rgba(99,102,241,0.35); }
+    .tile-rose { background: linear-gradient(160deg, rgba(244,63,94,0.22), rgba(190,18,60,0.08)); border-color: rgba(244,63,94,0.35); }
+    .tile-lime { background: linear-gradient(160deg, rgba(132,204,22,0.22), rgba(77,124,15,0.08)); border-color: rgba(132,204,22,0.35); }
+    .tile-sky { background: linear-gradient(160deg, rgba(14,165,233,0.22), rgba(3,105,161,0.08)); border-color: rgba(14,165,233,0.35); }
+
+    .support-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .support-contact-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 18px 10px; border-radius: 16px; cursor: pointer; text-decoration: none;
+      color: #fff; font-weight: 800; font-size: 13px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+    }
+    .support-tg { background: linear-gradient(145deg, #2AABEE, #229ED9); }
+    .support-wa { background: linear-gradient(145deg, #25D366, #128C7E); }
+    .support-logo {
+      width: 46px; height: 46px; border-radius: 14px; background: rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .quiz-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .quiz-cat-card {
+      background: var(--gold-gradient); border: var(--gold-border); color: var(--gold-text);
+      border-radius: 16px; padding: 16px 12px; cursor: pointer; text-align: center;
+      box-shadow: 0 10px 22px rgba(184,134,11,0.28);
+    }
+    .quiz-cat-card h4 { font-size: 14px; font-weight: 900; margin-top: 8px; }
+    .quiz-cat-card p { font-size: 10px; font-weight: 700; color: var(--gold-sub); margin-top: 4px; }
+
+    .ads-photo {
+      width: 100%; height: 92px; border-radius: 12px; object-fit: cover;
+      margin-bottom: 10px; position: relative; z-index: 2;
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    .charge-note {
+      font-size: 11px; color: var(--warning); font-weight: 700;
+      text-align: center; margin: 8px 0 12px;
+    }
+    .wallet-hub-card h4 { font-size: 12px; font-weight: 800; }
+    .wallet-hub-card {
+      background: linear-gradient(160deg, var(--bg-card-elevated), var(--bg-card));
+      box-shadow: var(--shadow-card);
+    }
   </style>
 </head>
 <body>
@@ -721,59 +1226,107 @@
          ========================================== -->
     <main id="view-home" class="view-page active-view">
 
-      <!-- REALISTIC GOLDEN BANK CARD WITH EMBOSSED CHIP & EMBEDDED TOKEN AVATAR -->
-      <section class="golden-bank-card">
-        <div class="gold-card-header">
-          <!-- Token Avatar & Symbol Badge -->
-          <div class="gold-token-avatar-badge">
-            <img class="gold-token-avatar" id="home-token-logo" src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=025" alt="Token" />
-            <span class="gold-token-sym" id="home-selected-symbol">USDT</span>
-          </div>
-
-          <!-- Small Top-Right Compact Token Switcher -->
-          <div class="gold-select-wrapper">
-            <select class="gold-select-compact" id="balance-token-picker" onchange="App.handleBalanceTokenChange(this.value)">
-              <!-- Populated via JS -->
-            </select>
-          </div>
+      <div class="card-flip-scene" id="home-card-scene">
+        <div class="card-flip-inner" id="home-card-inner">
+          <section class="golden-bank-card card-face-front">
+            <div class="gold-card-header">
+              <div class="gold-token-avatar-badge">
+                <img class="gold-token-avatar" id="home-token-logo" src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=025" alt="Token" />
+                <span class="gold-token-sym" id="home-selected-symbol">USDT</span>
+              </div>
+              <div class="gold-select-wrapper">
+                <select class="gold-select-compact" id="balance-token-picker" onchange="App.handleBalanceTokenChange(this.value)"></select>
+              </div>
+            </div>
+            <div class="gold-card-balance" style="margin-top:18px;">
+              <span id="home-selected-bal">0.3000</span>
+              <span style="font-size:16px; font-weight:800;" id="home-selected-cur">USDT</span>
+            </div>
+            <div class="gold-card-usd" id="home-selected-usd-val">≈ $0.30 USD</div>
+            <div class="gold-card-footer">
+              <span class="gold-swipe-hint">Swipe right for card back</span>
+              <div class="all-token-chip-wrap" onclick="event.stopPropagation(); App.navigate('view-all-tokens');">
+                <span class="all-token-chip-label">All Token</span>
+                <div class="gold-card-chip-btn" title="All Token"></div>
+              </div>
+            </div>
+          </section>
+          <section class="golden-bank-card card-face-back">
+            <div class="card-hologram"></div>
+            <div class="card-back-user">
+              <div class="card-back-photo" id="card-back-photo">U</div>
+              <div>
+                <div class="card-back-name" id="card-back-name">Telegram User</div>
+                <div style="font-size:10px; font-weight:700; color:var(--gold-sub);" id="card-back-handle">@guest</div>
+              </div>
+            </div>
+            <div class="card-pan-row">
+              <div class="card-secret-main">
+                <div class="card-pan-label">Card Number</div>
+                <div class="card-pan-num" id="card-pan-num" onclick="CardBank.copyPan()">•••• •••• •••• ••••</div>
+              </div>
+              <button class="card-hide-btn" type="button" onclick="event.stopPropagation(); CardBank.togglePan()" aria-label="Hide card number">
+                <i data-lucide="eye" id="pan-eye-icon" style="width:16px;height:16px;"></i>
+              </button>
+            </div>
+            <div class="card-cvvp-row">
+              <div class="card-secret-main">
+                <div class="card-cvvp-label">CVVP</div>
+                <div class="card-cvvp-num" id="card-cvvp-num" onclick="CardBank.copyCvvp()">••••</div>
+              </div>
+              <button class="card-hide-btn" type="button" onclick="event.stopPropagation(); CardBank.toggleCvvp()" aria-label="Hide CVVP">
+                <i data-lucide="eye" id="cvvp-eye-icon" style="width:16px;height:16px;"></i>
+              </button>
+            </div>
+          </section>
         </div>
-
-        <!-- EMV Microchip -->
-        <div class="gold-card-chip"></div>
-
-        <!-- Main Balance (No "Available Balance" Label) -->
-        <div class="gold-card-balance">
-          <span id="home-selected-bal">0.3000</span>
-          <span style="font-size:16px; font-weight:800;" id="home-selected-cur">USDT</span>
-        </div>
-        <div class="gold-card-usd" id="home-selected-usd-val">≈ $0.30 USD</div>
-      </section>
+      </div>
 
       <!-- 3-COLUMN HIGH-QUALITY ESSENTIAL ACTION BUTTONS -->
       <div class="essential-3col-grid">
         <div class="btn-lux-tile tile-blue" onclick="App.navigate('view-ads')">
           <div class="btn-lux-icon"><i data-lucide="tv" style="width:22px; height:22px;"></i></div>
-          <span>Watch Ads</span>
+          <span data-i18n="watchAds">Watch Ads</span>
         </div>
         <div class="btn-lux-tile tile-green" onclick="App.navigate('view-yield')">
           <div class="btn-lux-icon"><i data-lucide="hammer" style="width:22px; height:22px;"></i></div>
-          <span>Mining</span>
+          <span data-i18n="mining">Mining</span>
         </div>
         <div class="btn-lux-tile tile-purple" onclick="App.navigate('view-packages')">
           <div class="btn-lux-icon"><i data-lucide="layers" style="width:22px; height:22px;"></i></div>
-          <span>Packages</span>
+          <span data-i18n="packages">Packages</span>
         </div>
         <div class="btn-lux-tile tile-gold" onclick="App.navigate('view-wallet-hub')">
           <div class="btn-lux-icon"><i data-lucide="wallet" style="width:22px; height:22px;"></i></div>
-          <span>My Wallet</span>
+          <span data-i18n="wallet">My Wallet</span>
         </div>
         <div class="btn-lux-tile tile-pink" onclick="App.navigate('view-refer')">
           <div class="btn-lux-icon"><i data-lucide="share-2" style="width:22px; height:22px;"></i></div>
-          <span>Invite</span>
+          <span data-i18n="invite">Invite</span>
         </div>
         <div class="btn-lux-tile tile-teal" onclick="App.navigate('view-convert')">
           <div class="btn-lux-icon"><i data-lucide="repeat" style="width:22px; height:22px;"></i></div>
-          <span>Convert</span>
+          <span data-i18n="convert">Convert</span>
+        </div>
+        <div class="btn-lux-tile tile-orange" onclick="App.navigate('view-checkin')">
+          <div class="btn-lux-icon"><i data-lucide="calendar-check" style="width:22px; height:22px;"></i></div>
+          <span data-i18n="checkin">Daily Check</span>
+        </div>
+        <div class="btn-lux-tile tile-indigo" onclick="App.navigate('view-quiz')">
+          <div class="btn-lux-icon"><i data-lucide="help-circle" style="width:22px; height:22px;"></i></div>
+          <span data-i18n="quiz">Quiz Game</span>
+        </div>
+        <div class="btn-lux-tile tile-rose" onclick="App.navigate('view-visiting')">
+          <div class="btn-lux-icon"><i data-lucide="globe" style="width:22px; height:22px;"></i></div>
+          <span data-i18n="visiting">Visiting</span>
+        </div>
+        <div class="btn-lux-tile tile-lime" onclick="App.navigate('view-language')">
+          <div class="btn-lux-icon"><i data-lucide="languages" style="width:22px; height:22px;"></i></div>
+          <span data-i18n="language">Language</span>
+        </div>
+        <div class="btn-lux-tile tile-sky" onclick="App.navigate('view-support')">
+          <div class="btn-lux-icon"><i data-lucide="headphones" style="width:22px; height:22px;"></i></div>
+          <span data-i18n="support">Support</span>
         </div>
       </div>
     </main>
@@ -791,7 +1344,7 @@
 
       <!-- Search bar -->
       <div style="margin-bottom:14px;">
-        <input type="text" class="form-input" id="pkg-search-box" placeholder="🔍 Search token..." oninput="App.filterPackages(this.value)" />
+        <input type="text" class="form-input" id="pkg-search-box" placeholder="Search token..." oninput="App.filterPackages(this.value)" />
       </div>
 
       <!-- 50 Packages Mount -->
@@ -856,7 +1409,6 @@
         <p style="font-size:11px; color:var(--text-secondary);">Direct TRC20 deposits & dual cashout gateway.</p>
       </div>
 
-      <!-- 3 Buttons Grid -->
       <div class="wallet-hub-grid">
         <div class="wallet-hub-card" onclick="App.navigate('view-wallet-deposit')">
           <i data-lucide="arrow-down-circle" style="width:24px; height:24px; color:var(--cyan);"></i>
@@ -865,6 +1417,10 @@
         <div class="wallet-hub-card" onclick="App.navigate('view-wallet-withdraw')">
           <i data-lucide="arrow-up-circle" style="width:24px; height:24px; color:var(--neon);"></i>
           <h4>Withdraw</h4>
+        </div>
+        <div class="wallet-hub-card" onclick="App.navigate('view-wallet-transfer')">
+          <i data-lucide="send" style="width:24px; height:24px; color:#c084fc;"></i>
+          <h4>Transfer</h4>
         </div>
         <div class="wallet-hub-card" onclick="App.navigate('view-wallet-tx')">
           <i data-lucide="history" style="width:24px; height:24px; color:var(--warning);"></i>
@@ -897,7 +1453,23 @@
           <label class="form-label">Amount (USDT)</label>
           <input type="number" step="0.1" class="form-input" id="dep-amount-input" placeholder="Min 1.0 USDT" />
         </div>
-        <button class="btn-primary" onclick="WalletEngine.submitDeposit()">SUBMIT DEPOSIT</button>
+        <button class="btn-primary" id="btn-next-deposit" onclick="WalletEngine.goReview('deposit')">NEXT</button>
+      </div>
+    </section>
+
+    <section id="view-wallet-deposit-review" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-wallet-deposit')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated">
+        <h3 style="font-size:15px; font-weight:800; color:var(--cyan); margin-bottom:8px;">Confirm Deposit</h3>
+        <p style="font-size:11px; color:var(--text-secondary); margin-bottom:12px;">Check every detail. Hold Sent only if everything is correct.</p>
+        <div id="deposit-review-body"></div>
+        <button class="sent-hold-btn" id="deposit-sent-btn">
+          <div class="sent-hold-fill" id="deposit-sent-fill"></div>
+          <span>SENT</span>
+        </button>
       </div>
     </section>
 
@@ -944,10 +1516,26 @@
 
         <div class="form-group">
           <label class="form-label">Security PIN (4 Digits)</label>
-          <input type="password" maxlength="4" class="form-input" id="withdraw-pin-input" placeholder="****" />
+          <input type="password" maxlength="4" class="form-input" id="withdraw-pin-input" placeholder="****" inputmode="numeric" />
         </div>
 
-        <button class="btn-primary" onclick="WalletEngine.submitWithdrawal()">CONFIRM WITHDRAWAL</button>
+        <button class="btn-primary" id="btn-next-withdraw" onclick="WalletEngine.goReview('withdraw')">NEXT</button>
+      </div>
+    </section>
+
+    <section id="view-wallet-withdraw-review" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-wallet-withdraw')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated">
+        <h3 style="font-size:15px; font-weight:800; color:var(--cyan); margin-bottom:8px;">Confirm Withdraw</h3>
+        <p style="font-size:11px; color:var(--text-secondary); margin-bottom:12px;">Verify payout details. Hold Sent to submit.</p>
+        <div id="withdraw-review-body"></div>
+        <button class="sent-hold-btn" id="withdraw-sent-btn">
+          <div class="sent-hold-fill" id="withdraw-sent-fill"></div>
+          <span>SENT</span>
+        </button>
       </div>
     </section>
 
@@ -1008,8 +1596,8 @@
           Rate: <span id="swap-rate-hint" style="color:var(--text-primary);">1 = ...</span>
         </div>
       </div>
-
-      <button class="btn-primary" onclick="ConvertEngine.executeSwap()">INSTANT CONVERT</button>
+      <p class="charge-note" id="convert-charge-note">Convert fee: 2% · One convert per account</p>
+      <button class="btn-primary" id="btn-instant-convert" onclick="ConvertEngine.executeSwap()">CONVERT NOW</button>
     </section>
 
     <!-- ==========================================
@@ -1022,25 +1610,10 @@
       </div>
 
       <div class="card card-elevated" style="text-align:center;">
-        <h2 style="font-size:18px; font-weight:800; color:var(--cyan); margin-bottom:4px;">Rewarded Ads Station</h2>
-        <p style="font-size:11px; color:var(--text-secondary);">Watch sponsored presentations to directly earn real USDT balance.</p>
+        <h2 style="font-size:18px; font-weight:800; color:var(--cyan); margin-bottom:4px;" data-i18n="adsTitle">Rewarded Ads Station</h2>
+        <p style="font-size:11px; color:var(--text-secondary);" data-i18n="adsSub">Watch 15s ads to earn USDT instantly. Does not fill package missions.</p>
       </div>
-
-      <div class="card" style="border-left: 4px solid var(--cyan);">
-        <h3 style="font-size:14px; font-weight:800;">Monetag Premium SDK (#9955574)</h3>
-        <p style="font-size:11px; color:var(--text-secondary); margin:6px 0 12px 0;">Earn +0.0025 USDT per sponsored stream.</p>
-        <button class="btn-primary" onclick="AdsEngine.triggerMonetag()">
-          <i data-lucide="play" style="width:16px; height:16px;"></i> WATCH & CLAIM MONETAG
-        </button>
-      </div>
-
-      <div class="card" style="border-left: 4px solid var(--blue);">
-        <h3 style="font-size:14px; font-weight:800;">Gigapub Sponsored Ad (#6234)</h3>
-        <p style="font-size:11px; color:var(--text-secondary); margin:6px 0 12px 0;">Fallback direct video stream.</p>
-        <button class="btn-primary" style="background:linear-gradient(135deg, var(--blue), #594DFF);" onclick="AdsEngine.triggerGigapub()">
-          <i data-lucide="external-link" style="width:16px; height:16px;"></i> WATCH & CLAIM GIGAPUB
-        </button>
-      </div>
+      <div id="reward-ads-cards"></div>
     </section>
 
     <!-- ==========================================
@@ -1112,7 +1685,226 @@
       </div>
     </section>
 
+    <section id="view-all-tokens" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">All Tokens</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">Tap a token to show it on your home card.</p>
+      </div>
+      <div id="all-tokens-list"></div>
+    </section>
+
+    <section id="view-wallet-transfer" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-wallet-hub')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back to Wallet</span>
+      </div>
+      <div class="card card-elevated">
+        <h3 style="font-size:15px; font-weight:800; color:var(--cyan); margin-bottom:12px;">Transfer USDT</h3>
+        <div class="form-group">
+          <label class="form-label">Amount (USDT)</label>
+          <input type="number" step="0.0001" class="form-input" id="xfer-amount" placeholder="0.0000" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Card Number</label>
+          <input type="text" class="form-input" id="xfer-card" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" oninput="TransferEngine.lookupCard()" />
+          <div class="xfer-owner-box" id="xfer-owner-box">
+            <div class="xfer-owner-photo" id="xfer-owner-photo">U</div>
+            <div>
+              <div style="font-size:13px; font-weight:800;" id="xfer-owner-name">—</div>
+              <div style="font-size:10px; color:var(--text-secondary);" id="xfer-owner-handle">Card verified</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">CVVP (4 digits)</label>
+          <input type="password" maxlength="4" class="form-input" id="xfer-cvvp" placeholder="****" inputmode="numeric" />
+        </div>
+        <button class="btn-primary" id="btn-next-transfer" onclick="WalletEngine.goReview('transfer')">NEXT</button>
+      </div>
+    </section>
+
+    <section id="view-wallet-transfer-review" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-wallet-transfer')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated">
+        <h3 style="font-size:15px; font-weight:800; color:var(--cyan); margin-bottom:8px;">Confirm Transfer</h3>
+        <p style="font-size:11px; color:var(--text-secondary); margin-bottom:12px;">Verify receiver and amount. Hold Sent to send.</p>
+        <div id="transfer-review-body"></div>
+        <button class="sent-hold-btn" id="transfer-sent-btn">
+          <div class="sent-hold-fill" id="transfer-sent-fill"></div>
+          <span>SENT</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="view-support" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="margin-bottom:14px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan); margin-bottom:8px;">Support Center</h2>
+        <p style="font-size:12px; color:var(--text-secondary); line-height:1.6; margin-bottom:10px;">
+          Need help with deposit, withdraw, transfer, mining, or package activation? Our live support team is ready 24/7.
+        </p>
+        <p style="font-size:12px; color:var(--text-secondary); line-height:1.6;">
+          Share your Telegram ID, transaction type, and amount. Official support replies only through Telegram and WhatsApp below. Never send CVVP or PIN to unknown contacts.
+        </p>
+      </div>
+      <div class="support-contact-grid">
+        <a class="support-contact-btn support-tg" href="https://t.me/ZynexaFree_Bot" target="_blank" rel="noopener">
+          <div class="support-logo"><i data-lucide="send" style="width:22px;height:22px;"></i></div>
+          Telegram
+        </a>
+        <a class="support-contact-btn support-wa" href="https://wa.me/8801700000000" target="_blank" rel="noopener">
+          <div class="support-logo"><i data-lucide="message-circle" style="width:22px;height:22px;"></i></div>
+          WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <section id="view-visiting" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Visiting Tasks</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">Stay on the page for the full timer, then verify to claim.</p>
+      </div>
+      <div id="visit-tasks-list"></div>
+    </section>
+
+    <section id="view-visit-timer" class="view-page">
+      <div class="page-back" onclick="VisitEngine.cancelVisit()">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center; padding:28px 16px;">
+        <h3 style="font-size:16px; font-weight:900;" id="visit-timer-title">Visit Task</h3>
+        <p style="font-size:11px; color:var(--text-secondary); margin:8px 0 16px;" id="visit-timer-desc">Stay until the timer ends.</p>
+        <div class="ad-count" id="visit-countdown">00</div>
+        <p style="font-size:12px; font-weight:700; color:var(--cyan); margin-bottom:16px;" id="visit-status-txt">Keep this page open</p>
+        <button class="btn-primary" id="visit-verify-btn" onclick="VisitEngine.verify()" disabled>VERIFY & CLAIM</button>
+      </div>
+    </section>
+
+    <section id="view-checkin" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Daily Checking</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">Check in once per day. Watch an ad to earn 0.01 USDT.</p>
+        <div class="checkin-days" id="checkin-days"></div>
+        <button class="btn-primary" id="checkin-btn" onclick="CheckinEngine.doCheckin()">CHECK IN NOW</button>
+      </div>
+    </section>
+
+    <section id="view-quiz" class="view-page">
+      <div class="page-back" onclick="QuizEngine.back()">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div id="quiz-cat-wrap">
+        <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+          <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Quiz Arena</h2>
+          <p style="font-size:11px; color:var(--text-secondary);">Pick a category. Score 5/10 then watch an ad for 0.01 USDT.</p>
+        </div>
+        <div class="quiz-cat-grid">
+          <div class="quiz-cat-card" onclick="QuizEngine.openCat('bn')">
+            <i data-lucide="book-open" style="width:22px;height:22px;"></i>
+            <h4>Bangla Quiz</h4>
+            <p>Language and grammar</p>
+          </div>
+          <div class="quiz-cat-card" onclick="QuizEngine.openCat('math')">
+            <i data-lucide="calculator" style="width:22px;height:22px;"></i>
+            <h4>Math Quiz</h4>
+            <p>Numbers and logic</p>
+          </div>
+          <div class="quiz-cat-card" onclick="QuizEngine.openCat('en')">
+            <i data-lucide="languages" style="width:22px;height:22px;"></i>
+            <h4>English Quiz</h4>
+            <p>Vocabulary and grammar</p>
+          </div>
+          <div class="quiz-cat-card" onclick="QuizEngine.openCat('gk')">
+            <i data-lucide="earth" style="width:22px;height:22px;"></i>
+            <h4>General Knowledge</h4>
+            <p>World facts and crypto</p>
+          </div>
+        </div>
+      </div>
+      <div class="ads-bank-card" id="quiz-limit-card" style="display:none;">
+        <div class="ads-bank-head">
+          <div class="ads-bank-logo"><i data-lucide="help-circle" style="width:22px; height:22px;"></i></div>
+          <div>
+            <div style="font-size:15px; font-weight:900;" id="quiz-cat-title">Quiz Game</div>
+            <div style="font-size:11px; font-weight:700; color:var(--gold-sub);">Score 5/10 then watch ad for 0.01 USDT</div>
+          </div>
+        </div>
+        <div class="ads-meta-grid">
+          <div class="ads-meta-box"><h6>Reward</h6><p>0.01$</p></div>
+          <div class="ads-meta-box"><h6>Hourly</h6><p id="quiz-h-lim">1</p></div>
+          <div class="ads-meta-box"><h6>Daily</h6><p id="quiz-d-lim">3</p></div>
+        </div>
+        <div class="ads-pbar-row"><div class="ads-pbar-lab"><span>Hourly</span><span id="quiz-h-txt">0/1</span></div><div class="progress-track"><div class="progress-fill fill-ads" id="quiz-h-bar" style="width:0%"></div></div></div>
+        <div class="ads-pbar-row"><div class="ads-pbar-lab"><span>Daily</span><span id="quiz-d-txt">0/3</span></div><div class="progress-track"><div class="progress-fill fill-ref" id="quiz-d-bar" style="width:0%"></div></div></div>
+        <div class="ads-pbar-row"><div class="ads-pbar-lab"><span>Monthly</span><span id="quiz-m-txt">0/90</span></div><div class="progress-track"><div class="progress-fill" style="background:linear-gradient(90deg,#AA771C,#F5D77F); width:0%" id="quiz-m-bar"></div></div></div>
+        <button class="watch-now-btn" id="quiz-start-btn" onclick="QuizEngine.start()">START QUIZ</button>
+      </div>
+      <div class="card" id="quiz-play-card" style="display:none;">
+        <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:800; margin-bottom:10px;">
+          <span id="quiz-q-num">Question 1/10</span>
+          <span id="quiz-score">Score 0</span>
+        </div>
+        <h3 style="font-size:15px; font-weight:800; margin-bottom:14px;" id="quiz-question">...</h3>
+        <div id="quiz-options"></div>
+      </div>
+    </section>
+
+    <section id="view-language" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Language</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">Select a language to switch the whole site.</p>
+      </div>
+      <div id="lang-list"></div>
+    </section>
+
   </div> <!-- End App Container -->
+
+  <div id="ad-overlay">
+    <div class="ad-count" id="ad-overlay-count">15</div>
+    <h3 style="font-size:16px; font-weight:900; margin-bottom:6px;" id="ad-overlay-title">Watching Ad</h3>
+    <p style="font-size:12px; color:#94a3b8;" id="ad-overlay-sub">Please wait until the timer ends.</p>
+  </div>
+
+  <div class="bkash-popup" id="bkash-popup">
+    <div class="bkash-slip">
+      <div class="bkash-slip-top">
+        <div class="bkash-logo-mark">b</div>
+        <div style="font-size:18px; font-weight:900; letter-spacing:1px;">bKash</div>
+        <div class="bkash-ok"><i data-lucide="check" style="width:28px;height:28px;color:#fff;"></i></div>
+        <div style="font-size:15px; font-weight:800;" id="bkash-status-title">Transaction Successful</div>
+        <div style="font-size:22px; font-weight:900; margin-top:6px;" id="bkash-amount">0.00 USDT</div>
+      </div>
+      <div class="bkash-slip-body" id="bkash-slip-body"></div>
+      <div class="bkash-slip-foot">
+        <div style="font-size:10px; color:#6B7280; margin-bottom:10px;" id="bkash-trxid">TrxID: —</div>
+        <button class="bkash-close" onclick="WalletEngine.closeSlip()">Close</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ======================================================================
        BOTTOM FLOATING NAVIGATION BAR (STRICTLY 3 TABS)
@@ -1257,23 +2049,127 @@
       90: { days: 90, reqRefs: 100, reqAds: 20000, returnPct: 30, usdtCost: 90.0, missionDailyUsd: 0.15 }
     };
 
+    const REWARD_AD = 0.001;
+    const REWARD_MONTHLY = 5000;
+    const REWARD_DAILY = 166;
+    const REWARD_HOURLY = 6;
+    const CONVERT_FEE_PCT = 2;
+    const QUIZ_MONTHLY = 90;
+    const QUIZ_DAILY = 3;
+    const QUIZ_HOURLY = 1;
+    const VISIT_LINK = "https://omg10.com/4/10851248";
+    const AD_WATCH_SEC = 15;
+    const SUPPORT_TG = "https://t.me/ZynexaFree_Bot";
+    const SUPPORT_WA = "https://wa.me/8801700000000";
+
     const State = {
       user: {
         telegramId: "demo_guest",
         firstName: "Telegram",
         lastName: "User",
         username: "guest_user",
+        photoUrl: "",
         referralCode: "ZYN888",
-        tokenBalances: { usdt: 0.3000 }, // 0.30$ default welcome balance
+        tokenBalances: { usdt: 0.3000 },
         activeMiningRigs: {},
         packageAdProgress: {},
         referralCount: 0,
         adsToday: 0,
-        securityPin: null
+        securityPin: null,
+        cardNumber: "",
+        cvvp: "",
+        rewardAds: {},
+        quizAds: { hourly: 0, daily: 0, monthly: 0, hourKey: "", dayKey: "", monthKey: "" },
+        checkin: { lastDay: "", streak: 0, days: {} },
+        visitDone: {},
+        lang: "en",
+        convertUsed: false,
+        hidePan: false,
+        hideCvvp: false
       },
       selectedBalanceTokenId: "usdt",
-      currentConsoleTokenId: "usdt"
+      currentConsoleTokenId: "usdt",
+      firebaseReady: false,
+      localTxs: [],
+      syncBound: false
     };
+
+    function pad4(n) { return String(n).padStart(4, "0"); }
+    function nowKeys() {
+      const d = new Date();
+      return {
+        hourKey: d.getFullYear() + "-" + pad4(d.getMonth()+1) + "-" + pad4(d.getDate()) + "-" + pad4(d.getHours()),
+        dayKey: d.getFullYear() + "-" + pad4(d.getMonth()+1) + "-" + pad4(d.getDate()),
+        monthKey: d.getFullYear() + "-" + pad4(d.getMonth()+1)
+      };
+    }
+    function rollLimits(obj) {
+      const k = nowKeys();
+      if (!obj) obj = { hourly: 0, daily: 0, monthly: 0, hourKey: "", dayKey: "", monthKey: "" };
+      if (obj.hourKey !== k.hourKey) { obj.hourly = 0; obj.hourKey = k.hourKey; }
+      if (obj.dayKey !== k.dayKey) { obj.daily = 0; obj.dayKey = k.dayKey; }
+      if (obj.monthKey !== k.monthKey) { obj.monthly = 0; obj.monthKey = k.monthKey; }
+      return obj;
+    }
+    function genCardNumber(tid) {
+      const raw = String(tid).replace(/\D/g, "") + "8472910365123498";
+      let s = raw.slice(0, 16);
+      while (s.length < 16) s += "8";
+      return s.replace(/(\d{4})(?=\d)/g, "$1 ").trim();
+    }
+    function genCvvp(tid) {
+      let h = 0;
+      String(tid).split("").forEach((c, i) => { h = (h * 33 + c.charCodeAt(0) + i * 17) % 10000; });
+      return pad4(Math.abs(h));
+    }
+    function cardKey(num) { return String(num || "").replace(/\s/g, ""); }
+    function userPhotoHtml(url, initial) {
+      if (url) return `<img src="${url}" alt="photo" />`;
+      return (initial || "U");
+    }
+    async function fbSet(path, val) {
+      try { await db.ref(path).set(val); return true; }
+      catch (e) { App.toast("Request failed. Check connection."); return false; }
+    }
+    async function fbPush(path, val) {
+      try { await db.ref(path).push().set(val); return true; }
+      catch (e) { return false; }
+    }
+    async function fbUpdate(path, val) {
+      try { await db.ref(path).update(val); return true; }
+      catch (e) { return false; }
+    }
+    function pushLocalTx(tx) {
+      State.localTxs.unshift(tx);
+      renderTxList();
+    }
+    function renderTxList(fromSnap) {
+      const list = document.getElementById("full-tx-history-container");
+      if (!list) return;
+      let rows = [];
+      if (fromSnap && fromSnap.exists()) {
+        fromSnap.forEach((child) => { rows.push(child.val()); });
+      } else {
+        rows = State.localTxs.slice();
+      }
+      if (!rows.length) {
+        list.innerHTML = `<p style="font-size:12px; color:var(--text-secondary); text-align:center; padding:16px;">No transactions found.</p>`;
+        return;
+      }
+      rows.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+      list.innerHTML = rows.map(tx => `
+        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-secondary); padding:10px 12px; border-radius:10px; border:1px solid var(--border-color);">
+          <div>
+            <span style="font-size:12px; font-weight:800;">${tx.type || "TX"}</span>
+            <div style="font-size:10px; color:var(--text-secondary);">${new Date(tx.timestamp || Date.now()).toLocaleString()}</div>
+          </div>
+          <div style="text-align:right;">
+            <span style="font-size:12px; font-weight:800; color:var(--cyan);">${tx.desc || ("+" + tx.amount)}</span>
+            <div style="font-size:9px; color:var(--success); font-weight:700;">${tx.status || "COMPLETED"}</div>
+          </div>
+        </div>
+      `).join("");
+    }
 
     const NotificationDispatcher = {
       async sendTelegramRaw(chatId, textHtml) {
@@ -1298,55 +2194,172 @@
         this.render50Packages();
         this.startMasterTimers();
         this.drawProfileChart();
+        this.bindCardSwipe();
+        WalletEngine.bindAllHolds();
+        I18n.apply(State.user.lang || "en");
+        AdsEngine.renderCards();
+        AdsEngine.startLiveTicker();
+        VisitEngine.renderList();
+        CheckinEngine.render();
+        QuizEngine.renderLimits();
+        I18n.renderList();
+        this.renderAllTokens();
         if (window.lucide) lucide.createIcons();
       },
 
+      applyTgUser(u) {
+        if (!u || !u.id) return false;
+        State.user.telegramId = String(u.id);
+        State.user.firstName = u.first_name || "User";
+        State.user.lastName = u.last_name || "";
+        State.user.username = u.username || ("user_" + u.id);
+        State.user.photoUrl = u.photo_url || "";
+        State.user.referralCode = "ZYN" + String(u.id).slice(-4);
+        return true;
+      },
+      parseTgFromLocation() {
+        try {
+          const src = (location.hash || "") + "&" + (location.search || "").replace(/^\?/, "");
+          const m = src.match(/tgWebAppData=([^&]+)/);
+          if (!m) return null;
+          const decoded = decodeURIComponent(decodeURIComponent(m[1]));
+          const params = new URLSearchParams(decoded);
+          const raw = params.get("user");
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+      },
       initTelegram() {
-        const tg = window.Telegram?.WebApp;
+        try {
+          const tg = window.Telegram && window.Telegram.WebApp;
+          let applied = false;
+          if (tg) {
+            tg.ready();
+            tg.expand();
+            if (tg.enableClosingConfirmation) tg.enableClosingConfirmation();
+            const unsafe = tg.initDataUnsafe || {};
+            applied = this.applyTgUser(unsafe.user);
+            if (!applied && tg.initData) {
+              try {
+                const params = new URLSearchParams(tg.initData);
+                const raw = params.get("user");
+                if (raw) applied = this.applyTgUser(JSON.parse(raw));
+              } catch (e) {}
+            }
+          }
+          if (!applied) this.applyTgUser(this.parseTgFromLocation());
+        } catch (e) {}
+        if (!State.user.cardNumber) State.user.cardNumber = genCardNumber(State.user.telegramId);
+        if (!State.user.cvvp) State.user.cvvp = genCvvp(State.user.telegramId);
+        this.attachFirebaseSync();
+        setTimeout(() => this.retryTelegramAuth(), 800);
+        setTimeout(() => this.retryTelegramAuth(), 2500);
+      },
+      retryTelegramAuth() {
+        if (State.user.telegramId && State.user.telegramId !== "demo_guest") return;
+        const tg = window.Telegram && window.Telegram.WebApp;
+        let applied = false;
         if (tg) {
-          tg.ready();
-          tg.expand();
-          const unsafe = tg.initDataUnsafe;
-          if (unsafe?.user) {
-            State.user.telegramId = String(unsafe.user.id);
-            State.user.firstName = unsafe.user.first_name || "User";
-            State.user.lastName = unsafe.user.last_name || "";
-            State.user.username = unsafe.user.username || `user_${unsafe.user.id}`;
-            State.user.referralCode = `ZYN${unsafe.user.id.toString().slice(-4)}`;
+          try { tg.ready(); tg.expand(); } catch (e) {}
+          applied = this.applyTgUser((tg.initDataUnsafe || {}).user);
+          if (!applied && tg.initData) {
+            try {
+              const params = new URLSearchParams(tg.initData);
+              const raw = params.get("user");
+              if (raw) applied = this.applyTgUser(JSON.parse(raw));
+            } catch (e) {}
           }
         }
-        this.attachFirebaseSync();
+        if (!applied) applied = this.applyTgUser(this.parseTgFromLocation());
+        if (applied) {
+          State.user.cardNumber = genCardNumber(State.user.telegramId);
+          State.user.cvvp = genCvvp(State.user.telegramId);
+          this.attachFirebaseSync();
+          this.updateUI();
+        }
       },
 
       attachFirebaseSync() {
-        const uRef = db.ref(`users/${State.user.telegramId}`);
+        if (State.syncBound === State.user.telegramId) return;
+        State.syncBound = State.user.telegramId;
+        const uid = State.user.telegramId;
+        const uRef = db.ref("users/" + uid);
         uRef.on("value", (snap) => {
+          State.firebaseReady = true;
           if (!snap.exists()) {
+            const cardNumber = genCardNumber(uid);
+            const cvvp = genCvvp(uid);
+            State.user.cardNumber = cardNumber;
+            State.user.cvvp = cvvp;
             uRef.set({
               profile: {
-                telegramId: State.user.telegramId,
+                telegramId: uid,
                 firstName: State.user.firstName,
                 lastName: State.user.lastName,
                 username: State.user.username,
+                photoUrl: State.user.photoUrl || "",
                 referralCode: State.user.referralCode,
                 joinedAt: Date.now()
               },
               tokenBalances: { usdt: 0.3000 },
               activeMiningRigs: {},
               packageAdProgress: {},
-              stats: { referralCount: 0, adsToday: 0 }
+              stats: { referralCount: 0, adsToday: 0 },
+              cardNumber,
+              cvvp,
+              securityPin: cvvp,
+              rewardAds: {},
+              quizAds: rollLimits({}),
+              checkin: { lastDay: "", streak: 0, days: {} },
+              visitDone: {},
+              lang: "en",
+              convertUsed: false,
+              hidePan: false,
+              hideCvvp: false
             });
-            NotificationDispatcher.notifyAll("NEW USER + $0.30 BONUS", `🎁 User <b>${State.user.firstName}</b> (@${State.user.username}) registered!`);
+            db.ref("cardIndex/" + cardKey(cardNumber)).set({
+              telegramId: uid,
+              firstName: State.user.firstName,
+              lastName: State.user.lastName,
+              username: State.user.username,
+              photoUrl: State.user.photoUrl || "",
+              cvvp
+            });
+            NotificationDispatcher.notifyAll("NEW USER + $0.30 BONUS", "User <b>" + State.user.firstName + "</b> (@" + State.user.username + ") registered!");
+            App.updateUI();
           } else {
-            const data = snap.val();
+            const data = snap.val() || {};
             State.user.tokenBalances = data.tokenBalances || { usdt: 0.3000 };
             State.user.activeMiningRigs = data.activeMiningRigs || {};
             State.user.packageAdProgress = data.packageAdProgress || {};
-            State.user.referralCount = data.stats?.referralCount || 0;
-            State.user.adsToday = data.stats?.adsToday || 0;
-            State.user.securityPin = data.securityPin || null;
-
-            // Purge expired rigs
+            State.user.referralCount = (data.stats && data.stats.referralCount) || 0;
+            State.user.adsToday = (data.stats && data.stats.adsToday) || 0;
+            State.user.securityPin = data.securityPin || data.cvvp || null;
+            State.user.cardNumber = data.cardNumber || genCardNumber(uid);
+            State.user.cvvp = data.cvvp || genCvvp(uid);
+            State.user.rewardAds = AdsEngine.normalizeStore(data.rewardAds);
+            State.user.quizAds = rollLimits(data.quizAds || {});
+            State.user.checkin = data.checkin || { lastDay: "", streak: 0, days: {} };
+            State.user.visitDone = data.visitDone || {};
+            State.user.lang = data.lang || State.user.lang || "en";
+            State.user.convertUsed = !!data.convertUsed;
+            State.user.hidePan = !!data.hidePan;
+            State.user.hideCvvp = !!data.hideCvvp;
+            if (data.profile) {
+              if (data.profile.photoUrl) State.user.photoUrl = data.profile.photoUrl;
+              if (data.profile.firstName) State.user.firstName = data.profile.firstName;
+              if (data.profile.username) State.user.username = data.profile.username;
+            }
+            if (!data.cardNumber || !data.cvvp) {
+              uRef.update({ cardNumber: State.user.cardNumber, cvvp: State.user.cvvp, securityPin: State.user.cvvp });
+              db.ref("cardIndex/" + cardKey(State.user.cardNumber)).set({
+                telegramId: uid,
+                firstName: State.user.firstName,
+                lastName: State.user.lastName,
+                username: State.user.username,
+                photoUrl: State.user.photoUrl || "",
+                cvvp: State.user.cvvp
+              });
+            }
             let updated = false;
             const now = Date.now();
             Object.keys(State.user.activeMiningRigs).forEach(tId => {
@@ -1356,45 +2369,30 @@
               }
             });
             if (updated) uRef.child("activeMiningRigs").set(State.user.activeMiningRigs);
-
             App.updateUI();
-            App.render50Packages();
+            App.render50PackagesPreserving();
             App.renderActiveRigs();
+            AdsEngine.renderCards();
+            VisitEngine.renderList();
+            CheckinEngine.render();
+            QuizEngine.renderLimits();
+            I18n.apply(State.user.lang);
           }
+        }, () => {
+          State.firebaseReady = false;
+          App.updateUI();
         });
 
-        // Transactions list listener
-        db.ref(`transactions/${State.user.telegramId}`).on("value", (snap) => {
-          const list = document.getElementById("full-tx-history-container");
-          if (!list) return;
-          if (!snap.exists()) {
-            list.innerHTML = `<p style="font-size:12px; color:var(--text-secondary); text-align:center; padding:16px;">No transactions found.</p>`;
-            return;
-          }
-          let html = "";
-          snap.forEach((child) => {
-            const tx = child.val();
-            html = `
-              <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-secondary); padding:10px 12px; border-radius:10px; border:1px solid var(--border-color);">
-                <div>
-                  <span style="font-size:12px; font-weight:800;">${tx.type}</span>
-                  <div style="font-size:10px; color:var(--text-secondary);">${new Date(tx.timestamp).toLocaleString()}</div>
-                </div>
-                <div style="text-align:right;">
-                  <span style="font-size:12px; font-weight:800; color:var(--cyan);">${tx.desc || `+${tx.amount}`}</span>
-                  <div style="font-size:9px; color:var(--success); font-weight:700;">${tx.status || 'COMPLETED'}</div>
-                </div>
-              </div>
-            ` + html;
-          });
-          list.innerHTML = html;
-        });
+        db.ref("transactions/" + uid).on("value", (snap) => {
+          renderTxList(snap);
+        }, () => { renderTxList(); });
       },
 
       populateTokenSelectors() {
         const picker = document.getElementById("balance-token-picker");
         const swapFrom = document.getElementById("swap-from-token");
         const swapTo = document.getElementById("swap-to-token");
+        if (!picker || !swapFrom || !swapTo) return;
 
         picker.innerHTML = CRYPTO_TOKENS.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
         swapFrom.innerHTML = CRYPTO_TOKENS.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
@@ -1407,14 +2405,33 @@
       },
 
       updateUI() {
-        const name = `${State.user.firstName} ${State.user.lastName}`;
-        const initial = (State.user.firstName[0] || 'U').toUpperCase();
+        const name = (State.user.firstName + " " + (State.user.lastName || "")).trim();
+        const initial = (State.user.firstName[0] || "U").toUpperCase();
 
-        document.getElementById("top-bar-avatar").innerText = initial;
-        document.getElementById("profile-big-avatar").innerText = initial;
+        const topAv = document.getElementById("top-bar-avatar");
+        if (State.user.photoUrl) {
+          topAv.innerHTML = `<img src="${State.user.photoUrl}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />`;
+        } else {
+          topAv.innerText = initial;
+        }
+        const bigAv = document.getElementById("profile-big-avatar");
+        if (State.user.photoUrl) {
+          bigAv.innerHTML = `<img src="${State.user.photoUrl}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />`;
+        } else {
+          bigAv.innerText = initial;
+        }
         document.getElementById("profile-full-name").innerText = name;
-        document.getElementById("profile-handle").innerText = `@${State.user.username}`;
-        document.getElementById("profile-uid").innerText = `ID: ${State.user.telegramId}`;
+        document.getElementById("profile-handle").innerText = "@" + State.user.username;
+        document.getElementById("profile-uid").innerText = "ID: " + State.user.telegramId;
+
+        const backPhoto = document.getElementById("card-back-photo");
+        if (backPhoto) backPhoto.innerHTML = userPhotoHtml(State.user.photoUrl, initial);
+        const backName = document.getElementById("card-back-name");
+        if (backName) backName.innerText = name;
+        const backHandle = document.getElementById("card-back-handle");
+        if (backHandle) backHandle.innerText = "@" + State.user.username;
+        CardBank.renderSecrets();
+        ConvertEngine.refreshLock();
 
         this.handleBalanceTokenChange(State.selectedBalanceTokenId);
 
@@ -1423,14 +2440,56 @@
           totalUsd += ((State.user.tokenBalances[t.id] || 0) * t.baseUsdPrice);
         });
 
-        document.getElementById("dash-stat-usd").innerText = `$${totalUsd.toFixed(2)}`;
-        document.getElementById("dash-stat-rigs").innerText = `${Object.keys(State.user.activeMiningRigs).length} Rigs`;
-        document.getElementById("dash-stat-refs").innerText = `${State.user.referralCount} Peers`;
+        document.getElementById("dash-stat-usd").innerText = "$" + totalUsd.toFixed(2);
+        document.getElementById("dash-stat-rigs").innerText = Object.keys(State.user.activeMiningRigs).length + " Rigs";
+        document.getElementById("dash-stat-refs").innerText = State.user.referralCount + " Peers";
         document.getElementById("dash-stat-ads").innerText = State.user.adsToday;
 
         const usdtBal = State.user.tokenBalances.usdt || 0;
-        document.getElementById("wallet-hub-usdt-balance").innerText = `${usdtBal.toFixed(4)} USDT`;
-        document.getElementById("referral-link-input").value = `https://t.me/${BOT_USERNAME}?start=ref_${State.user.telegramId}`;
+        document.getElementById("wallet-hub-usdt-balance").innerText = usdtBal.toFixed(4) + " USDT";
+        document.getElementById("referral-link-input").value = "https://t.me/" + BOT_USERNAME + "?start=ref_" + State.user.telegramId;
+        this.renderAllTokens();
+      },
+
+      bindCardSwipe() {
+        const scene = document.getElementById("home-card-scene");
+        const inner = document.getElementById("home-card-inner");
+        if (!scene || !inner) return;
+        let startX = 0, startY = 0, tracking = false;
+        const onStart = (x, y) => { startX = x; startY = y; tracking = true; };
+        const onEnd = (x, y) => {
+          if (!tracking) return;
+          tracking = false;
+          const dx = x - startX;
+          const dy = y - startY;
+          if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+            if (dx > 0) inner.classList.add("is-flipped");
+            else inner.classList.remove("is-flipped");
+          }
+        };
+        scene.addEventListener("touchstart", (e) => { onStart(e.changedTouches[0].clientX, e.changedTouches[0].clientY); }, { passive: true });
+        scene.addEventListener("touchend", (e) => { onEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY); });
+        scene.addEventListener("mousedown", (e) => { onStart(e.clientX, e.clientY); });
+        scene.addEventListener("mouseup", (e) => { onEnd(e.clientX, e.clientY); });
+      },
+
+      renderAllTokens() {
+        const mount = document.getElementById("all-tokens-list");
+        if (!mount) return;
+        mount.innerHTML = CRYPTO_TOKENS.map(t => {
+          const bal = State.user.tokenBalances[t.id] || 0;
+          return `<div class="token-row" onclick="App.handleBalanceTokenChange('${t.id}'); App.navigate('view-home');">
+            <img src="${t.img}" alt="${t.symbol}" />
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:800;">${t.name}</div>
+              <div style="font-size:10px; color:var(--text-secondary);">${t.symbol}</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:13px; font-weight:800; color:var(--cyan);">${bal.toFixed(bal < 0.001 && bal > 0 ? 8 : 4)}</div>
+              <div style="font-size:10px; color:var(--text-secondary);">$${(bal * t.baseUsdPrice).toFixed(2)}</div>
+            </div>
+          </div>`;
+        }).join("");
       },
 
       handleBalanceTokenChange(tokenId) {
@@ -1464,6 +2523,23 @@
         }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (targetPageId === "view-convert") { ConvertEngine.updateRates(); ConvertEngine.refreshLock(); }
+        if (targetPageId === "view-ads") AdsEngine.renderCards();
+        if (targetPageId === "view-visiting") VisitEngine.renderList();
+        if (targetPageId === "view-checkin") CheckinEngine.render();
+        if (targetPageId === "view-quiz") {
+          QuizEngine.cat = null;
+          const catWrap = document.getElementById("quiz-cat-wrap");
+          const limitCard = document.getElementById("quiz-limit-card");
+          const playCard = document.getElementById("quiz-play-card");
+          if (catWrap) catWrap.style.display = "block";
+          if (limitCard) limitCard.style.display = "none";
+          if (playCard) playCard.style.display = "none";
+          QuizEngine.renderLimits();
+        }
+        if (targetPageId === "view-language") I18n.renderList();
+        if (targetPageId === "view-all-tokens") this.renderAllTokens();
+        if (targetPageId === "view-wallet-tx") renderTxList();
         if (window.lucide) lucide.createIcons();
       },
 
@@ -1501,8 +2577,8 @@
           const missionTotalToken = parseFloat((missionTotalUsd / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
           const missionHourlyRate = parseFloat(((missionTotalToken / (defDur * 24))).toFixed(t.baseUsdPrice < 1 ? 4 : 8));
 
-          const refPercent = Math.min(100, Math.floor((globalRefs / spec.reqRefs) * 100));
-          const adsPercent = Math.min(100, Math.floor((pkgAdsDone / spec.reqAds) * 100));
+          const refPercent = Math.min(100, (globalRefs / spec.reqRefs) * 100);
+          const adsPercent = pkgAdsDone > 0 ? Math.max(1.2, Math.min(100, (pkgAdsDone / spec.reqAds) * 100)) : 0;
           const canUnlockMission = (globalRefs >= spec.reqRefs) && (pkgAdsDone >= spec.reqAds);
 
           return `
@@ -1601,6 +2677,22 @@
       filterPackages(val) {
         this.render50Packages(val);
       },
+      render50PackagesPreserving() {
+        const saved = {};
+        CRYPTO_TOKENS.forEach(t => {
+          const dur = document.getElementById("sel-dur-" + t.id);
+          const mode = document.getElementById("sel-mode-" + t.id);
+          if (dur || mode) saved[t.id] = { dur: dur ? dur.value : "3", mode: mode ? mode.value : "pay" };
+        });
+        this.render50Packages(document.getElementById("pkg-search-box") ? document.getElementById("pkg-search-box").value : "");
+        Object.keys(saved).forEach(id => {
+          const dur = document.getElementById("sel-dur-" + id);
+          const mode = document.getElementById("sel-mode-" + id);
+          if (dur) dur.value = saved[id].dur;
+          if (mode) mode.value = saved[id].mode;
+          this.handlePackageConfigChange(id);
+        });
+      },
 
       handlePackageConfigChange(tokenId) {
         const dur = parseInt(document.getElementById(`sel-dur-${tokenId}`).value);
@@ -1633,8 +2725,8 @@
         const globalRefs = State.user.referralCount;
         const pkgAdsDone = State.user.packageAdProgress[tokenId] || 0;
 
-        const refPercent = Math.min(100, Math.floor((globalRefs / spec.reqRefs) * 100));
-        const adsPercent = Math.min(100, Math.floor((pkgAdsDone / spec.reqAds) * 100));
+        const refPercent = Math.min(100, (globalRefs / spec.reqRefs) * 100);
+        const adsPercent = pkgAdsDone > 0 ? Math.max(1.2, Math.min(100, (pkgAdsDone / spec.reqAds) * 100)) : 0;
 
         // Update UI
         const badgePct = document.getElementById(`badge-pct-${tokenId}`);
@@ -1735,26 +2827,34 @@
         App.toast(`Free Mission Rig Activated for ${dur} Days!`);
       },
 
-      /* Package specific ad */
       watchPackageAd(tokenId) {
         const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
-        this.toast(`Starting unlock mission ad for ${t.name}...`);
-
-        const proceedSuccess = async () => {
-          const cur = State.user.packageAdProgress[tokenId] || 0;
-          await db.ref(`users/${State.user.telegramId}/packageAdProgress/${tokenId}`).set(cur + 1);
-          App.toast(`+1 Mission Ad recorded for ${t.name}!`);
-        };
-
-        try {
-          if (typeof show_9955574 === 'function') {
-            show_9955574().then(() => proceedSuccess()).catch(() => setTimeout(() => proceedSuccess(), 2000));
-          } else {
-            setTimeout(() => proceedSuccess(), 2000);
+        this.toast("Starting unlock mission ad for " + t.name + "...");
+        AdPlayer.play(async () => {
+          const cur = Number(State.user.packageAdProgress[tokenId] || 0);
+          const next = cur + 1;
+          if (!State.user.packageAdProgress) State.user.packageAdProgress = {};
+          State.user.packageAdProgress[tokenId] = next;
+          const durEl = document.getElementById("sel-dur-" + tokenId);
+          const dur = durEl ? parseInt(durEl.value) : 3;
+          const spec = SPEC_CONFIG[dur] || SPEC_CONFIG[3];
+          const adsPercent = next > 0 ? Math.max(1.2, Math.min(100, (next / spec.reqAds) * 100)) : 0;
+          const txtAds = document.getElementById("txt-ads-" + tokenId);
+          if (txtAds) txtAds.innerText = next + " / " + spec.reqAds + " Ads";
+          const fillAds = document.getElementById("fill-ads-" + tokenId);
+          if (fillAds) fillAds.style.width = adsPercent + "%";
+          const btnActMis = document.getElementById("btn-act-mis-" + tokenId);
+          if (btnActMis) {
+            const canUnlock = (State.user.referralCount >= spec.reqRefs) && (next >= spec.reqAds);
+            btnActMis.disabled = !canUnlock;
           }
-        } catch(e) {
-          setTimeout(() => proceedSuccess(), 2000);
-        }
+          const payView = document.getElementById("view-pay-" + tokenId);
+          const misView = document.getElementById("view-mission-" + tokenId);
+          if (payView) payView.style.display = "none";
+          if (misView) misView.style.display = "block";
+          await fbSet("users/" + State.user.telegramId + "/packageAdProgress/" + tokenId, next);
+          App.toast("Mission ad +1 (" + next + "/" + spec.reqAds + ")");
+        });
       },
 
       openPkgDetails(tokenId) {
@@ -1911,16 +3011,22 @@
        ========================================================== */
     const ConvertEngine = {
       updateRates() {
-        const fromId = document.getElementById("swap-from-token").value;
-        const toId = document.getElementById("swap-to-token").value;
+        const fromEl = document.getElementById("swap-from-token");
+        const toEl = document.getElementById("swap-to-token");
+        if (!fromEl || !toEl) return;
+        const fromId = fromEl.value;
+        const toId = toEl.value;
         const fromT = CRYPTO_TOKENS.find(x => x.id === fromId);
         const toT = CRYPTO_TOKENS.find(x => x.id === toId);
+        if (!fromT || !toT) return;
 
         const avail = State.user.tokenBalances[fromId] || 0;
-        document.getElementById("swap-from-avail").innerText = `${avail.toFixed(4)} ${fromT.symbol}`;
+        const availEl = document.getElementById("swap-from-avail");
+        if (availEl) availEl.innerText = avail.toFixed(4) + " " + fromT.symbol;
 
         const rate = fromT.baseUsdPrice / toT.baseUsdPrice;
-        document.getElementById("swap-rate-hint").innerText = `1 ${fromT.symbol} ≈ ${rate.toFixed(4)} ${toT.symbol}`;
+        const hint = document.getElementById("swap-rate-hint");
+        if (hint) hint.innerText = "1 " + fromT.symbol + " = " + rate.toFixed(4) + " " + toT.symbol;
         this.calculateReceive();
       },
       maxFrom() {
@@ -1930,14 +3036,23 @@
         this.calculateReceive();
       },
       calculateReceive() {
-        const fromId = document.getElementById("swap-from-token").value;
-        const toId = document.getElementById("swap-to-token").value;
-        const amt = parseFloat(document.getElementById("swap-from-amount").value) || 0;
-        const fromT = CRYPTO_TOKENS.find(x => x.id === fromId);
-        const toT = CRYPTO_TOKENS.find(x => x.id === toId);
-
-        const receive = (amt * fromT.baseUsdPrice) / toT.baseUsdPrice;
-        document.getElementById("swap-to-amount").value = receive.toFixed(receive < 0.001 ? 8 : 4);
+        const fromEl = document.getElementById("swap-from-token");
+        const toEl = document.getElementById("swap-to-token");
+        const amtEl = document.getElementById("swap-from-amount");
+        const outEl = document.getElementById("swap-to-amount");
+        if (!fromEl || !toEl || !amtEl || !outEl) return;
+        const fromT = CRYPTO_TOKENS.find(x => x.id === fromEl.value);
+        const toT = CRYPTO_TOKENS.find(x => x.id === toEl.value);
+        if (!fromT || !toT) return;
+        const amt = parseFloat(amtEl.value) || 0;
+        const gross = (amt * fromT.baseUsdPrice) / toT.baseUsdPrice;
+        const receive = gross * (1 - CONVERT_FEE_PCT / 100);
+        outEl.value = receive.toFixed(receive < 0.001 ? 8 : 4);
+        const note = document.getElementById("convert-charge-note");
+        if (note) {
+          const fee = (gross * CONVERT_FEE_PCT / 100);
+          note.innerText = "Convert fee " + CONVERT_FEE_PCT + "% (" + fee.toFixed(fee < 0.001 ? 8 : 4) + " " + toT.symbol + ") · One convert per account";
+        }
       },
       invertSwap() {
         const s1 = document.getElementById("swap-from-token");
@@ -1947,7 +3062,20 @@
         s2.value = temp;
         this.updateRates();
       },
+      refreshLock() {
+        const btn = document.getElementById("btn-instant-convert");
+        if (!btn) return;
+        if (State.user.convertUsed) {
+          btn.disabled = true;
+          btn.innerText = "ALREADY CONVERTED";
+        } else {
+          btn.disabled = false;
+          btn.innerText = "CONVERT NOW";
+        }
+      },
       async executeSwap() {
+        const btn = document.getElementById("btn-instant-convert");
+        if (State.user.convertUsed) { App.toast("Convert can be used only once."); this.refreshLock(); return; }
         const fromId = document.getElementById("swap-from-token").value;
         const toId = document.getElementById("swap-to-token").value;
         const amt = parseFloat(document.getElementById("swap-from-amount").value) || 0;
@@ -1960,24 +3088,28 @@
 
         const fromT = CRYPTO_TOKENS.find(x => x.id === fromId);
         const toT = CRYPTO_TOKENS.find(x => x.id === toId);
-        const receiveAmt = (amt * fromT.baseUsdPrice) / toT.baseUsdPrice;
+        const gross = (amt * fromT.baseUsdPrice) / toT.baseUsdPrice;
+        const receiveAmt = gross * (1 - CONVERT_FEE_PCT / 100);
 
         const newFrom = fromBal - amt;
         const newTo = (State.user.tokenBalances[toId] || 0) + receiveAmt;
+        if (btn) { btn.disabled = true; btn.innerText = "CONVERTING..."; }
 
-        await db.ref(`users/${State.user.telegramId}/tokenBalances/${fromId}`).set(newFrom);
-        await db.ref(`users/${State.user.telegramId}/tokenBalances/${toId}`).set(newTo);
-        await db.ref(`transactions/${State.user.telegramId}`).push().set({
-          type: "SWAP",
-          desc: `Swapped ${amt} ${fromT.symbol} ➔ ${receiveAmt.toFixed(4)} ${toT.symbol}`,
-          status: "COMPLETED",
-          timestamp: Date.now()
-        });
-
+        State.user.tokenBalances[fromId] = newFrom;
+        State.user.tokenBalances[toId] = newTo;
+        State.user.convertUsed = true;
+        const tx = { type: "SWAP", desc: "Converted " + amt + " " + fromT.symbol + " -> " + receiveAmt.toFixed(4) + " " + toT.symbol + " (fee " + CONVERT_FEE_PCT + "%)", status: "COMPLETED", timestamp: Date.now() };
+        await fbSet("users/" + State.user.telegramId + "/tokenBalances/" + fromId, newFrom);
+        await fbSet("users/" + State.user.telegramId + "/tokenBalances/" + toId, newTo);
+        await fbSet("users/" + State.user.telegramId + "/convertUsed", true);
+        await fbPush("transactions/" + State.user.telegramId, tx);
+        pushLocalTx(tx);
+        App.updateUI();
         document.getElementById("swap-from-amount").value = "";
         document.getElementById("swap-to-amount").value = "";
-        App.toast(`Swap Complete! +${receiveAmt.toFixed(4)} ${toT.symbol}`);
+        App.toast("Convert complete. Fee " + CONVERT_FEE_PCT + "% applied.");
         this.updateRates();
+        this.refreshLock();
       }
     };
 
@@ -2060,43 +3192,135 @@
       }
     };
 
-    /* ==========================================================
-       ADS REWARD ENGINE (GUARANTEED DISPATCH)
-       ========================================================== */
-    const AdsEngine = {
-      busy: false,
-      triggerMonetag() {
-        if (this.busy) return;
-        this.busy = true;
-        App.toast("Connecting to Monetag network...");
-        try {
-          if (typeof show_9955574 === 'function') {
-            show_9955574().then(() => this.credit("MONETAG")).catch(() => this.triggerGigapub()).finally(() => this.busy = false);
-          } else {
-            setTimeout(() => { this.credit("MONETAG"); this.busy = false; }, 2500);
+    const AdPlayer = {
+      playing: false,
+      play(onDone) {
+        if (this.playing) return;
+        this.playing = true;
+        const overlay = document.getElementById("ad-overlay");
+        const countEl = document.getElementById("ad-overlay-count");
+        overlay.classList.add("show");
+        let left = AD_WATCH_SEC;
+        countEl.innerText = left;
+        const tick = setInterval(() => {
+          left -= 1;
+          countEl.innerText = left;
+          if (left <= 0) {
+            clearInterval(tick);
+            overlay.classList.remove("show");
+            this.playing = false;
+            if (typeof onDone === "function") onDone();
           }
-        } catch(e) {
-          setTimeout(() => { this.credit("MONETAG"); this.busy = false; }, 2500);
-        }
-      },
-      triggerGigapub() {
-        if (this.busy) return;
-        this.busy = true;
-        App.toast("Opening Gigapub ad...");
-        setTimeout(() => { this.credit("GIGAPUB"); this.busy = false; }, 2500);
-      },
-      async credit(network) {
-        const r = 0.0025;
-        const curUsdt = State.user.tokenBalances.usdt || 0;
-        await db.ref(`users/${State.user.telegramId}/tokenBalances/usdt`).set(curUsdt + r);
-        await db.ref(`users/${State.user.telegramId}/stats`).update({ adsToday: State.user.adsToday + 1 });
-        await db.ref(`transactions/${State.user.telegramId}`).push().set({
-          type: "AD_REWARD",
-          desc: `+${r} USDT (${network})`,
-          status: "COMPLETED",
-          timestamp: Date.now()
+        }, 1000);
+        const trySdk = () => {
+          try {
+            if (typeof show_9955574 === "function") {
+              show_9955574().catch(() => {
+                if (typeof showGigaPubAd === "function") showGigaPubAd();
+              });
+            } else if (window.showGiga) {
+              window.showGiga();
+            }
+          } catch (e) {}
+        };
+        trySdk();
+      }
+    };
+
+    const AdsEngine = {
+      ticker: null,
+      networks: [
+        { id: "monetag", name: "Monetag Premium", title: "Rewarded Video", desc: "Watch a 15s stream and earn USDT instantly.", img: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=640&q=60", hourly: 6, daily: 166, monthly: 5000 },
+        { id: "gigapub", name: "Gigapub Network", title: "Fallback Stream", desc: "Independent limits from other ad cards.", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=640&q=60", hourly: 6, daily: 166, monthly: 5000 },
+        { id: "offerwall", name: "Offer Wall Plus", title: "Brand Spotlight", desc: "Short brand video with live progress.", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=640&q=60", hourly: 6, daily: 166, monthly: 5000 },
+        { id: "playable", name: "Playable Ads", title: "Interactive Clip", desc: "Interactive 15s rewarded playable.", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=640&q=60", hourly: 6, daily: 166, monthly: 5000 },
+        { id: "storyad", name: "Story Ads", title: "Vertical Story", desc: "Full-screen story format reward.", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=640&q=60", hourly: 6, daily: 166, monthly: 5000 },
+        { id: "native", name: "Native Boost", title: "Native Reward", desc: "Native feed ad with separate caps.", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=640&q=60", hourly: 6, daily: 166, monthly: 5000 }
+      ],
+      emptyLimit() { return { hourly: 0, daily: 0, monthly: 0, hourKey: "", dayKey: "", monthKey: "" }; },
+      normalizeStore(raw) {
+        const store = {};
+        this.networks.forEach((n, idx) => {
+          let src = raw && raw[n.id];
+          if (!src && raw && typeof raw.hourly === "number" && idx === 0) src = raw;
+          store[n.id] = rollLimits(src || this.emptyLimit());
         });
-        App.toast(`+${r} USDT added to available balance!`);
+        const hasPerCard = raw && raw.monetag;
+        if (!hasPerCard && store.monetag) {
+          store.monetag.daily = REWARD_DAILY;
+          store.monetag.hourly = REWARD_HOURLY;
+        }
+        return store;
+      },
+      getSlot(id) {
+        State.user.rewardAds = this.normalizeStore(State.user.rewardAds);
+        return State.user.rewardAds[id];
+      },
+      isBlocked(n, slot) {
+        return slot.hourly >= n.hourly || slot.daily >= n.daily || slot.monthly >= n.monthly;
+      },
+      startLiveTicker() {
+        if (this.ticker) return;
+        this.ticker = setInterval(() => {
+          const page = document.getElementById("view-ads");
+          if (page && page.classList.contains("active-view")) this.renderCards();
+        }, 4000);
+      },
+      renderCards() {
+        const mount = document.getElementById("reward-ads-cards");
+        if (!mount) return;
+        State.user.rewardAds = this.normalizeStore(State.user.rewardAds);
+        mount.innerHTML = this.networks.map(n => {
+          const slot = this.getSlot(n.id);
+          const blocked = this.isBlocked(n, slot);
+          return `
+          <div class="ads-bank-card" id="reward-card-${n.id}">
+            <img class="ads-photo" src="${n.img}" alt="${n.name}" />
+            <div class="ads-bank-head">
+              <div class="ads-bank-logo">${n.name.slice(0,1)}</div>
+              <div>
+                <div style="font-size:15px; font-weight:900;">${n.name}</div>
+                <div style="font-size:11px; font-weight:700; color:var(--gold-sub);">${n.title}</div>
+              </div>
+            </div>
+            <p style="font-size:11px; font-weight:700; position:relative; z-index:2; margin-bottom:8px;">${n.desc}</p>
+            <div class="ads-meta-grid">
+              <div class="ads-meta-box"><h6>Reward</h6><p>${REWARD_AD}$</p></div>
+              <div class="ads-meta-box"><h6>Hour</h6><p>${n.hourly}</p></div>
+              <div class="ads-meta-box"><h6>Daily</h6><p>${n.daily}</p></div>
+            </div>
+            <div class="ads-pbar-row"><div class="ads-pbar-lab"><span>Hourly</span><span>${slot.hourly}/${n.hourly}</span></div><div class="progress-track"><div class="progress-fill fill-ads" style="width:${Math.min(100, slot.hourly / n.hourly * 100)}%"></div></div></div>
+            <div class="ads-pbar-row"><div class="ads-pbar-lab"><span>Daily</span><span>${slot.daily}/${n.daily}</span></div><div class="progress-track"><div class="progress-fill fill-ref" style="width:${Math.min(100, slot.daily / n.daily * 100)}%"></div></div></div>
+            <div class="ads-pbar-row"><div class="ads-pbar-lab"><span>Monthly</span><span>${slot.monthly}/${n.monthly}</span></div><div class="progress-track"><div class="progress-fill" style="background:linear-gradient(90deg,#AA771C,#F5D77F);width:${Math.min(100, slot.monthly / n.monthly * 100)}%"></div></div></div>
+            <button class="watch-now-btn" ${blocked ? "disabled" : ""} onclick="AdsEngine.watch('${n.id}')">${blocked ? "LIMIT REACHED" : "WATCH NOW"}</button>
+          </div>`;
+        }).join("");
+        if (window.lucide) lucide.createIcons();
+      },
+      watch(networkId) {
+        const n = this.networks.find(x => x.id === networkId);
+        if (!n) return;
+        const slot = this.getSlot(networkId);
+        if (slot.hourly >= n.hourly) { App.toast("Hourly limit reached on this card."); return; }
+        if (slot.daily >= n.daily) { App.toast("Daily limit reached on this card."); return; }
+        if (slot.monthly >= n.monthly) { App.toast("Monthly limit reached on this card."); return; }
+        AdPlayer.play(async () => {
+          const live = this.getSlot(networkId);
+          live.hourly += 1; live.daily += 1; live.monthly += 1;
+          const cur = Number(State.user.tokenBalances.usdt || 0);
+          const next = +(cur + REWARD_AD).toFixed(6);
+          State.user.tokenBalances.usdt = next;
+          State.user.adsToday = (State.user.adsToday || 0) + 1;
+          await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
+          await fbSet("users/" + State.user.telegramId + "/rewardAds/" + networkId, live);
+          await fbUpdate("users/" + State.user.telegramId + "/stats", { adsToday: State.user.adsToday });
+          const tx = { type: "AD_REWARD", desc: "+" + REWARD_AD + " USDT (" + n.name + ")", status: "COMPLETED", timestamp: Date.now() };
+          await fbPush("transactions/" + State.user.telegramId, tx);
+          pushLocalTx(tx);
+          App.updateUI();
+          AdsEngine.renderCards();
+          App.toast("+" + REWARD_AD + " USDT credited");
+        });
       }
     };
 
@@ -2104,37 +3328,16 @@
        WALLET ENGINE (DEPOSIT, WITHDRAW, TRANSACTION QUEUE)
        ========================================================== */
     const WalletEngine = {
+      draft: null,
+      holds: {},
       copyDepositAddr() {
         navigator.clipboard.writeText("TCW6u9WjZf2VqN1jQ3pM8Xk4kL7dYwJ8hK").then(() => App.toast("Deposit address copied!"));
-      },
-      async submitDeposit() {
-        const txid = document.getElementById("dep-txid-input").value.trim();
-        const amt = parseFloat(document.getElementById("dep-amount-input").value);
-        if (!txid || isNaN(amt) || amt < 1.0) {
-          App.toast("Provide valid TXID and minimum 1.0 USDT!");
-          return;
-        }
-        await db.ref("depositRequests").push().set({
-          userId: State.user.telegramId, username: State.user.username, txid, amount: amt, timestamp: Date.now(), status: "PENDING"
-        });
-        await db.ref(`transactions/${State.user.telegramId}`).push().set({
-          type: "DEPOSIT",
-          desc: `+${amt} USDT (TXID: ${txid.substring(0,6)}...)`,
-          status: "PENDING",
-          timestamp: Date.now()
-        });
-        NotificationDispatcher.notifyAll("DEPOSIT SUBMITTED", `💳 User @${State.user.username} deposited <b>${amt} USDT</b>. TXID: <code>${txid}</code>`);
-        document.getElementById("dep-txid-input").value = "";
-        document.getElementById("dep-amount-input").value = "";
-        App.toast("Deposit submitted for verification!");
-        App.navigate("view-wallet-tx");
       },
       handleWithdrawTypeChange(val) {
         const grp = document.getElementById("bdt-gateway-group");
         const lbl = document.getElementById("withdraw-addr-lbl");
         const inp = document.getElementById("withdraw-address-input");
         const calc = document.getElementById("withdraw-bdt-calc");
-
         if (val === "BDT") {
           grp.style.display = "block";
           lbl.innerText = "Personal Mobile Banking Number (017xxxxxxxx)";
@@ -2150,49 +3353,663 @@
       fillMax() {
         document.getElementById("withdraw-amt-input").value = (State.user.tokenBalances.usdt || 0).toFixed(4);
       },
-      async submitWithdrawal() {
+      reviewHtml(rows) {
+        return rows.map(r => `<div class="wallet-review-row"><div class="wallet-review-k">${r.k}</div><div class="wallet-review-v">${r.v}</div></div>`).join("");
+      },
+      collectDeposit() {
+        const txid = document.getElementById("dep-txid-input").value.trim();
+        const amt = parseFloat(document.getElementById("dep-amount-input").value);
+        if (!txid || isNaN(amt) || amt < 1.0) { App.toast("Provide valid TXID and minimum 1.0 USDT!"); return null; }
+        return {
+          kind: "deposit",
+          amount: amt,
+          rows: [
+            { k: "Type", v: "Deposit USDT (TRC20)" },
+            { k: "Amount", v: amt.toFixed(4) + " USDT" },
+            { k: "TXID", v: txid },
+            { k: "Network", v: "TRC20" },
+            { k: "Status", v: "Ready to send" }
+          ],
+          payload: { txid, amt }
+        };
+      },
+      collectWithdraw() {
         const type = document.getElementById("withdraw-type").value;
         const mfs = document.getElementById("withdraw-mfs-provider").value;
         const addr = document.getElementById("withdraw-address-input").value.trim();
         const amt = parseFloat(document.getElementById("withdraw-amt-input").value);
         const pin = document.getElementById("withdraw-pin-input").value.trim();
-
-        if (!addr) { App.toast("Please enter your payout destination!"); return; }
-        if (isNaN(amt) || amt < 0.5) { App.toast("Minimum cashout is 0.5000 USDT!"); return; }
-
+        if (!addr) { App.toast("Please enter your payout destination!"); return null; }
+        if (isNaN(amt) || amt < 0.5) { App.toast("Minimum cashout is 0.5000 USDT!"); return null; }
         const usdtBal = State.user.tokenBalances.usdt || 0;
-        if (amt > usdtBal) { App.toast("Insufficient USDT balance!"); return; }
-
-        if (State.user.securityPin && pin !== State.user.securityPin) {
-          App.toast("Incorrect Security PIN!"); return;
-        }
-
-        const newBal = usdtBal - amt;
-        await db.ref(`users/${State.user.telegramId}/tokenBalances/usdt`).set(newBal);
-
-        const methodDesc = type === "BDT" ? `${mfs} (${(amt * 125).toFixed(0)} BDT)` : "USDT TRC20";
-        await db.ref("withdrawRequests").push().set({
-          userId: State.user.telegramId,
-          username: State.user.username,
-          method: methodDesc,
-          address: addr,
+        if (amt > usdtBal) { App.toast("Insufficient USDT balance!"); return null; }
+        const needPin = State.user.cvvp || State.user.securityPin;
+        if (!pin || pin.length !== 4) { App.toast("Enter 4-digit CVVP from your card back."); return null; }
+        if (needPin && pin !== String(needPin)) { App.toast("Incorrect CVVP!"); return null; }
+        const methodDesc = type === "BDT" ? mfs + " (" + (amt * 125).toFixed(0) + " BDT)" : "USDT TRC20";
+        return {
+          kind: "withdraw",
           amount: amt,
-          status: "PENDING",
-          timestamp: Date.now()
-        });
-        await db.ref(`transactions/${State.user.telegramId}`).push().set({
-          type: "WITHDRAW",
-          desc: `-${amt} USDT to ${methodDesc}`,
-          status: "PENDING",
-          timestamp: Date.now()
-        });
-
-        NotificationDispatcher.notifyAll("CASHOUT REQUEST", `💸 User @${State.user.username} cashed out <b>${amt} USDT</b> to ${methodDesc}`);
+          rows: [
+            { k: "Type", v: "Withdraw" },
+            { k: "Amount", v: amt.toFixed(4) + " USDT" },
+            { k: "Method", v: methodDesc },
+            { k: "Destination", v: addr },
+            { k: "PIN", v: "Verified" }
+          ],
+          payload: { type, mfs, addr, amt, methodDesc }
+        };
+      },
+      collectTransfer() {
+        const amt = parseFloat(document.getElementById("xfer-amount").value);
+        const cvvp = document.getElementById("xfer-cvvp").value.trim();
+        if (isNaN(amt) || amt <= 0) { App.toast("Enter a valid amount"); return null; }
+        const myBal = State.user.tokenBalances.usdt || 0;
+        if (amt > myBal) { App.toast("Insufficient USDT"); return null; }
+        if (!TransferEngine.foundUser) { App.toast("Enter a valid card number first"); return null; }
+        if (String(TransferEngine.foundUser.telegramId) === String(State.user.telegramId)) { App.toast("Cannot transfer to yourself"); return null; }
+        if (cvvp !== String(TransferEngine.foundUser.cvvp)) { App.toast("Wrong CVVP for this card"); return null; }
+        const u = TransferEngine.foundUser;
+        return {
+          kind: "transfer",
+          amount: amt,
+          rows: [
+            { k: "Type", v: "Transfer USDT" },
+            { k: "Amount", v: amt.toFixed(4) + " USDT" },
+            { k: "Receiver", v: ((u.firstName || "") + " " + (u.lastName || "")).trim() },
+            { k: "Username", v: "@" + (u.username || "user") },
+            { k: "Card", v: document.getElementById("xfer-card").value },
+            { k: "CVVP", v: "Verified" }
+          ],
+          payload: { amt, user: u }
+        };
+      },
+      goReview(kind) {
+        let draft = null;
+        if (kind === "deposit") draft = this.collectDeposit();
+        if (kind === "withdraw") draft = this.collectWithdraw();
+        if (kind === "transfer") draft = this.collectTransfer();
+        if (!draft) return;
+        this.draft = draft;
+        const bodyId = kind + "-review-body";
+        const body = document.getElementById(bodyId);
+        if (body) body.innerHTML = this.reviewHtml(draft.rows);
+        App.navigate("view-wallet-" + kind + "-review");
+      },
+      bindHold(btnId, fillId, kind) {
+        const btn = document.getElementById(btnId);
+        if (!btn || btn.dataset.bound === "1") return;
+        btn.dataset.bound = "1";
+        const start = (e) => { e.preventDefault(); this.beginHold(kind, fillId); };
+        const stop = () => this.endHold(kind, fillId, false);
+        btn.addEventListener("mousedown", start);
+        btn.addEventListener("touchstart", start, { passive: false });
+        btn.addEventListener("mouseup", stop);
+        btn.addEventListener("mouseleave", stop);
+        btn.addEventListener("touchend", stop);
+        btn.addEventListener("touchcancel", stop);
+      },
+      bindAllHolds() {
+        this.bindHold("deposit-sent-btn", "deposit-sent-fill", "deposit");
+        this.bindHold("withdraw-sent-btn", "withdraw-sent-fill", "withdraw");
+        this.bindHold("transfer-sent-btn", "transfer-sent-fill", "transfer");
+      },
+      beginHold(kind, fillId) {
+        if (this.holds[kind]) return;
+        this.holds[kind] = { pct: 0, fillId };
+        const fill = document.getElementById(fillId);
+        this.holds[kind].timer = setInterval(() => {
+          this.holds[kind].pct += 4;
+          if (fill) fill.style.width = this.holds[kind].pct + "%";
+          if (this.holds[kind].pct >= 100) this.endHold(kind, fillId, true);
+        }, 40);
+      },
+      endHold(kind, fillId, done) {
+        const h = this.holds[kind];
+        if (h && h.timer) clearInterval(h.timer);
+        this.holds[kind] = null;
+        const fill = document.getElementById(fillId);
+        if (fill) fill.style.width = "0%";
+        if (done) this.sendDraft(kind);
+      },
+      trxId() {
+        const n = Math.floor(10000000 + Math.random() * 89999999);
+        return "B" + n;
+      },
+      showSlip(title, amountTxt, rows, trx) {
+        document.getElementById("bkash-status-title").innerText = title;
+        document.getElementById("bkash-amount").innerText = amountTxt;
+        document.getElementById("bkash-trxid").innerText = "TrxID: " + trx;
+        document.getElementById("bkash-slip-body").innerHTML = rows.map(r =>
+          `<div class="bkash-row"><span>${r.k}</span><b>${r.v}</b></div>`
+        ).join("");
+        document.getElementById("bkash-popup").classList.add("show");
+        if (window.lucide) lucide.createIcons();
+      },
+      closeSlip() {
+        document.getElementById("bkash-popup").classList.remove("show");
+        App.navigate("view-wallet-tx");
+      },
+      async sendDraft(kind) {
+        if (!this.draft || this.draft.kind !== kind) { App.toast("Review details first."); return; }
+        if (kind === "deposit") await this.submitDeposit(this.draft.payload);
+        if (kind === "withdraw") await this.submitWithdrawal(this.draft.payload);
+        if (kind === "transfer") await TransferEngine.confirm(this.draft.payload);
+        this.draft = null;
+      },
+      async submitDeposit(p) {
+        const req = { userId: State.user.telegramId, username: State.user.username, txid: p.txid, amount: p.amt, timestamp: Date.now(), status: "PENDING" };
+        const tx = { type: "DEPOSIT", desc: "+" + p.amt + " USDT (TXID: " + p.txid.substring(0, 6) + "...)", status: "PENDING", timestamp: Date.now() };
+        await fbPush("depositRequests", req);
+        await fbPush("transactions/" + State.user.telegramId, tx);
+        pushLocalTx(tx);
+        NotificationDispatcher.notifyAll("DEPOSIT SUBMITTED", "User @" + State.user.username + " deposited <b>" + p.amt + " USDT</b>. TXID: <code>" + p.txid + "</code>");
+        document.getElementById("dep-txid-input").value = "";
+        document.getElementById("dep-amount-input").value = "";
+        const trx = this.trxId();
+        this.showSlip("Deposit Successful", p.amt.toFixed(2) + " USDT", [
+          { k: "Type", v: "Deposit" },
+          { k: "Amount", v: p.amt.toFixed(4) + " USDT" },
+          { k: "TXID", v: p.txid },
+          { k: "Time", v: new Date().toLocaleString() }
+        ], trx);
+      },
+      async submitWithdrawal(p) {
+        const usdtBal = State.user.tokenBalances.usdt || 0;
+        const newBal = +(usdtBal - p.amt).toFixed(6);
+        State.user.tokenBalances.usdt = newBal;
+        await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", newBal);
+        const req = { userId: State.user.telegramId, username: State.user.username, method: p.methodDesc, address: p.addr, amount: p.amt, status: "PENDING", timestamp: Date.now() };
+        const tx = { type: "WITHDRAW", desc: "-" + p.amt + " USDT to " + p.methodDesc, status: "PENDING", timestamp: Date.now() };
+        await fbPush("withdrawRequests", req);
+        await fbPush("transactions/" + State.user.telegramId, tx);
+        pushLocalTx(tx);
+        App.updateUI();
+        NotificationDispatcher.notifyAll("CASHOUT REQUEST", "User @" + State.user.username + " cashed out <b>" + p.amt + " USDT</b> to " + p.methodDesc);
         document.getElementById("withdraw-address-input").value = "";
         document.getElementById("withdraw-amt-input").value = "";
         document.getElementById("withdraw-pin-input").value = "";
-        App.toast("Withdrawal placed in queue!");
-        App.navigate("view-wallet-tx");
+        const trx = this.trxId();
+        this.showSlip("Withdraw Successful", p.amt.toFixed(2) + " USDT", [
+          { k: "Type", v: "Withdraw" },
+          { k: "To", v: p.methodDesc },
+          { k: "Destination", v: p.addr },
+          { k: "Time", v: new Date().toLocaleString() }
+        ], trx);
+      }
+    };
+
+    const CardBank = {
+      pan() { return State.user.cardNumber || genCardNumber(State.user.telegramId); },
+      cvvp() { return State.user.cvvp || genCvvp(State.user.telegramId); },
+      maskPan(n) { return String(n).replace(/\d(?=\d{4})/g, "•").replace(/•{4} /g, "•••• "); },
+      renderSecrets() {
+        const panEl = document.getElementById("card-pan-num");
+        const cvEl = document.getElementById("card-cvvp-num");
+        const pan = this.pan();
+        const cv = this.cvvp();
+        if (panEl) panEl.innerText = State.user.hidePan ? this.maskPan(pan) : pan;
+        if (cvEl) cvEl.innerText = State.user.hideCvvp ? "••••" : cv;
+        this.swapEye("pan-eye-icon", State.user.hidePan);
+        this.swapEye("cvvp-eye-icon", State.user.hideCvvp);
+        if (window.lucide) lucide.createIcons();
+      },
+      swapEye(id, hidden) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.setAttribute("data-lucide", hidden ? "eye-off" : "eye");
+      },
+      togglePan() {
+        State.user.hidePan = !State.user.hidePan;
+        fbSet("users/" + State.user.telegramId + "/hidePan", State.user.hidePan);
+        this.renderSecrets();
+      },
+      toggleCvvp() {
+        State.user.hideCvvp = !State.user.hideCvvp;
+        fbSet("users/" + State.user.telegramId + "/hideCvvp", State.user.hideCvvp);
+        this.renderSecrets();
+      },
+      copyPan() {
+        const n = this.pan();
+        navigator.clipboard.writeText(cardKey(n)).then(() => App.toast("Card number copied!")).catch(() => App.toast(n));
+      },
+      copyCvvp() {
+        const c = this.cvvp();
+        navigator.clipboard.writeText(c).then(() => App.toast("CVVP copied!")).catch(() => App.toast(c));
+      }
+    };
+
+    const TransferEngine = {
+      foundUser: null,
+      lookupCard() {
+        const raw = cardKey(document.getElementById("xfer-card").value);
+        const box = document.getElementById("xfer-owner-box");
+        this.foundUser = null;
+        if (raw.length < 16) { box.classList.remove("show"); return; }
+        db.ref("cardIndex/" + raw).once("value").then((snap) => {
+          if (!snap.exists()) { box.classList.remove("show"); App.toast("Card not found"); return; }
+          const u = snap.val();
+          this.foundUser = u;
+          box.classList.add("show");
+          const initial = ((u.firstName || "U")[0]).toUpperCase();
+          document.getElementById("xfer-owner-photo").innerHTML = userPhotoHtml(u.photoUrl, initial);
+          document.getElementById("xfer-owner-name").innerText = ((u.firstName || "") + " " + (u.lastName || "")).trim();
+          document.getElementById("xfer-owner-handle").innerText = "@" + (u.username || "user");
+        }).catch(() => { box.classList.remove("show"); });
+      },
+      async confirm(payload) {
+        const p = payload || {};
+        const amt = p.amt;
+        const u = p.user || this.foundUser;
+        if (!u || !amt) { App.toast("Transfer details missing"); return; }
+        const myBal = State.user.tokenBalances.usdt || 0;
+        if (amt > myBal) { App.toast("Insufficient USDT"); return; }
+        const newFrom = +(myBal - amt).toFixed(6);
+        State.user.tokenBalances.usdt = newFrom;
+        await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", newFrom);
+        const toRef = db.ref("users/" + u.telegramId + "/tokenBalances/usdt");
+        toRef.transaction((cur) => +(Number(cur || 0) + amt).toFixed(6));
+        const txOut = { type: "TRANSFER_OUT", desc: "-" + amt + " USDT to @" + u.username, status: "COMPLETED", timestamp: Date.now() };
+        const txIn = { type: "TRANSFER_IN", desc: "+" + amt + " USDT from @" + State.user.username, status: "COMPLETED", timestamp: Date.now() };
+        await fbPush("transactions/" + State.user.telegramId, txOut);
+        await fbPush("transactions/" + u.telegramId, txIn);
+        pushLocalTx(txOut);
+        App.updateUI();
+        document.getElementById("xfer-amount").value = "";
+        document.getElementById("xfer-card").value = "";
+        document.getElementById("xfer-cvvp").value = "";
+        document.getElementById("xfer-owner-box").classList.remove("show");
+        this.foundUser = null;
+        const trx = WalletEngine.trxId();
+        WalletEngine.showSlip("Transfer Successful", amt.toFixed(2) + " USDT", [
+          { k: "Type", v: "Transfer" },
+          { k: "To", v: "@" + (u.username || "user") },
+          { k: "Receiver", v: ((u.firstName || "") + " " + (u.lastName || "")).trim() },
+          { k: "Time", v: new Date().toLocaleString() }
+        ], trx);
+      }
+    };
+
+    const VISIT_POOL = [
+      { name: "OMG Offer", title: "Visit Partner Site", desc: "Open the partner page and stay until the timer ends." },
+      { name: "Deal Hub", title: "Browse Featured Deal", desc: "Stay on the offer page to unlock the reward." },
+      { name: "Promo Gate", title: "Open Promo Link", desc: "Complete the full visit time before verify." },
+      { name: "Boost Page", title: "Traffic Boost Visit", desc: "Do not leave early or the claim will fail." },
+      { name: "Partner Wall", title: "Sponsored Visit", desc: "Wait for the countdown then tap verify." }
+    ];
+    const VisitEngine = {
+      current: null,
+      timer: null,
+      left: 0,
+      required: 30,
+      pool: [],
+      ensurePool() {
+        if (this.pool.length) return;
+        for (let i = 0; i < 20; i++) {
+          const base = VISIT_POOL[i % VISIT_POOL.length];
+          const time = 30 + (i % 21);
+          const reward = +(0.01 + (i % 3) * 0.005).toFixed(3);
+          this.pool.push({
+            id: "v" + i + "_" + Date.now().toString(36),
+            name: base.name + " #" + (i + 1),
+            title: base.title,
+            desc: base.desc,
+            reward,
+            visitTime: time,
+            link: VISIT_LINK
+          });
+        }
+      },
+      renderList() {
+        this.ensurePool();
+        const mount = document.getElementById("visit-tasks-list");
+        if (!mount) return;
+        mount.innerHTML = this.pool.map((t, idx) => `
+          <div class="visit-card">
+            <div class="visit-card-head">
+              <div class="visit-thumb"><i data-lucide="globe" style="width:20px;height:20px;"></i></div>
+              <div>
+                <div style="font-size:14px; font-weight:900;">${t.name}</div>
+                <div style="font-size:11px; color:var(--text-secondary);">${t.title}</div>
+              </div>
+            </div>
+            <p style="font-size:11px; color:var(--text-secondary); margin-bottom:8px;">${t.desc}</p>
+            <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:800; margin-bottom:10px;">
+              <span style="color:var(--success);">Reward ${t.reward}$</span>
+              <span>Visit ${t.visitTime}s</span>
+            </div>
+            <button class="btn-primary" onclick="VisitEngine.start(${idx})">VISIT NOW</button>
+          </div>
+        `).join("");
+        if (window.lucide) lucide.createIcons();
+      },
+      start(idx) {
+        const t = this.pool[idx];
+        if (!t) return;
+        this.current = t;
+        this.required = t.visitTime;
+        this.left = t.visitTime;
+        window.open(t.link, "_blank");
+        App.navigate("view-visit-timer");
+        document.getElementById("visit-timer-title").innerText = t.name;
+        document.getElementById("visit-timer-desc").innerText = t.title + " · stay " + t.visitTime + "s";
+        document.getElementById("visit-verify-btn").disabled = true;
+        document.getElementById("visit-status-txt").innerText = "Keep this page open";
+        document.getElementById("visit-countdown").innerText = this.left;
+        if (this.timer) clearInterval(this.timer);
+        this.timer = setInterval(() => {
+          this.left -= 1;
+          document.getElementById("visit-countdown").innerText = Math.max(0, this.left);
+          if (this.left <= 0) {
+            clearInterval(this.timer);
+            this.timer = null;
+            document.getElementById("visit-verify-btn").disabled = false;
+            document.getElementById("visit-status-txt").innerText = "Ready to verify";
+          }
+        }, 1000);
+      },
+      cancelVisit() {
+        if (this.timer) { clearInterval(this.timer); this.timer = null; }
+        App.navigate("view-visiting");
+      },
+      async verify() {
+        if (!this.current) return;
+        if (this.left > 0) {
+          App.toast(this.left + " seconds remaining. Stay until the timer ends.");
+          return;
+        }
+        const reward = this.current.reward;
+        const cur = State.user.tokenBalances.usdt || 0;
+        const next = +(cur + reward).toFixed(6);
+        State.user.tokenBalances.usdt = next;
+        await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
+        const tx = { type: "VISIT_REWARD", desc: "+" + reward + " USDT visit", status: "COMPLETED", timestamp: Date.now() };
+        await fbPush("transactions/" + State.user.telegramId, tx);
+        pushLocalTx(tx);
+        const doneId = this.current.id;
+        this.pool = this.pool.filter(x => x.id !== doneId);
+        const n = this.pool.length + 1;
+        const base = VISIT_POOL[n % VISIT_POOL.length];
+        const time = 30 + (n % 21);
+        const rwd = +(0.01 + (n % 3) * 0.005).toFixed(3);
+        this.pool.push({ id: "v" + Date.now(), name: base.name + " #" + (n + 20), title: base.title, desc: base.desc, reward: rwd, visitTime: time, link: VISIT_LINK });
+        this.current = null;
+        App.updateUI();
+        App.toast("+" + reward + " USDT from visit");
+        App.navigate("view-visiting");
+        this.renderList();
+      }
+    };
+
+    const CheckinEngine = {
+      render() {
+        const mount = document.getElementById("checkin-days");
+        if (!mount) return;
+        const k = nowKeys();
+        const days = (State.user.checkin && State.user.checkin.days) || {};
+        const last = (State.user.checkin && State.user.checkin.lastDay) || "";
+        let html = "";
+        for (let i = 0; i < 7; i++) {
+          const d = new Date();
+          d.setDate(d.getDate() - (6 - i));
+          const key = d.getFullYear() + "-" + pad4(d.getMonth() + 1) + "-" + pad4(d.getDate());
+          const done = !!days[key];
+          const today = key === k.dayKey;
+          html += `<div class="checkin-day ${done ? "done" : ""} ${today ? "today" : ""}"><span>D${i + 1}</span><span>${done ? "OK" : (today ? "NOW" : "")}</span></div>`;
+        }
+        mount.innerHTML = html;
+        const btn = document.getElementById("checkin-btn");
+        if (btn) {
+          btn.disabled = last === k.dayKey;
+          btn.innerText = last === k.dayKey ? "ALREADY CHECKED TODAY" : "CHECK IN NOW";
+        }
+      },
+      doCheckin() {
+        const k = nowKeys();
+        if (State.user.checkin && State.user.checkin.lastDay === k.dayKey) {
+          App.toast("Already checked in today");
+          return;
+        }
+        AdPlayer.play(async () => {
+          const reward = 0.01;
+          const cur = State.user.tokenBalances.usdt || 0;
+          const next = +(cur + reward).toFixed(6);
+          State.user.tokenBalances.usdt = next;
+          if (!State.user.checkin) State.user.checkin = { lastDay: "", streak: 0, days: {} };
+          if (!State.user.checkin.days) State.user.checkin.days = {};
+          State.user.checkin.days[k.dayKey] = true;
+          State.user.checkin.lastDay = k.dayKey;
+          State.user.checkin.streak = (State.user.checkin.streak || 0) + 1;
+          await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
+          await fbSet("users/" + State.user.telegramId + "/checkin", State.user.checkin);
+          const tx = { type: "CHECKIN", desc: "+" + reward + " USDT daily check", status: "COMPLETED", timestamp: Date.now() };
+          await fbPush("transactions/" + State.user.telegramId, tx);
+          pushLocalTx(tx);
+          App.updateUI();
+          CheckinEngine.render();
+          App.toast("+0.01 USDT daily check-in");
+        });
+      }
+    };
+
+    const QUIZ_BANKS = {
+      bn: [
+        { q: "বাংলা ভাষার বর্ণমালায় স্বরবর্ণ কয়টি?", opts: ["৯", "১১", "১৪", "২১"], a: 1 },
+        { q: "‘অমর একুশে’ কোন মাসে পালিত হয়?", opts: ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল"], a: 1 },
+        { q: "বাংলাদেশের জাতীয় কবি কে?", opts: ["রবীন্দ্রনাথ ঠাকুর", "কাজী নজরুল ইসলাম", "জসীমউদ্দীন", "সুকান্ত ভট্টাচার্য"], a: 1 },
+        { q: "‘পদ্মা নদীর মাঝি’ গ্রন্থের লেখক কে?", opts: ["মানিক বন্দ্যোপাধ্যায়", "বিভূতিভূষণ", "তারাশঙ্কর", "শরৎচন্দ্র"], a: 0 },
+        { q: "বাংলা নববর্ষ কবে?", opts: ["১৪ এপ্রিল", "২১ ফেব্রুয়ারি", "২৬ মার্চ", "১৬ ডিসেম্বর"], a: 0 },
+        { q: "‘সোনার তরী’ কার রচনা?", opts: ["নজরুল", "রবীন্দ্রনাথ", "জীবনানন্দ", "সুকান্ত"], a: 1 },
+        { q: "বাংলাদেশের রাজধানী কোনটি?", opts: ["চট্টগ্রাম", "খুলনা", "ঢাকা", "রাজশাহী"], a: 2 },
+        { q: "বাংলা একাডেমি কোথায় অবস্থিত?", opts: ["ঢাকা", "কলকাতা", "সিলেট", "কুমিল্লা"], a: 0 },
+        { q: "‘আমার সোনার বাংলা’ কোন ধরনের গান?", opts: ["লোকগান", "জাতীয় সংগীত", "গজল", "র্যাপ"], a: 1 },
+        { q: "বাংলা দিনপঞ্জির প্রথম মাস কোনটি?", opts: ["জ্যৈষ্ঠ", "বৈশাখ", "আষাঢ়", "শ্রাবণ"], a: 1 },
+        { q: "‘রূপসী বাংলা’ কাব্যের কবি কে?", opts: ["জীবনানন্দ দাশ", "নজরুল", "মাইকেল", "শামসুর রাহমান"], a: 0 },
+        { q: "বাংলাদেশের স্বাধীনতা দিবস কোন তারিখ?", opts: ["২১ ফেব্রুয়ারি", "২৬ মার্চ", "১৬ ডিসেম্বর", "১৭ এপ্রিল"], a: 1 }
+      ],
+      math: [
+        { q: "12 + 8 x 2 = ?", opts: ["40", "28", "32", "20"], a: 1 },
+        { q: "Square root of 144?", opts: ["10", "12", "14", "16"], a: 1 },
+        { q: "15% of 200 = ?", opts: ["15", "20", "30", "45"], a: 2 },
+        { q: "LCM of 4 and 6?", opts: ["8", "10", "12", "24"], a: 2 },
+        { q: "If 3x = 27, x = ?", opts: ["6", "9", "12", "7"], a: 1 },
+        { q: "A triangle has how many degrees?", opts: ["90", "180", "270", "360"], a: 1 },
+        { q: "7 squared is?", opts: ["14", "21", "49", "77"], a: 2 },
+        { q: "HCF of 18 and 24?", opts: ["3", "6", "8", "12"], a: 1 },
+        { q: "0.25 as a fraction?", opts: ["1/2", "1/3", "1/4", "1/5"], a: 2 },
+        { q: "Average of 4, 8, 12?", opts: ["6", "8", "10", "12"], a: 1 },
+        { q: "2^5 = ?", opts: ["10", "16", "32", "64"], a: 2 },
+        { q: "Perimeter of a square side 5?", opts: ["10", "15", "20", "25"], a: 2 }
+      ],
+      en: [
+        { q: "Synonym of 'rapid'?", opts: ["Slow", "Fast", "Late", "Weak"], a: 1 },
+        { q: "Plural of 'child'?", opts: ["Childs", "Childes", "Children", "Childer"], a: 2 },
+        { q: "Choose the correct article: ___ hour", opts: ["a", "an", "the", "no article"], a: 1 },
+        { q: "Antonym of 'ancient'?", opts: ["Old", "Modern", "Historic", "Past"], a: 1 },
+        { q: "Which is a verb?", opts: ["Quickly", "Blue", "Write", "Happy"], a: 2 },
+        { q: "'They ___ playing now.'", opts: ["is", "are", "was", "be"], a: 1 },
+        { q: "Correct spelling?", opts: ["Recieve", "Receive", "Receeve", "Receve"], a: 1 },
+        { q: "A noun names a?", opts: ["Action", "Person/place/thing", "Quality only", "Question"], a: 1 },
+        { q: "Past tense of 'go'?", opts: ["goed", "gone", "went", "going"], a: 2 },
+        { q: "'Beautiful' is a?", opts: ["Noun", "Verb", "Adjective", "Adverb"], a: 2 },
+        { q: "Opposite of 'arrive'?", opts: ["Come", "Reach", "Depart", "Enter"], a: 2 },
+        { q: "Fill: She has ___ apple.", opts: ["a", "an", "two", "many"], a: 1 }
+      ],
+      gk: [
+        { q: "What does BTC stand for?", opts: ["Bit Token Cash", "Bitcoin", "Block Transfer Coin", "Binary Trade Credit"], a: 1 },
+        { q: "Which chain is TRC20 on?", opts: ["Ethereum", "Solana", "TRON", "Bitcoin"], a: 2 },
+        { q: "USDT is a type of?", opts: ["NFT", "Stablecoin", "Memecoin", "Gas token"], a: 1 },
+        { q: "The largest ocean is?", opts: ["Atlantic", "Indian", "Pacific", "Arctic"], a: 2 },
+        { q: "How many continents are there?", opts: ["5", "6", "7", "8"], a: 2 },
+        { q: "TON is linked to which app?", opts: ["WhatsApp", "Telegram", "Discord", "WeChat"], a: 1 },
+        { q: "Which is a Layer 2 network?", opts: ["Bitcoin", "Arbitrum", "Dogecoin", "Monero"], a: 1 },
+        { q: "The currency of Japan is?", opts: ["Yuan", "Won", "Yen", "Ringgit"], a: 2 },
+        { q: "A smart contract is?", opts: ["Paper agreement", "On-chain program", "Mining rig", "Hardware wallet"], a: 1 },
+        { q: "Which planet is known as the Red Planet?", opts: ["Venus", "Mars", "Jupiter", "Mercury"], a: 1 },
+        { q: "Which token is native to Solana?", opts: ["SOL", "BNB", "ADA", "XRP"], a: 0 },
+        { q: "Halving is associated with?", opts: ["ETH gas", "Bitcoin supply", "USDT mint", "NFT mint"], a: 1 }
+      ]
+    };
+    const QuizEngine = {
+      round: [],
+      idx: 0,
+      score: 0,
+      playing: false,
+      cat: null,
+      titles: { bn: "Bangla Quiz", math: "Math Quiz", en: "English Quiz", gk: "General Knowledge" },
+      renderLimits() {
+        State.user.quizAds = rollLimits(State.user.quizAds);
+        const q = State.user.quizAds;
+        const set = (id, txt) => { const el = document.getElementById(id); if (el) el.innerText = txt; };
+        const bar = (id, pct) => { const el = document.getElementById(id); if (el) el.style.width = Math.min(100, pct) + "%"; };
+        set("quiz-h-txt", q.hourly + "/" + QUIZ_HOURLY);
+        set("quiz-d-txt", q.daily + "/" + QUIZ_DAILY);
+        set("quiz-m-txt", q.monthly + "/" + QUIZ_MONTHLY);
+        bar("quiz-h-bar", q.hourly / QUIZ_HOURLY * 100);
+        bar("quiz-d-bar", q.daily / QUIZ_DAILY * 100);
+        bar("quiz-m-bar", q.monthly / QUIZ_MONTHLY * 100);
+        const blocked = q.hourly >= QUIZ_HOURLY || q.daily >= QUIZ_DAILY || q.monthly >= QUIZ_MONTHLY;
+        const btn = document.getElementById("quiz-start-btn");
+        if (btn) { btn.disabled = blocked; btn.innerText = blocked ? "LIMIT REACHED" : "START QUIZ"; }
+      },
+      openCat(id) {
+        this.cat = id;
+        document.getElementById("quiz-cat-wrap").style.display = "none";
+        document.getElementById("quiz-limit-card").style.display = "block";
+        document.getElementById("quiz-play-card").style.display = "none";
+        const title = document.getElementById("quiz-cat-title");
+        if (title) title.innerText = this.titles[id] || "Quiz Game";
+        this.renderLimits();
+        if (window.lucide) lucide.createIcons();
+      },
+      back() {
+        if (this.playing) {
+          this.playing = false;
+          document.getElementById("quiz-play-card").style.display = "none";
+          document.getElementById("quiz-limit-card").style.display = "block";
+          return;
+        }
+        if (this.cat) {
+          this.cat = null;
+          document.getElementById("quiz-limit-card").style.display = "none";
+          document.getElementById("quiz-play-card").style.display = "none";
+          document.getElementById("quiz-cat-wrap").style.display = "block";
+          return;
+        }
+        App.navigate("view-home");
+      },
+      start() {
+        State.user.quizAds = rollLimits(State.user.quizAds);
+        const q = State.user.quizAds;
+        if (q.hourly >= QUIZ_HOURLY) { App.toast("Hourly quiz limit reached"); return; }
+        if (q.daily >= QUIZ_DAILY) { App.toast("Daily quiz limit reached"); return; }
+        if (q.monthly >= QUIZ_MONTHLY) { App.toast("Monthly quiz limit reached"); return; }
+        const bank = QUIZ_BANKS[this.cat] || QUIZ_BANKS.gk;
+        const shuffled = bank.slice().sort(() => Math.random() - 0.5).slice(0, 10);
+        this.round = shuffled;
+        this.idx = 0;
+        this.score = 0;
+        this.playing = true;
+        document.getElementById("quiz-play-card").style.display = "block";
+        this.showQ();
+      },
+      showQ() {
+        const item = this.round[this.idx];
+        document.getElementById("quiz-q-num").innerText = "Question " + (this.idx + 1) + "/10";
+        document.getElementById("quiz-score").innerText = "Score " + this.score;
+        document.getElementById("quiz-question").innerText = item.q;
+        document.getElementById("quiz-options").innerHTML = item.opts.map((o, i) =>
+          `<button class="quiz-opt" onclick="QuizEngine.pick(${i})">${o}</button>`
+        ).join("");
+      },
+      pick(i) {
+        if (!this.playing) return;
+        const item = this.round[this.idx];
+        const opts = document.querySelectorAll("#quiz-options .quiz-opt");
+        opts.forEach((el, idx) => {
+          el.disabled = true;
+          if (idx === item.a) el.classList.add("correct");
+          if (idx === i && i !== item.a) el.classList.add("wrong");
+        });
+        if (i === item.a) this.score += 1;
+        setTimeout(() => {
+          this.idx += 1;
+          if (this.idx >= 10) this.finish();
+          else this.showQ();
+        }, 500);
+      },
+      finish() {
+        this.playing = false;
+        document.getElementById("quiz-play-card").style.display = "none";
+        if (this.score < 5) {
+          App.toast("Score " + this.score + "/10. Need 5 correct to claim.");
+          return;
+        }
+        AdPlayer.play(async () => {
+          State.user.quizAds = rollLimits(State.user.quizAds);
+          State.user.quizAds.hourly += 1;
+          State.user.quizAds.daily += 1;
+          State.user.quizAds.monthly += 1;
+          const cur = State.user.tokenBalances.usdt || 0;
+          const next = +(cur + 0.01).toFixed(6);
+          State.user.tokenBalances.usdt = next;
+          await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
+          await fbSet("users/" + State.user.telegramId + "/quizAds", State.user.quizAds);
+          const tx = { type: "QUIZ_REWARD", desc: "+0.01 USDT quiz " + this.score + "/10", status: "COMPLETED", timestamp: Date.now() };
+          await fbPush("transactions/" + State.user.telegramId, tx);
+          pushLocalTx(tx);
+          App.updateUI();
+          QuizEngine.renderLimits();
+          App.toast("+0.01 USDT quiz reward");
+        });
+      }
+    };
+
+    const I18N = {
+      en: { adsTitle: "Rewarded Ads Station", adsSub: "Watch 15s ads to earn USDT instantly. Does not fill package missions.", support: "Support", visiting: "Visiting", checkin: "Daily Check", quiz: "Quiz Game", language: "Language", transfer: "Transfer", convert: "Convert", wallet: "My Wallet", watchAds: "Watch Ads", mining: "Mining", packages: "Packages", invite: "Invite" },
+      bn: { adsTitle: "রিওয়ার্ডেড অ্যাড স্টেশন", adsSub: "১৫ সেকেন্ড অ্যাড দেখে সাথে সাথে USDT পান। প্যাকেজ মিশনে যোগ হয় না।", support: "সাপোর্ট", visiting: "ভিজিটিং", checkin: "ডেইলি চেক", quiz: "কুইজ গেম", language: "ভাষা", transfer: "ট্রান্সফার", convert: "কনভার্ট", wallet: "মাই ওয়ালেট", watchAds: "ওয়াচ অ্যাডস", mining: "মাইনিং", packages: "প্যাকেজ", invite: "ইনভাইট" },
+      hi: { adsTitle: "रिवॉर्डेड ऐड स्टेशन", adsSub: "15 सेकंड ऐड देखकर तुरंत USDT पाएं। पैकेज मिशन नहीं भरता।", support: "सपोर्ट", visiting: "विजिटिंग", checkin: "डेली चेक", quiz: "क्विज गेम", language: "भाषा", transfer: "ट्रांसफर", convert: "कन्वर्ट", wallet: "वॉलेट", watchAds: "विज्ञापन देखें", mining: "माइनिंग", packages: "पैकेज", invite: "इनवाइट" },
+      ar: { adsTitle: "محطة الإعلانات المكافأة", adsSub: "شاهد إعلاناً لمدة 15 ثانية واحصل على USDT فوراً.", support: "الدعم", visiting: "الزيارات", checkin: "تسجيل يومي", quiz: "اختبار", language: "اللغة", transfer: "تحويل", convert: "تحويل عملة", wallet: "المحفظة", watchAds: "شاهد الإعلانات", mining: "التعدين", packages: "الباقات", invite: "دعوة" },
+      zh: { adsTitle: "奖励广告站", adsSub: "观看15秒广告即可即时获得USDT，不计入套餐任务。", support: "支持", visiting: "访问任务", checkin: "每日签到", quiz: "问答游戏", language: "语言", transfer: "转账", convert: "兑换", wallet: "钱包", watchAds: "看广告", mining: "挖矿", packages: "套餐", invite: "邀请" }
+    };
+    const I18n = {
+      langs: [
+        { id: "en", name: "English", flag: "EN" },
+        { id: "bn", name: "Bangla", flag: "BN" },
+        { id: "hi", name: "Hindi", flag: "HI" },
+        { id: "ar", name: "Arabic", flag: "AR" },
+        { id: "zh", name: "Chinese", flag: "ZH" }
+      ],
+      apply(id) {
+        const next = I18N[id] ? id : "en";
+        State.user.lang = next;
+        document.documentElement.lang = next;
+        document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
+        const pack = I18N[next] || I18N.en;
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const k = el.getAttribute("data-i18n");
+          if (pack[k]) el.innerText = pack[k];
+        });
+        this.renderList();
+      },
+      renderList() {
+        const mount = document.getElementById("lang-list");
+        if (!mount) return;
+        const cur = State.user.lang || "en";
+        mount.innerHTML = this.langs.map(l => `
+          <div class="lang-row" onclick="I18n.select('${l.id}')">
+            <div class="lang-left">
+              <div class="lang-flag">${l.flag}</div>
+              <div style="font-size:14px; font-weight:800;">${l.name}</div>
+            </div>
+            <button class="lang-toggle ${cur === l.id ? "on" : ""}" type="button"><span></span></button>
+          </div>
+        `).join("");
+      },
+      select(id) {
+        this.apply(id);
+        fbSet("users/" + State.user.telegramId + "/lang", id);
+        App.toast((I18N[id] && I18N[id].language ? I18N[id].language : "Language") + ": " + id.toUpperCase());
       }
     };
 
