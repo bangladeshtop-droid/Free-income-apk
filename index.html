@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -1162,6 +1162,8 @@
     .tile-rose { background: linear-gradient(160deg, rgba(244,63,94,0.22), rgba(190,18,60,0.08)); border-color: rgba(244,63,94,0.35); }
     .tile-lime { background: linear-gradient(160deg, rgba(132,204,22,0.22), rgba(77,124,15,0.08)); border-color: rgba(132,204,22,0.35); }
     .tile-sky { background: linear-gradient(160deg, rgba(14,165,233,0.22), rgba(3,105,161,0.08)); border-color: rgba(14,165,233,0.35); }
+    .tile-casino { background: linear-gradient(160deg, rgba(220,38,38,0.32), rgba(127,29,29,0.12)); border-color: rgba(251,191,36,0.45); }
+    .tile-casino .btn-lux-icon { background: rgba(251,191,36,0.16); color: #FBBF24; }
 
     .support-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
     .support-contact-btn {
@@ -1199,6 +1201,246 @@
     .wallet-hub-card {
       background: linear-gradient(160deg, var(--bg-card-elevated), var(--bg-card));
       box-shadow: var(--shadow-card);
+    }
+
+    .casino-hero {
+      background: linear-gradient(145deg, #2a1230 0%, #0b1224 55%, #1a0a16 100%);
+      border: 1px solid rgba(251,191,36,0.35);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .casino-hero::before {
+      content: "";
+      position: absolute;
+      width: 180px; height: 180px;
+      right: -40px; top: -50px;
+      background: radial-gradient(circle, rgba(251,191,36,0.28), transparent 70%);
+      pointer-events: none;
+    }
+    .casino-hero h2 { font-size: 18px; font-weight: 900; color: #FDE68A; position: relative; z-index: 1; }
+    .casino-hero p { font-size: 11px; color: #CBD5E1; margin-top: 4px; position: relative; z-index: 1; line-height: 1.45; }
+    .casino-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .casino-game-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 220px;
+      cursor: default;
+      transform: perspective(900px) rotateX(4deg);
+      transform-style: preserve-3d;
+      background: linear-gradient(165deg, #3b1020 0%, #12081a 40%, #071018 100%);
+      border: 1px solid rgba(253, 230, 138, 0.38);
+      box-shadow:
+        0 18px 32px rgba(0,0,0,0.42),
+        0 6px 0 #4a1020,
+        inset 0 1px 0 rgba(255,255,255,0.22);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .casino-game-card:active { transform: perspective(900px) rotateX(0deg) scale(0.98); }
+    .casino-game-photo {
+      height: 118px;
+      position: relative;
+      overflow: hidden;
+    }
+    .casino-game-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: saturate(1.15) contrast(1.05);
+    }
+    .casino-game-photo::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(7,8,16,0.92) 100%);
+    }
+    .casino-game-body {
+      padding: 10px 10px 12px;
+      position: relative; z-index: 2;
+      margin-top: -18px;
+    }
+    .casino-game-body h3 {
+      font-size: 13px; font-weight: 900; color: #FDE68A; letter-spacing: 0.3px;
+    }
+    .casino-start-btn {
+      margin-top: 10px; width: 100%;
+      min-height: 44px;
+      border: none; cursor: pointer;
+      border-radius: 12px;
+      font-weight: 900; font-size: 12px; letter-spacing: 1px;
+      color: #2A1A00;
+      background: linear-gradient(180deg, #FFE38A 0%, #F5B942 45%, #C4891A 100%);
+      box-shadow: 0 6px 0 #7a4a0a, 0 10px 18px rgba(201, 146, 28, 0.35), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+    .casino-start-btn:active { transform: translateY(2px); box-shadow: 0 4px 0 #7a4a0a; }
+
+    .game-loader {
+      display: none; position: fixed; inset: 0; z-index: 50000;
+      background: radial-gradient(circle at 50% 30%, #3b1024, #070b14 70%);
+      align-items: center; justify-content: center; flex-direction: column;
+    }
+    .game-loader.show { display: flex; }
+    .loader-orb {
+      width: 92px; height: 92px; border-radius: 50%;
+      border: 3px solid rgba(251,191,36,0.15);
+      border-top-color: #FBBF24;
+      border-right-color: #F43F5E;
+      animation: loaderSpin 0.9s linear infinite;
+      box-shadow: 0 0 32px rgba(251,191,36,0.35);
+    }
+    .loader-plane {
+      width: 54px; height: 54px; margin-top: -73px; margin-bottom: 28px;
+      filter: drop-shadow(0 8px 12px rgba(244,63,94,0.45));
+      animation: loaderBob 0.8s ease-in-out infinite;
+    }
+    .loader-title {
+      font-family: Orbitron, sans-serif;
+      color: #FDE68A; font-size: 14px; font-weight: 900; letter-spacing: 2px;
+      margin-top: 8px;
+    }
+    .loader-bar {
+      width: 180px; height: 6px; border-radius: 99px; margin-top: 14px;
+      background: rgba(255,255,255,0.08); overflow: hidden;
+    }
+    .loader-bar > i {
+      display: block; height: 100%; width: 0%;
+      background: linear-gradient(90deg, #F43F5E, #FBBF24);
+      animation: loaderFill 3.4s ease-in-out forwards;
+    }
+    @keyframes loaderSpin { to { transform: rotate(360deg); } }
+    @keyframes loaderBob { 50% { transform: translateY(-6px); } }
+    @keyframes loaderFill { to { width: 100%; } }
+
+    body.crash-immersive { padding-bottom: 0; }
+    body.crash-immersive .top-header,
+    body.crash-immersive .bottom-nav-premium-wrap { display: none; }
+    body.crash-immersive .app-container { max-width: 480px; padding: 0 0 12px; }
+
+    .crash-wrap {
+      background: #070b14;
+      min-height: 100dvh;
+      padding: 8px 10px 16px;
+      color: #F8FAFC;
+    }
+    .crash-top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; padding: 6px 2px 10px;
+    }
+    .crash-back {
+      display: flex; align-items: center; gap: 6px; cursor: pointer;
+      color: #FCA5A5; font-size: 12px; font-weight: 800; min-height: 44px;
+    }
+    .crash-bal {
+      background: linear-gradient(180deg, #1e293b, #0f172a);
+      border: 1px solid rgba(251,191,36,0.3);
+      border-radius: 12px; padding: 8px 12px; text-align: right;
+    }
+    .crash-bal b { color: #FDE68A; font-size: 13px; font-family: "JetBrains Mono", monospace; }
+    .crash-bal span { display: block; font-size: 9px; color: #94A3B8; font-weight: 700; }
+    .crash-history {
+      display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .crash-pill {
+      flex-shrink: 0; border-radius: 99px; padding: 4px 8px;
+      font-size: 10px; font-weight: 800; font-family: "JetBrains Mono", monospace;
+      background: #1e293b; color: #94A3B8;
+    }
+    .crash-pill.low { color: #F87171; background: rgba(239,68,68,0.15); }
+    .crash-pill.mid { color: #C084FC; background: rgba(168,85,247,0.16); }
+    .crash-pill.high { color: #FBBF24; background: rgba(251,191,36,0.16); }
+    .crash-stage {
+      position: relative; height: 230px; border-radius: 18px; overflow: hidden;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(244,63,94,0.18), transparent 40%),
+        linear-gradient(180deg, #10182a 0%, #0b1220 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.35);
+    }
+    #crash-canvas { width: 100%; height: 100%; display: block; }
+    .crash-mult {
+      position: absolute; left: 0; right: 0; top: 42%;
+      transform: translateY(-50%);
+      text-align: center; pointer-events: none; z-index: 3;
+      font-family: Orbitron, sans-serif;
+      font-size: 42px; font-weight: 900; letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 0 24px rgba(56,189,248,0.45);
+    }
+    .crash-mult.fly { color: #5EEAD4; }
+    .crash-mult.boom { color: #F43F5E; text-shadow: 0 0 28px rgba(244,63,94,0.7); }
+    .crash-status {
+      position: absolute; left: 12px; top: 10px; z-index: 4;
+      font-size: 10px; font-weight: 800; letter-spacing: 1px;
+      color: #94A3B8; text-transform: uppercase;
+    }
+    .crash-live {
+      margin: 10px 0 8px; max-height: 72px; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .crash-live-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; padding: 6px 8px; border-radius: 8px;
+      background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.06);
+    }
+    .crash-live-row .win { color: #34D399; font-weight: 800; }
+    .crash-live-row .lose { color: #F87171; font-weight: 800; }
+    .crash-bets {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    .crash-bet-panel {
+      background: linear-gradient(180deg, #151c2e, #0d1322);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 10px;
+    }
+    .crash-amt-row { display: flex; gap: 6px; align-items: center; }
+    .crash-amt-btn {
+      width: 36px; height: 36px; min-width: 36px;
+      border-radius: 10px; border: 1px solid rgba(255,255,255,0.12);
+      background: #1e293b; color: #fff; font-weight: 900; cursor: pointer;
+    }
+    .crash-amt-input {
+      flex: 1; min-width: 0; height: 36px; text-align: center;
+      border-radius: 10px; border: 1px solid rgba(251,191,36,0.25);
+      background: #0b1220; color: #FDE68A; font-weight: 800; font-size: 13px;
+    }
+    .crash-toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 8px; font-size: 10px; font-weight: 800; color: #94A3B8;
+    }
+    .crash-switch {
+      width: 36px; height: 20px; border-radius: 99px; border: none;
+      background: #334155; position: relative; cursor: pointer; padding: 0;
+    }
+    .crash-switch.on { background: #059669; }
+    .crash-switch i {
+      position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
+      border-radius: 50%; background: #fff; display: block;
+      transition: transform 0.18s ease;
+    }
+    .crash-switch.on i { transform: translateX(16px); }
+    .crash-cash-input {
+      width: 58px; height: 28px; border-radius: 8px; text-align: center;
+      border: 1px solid rgba(255,255,255,0.1); background: #0b1220; color: #5EEAD4;
+      font-size: 11px; font-weight: 800;
+    }
+    .crash-action {
+      width: 100%; margin-top: 10px; min-height: 44px; border: none; cursor: pointer;
+      border-radius: 12px; font-weight: 900; font-size: 12px; letter-spacing: 0.4px; color: #fff;
+      background: linear-gradient(180deg, #22c55e, #15803d);
+      box-shadow: 0 5px 0 #14532d;
+    }
+    .crash-action.wait { background: linear-gradient(180deg, #64748b, #334155); box-shadow: 0 5px 0 #1e293b; }
+    .crash-action.cash { background: linear-gradient(180deg, #f59e0b, #d97706); box-shadow: 0 5px 0 #92400e; color: #111; }
+    .crash-action.busy { opacity: 0.7; pointer-events: none; }
+    .crash-action:disabled { opacity: 0.55; cursor: not-allowed; }
+    @media (prefers-reduced-motion: reduce) {
+      .loader-orb, .loader-plane, .loader-bar > i { animation: none; }
     }
   </style>
 </head>
@@ -1327,6 +1569,10 @@
         <div class="btn-lux-tile tile-sky" onclick="App.navigate('view-support')">
           <div class="btn-lux-icon"><i data-lucide="headphones" style="width:22px; height:22px;"></i></div>
           <span data-i18n="support">Support</span>
+        </div>
+        <div class="btn-lux-tile tile-casino" onclick="App.navigate('view-casino')">
+          <div class="btn-lux-icon"><i data-lucide="rocket" style="width:22px; height:22px;"></i></div>
+          <span data-i18n="casino">Casino</span>
         </div>
       </div>
     </main>
@@ -1596,7 +1842,7 @@
           Rate: <span id="swap-rate-hint" style="color:var(--text-primary);">1 = ...</span>
         </div>
       </div>
-      <p class="charge-note" id="convert-charge-note">Convert fee: 2% · One convert per account</p>
+      <p class="charge-note" id="convert-charge-note">Convert fee: 2%</p>
       <button class="btn-primary" id="btn-instant-convert" onclick="ConvertEngine.executeSwap()">CONVERT NOW</button>
     </section>
 
@@ -1881,7 +2127,104 @@
       <div id="lang-list"></div>
     </section>
 
+    <section id="view-casino" class="view-page">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="casino-hero">
+        <h2 data-i18n="casinoTitle">ZYNEXA Casino</h2>
+        <p data-i18n="casinoSub">Premium games. Bet with USDT. Global live rounds.</p>
+      </div>
+      <div class="casino-grid">
+        <article class="casino-game-card">
+          <div class="casino-game-photo">
+            <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=70" alt="Crash Game airplane" />
+          </div>
+          <div class="casino-game-body">
+            <h3>Crash Game</h3>
+            <button class="casino-start-btn" type="button" onclick="CasinoHub.startGame('crash')">START</button>
+          </div>
+        </article>
+        <article class="casino-game-card" style="opacity:0.72;">
+          <div class="casino-game-photo">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=70" alt="Coming soon casino game" />
+          </div>
+          <div class="casino-game-body">
+            <h3>Coming Soon</h3>
+            <button class="casino-start-btn" type="button" disabled style="opacity:0.55; cursor:not-allowed;">SOON</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="view-crash" class="view-page">
+      <div class="crash-wrap">
+        <div class="crash-top">
+          <div class="crash-back" onclick="CrashEngine.leave()">
+            <i data-lucide="arrow-left" style="width:16px; height:16px;"></i>
+            <span>Lobby</span>
+          </div>
+          <div class="crash-bal">
+            <span>USDT BALANCE</span>
+            <b id="crash-usdt-bal">0.0000</b>
+          </div>
+        </div>
+        <div class="crash-history" id="crash-history"></div>
+        <div class="crash-stage">
+          <canvas id="crash-canvas" width="720" height="420"></canvas>
+          <div class="crash-status" id="crash-status">WAITING</div>
+          <div class="crash-mult" id="crash-mult">1.00x</div>
+        </div>
+        <div class="crash-live" id="crash-live"></div>
+        <div class="crash-bets">
+          <div class="crash-bet-panel">
+            <div class="crash-amt-row">
+              <button class="crash-amt-btn" type="button" onclick="CrashEngine.nudgeBet(1,-1)">-</button>
+              <input class="crash-amt-input" id="crash-bet-1" type="number" step="0.01" min="0.01" value="0.10" />
+              <button class="crash-amt-btn" type="button" onclick="CrashEngine.nudgeBet(1,1)">+</button>
+            </div>
+            <div class="crash-toggle-row">
+              <span>Auto Bet</span>
+              <button class="crash-switch" id="crash-auto-1" type="button" onclick="CrashEngine.toggleAuto(1)"><i></i></button>
+            </div>
+            <div class="crash-toggle-row">
+              <span>Auto Cashout</span>
+              <input class="crash-cash-input" id="crash-cash-1" type="number" step="0.1" min="1.01" value="2.00" />
+            </div>
+            <button class="crash-action" id="crash-act-1" type="button" onclick="CrashEngine.act(1)">BET</button>
+          </div>
+          <div class="crash-bet-panel">
+            <div class="crash-amt-row">
+              <button class="crash-amt-btn" type="button" onclick="CrashEngine.nudgeBet(2,-1)">-</button>
+              <input class="crash-amt-input" id="crash-bet-2" type="number" step="0.01" min="0.01" value="0.10" />
+              <button class="crash-amt-btn" type="button" onclick="CrashEngine.nudgeBet(2,1)">+</button>
+            </div>
+            <div class="crash-toggle-row">
+              <span>Auto Bet</span>
+              <button class="crash-switch" id="crash-auto-2" type="button" onclick="CrashEngine.toggleAuto(2)"><i></i></button>
+            </div>
+            <div class="crash-toggle-row">
+              <span>Auto Cashout</span>
+              <input class="crash-cash-input" id="crash-cash-2" type="number" step="0.1" min="1.01" value="2.00" />
+            </div>
+            <button class="crash-action" id="crash-act-2" type="button" onclick="CrashEngine.act(2)">BET</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div> <!-- End App Container -->
+
+  <div class="game-loader" id="game-loader">
+    <div class="loader-orb"></div>
+    <svg class="loader-plane" viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M6 34 L58 18 L40 46 L32 36 L22 48 Z" fill="#F43F5E"/>
+      <path d="M18 30 L40 22 L34 34 Z" fill="#FDE68A"/>
+    </svg>
+    <div class="loader-title">LOADING CRASH</div>
+    <div class="loader-bar"><i></i></div>
+  </div>
 
   <div id="ad-overlay">
     <div class="ad-count" id="ad-overlay-count">15</div>
@@ -2083,7 +2426,6 @@
         checkin: { lastDay: "", streak: 0, days: {} },
         visitDone: {},
         lang: "en",
-        convertUsed: false,
         hidePan: false,
         hideCvvp: false
       },
@@ -2204,6 +2546,7 @@
         QuizEngine.renderLimits();
         I18n.renderList();
         this.renderAllTokens();
+        CrashEngine.bindGlobal();
         if (window.lucide) lucide.createIcons();
       },
 
@@ -2312,7 +2655,6 @@
               checkin: { lastDay: "", streak: 0, days: {} },
               visitDone: {},
               lang: "en",
-              convertUsed: false,
               hidePan: false,
               hideCvvp: false
             });
@@ -2341,7 +2683,6 @@
             State.user.checkin = data.checkin || { lastDay: "", streak: 0, days: {} };
             State.user.visitDone = data.visitDone || {};
             State.user.lang = data.lang || State.user.lang || "en";
-            State.user.convertUsed = !!data.convertUsed;
             State.user.hidePan = !!data.hidePan;
             State.user.hideCvvp = !!data.hideCvvp;
             if (data.profile) {
@@ -2431,7 +2772,6 @@
         const backHandle = document.getElementById("card-back-handle");
         if (backHandle) backHandle.innerText = "@" + State.user.username;
         CardBank.renderSecrets();
-        ConvertEngine.refreshLock();
 
         this.handleBalanceTokenChange(State.selectedBalanceTokenId);
 
@@ -2447,6 +2787,7 @@
 
         const usdtBal = State.user.tokenBalances.usdt || 0;
         document.getElementById("wallet-hub-usdt-balance").innerText = usdtBal.toFixed(4) + " USDT";
+        if (typeof CrashEngine !== "undefined") CrashEngine.refreshBalance();
         document.getElementById("referral-link-input").value = "https://t.me/" + BOT_USERNAME + "?start=ref_" + State.user.telegramId;
         this.renderAllTokens();
       },
@@ -2523,8 +2864,10 @@
         }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (targetPageId === "view-convert") { ConvertEngine.updateRates(); ConvertEngine.refreshLock(); }
+        if (targetPageId === "view-convert") ConvertEngine.updateRates();
         if (targetPageId === "view-ads") AdsEngine.renderCards();
+        if (targetPageId === "view-crash") CrashEngine.enter();
+        if (targetPageId !== "view-crash") document.body.classList.remove("crash-immersive");
         if (targetPageId === "view-visiting") VisitEngine.renderList();
         if (targetPageId === "view-checkin") CheckinEngine.render();
         if (targetPageId === "view-quiz") {
@@ -3051,7 +3394,7 @@
         const note = document.getElementById("convert-charge-note");
         if (note) {
           const fee = (gross * CONVERT_FEE_PCT / 100);
-          note.innerText = "Convert fee " + CONVERT_FEE_PCT + "% (" + fee.toFixed(fee < 0.001 ? 8 : 4) + " " + toT.symbol + ") · One convert per account";
+          note.innerText = "Convert fee " + CONVERT_FEE_PCT + "% (" + fee.toFixed(fee < 0.001 ? 8 : 4) + " " + toT.symbol + ")";
         }
       },
       invertSwap() {
@@ -3062,20 +3405,8 @@
         s2.value = temp;
         this.updateRates();
       },
-      refreshLock() {
-        const btn = document.getElementById("btn-instant-convert");
-        if (!btn) return;
-        if (State.user.convertUsed) {
-          btn.disabled = true;
-          btn.innerText = "ALREADY CONVERTED";
-        } else {
-          btn.disabled = false;
-          btn.innerText = "CONVERT NOW";
-        }
-      },
       async executeSwap() {
         const btn = document.getElementById("btn-instant-convert");
-        if (State.user.convertUsed) { App.toast("Convert can be used only once."); this.refreshLock(); return; }
         const fromId = document.getElementById("swap-from-token").value;
         const toId = document.getElementById("swap-to-token").value;
         const amt = parseFloat(document.getElementById("swap-from-amount").value) || 0;
@@ -3097,11 +3428,9 @@
 
         State.user.tokenBalances[fromId] = newFrom;
         State.user.tokenBalances[toId] = newTo;
-        State.user.convertUsed = true;
         const tx = { type: "SWAP", desc: "Converted " + amt + " " + fromT.symbol + " -> " + receiveAmt.toFixed(4) + " " + toT.symbol + " (fee " + CONVERT_FEE_PCT + "%)", status: "COMPLETED", timestamp: Date.now() };
         await fbSet("users/" + State.user.telegramId + "/tokenBalances/" + fromId, newFrom);
         await fbSet("users/" + State.user.telegramId + "/tokenBalances/" + toId, newTo);
-        await fbSet("users/" + State.user.telegramId + "/convertUsed", true);
         await fbPush("transactions/" + State.user.telegramId, tx);
         pushLocalTx(tx);
         App.updateUI();
@@ -3109,7 +3438,485 @@
         document.getElementById("swap-to-amount").value = "";
         App.toast("Convert complete. Fee " + CONVERT_FEE_PCT + "% applied.");
         this.updateRates();
-        this.refreshLock();
+        if (btn) { btn.disabled = false; btn.innerText = "CONVERT NOW"; }
+      }
+    };
+
+    const CasinoHub = {
+      startGame(id) {
+        const loader = document.getElementById("game-loader");
+        if (!loader) return;
+        const bar = loader.querySelector(".loader-bar > i");
+        if (bar) {
+          bar.style.animation = "none";
+          void bar.offsetWidth;
+          bar.style.animation = "";
+        }
+        loader.classList.add("show");
+        const ms = 3200 + Math.floor(Math.random() * 800);
+        setTimeout(() => {
+          loader.classList.remove("show");
+          if (id === "crash") App.navigate("view-crash");
+        }, ms);
+      }
+    };
+
+    const CrashEngine = {
+      bound: false,
+      localMode: false,
+      driving: false,
+      round: null,
+      seats: {
+        1: { amount: 0, active: false, cashed: false, pending: false, busy: false, auto: false },
+        2: { amount: 0, active: false, cashed: false, pending: false, busy: false, auto: false }
+      },
+      anim: 0,
+      lastPhase: "",
+      lastRoundId: 0,
+      liveRows: [],
+      bindGlobal() {
+        if (this.bound) return;
+        this.bound = true;
+        db.ref("crash/live").on("value", (snap) => {
+          const data = snap.val();
+          if (!data) { this.bootstrap(); return; }
+          this.round = data;
+          this.onRound(data);
+        });
+        setInterval(() => this.tickDriver(), 180);
+        const loop = () => {
+          this.anim = requestAnimationFrame(loop);
+          this.paint();
+          this.checkAutoCash();
+          this.updateHud();
+        };
+        this.anim = requestAnimationFrame(loop);
+        window.addEventListener("resize", () => this.resizeCanvas());
+      },
+      bootstrap() {
+        const seed = {
+          roundId: 1,
+          phase: "waiting",
+          waitUntil: Date.now() + 5000,
+          flyStart: 0,
+          crashPoint: this.genCrash(),
+          crashAt: 0,
+          history: [2.14, 1.03, 3.87, 1.41, 12.05, 1.19]
+        };
+        db.ref("crash/live").transaction((cur) => {
+          if (cur) return;
+          return seed;
+        }).catch(() => this.useLocal(seed));
+      },
+      useLocal(round) {
+        this.localMode = true;
+        this.round = round;
+        this.onRound(round);
+      },
+      genCrash() {
+        const r = Math.random();
+        if (r < 0.04) return 1.00;
+        const p = Math.floor(((0.96) / (1 - r)) * 100) / 100;
+        return Math.min(Math.max(p, 1.00), 250);
+      },
+      multAt(ms) {
+        return Math.max(1, Math.pow(Math.E, 0.00006 * Math.max(0, ms)));
+      },
+      currentMult() {
+        const r = this.round;
+        if (!r) return 1;
+        if (r.phase === "waiting") return 1;
+        if (r.phase === "crashed") return Number(r.crashPoint) || 1;
+        return this.multAt(Date.now() - (r.flyStart || Date.now()));
+      },
+      tickDriver() {
+        const r = this.round;
+        if (!r || this.driving) return;
+        const now = Date.now();
+        if (r.phase === "waiting" && now >= (r.waitUntil || 0)) {
+          this.driving = true;
+          const next = Object.assign({}, r, { phase: "flying", flyStart: now });
+          this.commitPhase(r, next, () => { this.driving = false; });
+          return;
+        }
+        if (r.phase === "flying") {
+          const start = Number(r.flyStart);
+          if (!start) return;
+          const m = this.multAt(now - start);
+          if (m >= Number(r.crashPoint || 1)) {
+            this.driving = true;
+            const hist = (Array.isArray(r.history) ? r.history.slice() : []);
+            hist.unshift(Number(r.crashPoint) || 1);
+            const next = Object.assign({}, r, { phase: "crashed", crashAt: now, history: hist.slice(0, 14) });
+            this.commitPhase(r, next, () => { this.driving = false; });
+          }
+          return;
+        }
+        if (r.phase === "crashed" && now >= ((r.crashAt || 0) + 3500)) {
+          this.driving = true;
+          const next = {
+            roundId: (r.roundId || 1) + 1,
+            phase: "waiting",
+            waitUntil: now + 5000,
+            flyStart: 0,
+            crashPoint: this.genCrash(),
+            crashAt: 0,
+            history: r.history || []
+          };
+          this.commitPhase(r, next, () => { this.driving = false; });
+        }
+      },
+      commitPhase(expected, next, done) {
+        if (this.localMode) {
+          this.round = next;
+          this.onRound(next);
+          if (done) done();
+          return;
+        }
+        db.ref("crash/live").transaction((cur) => {
+          if (!cur) return next;
+          if (cur.roundId !== expected.roundId || cur.phase !== expected.phase) return;
+          return next;
+        }).then((res) => {
+          if (!res.committed && !this.round) this.useLocal(next);
+          if (done) done();
+        }).catch(() => {
+          this.useLocal(next);
+          if (done) done();
+        });
+      },
+      onRound(data) {
+        if (data.roundId !== this.lastRoundId) {
+          this.lastRoundId = data.roundId;
+          const onCrash = document.getElementById("view-crash") && document.getElementById("view-crash").classList.contains("active-view");
+          [1, 2].forEach((s) => {
+            const seat = this.seats[s];
+            seat.active = false;
+            seat.cashed = false;
+            seat.amount = 0;
+            if (seat.pending || (seat.auto && onCrash && data.phase === "waiting")) {
+              seat.pending = false;
+              this.placeBet(s, true);
+            }
+          });
+          this.liveRows = this.fakeLive(data.roundId);
+        }
+        if (data.phase === "crashed" && this.lastPhase === "flying") {
+          [1, 2].forEach((s) => {
+            const seat = this.seats[s];
+            if (seat.active && !seat.cashed) {
+              seat.active = false;
+              this.liveRows.unshift({ name: "You", amt: seat.amount, result: "lose", mult: data.crashPoint });
+            }
+          });
+        }
+        this.lastPhase = data.phase;
+        this.renderHistory();
+        this.renderLive();
+        this.renderButtons();
+      },
+      fakeLive(id) {
+        const names = ["SkyAce", "NovaUSDT", "PilotX", "MoonBet", "CrashKing", "LuckyJet", "AeroPro", "GoldWing"];
+        let x = (Number(id) * 9301 + 49297) % 233280;
+        const rnd = () => { x = (x * 9301 + 49297) % 233280; return x / 233280; };
+        const n = 4 + Math.floor(rnd() * 4);
+        const rows = [];
+        for (let i = 0; i < n; i++) {
+          rows.push({
+            name: names[Math.floor(rnd() * names.length)],
+            amt: (0.05 + rnd() * 4).toFixed(2),
+            result: "live"
+          });
+        }
+        return rows;
+      },
+      enter() {
+        document.body.classList.add("crash-immersive");
+        this.resizeCanvas();
+        this.refreshBalance();
+        this.renderHistory();
+        this.renderLive();
+        this.renderButtons();
+      },
+      leave() {
+        document.body.classList.remove("crash-immersive");
+        App.navigate("view-casino");
+      },
+      refreshBalance() {
+        const el = document.getElementById("crash-usdt-bal");
+        if (el) el.innerText = (State.user.tokenBalances.usdt || 0).toFixed(4) + " USDT";
+      },
+      resizeCanvas() {
+        const c = document.getElementById("crash-canvas");
+        if (!c || !c.parentElement) return;
+        const rect = c.parentElement.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        c.width = Math.max(320, Math.floor(rect.width * dpr));
+        c.height = Math.max(180, Math.floor(rect.height * dpr));
+      },
+      renderHistory() {
+        const mount = document.getElementById("crash-history");
+        if (!mount) return;
+        const hist = (this.round && this.round.history) || [];
+        mount.innerHTML = hist.map((v) => {
+          const n = Number(v) || 1;
+          const cls = n < 2 ? "low" : (n < 10 ? "mid" : "high");
+          return `<span class="crash-pill ${cls}">${n.toFixed(2)}x</span>`;
+        }).join("");
+      },
+      renderLive() {
+        const mount = document.getElementById("crash-live");
+        if (!mount) return;
+        const rows = this.liveRows.slice(0, 6);
+        mount.innerHTML = rows.map((r) => {
+          let right = Number(r.amt).toFixed(2) + " USDT";
+          if (r.result === "win") right = `<span class="win">+${(Number(r.amt) * Number(r.mult)).toFixed(2)}</span>`;
+          if (r.result === "lose") right = `<span class="lose">-${Number(r.amt).toFixed(2)}</span>`;
+          return `<div class="crash-live-row"><span>${r.name}</span><span>${right}</span></div>`;
+        }).join("");
+      },
+      updateHud() {
+        const page = document.getElementById("view-crash");
+        if (!page || !page.classList.contains("active-view")) return;
+        const r = this.round;
+        const multEl = document.getElementById("crash-mult");
+        const stEl = document.getElementById("crash-status");
+        if (!multEl || !stEl || !r) return;
+        const m = this.currentMult();
+        if (r.phase === "waiting") {
+          const left = Math.max(0, Math.ceil(((r.waitUntil || 0) - Date.now()) / 1000));
+          multEl.className = "crash-mult";
+          multEl.innerText = "1.00x";
+          stEl.innerText = "NEXT ROUND IN " + left + "s";
+        } else if (r.phase === "flying") {
+          multEl.className = "crash-mult fly";
+          multEl.innerText = m.toFixed(2) + "x";
+          stEl.innerText = "IN FLIGHT";
+        } else {
+          multEl.className = "crash-mult boom";
+          multEl.innerText = Number(r.crashPoint).toFixed(2) + "x";
+          stEl.innerText = "FLEW AWAY";
+        }
+        this.renderButtons();
+      },
+      renderButtons() {
+        [1, 2].forEach((s) => {
+          const btn = document.getElementById("crash-act-" + s);
+          const sw = document.getElementById("crash-auto-" + s);
+          if (!btn) return;
+          const seat = this.seats[s];
+          const r = this.round || { phase: "waiting" };
+          btn.className = "crash-action";
+          if (seat.busy) {
+            btn.classList.add("busy");
+            btn.innerText = "...";
+            return;
+          }
+          if (r.phase === "flying" && seat.active && !seat.cashed) {
+            btn.classList.add("cash");
+            btn.innerText = "CASH OUT " + this.currentMult().toFixed(2) + "x";
+          } else if (seat.pending) {
+            btn.classList.add("wait");
+            btn.innerText = "CANCEL WAIT";
+          } else if (r.phase === "waiting" && seat.active) {
+            btn.classList.add("wait");
+            btn.innerText = "CANCEL BET";
+          } else {
+            btn.innerText = "BET";
+          }
+          if (sw) sw.classList.toggle("on", !!seat.auto);
+        });
+      },
+      nudgeBet(seat, dir) {
+        const el = document.getElementById("crash-bet-" + seat);
+        if (!el) return;
+        let v = parseFloat(el.value) || 0.1;
+        v = Math.max(0.01, +(v + dir * 0.1).toFixed(2));
+        el.value = v.toFixed(2);
+      },
+      toggleAuto(seat) {
+        this.seats[seat].auto = !this.seats[seat].auto;
+        this.renderButtons();
+      },
+      act(seat) {
+        const r = this.round;
+        if (!r) return;
+        const s = this.seats[seat];
+        if (s.busy) return;
+        if (r.phase === "flying" && s.active && !s.cashed) {
+          this.cashout(seat);
+          return;
+        }
+        if (s.pending) { s.pending = false; this.renderButtons(); return; }
+        if (r.phase === "waiting" && s.active && !s.cashed) {
+          this.cancelBet(seat);
+          return;
+        }
+        if (r.phase === "flying" || r.phase === "crashed") {
+          s.pending = true;
+          this.renderButtons();
+          return;
+        }
+        this.placeBet(seat, false);
+      },
+      async placeBet(seat, silent) {
+        const s = this.seats[seat];
+        if (s.busy || s.active) return;
+        const r = this.round;
+        if (!r || r.phase !== "waiting") {
+          s.pending = true;
+          this.renderButtons();
+          return;
+        }
+        const inp = document.getElementById("crash-bet-" + seat);
+        const amt = parseFloat(inp && inp.value) || 0;
+        if (amt < 0.01) { if (!silent) App.toast("Min bet 0.01 USDT"); return; }
+        const bal = Number(State.user.tokenBalances.usdt || 0);
+        if (amt > bal + 1e-9) { if (!silent) App.toast("Need USDT in account to bet"); return; }
+        s.busy = true;
+        this.renderButtons();
+        const next = +(bal - amt).toFixed(6);
+        State.user.tokenBalances.usdt = next;
+        const ok = await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
+        if (!ok) {
+          State.user.tokenBalances.usdt = bal;
+          s.busy = false;
+          this.renderButtons();
+          App.toast("Bet failed. Try again.");
+          return;
+        }
+        s.active = true;
+        s.cashed = false;
+        s.pending = false;
+        s.amount = amt;
+        s.busy = false;
+        const tx = { type: "CRASH_BET", desc: "Crash bet " + amt.toFixed(4) + " USDT (seat " + seat + ")", status: "PENDING", timestamp: Date.now() };
+        await fbPush("transactions/" + State.user.telegramId, tx);
+        pushLocalTx(tx);
+        App.updateUI();
+        this.refreshBalance();
+        this.renderButtons();
+      },
+      async cancelBet(seat) {
+        const s = this.seats[seat];
+        if (!s.active || s.cashed || s.busy) return;
+        if (this.round && this.round.phase !== "waiting") return;
+        s.busy = true;
+        const refund = s.amount;
+        const bal = Number(State.user.tokenBalances.usdt || 0);
+        const next = +(bal + refund).toFixed(6);
+        State.user.tokenBalances.usdt = next;
+        await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
+        s.active = false;
+        s.amount = 0;
+        s.busy = false;
+        App.updateUI();
+        this.refreshBalance();
+        this.renderButtons();
+      },
+      async cashout(seat) {
+        const s = this.seats[seat];
+        const r = this.round;
+        if (!s.active || s.cashed || s.busy) return;
+        if (!r || r.phase !== "flying") return;
+        const m = this.currentMult();
+        if (m >= Number(r.crashPoint || 1)) return;
+        s.busy = true;
+        s.cashed = true;
+        s.active = false;
+        const win = +(s.amount * m).toFixed(6);
+        const bal = Number(State.user.tokenBalances.usdt || 0);
+        const next = +(bal + win).toFixed(6);
+        State.user.tokenBalances.usdt = next;
+        await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
+        const tx = { type: "CRASH_WIN", desc: "Crash cashout " + m.toFixed(2) + "x +" + win.toFixed(4) + " USDT", status: "COMPLETED", timestamp: Date.now() };
+        await fbPush("transactions/" + State.user.telegramId, tx);
+        pushLocalTx(tx);
+        this.liveRows.unshift({ name: "You", amt: s.amount, result: "win", mult: m });
+        s.busy = false;
+        App.updateUI();
+        this.refreshBalance();
+        this.renderLive();
+        this.renderButtons();
+        App.toast("Cashed out " + m.toFixed(2) + "x");
+      },
+      checkAutoCash() {
+        const r = this.round;
+        if (!r || r.phase !== "flying") return;
+        const m = this.currentMult();
+        [1, 2].forEach((seat) => {
+          const s = this.seats[seat];
+          if (!s.active || s.cashed || s.busy) return;
+          const target = parseFloat((document.getElementById("crash-cash-" + seat) || {}).value) || 0;
+          if (target >= 1.01 && m >= target) this.cashout(seat);
+        });
+      },
+      paint() {
+        const page = document.getElementById("view-crash");
+        if (!page || !page.classList.contains("active-view")) return;
+        const c = document.getElementById("crash-canvas");
+        if (!c) return;
+        const ctx = c.getContext("2d");
+        const w = c.width, h = c.height;
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "#0b1220";
+        ctx.fillRect(0, 0, w, h);
+        ctx.strokeStyle = "rgba(148,163,184,0.12)";
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 8; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, (h / 8) * i);
+          ctx.lineTo(w, (h / 8) * i);
+          ctx.stroke();
+        }
+        const r = this.round;
+        const pad = 24;
+        const m = this.currentMult();
+        const tNorm = r && r.phase === "waiting" ? 0 : Math.min(1, Math.log(m) / Math.log(40));
+        const pts = [];
+        const steps = 48;
+        for (let i = 0; i <= steps; i++) {
+          const p = (i / steps) * tNorm;
+          const x = pad + p * (w - pad * 2);
+          const y = h - pad - Math.pow(p, 1.25) * (h - pad * 2);
+          pts.push([x, y]);
+        }
+        ctx.beginPath();
+        ctx.moveTo(pts[0][0], pts[0][1]);
+        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+        const crashed = r && r.phase === "crashed";
+        ctx.strokeStyle = crashed ? "#F43F5E" : "#2DD4BF";
+        ctx.lineWidth = 4;
+        ctx.shadowColor = crashed ? "rgba(244,63,94,0.6)" : "rgba(45,212,191,0.5)";
+        ctx.shadowBlur = 12;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        const last = pts[pts.length - 1];
+        if (r && r.phase === "flying") {
+          ctx.save();
+          ctx.translate(last[0], last[1]);
+          const ang = Math.atan2(pts[pts.length - 1][1] - pts[Math.max(0, pts.length - 4)][1], pts[pts.length - 1][0] - pts[Math.max(0, pts.length - 4)][0]);
+          ctx.rotate(ang);
+          ctx.fillStyle = "#F43F5E";
+          ctx.beginPath();
+          ctx.moveTo(18, 0);
+          ctx.lineTo(-12, 8);
+          ctx.lineTo(-6, 0);
+          ctx.lineTo(-12, -8);
+          ctx.closePath();
+          ctx.fill();
+          ctx.fillStyle = "#FDE68A";
+          ctx.beginPath();
+          ctx.moveTo(4, 0);
+          ctx.lineTo(-8, 4);
+          ctx.lineTo(-8, -4);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        } else if (crashed) {
+          ctx.fillStyle = "rgba(244,63,94,0.18)";
+          ctx.fillRect(0, 0, w, h);
+        }
       }
     };
 
@@ -3966,11 +4773,11 @@
     };
 
     const I18N = {
-      en: { adsTitle: "Rewarded Ads Station", adsSub: "Watch 15s ads to earn USDT instantly. Does not fill package missions.", support: "Support", visiting: "Visiting", checkin: "Daily Check", quiz: "Quiz Game", language: "Language", transfer: "Transfer", convert: "Convert", wallet: "My Wallet", watchAds: "Watch Ads", mining: "Mining", packages: "Packages", invite: "Invite" },
-      bn: { adsTitle: "রিওয়ার্ডেড অ্যাড স্টেশন", adsSub: "১৫ সেকেন্ড অ্যাড দেখে সাথে সাথে USDT পান। প্যাকেজ মিশনে যোগ হয় না।", support: "সাপোর্ট", visiting: "ভিজিটিং", checkin: "ডেইলি চেক", quiz: "কুইজ গেম", language: "ভাষা", transfer: "ট্রান্সফার", convert: "কনভার্ট", wallet: "মাই ওয়ালেট", watchAds: "ওয়াচ অ্যাডস", mining: "মাইনিং", packages: "প্যাকেজ", invite: "ইনভাইট" },
-      hi: { adsTitle: "रिवॉर्डेड ऐड स्टेशन", adsSub: "15 सेकंड ऐड देखकर तुरंत USDT पाएं। पैकेज मिशन नहीं भरता।", support: "सपोर्ट", visiting: "विजिटिंग", checkin: "डेली चेक", quiz: "क्विज गेम", language: "भाषा", transfer: "ट्रांसफर", convert: "कन्वर्ट", wallet: "वॉलेट", watchAds: "विज्ञापन देखें", mining: "माइनिंग", packages: "पैकेज", invite: "इनवाइट" },
-      ar: { adsTitle: "محطة الإعلانات المكافأة", adsSub: "شاهد إعلاناً لمدة 15 ثانية واحصل على USDT فوراً.", support: "الدعم", visiting: "الزيارات", checkin: "تسجيل يومي", quiz: "اختبار", language: "اللغة", transfer: "تحويل", convert: "تحويل عملة", wallet: "المحفظة", watchAds: "شاهد الإعلانات", mining: "التعدين", packages: "الباقات", invite: "دعوة" },
-      zh: { adsTitle: "奖励广告站", adsSub: "观看15秒广告即可即时获得USDT，不计入套餐任务。", support: "支持", visiting: "访问任务", checkin: "每日签到", quiz: "问答游戏", language: "语言", transfer: "转账", convert: "兑换", wallet: "钱包", watchAds: "看广告", mining: "挖矿", packages: "套餐", invite: "邀请" }
+      en: { adsTitle: "Rewarded Ads Station", adsSub: "Watch 15s ads to earn USDT instantly. Does not fill package missions.", support: "Support", visiting: "Visiting", checkin: "Daily Check", quiz: "Quiz Game", language: "Language", transfer: "Transfer", convert: "Convert", wallet: "My Wallet", watchAds: "Watch Ads", mining: "Mining", packages: "Packages", invite: "Invite", casino: "Casino", casinoTitle: "ZYNEXA Casino", casinoSub: "Premium games. Bet with USDT. Global live rounds." },
+      bn: { adsTitle: "রিওয়ার্ডেড অ্যাড স্টেশন", adsSub: "১৫ সেকেন্ড অ্যাড দেখে সাথে সাথে USDT পান। প্যাকেজ মিশনে যোগ হয় না।", support: "সাপোর্ট", visiting: "ভিজিটিং", checkin: "ডেইলি চেক", quiz: "কুইজ গেম", language: "ভাষা", transfer: "ট্রান্সফার", convert: "কনভার্ট", wallet: "মাই ওয়ালেট", watchAds: "ওয়াচ অ্যাডস", mining: "মাইনিং", packages: "প্যাকেজ", invite: "ইনভাইট", casino: "ক্যাসিনো", casinoTitle: "ZYNEXA ক্যাসিনো", casinoSub: "প্রিমিয়াম গেম। USDT দিয়ে বেট। গ্লোবাল লাইভ রাউন্ড।" },
+      hi: { adsTitle: "रिवॉर्डेड ऐड स्टेशन", adsSub: "15 सेकंड ऐड देखकर तुरंत USDT पाएं। पैकेज मिशन नहीं भरता।", support: "सपोर्ट", visiting: "विजिटिंग", checkin: "डेली चेक", quiz: "क्विज गेम", language: "भाषा", transfer: "ट्रांसफर", convert: "कन्वर्ट", wallet: "वॉलेट", watchAds: "विज्ञापन देखें", mining: "माइनिंग", packages: "पैकेज", invite: "इनवाइट", casino: "कैसिनो", casinoTitle: "ZYNEXA कैसिनो", casinoSub: "प्रीमियम गेम। USDT से बेट। ग्लोबल लाइव राउंड।" },
+      ar: { adsTitle: "محطة الإعلانات المكافأة", adsSub: "شاهد إعلاناً لمدة 15 ثانية واحصل على USDT فوراً.", support: "الدعم", visiting: "الزيارات", checkin: "تسجيل يومي", quiz: "اختبار", language: "اللغة", transfer: "تحويل", convert: "تحويل عملة", wallet: "المحفظة", watchAds: "شاهد الإعلانات", mining: "التعدين", packages: "الباقات", invite: "دعوة", casino: "كازينو", casinoTitle: "ZYNEXA كازينو", casinoSub: "ألعاب فاخرة. راهن بـ USDT. جولات عالمية مباشرة." },
+      zh: { adsTitle: "奖励广告站", adsSub: "观看15秒广告即可即时获得USDT，不计入套餐任务。", support: "支持", visiting: "访问任务", checkin: "每日签到", quiz: "问答游戏", language: "语言", transfer: "转账", convert: "兑换", wallet: "钱包", watchAds: "看广告", mining: "挖矿", packages: "套餐", invite: "邀请", casino: "娱乐场", casinoTitle: "ZYNEXA 娱乐场", casinoSub: "精品游戏。使用USDT投注。全球同步局。" }
     };
     const I18n = {
       langs: [
