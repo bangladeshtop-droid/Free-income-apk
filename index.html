@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
@@ -1510,6 +1510,188 @@
     @media (prefers-reduced-motion: reduce) {
       .loader-orb, .loader-plane, .loader-bar > i { animation: none; }
     }
+
+    html, body { direction: ltr !important; }
+    .app-container, .view-page { direction: ltr !important; text-align: start; }
+
+    .tile-admin { background: linear-gradient(160deg, rgba(251,191,36,0.32), rgba(127,29,29,0.14)); border-color: rgba(251,191,36,0.55); display: none; }
+    .tile-admin .btn-lux-icon { background: rgba(251,191,36,0.2); color: #FBBF24; }
+
+    .visit-tabs {
+      display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 12px;
+      margin-bottom: 4px; -webkit-overflow-scrolling: touch;
+    }
+    .visit-tab {
+      flex: 1; min-width: 92px; min-height: 44px; border: 1px solid var(--border-color);
+      border-radius: 14px; background: var(--bg-card); color: var(--text-secondary);
+      font-weight: 800; font-size: 12px; cursor: pointer; padding: 10px 8px;
+    }
+    .visit-tab.on {
+      color: #2A1A00;
+      background: linear-gradient(180deg, #FFE38A, #C4891A);
+      border-color: rgba(255,223,115,0.8);
+      box-shadow: 0 8px 18px rgba(180,83,9,0.28);
+    }
+    .visit-tab b { display: block; font-size: 13px; }
+    .visit-tab span { display: block; font-size: 9px; font-weight: 700; opacity: 0.8; margin-top: 2px; }
+    .visit-premium-card {
+      background: linear-gradient(165deg, var(--bg-card-elevated), var(--bg-card));
+      border: 1px solid var(--border-color);
+      border-radius: 18px; padding: 14px; margin-bottom: 12px;
+      box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.08);
+      position: relative; overflow: hidden;
+    }
+    .visit-premium-card::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 100% 0%, rgba(251,191,36,0.14), transparent 46%);
+      pointer-events: none;
+    }
+    .visit-premium-card.lock { opacity: 0.72; }
+    .vpc-top { display: flex; gap: 10px; align-items: center; position: relative; z-index: 1; }
+    .vpc-ico {
+      width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; color: #2A1A00;
+      background: linear-gradient(180deg, #FFE38A, #C4891A);
+      box-shadow: 0 8px 16px rgba(180,83,9,0.28);
+    }
+    .vpc-meta { display: flex; justify-content: space-between; gap: 8px; margin: 10px 0; position: relative; z-index: 1; }
+    .vpc-chip {
+      flex: 1; text-align: center; background: var(--bg-secondary);
+      border: 1px solid var(--border-color); border-radius: 10px; padding: 7px 4px;
+    }
+    .vpc-chip h6 { font-size: 8px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-secondary); }
+    .vpc-chip p { font-size: 12px; font-weight: 900; margin-top: 2px; color: var(--cyan); }
+    .vpc-lock {
+      font-size: 11px; font-weight: 800; color: var(--warning); text-align: center;
+      margin-bottom: 8px; position: relative; z-index: 1;
+    }
+
+    .checkin-hero {
+      background: linear-gradient(145deg, #1d1433, #0b1224 58%, #122033);
+      border: 1px solid rgba(251,191,36,0.35); border-radius: 20px; padding: 16px;
+      margin-bottom: 12px; color: #FDE68A; text-align: center;
+    }
+    .checkin-hero h2 { font-size: 18px; font-weight: 900; }
+    .checkin-hero p { font-size: 11px; color: #CBD5E1; margin-top: 4px; line-height: 1.5; }
+    .checkin-count { font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 900; color: #5EEAD4; margin: 8px 0 4px; }
+    .checkin-days-15 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 12px 0; }
+    .checkin-day15 {
+      aspect-ratio: 1; border-radius: 14px; background: var(--bg-secondary);
+      border: 1px solid var(--border-color); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; font-size: 10px; font-weight: 800;
+      position: relative; overflow: hidden;
+    }
+    .checkin-day15.done {
+      border-color: rgba(16,185,129,0.7);
+      background: linear-gradient(160deg, rgba(16,185,129,0.28), rgba(5,150,105,0.1));
+      color: #34D399;
+    }
+    .checkin-day15.today {
+      border-color: #FBBF24;
+      box-shadow: 0 0 14px rgba(251,191,36,0.35);
+      color: #FDE68A;
+    }
+    .checkin-day15.next { opacity: 0.55; }
+    .checkin-reward { font-size: 9px; color: var(--text-secondary); margin-top: 2px; }
+
+    .invite-hero {
+      background: linear-gradient(145deg, #10261f, #0b1224 60%, #1a1430);
+      border: 1px solid rgba(16,185,129,0.35); border-radius: 20px; padding: 16px; text-align: center;
+    }
+    .invite-hero h2 { font-size: 18px; font-weight: 900; color: #6EE7B7; }
+    .invite-hero p { font-size: 11px; color: #CBD5E1; margin-top: 6px; line-height: 1.55; }
+    .invite-stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 12px 0; }
+    .invite-stat {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px;
+      padding: 10px 6px; text-align: center;
+    }
+    .invite-stat b { display: block; font-size: 14px; color: var(--cyan); }
+    .invite-stat span { font-size: 9px; font-weight: 800; color: var(--text-secondary); text-transform: uppercase; }
+    .invite-rule {
+      background: var(--bg-card-elevated); border: 1px solid var(--border-color);
+      border-radius: 14px; padding: 12px; margin-bottom: 10px;
+    }
+    .invite-rule h4 { font-size: 13px; font-weight: 900; margin-bottom: 6px; color: var(--text-primary); }
+    .invite-rule p { font-size: 11px; color: var(--text-secondary); line-height: 1.55; }
+    .country-points { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cp-row {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--bg-secondary); border-radius: 10px; padding: 8px 10px; font-size: 11px; font-weight: 800;
+    }
+
+    .admin-kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .admin-kpi .card { margin: 0; text-align: center; padding: 12px; }
+    .admin-kpi b { display: block; font-size: 18px; color: var(--cyan); }
+    .admin-user-card { font-size: 12px; line-height: 1.6; }
+
+    .quiz-cat-card .q-lock { font-size: 10px; font-weight: 800; color: var(--gold-sub); margin-top: 6px; }
+
+    .table-game-wrap {
+      background: #07140d; min-height: 100dvh; padding: 8px 10px 18px; color: #F8FAFC;
+    }
+    body.table-immersive { padding-bottom: 0; }
+    body.table-immersive .top-header,
+    body.table-immersive .bottom-nav-premium-wrap { display: none; }
+    body.table-immersive .app-container { max-width: 480px; padding: 0 0 12px; }
+    .tg-top { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
+    .tg-back { color: #FDE68A; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .tg-bal { font-family: "JetBrains Mono", monospace; color: #FDE68A; font-weight: 800; font-size: 13px; }
+    .felt {
+      margin-top: 10px; border-radius: 22px; padding: 16px 12px 18px;
+      background:
+        radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,0.08), transparent 42%),
+        linear-gradient(180deg, #0f6b3c, #083822 55%, #062616);
+      border: 3px solid #c9a227;
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.35), 0 16px 30px rgba(0,0,0,0.4);
+      min-height: 280px;
+    }
+    .dice-row { display: flex; justify-content: center; gap: 12px; margin: 18px 0 12px; }
+    .die {
+      width: 58px; height: 58px; border-radius: 12px; background: #fff; color: #111;
+      display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+      padding: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+    }
+    .die.roll { animation: dieShake 0.12s linear infinite; }
+    @keyframes dieShake { 50% { transform: rotate(12deg) translateY(-2px); } }
+    .pip { width: 8px; height: 8px; border-radius: 50%; background: #111; margin: auto; opacity: 0; }
+    .die.on-1 .p5, .die.on-2 .p1, .die.on-2 .p9, .die.on-3 .p1, .die.on-3 .p5, .die.on-3 .p9,
+    .die.on-4 .p1, .die.on-4 .p3, .die.on-4 .p7, .die.on-4 .p9,
+    .die.on-5 .p1, .die.on-5 .p3, .die.on-5 .p5, .die.on-5 .p7, .die.on-5 .p9,
+    .die.on-6 .p1, .die.on-6 .p3, .die.on-6 .p4, .die.on-6 .p6, .die.on-6 .p7, .die.on-6 .p9 { opacity: 1; }
+    .sic-bets { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .sic-bet {
+      min-height: 52px; border: 1px solid rgba(253,230,138,0.35); border-radius: 12px;
+      background: rgba(0,0,0,0.22); color: #FDE68A; font-weight: 800; font-size: 11px; cursor: pointer;
+    }
+    .sic-bet.on { background: linear-gradient(180deg, #FFE38A, #C4891A); color: #2A1A00; }
+    .bj-hands { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .bj-label { font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #BBF7D0; margin-bottom: 6px; }
+    .cards { display: flex; gap: 8px; min-height: 88px; justify-content: center; }
+    .playing-card {
+      width: 62px; height: 88px; border-radius: 8px; background: #fff; color: #111;
+      box-shadow: 0 8px 14px rgba(0,0,0,0.28); padding: 6px 7px; font-weight: 900;
+      display: flex; flex-direction: column; justify-content: space-between;
+      font-family: "Space Grotesk", sans-serif;
+    }
+    .playing-card.red { color: #DC2626; }
+    .playing-card.back {
+      background: linear-gradient(160deg, #1e3a8a, #7f1d1d);
+      color: #FDE68A; align-items: center; justify-content: center;
+    }
+    .bj-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .bj-actions button, .sic-action {
+      min-height: 44px; border: none; border-radius: 12px; font-weight: 900; cursor: pointer;
+      background: linear-gradient(180deg, #FFE38A, #C4891A); color: #2A1A00;
+    }
+    .bj-actions button:disabled, .sic-action:disabled { opacity: 0.45; cursor: not-allowed; }
+    .chip-row { display: flex; gap: 8px; justify-content: center; margin: 10px 0; flex-wrap: wrap; }
+    .chip {
+      width: 44px; height: 44px; border-radius: 50%; border: 3px dashed #fff; font-size: 10px; font-weight: 900;
+      color: #fff; cursor: pointer;
+    }
+    .chip.c01 { background: #0ea5e9; } .chip.c05 { background: #10b981; } .chip.c1 { background: #ef4444; } .chip.c5 { background: #7c3aed; }
+    .chip.on { box-shadow: 0 0 0 3px #FDE68A; }
+    .tg-status { text-align: center; font-size: 13px; font-weight: 800; color: #FDE68A; min-height: 22px; margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -1647,6 +1829,10 @@
           <div class="btn-lux-icon"><i data-lucide="rocket" style="width:22px; height:22px;"></i></div>
           <span data-i18n="casino">Casino</span>
         </div>
+        <div class="btn-lux-tile tile-admin" id="admin-home-btn" onclick="AdminPanel.open()">
+          <div class="btn-lux-icon"><i data-lucide="shield" style="width:22px; height:22px;"></i></div>
+          <span data-i18n="adminPanel">Admin Panel</span>
+        </div>
       </div>
     </main>
 
@@ -1731,19 +1917,19 @@
       <div class="wallet-hub-grid">
         <div class="wallet-hub-card" onclick="App.navigate('view-wallet-deposit')">
           <i data-lucide="arrow-down-circle" style="width:24px; height:24px; color:var(--cyan);"></i>
-          <h4>Deposit</h4>
+          <h4 data-i18n="deposit">Deposit</h4>
         </div>
         <div class="wallet-hub-card" onclick="App.navigate('view-wallet-withdraw')">
           <i data-lucide="arrow-up-circle" style="width:24px; height:24px; color:var(--neon);"></i>
-          <h4>Withdraw</h4>
+          <h4 data-i18n="withdraw">Withdraw</h4>
         </div>
         <div class="wallet-hub-card" onclick="App.navigate('view-wallet-transfer')">
           <i data-lucide="send" style="width:24px; height:24px; color:#c084fc;"></i>
-          <h4>Transfer</h4>
+          <h4 data-i18n="transfer">Transfer</h4>
         </div>
         <div class="wallet-hub-card" onclick="App.navigate('view-wallet-tx')">
           <i data-lucide="history" style="width:24px; height:24px; color:var(--warning);"></i>
-          <h4>Transactions</h4>
+          <h4 data-i18n="transactions">Transactions</h4>
         </div>
       </div>
     </section>
@@ -1940,24 +2126,58 @@
          PAGE 8: INVITE PEERS
          ========================================== -->
     <section id="view-refer" class="view-page">
-      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; cursor:pointer;" onclick="App.navigate('view-home')">
+      <div class="page-back" onclick="App.navigate('view-home')">
         <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
-        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);" data-i18n="back">Back</span>
       </div>
-
-      <div class="card card-elevated" style="text-align:center;">
-        <i data-lucide="share-2" style="width:36px; height:36px; color:var(--cyan); margin-bottom:8px;"></i>
-        <h2 style="font-size:18px; font-weight:800; color:var(--text-primary);">Invite Friends & Unlock Rigs</h2>
-        <p style="font-size:11px; color:var(--text-secondary); margin-bottom:14px;">Every peer who joins advances all your package referral missions!</p>
-
+      <div class="invite-hero">
+        <h2 data-i18n="inviteTitle">Invite & Earn</h2>
+        <p data-i18n="inviteHeroSub">Share your personal link. Every verified new user is locked to you forever. Fake self-referrals are blocked.</p>
+      </div>
+      <div class="invite-stat-grid">
+        <div class="invite-stat"><b id="invite-count">0</b><span data-i18n="invitePeers">Peers</span></div>
+        <div class="invite-stat"><b id="invite-earn">0.00</b><span data-i18n="inviteEarned">Earned</span></div>
+        <div class="invite-stat"><b>0.05$</b><span data-i18n="invitePerRef">Per Refer</span></div>
+      </div>
+      <div class="card">
+        <label class="form-label" data-i18n="inviteLinkLab">Your secure referral link</label>
         <div style="background:var(--bg-secondary); border:1px solid var(--border-color); padding:10px; border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; gap:8px;">
           <input type="text" id="referral-link-input" readonly style="background:transparent; border:none; color:var(--cyan); font-size:12px; width:100%;" value="https://t.me/YOUR_BOT?start=ref_..." />
-          <button class="btn-secondary" onclick="ReferralEngine.copyLink()">Copy</button>
+          <button class="btn-secondary" onclick="ReferralEngine.copyLink()" data-i18n="copy">Copy</button>
         </div>
-
         <button class="btn-primary" style="margin-top:12px;" onclick="ReferralEngine.shareTelegram()">
-          <i data-lucide="send" style="width:16px; height:16px;"></i> SHARE ON TELEGRAM
+          <i data-lucide="send" style="width:16px; height:16px;"></i> <span data-i18n="shareTg">SHARE ON TELEGRAM</span>
         </button>
+      </div>
+      <div class="invite-rule">
+        <h4 data-i18n="inviteRule1Title">Per referral reward</h4>
+        <p data-i18n="inviteRule1Body">You receive 0.05 USDT instantly when a new Telegram user opens the bot with your link and creates an account. Duplicate or same-device self invites are rejected.</p>
+      </div>
+      <div class="invite-rule">
+        <h4 data-i18n="inviteRule2Title">Lifetime commission</h4>
+        <p data-i18n="inviteRule2Body">Level 1: 8% of every USDT your direct invite earns from ads, visits, quiz and check-in. Level 2: 3% from their invites. Commission is paid in USDT to your wallet.</p>
+      </div>
+      <div class="invite-rule">
+        <h4 data-i18n="inviteRule3Title">How the link works</h4>
+        <p data-i18n="inviteRule3Body">Your link is t.me/ZynexaFree_Bot?start=ref_YOURID. Telegram sends that start code into the Mini App. We bind the new user to you on first login only.</p>
+      </div>
+      <div class="invite-rule">
+        <h4 data-i18n="inviteCountryTitle">Country point table</h4>
+        <p data-i18n="inviteCountryBody">Referral quality score by country. Higher points mean stronger traffic quality for missions.</p>
+        <div class="country-points" style="margin-top:8px;">
+          <div class="cp-row"><span>BD</span><b>12 pts</b></div>
+          <div class="cp-row"><span>IN</span><b>10 pts</b></div>
+          <div class="cp-row"><span>PK</span><b>9 pts</b></div>
+          <div class="cp-row"><span>ID</span><b>11 pts</b></div>
+          <div class="cp-row"><span>NG</span><b>8 pts</b></div>
+          <div class="cp-row"><span>US</span><b>20 pts</b></div>
+          <div class="cp-row"><span>GB</span><b>18 pts</b></div>
+          <div class="cp-row"><span>AE</span><b>16 pts</b></div>
+          <div class="cp-row"><span>SA</span><b>15 pts</b></div>
+          <div class="cp-row"><span>TR</span><b>13 pts</b></div>
+          <div class="cp-row"><span>PH</span><b>11 pts</b></div>
+          <div class="cp-row"><span>Other</span><b>7 pts</b></div>
+        </div>
       </div>
     </section>
 
@@ -2092,11 +2312,16 @@
     <section id="view-visiting" class="view-page">
       <div class="page-back" onclick="App.navigate('view-home')">
         <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
-        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);" data-i18n="back">Back</span>
       </div>
       <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
-        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Visiting Tasks</h2>
-        <p style="font-size:11px; color:var(--text-secondary);">Stay on the page for the full timer, then verify to claim.</p>
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);" data-i18n="visitTitle">Visiting Tasks</h2>
+        <p style="font-size:11px; color:var(--text-secondary);" data-i18n="visitSub">Stay the full timer. Each task locks after claim. Fake claims are blocked.</p>
+      </div>
+      <div class="visit-tabs">
+        <button class="visit-tab on" id="vtab-daily" type="button" onclick="VisitEngine.setTab('daily')"><b data-i18n="daily">Daily</b><span>20 · 24h</span></button>
+        <button class="visit-tab" id="vtab-weekly" type="button" onclick="VisitEngine.setTab('weekly')"><b data-i18n="weekly">Weekly</b><span>15 · 7d</span></button>
+        <button class="visit-tab" id="vtab-monthly" type="button" onclick="VisitEngine.setTab('monthly')"><b data-i18n="monthly">Monthly</b><span>10 · 30d</span></button>
       </div>
       <div id="visit-tasks-list"></div>
     </section>
@@ -2110,21 +2335,24 @@
         <h3 style="font-size:16px; font-weight:900;" id="visit-timer-title">Visit Task</h3>
         <p style="font-size:11px; color:var(--text-secondary); margin:8px 0 16px;" id="visit-timer-desc">Stay until the timer ends.</p>
         <div class="ad-count" id="visit-countdown">00</div>
-        <p style="font-size:12px; font-weight:700; color:var(--cyan); margin-bottom:16px;" id="visit-status-txt">Keep this page open</p>
-        <button class="btn-primary" id="visit-verify-btn" onclick="VisitEngine.verify()" disabled>VERIFY & CLAIM</button>
+        <p style="font-size:12px; font-weight:700; color:var(--cyan); margin-bottom:16px;" id="visit-status-txt" data-i18n="keepOpen">Keep this page open</p>
+        <button class="btn-primary" id="visit-verify-btn" onclick="VisitEngine.verify()" disabled data-i18n="readyVerify">VERIFY & CLAIM</button>
       </div>
     </section>
 
     <section id="view-checkin" class="view-page">
       <div class="page-back" onclick="App.navigate('view-home')">
         <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
-        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);" data-i18n="back">Back</span>
+      </div>
+      <div class="checkin-hero">
+        <h2 data-i18n="checkinTitle">Daily Checking</h2>
+        <p data-i18n="checkinSub">One check-in every 24 hours. Streak board of 15 days. Clock time is server-locked.</p>
+        <div class="checkin-count" id="checkin-countdown">READY</div>
       </div>
       <div class="card card-elevated" style="text-align:center;">
-        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Daily Checking</h2>
-        <p style="font-size:11px; color:var(--text-secondary);">Check in once per day. Watch an ad to earn 0.01 USDT.</p>
-        <div class="checkin-days" id="checkin-days"></div>
-        <button class="btn-primary" id="checkin-btn" onclick="CheckinEngine.doCheckin()">CHECK IN NOW</button>
+        <div class="checkin-days-15" id="checkin-days"></div>
+        <button class="btn-primary" id="checkin-btn" onclick="CheckinEngine.doCheckin()" data-i18n="checkinNow">CHECK IN NOW</button>
       </div>
     </section>
 
@@ -2192,11 +2420,11 @@
     <section id="view-language" class="view-page">
       <div class="page-back" onclick="App.navigate('view-home')">
         <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
-        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);" data-i18n="back">Back</span>
       </div>
       <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
-        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Language</h2>
-        <p style="font-size:11px; color:var(--text-secondary);">Select a language to switch the whole site.</p>
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);" data-i18n="langTitle">Language</h2>
+        <p style="font-size:11px; color:var(--text-secondary);" data-i18n="langSub">Select a language. Layout stays the same. Only text changes.</p>
       </div>
       <div id="lang-list"></div>
     </section>
@@ -2216,19 +2444,130 @@
             <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=70" alt="Crash Game airplane" />
           </div>
           <div class="casino-game-body">
-            <h3>Crash Game</h3>
-            <button class="casino-start-btn" type="button" onclick="CasinoHub.startGame('crash')">START</button>
+            <h3 data-i18n="crashGame">Crash Game</h3>
+            <button class="casino-start-btn" type="button" onclick="CasinoHub.startGame('crash')" data-i18n="start">START</button>
           </div>
         </article>
-        <article class="casino-game-card" style="opacity:0.72;">
+        <article class="casino-game-card">
           <div class="casino-game-photo">
-            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=70" alt="Coming soon casino game" />
+            <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4316?auto=format&fit=crop&w=800&q=70" alt="Sic Bo dice table" />
           </div>
           <div class="casino-game-body">
-            <h3>Coming Soon</h3>
-            <button class="casino-start-btn" type="button" disabled style="opacity:0.55; cursor:not-allowed;">SOON</button>
+            <h3 data-i18n="sicboGame">Sic Bo</h3>
+            <button class="casino-start-btn" type="button" onclick="CasinoHub.startGame('sicbo')" data-i18n="start">START</button>
           </div>
         </article>
+        <article class="casino-game-card">
+          <div class="casino-game-photo">
+            <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=800&q=70" alt="Blackjack table" />
+          </div>
+          <div class="casino-game-body">
+            <h3 data-i18n="blackjackGame">Blackjack</h3>
+            <button class="casino-start-btn" type="button" onclick="CasinoHub.startGame('blackjack')" data-i18n="start">START</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="view-admin" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-home')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);" data-i18n="back">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);" data-i18n="adminDash">Admin Dashboard</h2>
+        <p style="font-size:11px; color:var(--text-secondary);" data-i18n="adminSub">Control users, balances, tasks, and live casino settings.</p>
+      </div>
+      <div class="admin-kpi">
+        <div class="card"><b id="admin-users">0</b><span data-i18n="adminUsers">Users</span></div>
+        <div class="card"><b id="admin-usdt">0</b><span>USDT</span></div>
+        <div class="card"><b id="admin-refs">0</b><span data-i18n="invite">Invite</span></div>
+        <div class="card"><b id="admin-wd">0</b><span data-i18n="withdraws">Withdraws</span></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:14px; font-weight:900; margin-bottom:8px;" data-i18n="adminFind">Find user</h3>
+        <input class="form-input" id="admin-uid" placeholder="Telegram ID" />
+        <button class="btn-primary" style="margin-top:10px;" onclick="AdminPanel.loadUser()" data-i18n="adminLoad">LOAD</button>
+        <div id="admin-user-box" class="admin-user-card" style="margin-top:10px;"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:14px; font-weight:900; margin-bottom:8px;" data-i18n="adminCredit">Credit / Debit USDT</h3>
+        <input class="form-input" id="admin-amt" type="number" step="0.0001" placeholder="Amount" />
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
+          <button class="btn-primary" onclick="AdminPanel.adjust(1)" data-i18n="credit">CREDIT</button>
+          <button class="btn-secondary" onclick="AdminPanel.adjust(-1)" data-i18n="debit">DEBIT</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:14px; font-weight:900; margin-bottom:8px;" data-i18n="adminTools">Control tools</h3>
+        <button class="btn-primary" style="margin-bottom:8px;" onclick="AdminPanel.resetCheckin()" data-i18n="resetCheckin">Reset check-in lock</button>
+        <button class="btn-primary" style="margin-bottom:8px;" onclick="AdminPanel.resetVisits()" data-i18n="resetVisits">Reset visit locks</button>
+        <button class="btn-primary" onclick="AdminPanel.resetQuiz()" data-i18n="resetQuiz">Reset quiz limits</button>
+      </div>
+    </section>
+
+    <section id="view-sicbo" class="view-page">
+      <div class="table-game-wrap">
+        <div class="tg-top">
+          <div class="tg-back" onclick="SicBoEngine.leave()"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i> <span data-i18n="lobby">Lobby</span></div>
+          <div class="tg-bal" id="sicbo-bal">0.0000 USDT</div>
+        </div>
+        <div class="felt">
+          <div class="dice-row">
+            <div class="die on-1" id="die1"><i class="pip p1"></i><i class="pip p2"></i><i class="pip p3"></i><i class="pip p4"></i><i class="pip p5"></i><i class="pip p6"></i><i class="pip p7"></i><i class="pip p8"></i><i class="pip p9"></i></div>
+            <div class="die on-2" id="die2"><i class="pip p1"></i><i class="pip p2"></i><i class="pip p3"></i><i class="pip p4"></i><i class="pip p5"></i><i class="pip p6"></i><i class="pip p7"></i><i class="pip p8"></i><i class="pip p9"></i></div>
+            <div class="die on-3" id="die3"><i class="pip p1"></i><i class="pip p2"></i><i class="pip p3"></i><i class="pip p4"></i><i class="pip p5"></i><i class="pip p6"></i><i class="pip p7"></i><i class="pip p8"></i><i class="pip p9"></i></div>
+          </div>
+          <div class="tg-status" id="sicbo-status">Place a bet</div>
+          <div class="sic-bets">
+            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('small')">SMALL 1:1</button>
+            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('triple')">ANY TRIPLE 30:1</button>
+            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('big')">BIG 1:1</button>
+            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('odd')">ODD 1:1</button>
+            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('total11')">TOTAL 11 6:1</button>
+            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('even')">EVEN 1:1</button>
+          </div>
+          <div class="chip-row">
+            <button class="chip c01 on" type="button" onclick="SicBoEngine.setChip(0.10)">0.10</button>
+            <button class="chip c05" type="button" onclick="SicBoEngine.setChip(0.50)">0.50</button>
+            <button class="chip c1" type="button" onclick="SicBoEngine.setChip(1)">1</button>
+            <button class="chip c5" type="button" onclick="SicBoEngine.setChip(5)">5</button>
+          </div>
+          <button class="sic-action" id="sicbo-roll" type="button" onclick="SicBoEngine.roll()" style="width:100%;">ROLL DICE</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-blackjack" class="view-page">
+      <div class="table-game-wrap">
+        <div class="tg-top">
+          <div class="tg-back" onclick="BlackjackEngine.leave()"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i> <span data-i18n="lobby">Lobby</span></div>
+          <div class="tg-bal" id="bj-bal">0.0000 USDT</div>
+        </div>
+        <div class="felt">
+          <div class="bj-hands">
+            <div>
+              <div class="bj-label">DEALER <span id="bj-dealer-total"></span></div>
+              <div class="cards" id="bj-dealer"></div>
+            </div>
+            <div>
+              <div class="bj-label">YOU <span id="bj-player-total"></span></div>
+              <div class="cards" id="bj-player"></div>
+            </div>
+          </div>
+          <div class="tg-status" id="bj-status">Place bet then Deal</div>
+          <div class="chip-row">
+            <button class="chip c01 on" type="button" onclick="BlackjackEngine.setChip(0.10)">0.10</button>
+            <button class="chip c05" type="button" onclick="BlackjackEngine.setChip(0.50)">0.50</button>
+            <button class="chip c1" type="button" onclick="BlackjackEngine.setChip(1)">1</button>
+            <button class="chip c5" type="button" onclick="BlackjackEngine.setChip(5)">5</button>
+          </div>
+          <div class="bj-actions">
+            <button type="button" id="bj-deal" onclick="BlackjackEngine.deal()">DEAL</button>
+            <button type="button" id="bj-hit" onclick="BlackjackEngine.hit()" disabled>HIT</button>
+            <button type="button" id="bj-stand" onclick="BlackjackEngine.stand()" disabled>STAND</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2503,8 +2842,12 @@
         cvvp: "",
         rewardAds: {},
         quizAds: { hourly: 0, daily: 0, monthly: 0, hourKey: "", dayKey: "", monthKey: "" },
-        checkin: { lastDay: "", streak: 0, days: {} },
+        quizCats: {},
+        checkin: { lastDay: "", lastAt: 0, streak: 0, days: {} },
         visitDone: {},
+        visitLocks: { daily: {}, weekly: {}, monthly: {} },
+        referredBy: "",
+        referralEarn: 0,
         lang: "en",
         hidePan: false,
         hideCvvp: false
@@ -2629,10 +2972,12 @@
         AdsEngine.startLiveTicker();
         VisitEngine.renderList();
         CheckinEngine.render();
-        QuizEngine.renderLimits();
+        QuizEngine.renderCats();
         I18n.renderList();
         this.renderAllTokens();
         CrashEngine.bindGlobal();
+        ReferralEngine.captureStart();
+        AdminPanel.refreshHomeBtn();
         if (window.lucide) lucide.createIcons();
       },
 
@@ -2738,12 +3083,17 @@
               securityPin: cvvp,
               rewardAds: {},
               quizAds: rollLimits({}),
-              checkin: { lastDay: "", streak: 0, days: {} },
+              quizCats: {},
+              checkin: { lastDay: "", lastAt: 0, streak: 0, days: {} },
               visitDone: {},
+              visitLocks: { daily: {}, weekly: {}, monthly: {} },
+              referredBy: "",
+              referralEarn: 0,
               lang: "en",
               hidePan: false,
               hideCvvp: false
             });
+            ReferralEngine.bindNewUser(uid);
             db.ref("cardIndex/" + cardKey(cardNumber)).set({
               telegramId: uid,
               firstName: State.user.firstName,
@@ -2766,8 +3116,12 @@
             State.user.cvvp = data.cvvp || genCvvp(uid);
             State.user.rewardAds = AdsEngine.normalizeStore(data.rewardAds);
             State.user.quizAds = rollLimits(data.quizAds || {});
-            State.user.checkin = data.checkin || { lastDay: "", streak: 0, days: {} };
+            State.user.quizCats = data.quizCats || {};
+            State.user.checkin = data.checkin || { lastDay: "", lastAt: 0, streak: 0, days: {} };
             State.user.visitDone = data.visitDone || {};
+            State.user.visitLocks = data.visitLocks || { daily: {}, weekly: {}, monthly: {} };
+            State.user.referredBy = data.referredBy || "";
+            State.user.referralEarn = Number(data.referralEarn || 0);
             State.user.lang = data.lang || State.user.lang || "en";
             State.user.hidePan = !!data.hidePan;
             State.user.hideCvvp = !!data.hideCvvp;
@@ -2874,7 +3228,12 @@
         const usdtBal = State.user.tokenBalances.usdt || 0;
         document.getElementById("wallet-hub-usdt-balance").innerText = usdtBal.toFixed(4) + " USDT";
         if (typeof CrashEngine !== "undefined") CrashEngine.refreshBalance();
-        document.getElementById("referral-link-input").value = "https://t.me/" + BOT_USERNAME + "?start=ref_" + State.user.telegramId;
+        document.getElementById("referral-link-input").value = ReferralEngine.linkFor(State.user.telegramId);
+        const ic = document.getElementById("invite-count");
+        if (ic) ic.innerText = String(State.user.referralCount || 0);
+        const ie = document.getElementById("invite-earn");
+        if (ie) ie.innerText = Number(State.user.referralEarn || 0).toFixed(4);
+        AdminPanel.refreshHomeBtn();
         this.renderAllTokens();
       },
 
@@ -2956,6 +3315,11 @@
         if (targetPageId !== "view-crash") document.body.classList.remove("crash-immersive");
         if (targetPageId === "view-visiting") VisitEngine.renderList();
         if (targetPageId === "view-checkin") CheckinEngine.render();
+        if (targetPageId === "view-refer") ReferralEngine.refreshPage();
+        if (targetPageId === "view-admin") AdminPanel.renderDash();
+        if (targetPageId === "view-sicbo") SicBoEngine.enter();
+        if (targetPageId === "view-blackjack") BlackjackEngine.enter();
+        if (targetPageId !== "view-sicbo" && targetPageId !== "view-blackjack") document.body.classList.remove("table-immersive");
         if (targetPageId === "view-quiz") {
           QuizEngine.cat = null;
           const catWrap = document.getElementById("quiz-cat-wrap");
@@ -2964,7 +3328,7 @@
           if (catWrap) catWrap.style.display = "block";
           if (limitCard) limitCard.style.display = "none";
           if (playCard) playCard.style.display = "none";
-          QuizEngine.renderLimits();
+          QuizEngine.renderCats();
         }
         if (targetPageId === "view-language") I18n.renderList();
         if (targetPageId === "view-all-tokens") this.renderAllTokens();
@@ -3532,17 +3896,23 @@
       startGame(id) {
         const loader = document.getElementById("game-loader");
         if (!loader) return;
+        const title = loader.querySelector(".loader-title");
+        const names = { crash: "LOADING CRASH", sicbo: "LOADING SIC BO", blackjack: "LOADING BLACKJACK" };
+        if (title) title.innerText = names[id] || "LOADING";
         const bar = loader.querySelector(".loader-bar > i");
         if (bar) {
           bar.style.animation = "none";
           void bar.offsetWidth;
           bar.style.animation = "";
         }
+        GameSFX.unlock();
         loader.classList.add("show");
-        const ms = 3200 + Math.floor(Math.random() * 800);
+        const ms = 2800 + Math.floor(Math.random() * 900);
         setTimeout(() => {
           loader.classList.remove("show");
           if (id === "crash") App.navigate("view-crash");
+          if (id === "sicbo") App.navigate("view-sicbo");
+          if (id === "blackjack") App.navigate("view-blackjack");
         }, ms);
       }
     };
@@ -3601,11 +3971,30 @@
         this.round = round;
         this.onRound(round);
       },
+      deck: [],
+      deckIdx: 0,
+      lastSoundPhase: "",
+      flyTick: 0,
+      buildDeck() {
+        const rnd = (a, b) => +(a + Math.random() * (b - a)).toFixed(2);
+        const d = [];
+        for (let i = 0; i < 70; i++) d.push(rnd(1.00, 1.60));
+        for (let i = 0; i < 10; i++) d.push(rnd(2.00, 7.00));
+        for (let i = 0; i < 10; i++) d.push(rnd(8.00, 15.00));
+        for (let i = 0; i < 6; i++) d.push(rnd(1.01, 4.80));
+        for (let i = 0; i < 3; i++) d.push(rnd(30.00, 40.00));
+        d.push(rnd(40.00, 500.00));
+        for (let i = d.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const t = d[i]; d[i] = d[j]; d[j] = t;
+        }
+        this.deck = d;
+        this.deckIdx = 0;
+      },
       genCrash() {
-        const r = Math.random();
-        if (r < 0.04) return 1.00;
-        const p = Math.floor(((0.96) / (1 - r)) * 100) / 100;
-        return Math.min(Math.max(p, 1.00), 250);
+        if (!this.deck.length || this.deckIdx >= this.deck.length) this.buildDeck();
+        const v = this.deck[this.deckIdx++];
+        return Math.min(Math.max(Number(v) || 1.2, 1.00), 500);
       },
       multAt(ms) {
         return Math.max(1, Math.pow(Math.E, 0.00006 * Math.max(0, ms)));
@@ -3722,6 +4111,7 @@
       },
       enter() {
         document.body.classList.add("crash-immersive");
+        GameSFX.unlock();
         this.resizeCanvas();
         this.refreshBalance();
         this.renderHistory();
@@ -3799,14 +4189,19 @@
           multEl.className = "crash-mult";
           multEl.innerText = "1.00x";
           stEl.innerText = "NEXT ROUND IN " + left + "s";
+          if (this.lastSoundPhase !== "waiting") { this.lastSoundPhase = "waiting"; GameSFX.beep(520, 0.08, "square", 0.04); }
         } else if (r.phase === "flying") {
           multEl.className = "crash-mult fly";
           multEl.innerText = m.toFixed(2) + "x";
           stEl.innerText = "IN FLIGHT";
+          if (this.lastSoundPhase !== "flying") { this.lastSoundPhase = "flying"; GameSFX.crashLift(); }
+          this.flyTick = (this.flyTick || 0) + 1;
+          if (this.flyTick % 18 === 0) GameSFX.tick(m);
         } else {
           multEl.className = "crash-mult boom";
           multEl.innerText = Number(r.crashPoint).toFixed(2) + "x";
           stEl.innerText = "FLEW AWAY";
+          if (this.lastSoundPhase !== "crashed") { this.lastSoundPhase = "crashed"; GameSFX.crashBoom(); }
         }
         this.renderButtons();
       },
@@ -3958,6 +4353,7 @@
         this.refreshBalance();
         this.renderLive();
         this.renderButtons();
+        GameSFX.cash();
         App.toast("Cashed out " + m.toFixed(2) + "x");
       },
       checkAutoCash() {
@@ -4558,165 +4954,304 @@
       }
     };
 
+    function t(key, fallback) {
+      const pack = (typeof I18N !== "undefined" && I18N[State.user.lang]) || (typeof I18N !== "undefined" && I18N.en) || {};
+      return pack[key] || (typeof I18N !== "undefined" && I18N.en && I18N.en[key]) || fallback || key;
+    }
+    function fmtDur(ms) {
+      ms = Math.max(0, ms);
+      const s = Math.floor(ms / 1000);
+      const d = Math.floor(s / 86400);
+      const h = Math.floor((s % 86400) / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sec = s % 60;
+      if (d > 0) return d + "d " + pad4(h).slice(-2) + ":" + pad4(m).slice(-2) + ":" + pad4(sec).slice(-2);
+      return pad4(h).slice(-2) + ":" + pad4(m).slice(-2) + ":" + pad4(sec).slice(-2);
+    }
+    function randRange(a, b, digits) {
+      const n = a + Math.random() * (b - a);
+      return +n.toFixed(digits == null ? 4 : digits);
+    }
+    function nonce() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+    }
+
+    const GameSFX = {
+      ctx: null,
+      unlock() {
+        try {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          if (!this.ctx) this.ctx = new AC();
+          if (this.ctx.state === "suspended") this.ctx.resume();
+        } catch (e) {}
+      },
+      tone(freq, dur, type, vol, slide) {
+        if (!this.ctx) this.unlock();
+        if (!this.ctx) return;
+        const o = this.ctx.createOscillator();
+        const g = this.ctx.createGain();
+        o.type = type || "sine";
+        o.frequency.setValueAtTime(freq, this.ctx.currentTime);
+        if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(40, slide), this.ctx.currentTime + dur);
+        g.gain.setValueAtTime(vol || 0.06, this.ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + dur);
+        o.connect(g); g.connect(this.ctx.destination);
+        o.start(); o.stop(this.ctx.currentTime + dur);
+      },
+      beep(f, d, type, v) { this.tone(f, d || 0.08, type || "square", v || 0.05); },
+      tick(mult) { this.tone(420 + Math.min(900, (mult || 1) * 80), 0.05, "triangle", 0.03); },
+      crashLift() { this.tone(220, 0.35, "sawtooth", 0.04, 520); },
+      crashBoom() { this.tone(180, 0.45, "sawtooth", 0.09, 55); this.tone(90, 0.5, "square", 0.05, 40); },
+      cash() { this.tone(880, 0.12, "sine", 0.07); this.tone(1320, 0.18, "triangle", 0.05); },
+      dice() { this.tone(180 + Math.random() * 90, 0.08, "square", 0.05); },
+      card() { this.tone(740, 0.07, "triangle", 0.04); },
+      win() { this.tone(523, 0.12, "sine", 0.06); this.tone(659, 0.16, "sine", 0.05); this.tone(784, 0.2, "sine", 0.05); },
+      lose() { this.tone(220, 0.25, "sawtooth", 0.05, 90); }
+    };
+
     const VISIT_POOL = [
       { name: "OMG Offer", title: "Visit Partner Site", desc: "Open the partner page and stay until the timer ends." },
       { name: "Deal Hub", title: "Browse Featured Deal", desc: "Stay on the offer page to unlock the reward." },
       { name: "Promo Gate", title: "Open Promo Link", desc: "Complete the full visit time before verify." },
       { name: "Boost Page", title: "Traffic Boost Visit", desc: "Do not leave early or the claim will fail." },
-      { name: "Partner Wall", title: "Sponsored Visit", desc: "Wait for the countdown then tap verify." }
+      { name: "Partner Wall", title: "Sponsored Visit", desc: "Wait for the countdown then tap verify." },
+      { name: "Gold Traffic", title: "Premium Visit", desc: "High-quality visit with anti-fake lock." },
+      { name: "Nova Link", title: "Secure Partner", desc: "Timer must finish on this device." }
     ];
+    const VISIT_TABS = {
+      daily: { count: 20, minR: 0.0001, maxR: 0.006, minT: 15, maxT: 20, lock: 24 * 3600000, label: "Daily" },
+      weekly: { count: 15, minR: 0.007, maxR: 0.01, minT: 25, maxT: 30, lock: 7 * 24 * 3600000, label: "Weekly" },
+      monthly: { count: 10, minR: 0.012, maxR: 0.02, minT: 40, maxT: 50, lock: 30 * 24 * 3600000, label: "Monthly" }
+    };
     const VisitEngine = {
       current: null,
       timer: null,
       left: 0,
       required: 30,
-      pool: [],
-      ensurePool() {
-        if (this.pool.length) return;
-        for (let i = 0; i < 20; i++) {
+      tab: "daily",
+      pools: {},
+      claiming: false,
+      clock: null,
+      ensureLocks() {
+        if (!State.user.visitLocks) State.user.visitLocks = { daily: {}, weekly: {}, monthly: {} };
+        ["daily", "weekly", "monthly"].forEach((k) => {
+          if (!State.user.visitLocks[k]) State.user.visitLocks[k] = {};
+        });
+      },
+      ensurePool(tab) {
+        tab = tab || this.tab;
+        if (this.pools[tab] && this.pools[tab].length) return;
+        const cfg = VISIT_TABS[tab];
+        const list = [];
+        for (let i = 0; i < cfg.count; i++) {
           const base = VISIT_POOL[i % VISIT_POOL.length];
-          const time = 30 + (i % 21);
-          const reward = +(0.01 + (i % 3) * 0.005).toFixed(3);
-          this.pool.push({
-            id: "v" + i + "_" + Date.now().toString(36),
-            name: base.name + " #" + (i + 1),
+          const time = cfg.minT + (i % (cfg.maxT - cfg.minT + 1));
+          const reward = +(cfg.minR + (i / Math.max(1, cfg.count - 1)) * (cfg.maxR - cfg.minR)).toFixed(4);
+          list.push({
+            id: tab + "_" + i,
+            name: base.name + " " + (i + 1),
             title: base.title,
             desc: base.desc,
             reward,
             visitTime: time,
-            link: VISIT_LINK
+            link: VISIT_LINK,
+            tab
           });
         }
+        this.pools[tab] = list;
+      },
+      setTab(tab) {
+        this.tab = tab;
+        ["daily", "weekly", "monthly"].forEach((k) => {
+          const el = document.getElementById("vtab-" + k);
+          if (el) el.classList.toggle("on", k === tab);
+        });
+        this.renderList();
+      },
+      lockLeft(id) {
+        this.ensureLocks();
+        const until = Number((State.user.visitLocks[this.tab] || {})[id] || 0);
+        return Math.max(0, until - Date.now());
       },
       renderList() {
-        this.ensurePool();
+        this.ensurePool(this.tab);
+        this.ensureLocks();
         const mount = document.getElementById("visit-tasks-list");
         if (!mount) return;
-        mount.innerHTML = this.pool.map((t, idx) => `
-          <div class="visit-card">
-            <div class="visit-card-head">
-              <div class="visit-thumb"><i data-lucide="globe" style="width:20px;height:20px;"></i></div>
-              <div>
-                <div style="font-size:14px; font-weight:900;">${t.name}</div>
-                <div style="font-size:11px; color:var(--text-secondary);">${t.title}</div>
+        const list = this.pools[this.tab] || [];
+        mount.innerHTML = list.map((task, idx) => {
+          const left = this.lockLeft(task.id);
+          const locked = left > 0;
+          return `
+            <div class="visit-premium-card ${locked ? "lock" : ""}">
+              <div class="vpc-top">
+                <div class="vpc-ico"><i data-lucide="globe" style="width:22px;height:22px;"></i></div>
+                <div>
+                  <div style="font-size:14px; font-weight:900;">${task.name}</div>
+                  <div style="font-size:11px; color:var(--text-secondary);">${task.title}</div>
+                </div>
               </div>
-            </div>
-            <p style="font-size:11px; color:var(--text-secondary); margin-bottom:8px;">${t.desc}</p>
-            <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:800; margin-bottom:10px;">
-              <span style="color:var(--success);">Reward ${t.reward}$</span>
-              <span>Visit ${t.visitTime}s</span>
-            </div>
-            <button class="btn-primary" onclick="VisitEngine.start(${idx})">VISIT NOW</button>
-          </div>
-        `).join("");
+              <p style="font-size:11px; color:var(--text-secondary); margin:8px 0; position:relative; z-index:1;">${task.desc}</p>
+              <div class="vpc-meta">
+                <div class="vpc-chip"><h6>${t("reward", "Reward")}</h6><p>${task.reward}$</p></div>
+                <div class="vpc-chip"><h6>${t("timer", "Timer")}</h6><p>${task.visitTime}s</p></div>
+                <div class="vpc-chip"><h6>${t("lock", "Lock")}</h6><p>${this.tab === "daily" ? "24h" : (this.tab === "weekly" ? "7d" : "30d")}</p></div>
+              </div>
+              ${locked ? `<div class="vpc-lock">${t("nextIn", "Next in")} ${fmtDur(left)}</div>` : ""}
+              <button class="btn-primary" ${locked ? "disabled" : ""} onclick="VisitEngine.start('${this.tab}', ${idx})">${locked ? t("locked", "LOCKED") : t("visitNow", "VISIT NOW")}</button>
+            </div>`;
+        }).join("");
         if (window.lucide) lucide.createIcons();
+        if (!this.clock) {
+          this.clock = setInterval(() => {
+            const page = document.getElementById("view-visiting");
+            if (page && page.classList.contains("active-view")) this.renderList();
+          }, 1000);
+        }
       },
-      start(idx) {
-        const t = this.pool[idx];
-        if (!t) return;
-        this.current = t;
-        this.required = t.visitTime;
-        this.left = t.visitTime;
-        window.open(t.link, "_blank");
+      start(tab, idx) {
+        this.tab = tab;
+        this.ensurePool(tab);
+        const task = (this.pools[tab] || [])[idx];
+        if (!task) return;
+        if (this.lockLeft(task.id) > 0) { App.toast(t("taskLocked", "Task is locked")); return; }
+        this.current = {
+          id: task.id, tab, name: task.name, title: task.title, reward: task.reward,
+          visitTime: task.visitTime, link: task.link, startedAt: Date.now(), token: nonce(), claimed: false
+        };
+        this.required = task.visitTime;
+        this.left = task.visitTime;
+        window.open(task.link, "_blank");
         App.navigate("view-visit-timer");
-        document.getElementById("visit-timer-title").innerText = t.name;
-        document.getElementById("visit-timer-desc").innerText = t.title + " · stay " + t.visitTime + "s";
+        document.getElementById("visit-timer-title").innerText = task.name;
+        document.getElementById("visit-timer-desc").innerText = task.title + " · " + task.visitTime + "s";
         document.getElementById("visit-verify-btn").disabled = true;
-        document.getElementById("visit-status-txt").innerText = "Keep this page open";
+        document.getElementById("visit-status-txt").innerText = t("keepOpen", "Keep this page open");
         document.getElementById("visit-countdown").innerText = this.left;
         if (this.timer) clearInterval(this.timer);
         this.timer = setInterval(() => {
-          this.left -= 1;
-          document.getElementById("visit-countdown").innerText = Math.max(0, this.left);
+          const elapsed = Math.floor((Date.now() - this.current.startedAt) / 1000);
+          this.left = Math.max(0, this.required - elapsed);
+          document.getElementById("visit-countdown").innerText = this.left;
           if (this.left <= 0) {
             clearInterval(this.timer);
             this.timer = null;
             document.getElementById("visit-verify-btn").disabled = false;
-            document.getElementById("visit-status-txt").innerText = "Ready to verify";
+            document.getElementById("visit-status-txt").innerText = t("readyVerify", "Ready to verify");
           }
-        }, 1000);
+        }, 250);
       },
       cancelVisit() {
         if (this.timer) { clearInterval(this.timer); this.timer = null; }
         App.navigate("view-visiting");
       },
       async verify() {
-        if (!this.current) return;
-        if (this.left > 0) {
-          App.toast(this.left + " seconds remaining. Stay until the timer ends.");
+        if (!this.current || this.claiming) return;
+        const elapsed = (Date.now() - this.current.startedAt) / 1000;
+        if (elapsed < this.current.visitTime - 0.2) {
+          App.toast(t("stayTimer", "Stay until the timer ends."));
           return;
         }
-        const reward = this.current.reward;
+        if (this.current.claimed) { App.toast(t("alreadyClaimed", "Already claimed")); return; }
+        if (this.lockLeft(this.current.id) > 0) { App.toast(t("taskLocked", "Task is locked")); return; }
+        this.claiming = true;
+        this.current.claimed = true;
+        const cfg = VISIT_TABS[this.current.tab];
+        const reward = Number(this.current.reward);
+        if (reward < cfg.minR - 0.00001 || reward > cfg.maxR + 0.00001) {
+          this.claiming = false;
+          App.toast(t("secBlock", "Security block"));
+          return;
+        }
+        this.ensureLocks();
+        State.user.visitLocks[this.current.tab][this.current.id] = Date.now() + cfg.lock;
         const cur = State.user.tokenBalances.usdt || 0;
         const next = +(cur + reward).toFixed(6);
         State.user.tokenBalances.usdt = next;
         await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
+        await fbSet("users/" + State.user.telegramId + "/visitLocks", State.user.visitLocks);
         const tx = { type: "VISIT_REWARD", desc: "+" + reward + " USDT visit", status: "COMPLETED", timestamp: Date.now() };
         await fbPush("transactions/" + State.user.telegramId, tx);
         pushLocalTx(tx);
-        const doneId = this.current.id;
-        this.pool = this.pool.filter(x => x.id !== doneId);
-        const n = this.pool.length + 1;
-        const base = VISIT_POOL[n % VISIT_POOL.length];
-        const time = 30 + (n % 21);
-        const rwd = +(0.01 + (n % 3) * 0.005).toFixed(3);
-        this.pool.push({ id: "v" + Date.now(), name: base.name + " #" + (n + 20), title: base.title, desc: base.desc, reward: rwd, visitTime: time, link: VISIT_LINK });
+        ReferralEngine.payCommission(reward);
         this.current = null;
+        this.claiming = false;
         App.updateUI();
-        App.toast("+" + reward + " USDT from visit");
+        App.toast("+" + reward + " USDT");
         App.navigate("view-visiting");
         this.renderList();
       }
     };
 
     const CheckinEngine = {
+      clock: null,
+      claiming: false,
+      rewards: [0.002, 0.003, 0.004, 0.005, 0.006, 0.008, 0.01, 0.012, 0.014, 0.016, 0.018, 0.02, 0.022, 0.025, 0.03],
+      lockMs() {
+        const lastAt = Number((State.user.checkin && State.user.checkin.lastAt) || 0);
+        return Math.max(0, lastAt + 24 * 3600000 - Date.now());
+      },
       render() {
         const mount = document.getElementById("checkin-days");
         if (!mount) return;
-        const k = nowKeys();
-        const days = (State.user.checkin && State.user.checkin.days) || {};
-        const last = (State.user.checkin && State.user.checkin.lastDay) || "";
+        if (!State.user.checkin) State.user.checkin = { lastDay: "", lastAt: 0, streak: 0, days: {} };
+        const streak = Math.min(15, Number(State.user.checkin.streak || 0));
+        const left = this.lockMs();
         let html = "";
-        for (let i = 0; i < 7; i++) {
-          const d = new Date();
-          d.setDate(d.getDate() - (6 - i));
-          const key = d.getFullYear() + "-" + pad4(d.getMonth() + 1) + "-" + pad4(d.getDate());
-          const done = !!days[key];
-          const today = key === k.dayKey;
-          html += `<div class="checkin-day ${done ? "done" : ""} ${today ? "today" : ""}"><span>D${i + 1}</span><span>${done ? "OK" : (today ? "NOW" : "")}</span></div>`;
+        for (let i = 0; i < 15; i++) {
+          const done = i < streak;
+          const today = i === streak && left <= 0;
+          html += `<div class="checkin-day15 ${done ? "done" : ""} ${today ? "today" : ""} ${!done && !today ? "next" : ""}"><span>D${i + 1}</span><span class="checkin-reward">${this.rewards[i]}$</span></div>`;
         }
         mount.innerHTML = html;
+        const cd = document.getElementById("checkin-countdown");
         const btn = document.getElementById("checkin-btn");
+        if (cd) cd.innerText = left > 0 ? fmtDur(left) : t("ready", "READY");
         if (btn) {
-          btn.disabled = last === k.dayKey;
-          btn.innerText = last === k.dayKey ? "ALREADY CHECKED TODAY" : "CHECK IN NOW";
+          btn.disabled = left > 0;
+          btn.innerText = left > 0 ? t("wait24h", "WAIT 24H") : t("checkinNow", "CHECK IN NOW");
+        }
+        if (!this.clock) {
+          this.clock = setInterval(() => {
+            const page = document.getElementById("view-checkin");
+            if (page && page.classList.contains("active-view")) this.render();
+          }, 1000);
         }
       },
       doCheckin() {
-        const k = nowKeys();
-        if (State.user.checkin && State.user.checkin.lastDay === k.dayKey) {
-          App.toast("Already checked in today");
-          return;
-        }
+        if (this.claiming) return;
+        if (this.lockMs() > 0) { App.toast(t("alreadyChecked", "Already checked in. Wait 24 hours.")); return; }
+        this.claiming = true;
         AdPlayer.play(async () => {
-          const reward = 0.01;
+          if (this.lockMs() > 0) { this.claiming = false; return; }
+          if (!State.user.checkin) State.user.checkin = { lastDay: "", lastAt: 0, streak: 0, days: {} };
+          const k = nowKeys();
+          let streak = Number(State.user.checkin.streak || 0);
+          const lastAt = Number(State.user.checkin.lastAt || 0);
+          if (lastAt && Date.now() - lastAt > 48 * 3600000) streak = 0;
+          const idx = Math.min(14, streak);
+          const reward = this.rewards[idx];
           const cur = State.user.tokenBalances.usdt || 0;
           const next = +(cur + reward).toFixed(6);
           State.user.tokenBalances.usdt = next;
-          if (!State.user.checkin) State.user.checkin = { lastDay: "", streak: 0, days: {} };
           if (!State.user.checkin.days) State.user.checkin.days = {};
           State.user.checkin.days[k.dayKey] = true;
           State.user.checkin.lastDay = k.dayKey;
-          State.user.checkin.streak = (State.user.checkin.streak || 0) + 1;
+          State.user.checkin.lastAt = Date.now();
+          State.user.checkin.streak = streak >= 15 ? 1 : streak + 1;
           await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
           await fbSet("users/" + State.user.telegramId + "/checkin", State.user.checkin);
           const tx = { type: "CHECKIN", desc: "+" + reward + " USDT daily check", status: "COMPLETED", timestamp: Date.now() };
           await fbPush("transactions/" + State.user.telegramId, tx);
           pushLocalTx(tx);
+          ReferralEngine.payCommission(reward);
+          this.claiming = false;
           App.updateUI();
           CheckinEngine.render();
-          App.toast("+0.01 USDT daily check-in");
+          App.toast("+" + reward + " USDT");
         });
+        setTimeout(() => { this.claiming = false; }, 18000);
       }
     };
 
@@ -4733,7 +5268,18 @@
         { q: "‘আমার সোনার বাংলা’ কোন ধরনের গান?", opts: ["লোকগান", "জাতীয় সংগীত", "গজল", "র্যাপ"], a: 1 },
         { q: "বাংলা দিনপঞ্জির প্রথম মাস কোনটি?", opts: ["জ্যৈষ্ঠ", "বৈশাখ", "আষাঢ়", "শ্রাবণ"], a: 1 },
         { q: "‘রূপসী বাংলা’ কাব্যের কবি কে?", opts: ["জীবনানন্দ দাশ", "নজরুল", "মাইকেল", "শামসুর রাহমান"], a: 0 },
-        { q: "বাংলাদেশের স্বাধীনতা দিবস কোন তারিখ?", opts: ["২১ ফেব্রুয়ারি", "২৬ মার্চ", "১৬ ডিসেম্বর", "১৭ এপ্রিল"], a: 1 }
+        { q: "বাংলাদেশের স্বাধীনতা দিবস কোন তারিখ?", opts: ["২১ ফেব্রুয়ারি", "২৬ মার্চ", "১৬ ডিসেম্বর", "১৭ এপ্রিল"], a: 1 },
+        { q: "বাংলাদেশের জাতীয় ফুল কোনটি?", opts: ["গোলাপ", "শাপলা", "সূর্যমুখী", "জবা"], a: 1 },
+        { q: "বাংলাদেশের জাতীয় মাছ কোনটি?", opts: ["রুই", "ইলিশ", "কাতলা", "পাঙ্গাস"], a: 1 },
+        { q: "বাংলাদেশের জাতীয় পাখি কোনটি?", opts: ["কাক", "দোয়েল", "ময়না", "টিয়া"], a: 1 },
+        { q: "বাংলাদেশের মুদ্রার নাম কী?", opts: ["রুপি", "টাকা", "ডলার", "রিয়াল"], a: 1 },
+        { q: "বিশ্ব মাতৃভাষা দিবস কোন তারিখ?", opts: ["২১ ফেব্রুয়ারি", "২৬ মার্চ", "১৬ ডিসেম্বর", "১৪ এপ্রিল"], a: 0 },
+        { q: "বাংলাদেশের সর্বোচ্চ পর্বত কোনটি?", opts: ["কেওক্রাডং", "তাজিংডং", "চিম্বুক", "নীলগিরি"], a: 1 },
+        { q: "সুন্দরবন কোন প্রাণীর জন্য বিখ্যাত?", opts: ["সিংহ", "রয়েল বেঙ্গল টাইগার", "হাতি", "গণ্ডার"], a: 1 },
+        { q: "বাংলা সাহিত্যের প্রথম মহাকাব্য?", opts: ["মেঘনাদবধ কাব্য", "পদ্মাবতী", "অন্নদামঙ্গল", "চণ্ডীমঙ্গল"], a: 0 },
+        { q: "ঢাকা বিশ্ববিদ্যালয় প্রতিষ্ঠিত হয়?", opts: ["১৯১১", "১৯২১", "১৯৪৭", "১৯৭১"], a: 1 },
+        { q: "বাংলাদেশের জাতীয় সংসদ ভবনের স্থপতি কে?", opts: ["লুই আই কান", "ফজলুর রহমান খান", "মসিহউদ্দিন", "কামরুল হাসান"], a: 0 },
+        { q: "বাংলাদেশের স্বাধীনতা যুদ্ধ কোন সালে?", opts: ["১৯৬৯", "১৯৭১", "১৯৭৫", "১৯৫২"], a: 1 }
       ],
       math: [
         { q: "12 + 8 x 2 = ?", opts: ["40", "28", "32", "20"], a: 1 },
@@ -4747,7 +5293,18 @@
         { q: "0.25 as a fraction?", opts: ["1/2", "1/3", "1/4", "1/5"], a: 2 },
         { q: "Average of 4, 8, 12?", opts: ["6", "8", "10", "12"], a: 1 },
         { q: "2^5 = ?", opts: ["10", "16", "32", "64"], a: 2 },
-        { q: "Perimeter of a square side 5?", opts: ["10", "15", "20", "25"], a: 2 }
+        { q: "Perimeter of a square side 5?", opts: ["10", "15", "20", "25"], a: 2 },
+        { q: "9 x 8 = ?", opts: ["63", "72", "81", "64"], a: 1 },
+        { q: "100 divided by 4?", opts: ["20", "25", "40", "50"], a: 1 },
+        { q: "Prime number?", opts: ["9", "15", "17", "21"], a: 2 },
+        { q: "Area of rectangle 4x6?", opts: ["10", "20", "24", "30"], a: 2 },
+        { q: "3/4 of 80?", opts: ["40", "50", "60", "70"], a: 2 },
+        { q: "Next even after 18?", opts: ["19", "20", "21", "22"], a: 1 },
+        { q: "10% of 50?", opts: ["2", "5", "10", "15"], a: 1 },
+        { q: "Cube of 3?", opts: ["6", "9", "27", "81"], a: 2 },
+        { q: "If 5y=40, y=?", opts: ["5", "6", "8", "10"], a: 2 },
+        { q: "GCD of 12 and 18?", opts: ["3", "6", "9", "12"], a: 1 },
+        { q: "1 hour has how many minutes?", opts: ["30", "45", "60", "90"], a: 2 }
       ],
       en: [
         { q: "Synonym of 'rapid'?", opts: ["Slow", "Fast", "Late", "Weak"], a: 1 },
@@ -4761,7 +5318,18 @@
         { q: "Past tense of 'go'?", opts: ["goed", "gone", "went", "going"], a: 2 },
         { q: "'Beautiful' is a?", opts: ["Noun", "Verb", "Adjective", "Adverb"], a: 2 },
         { q: "Opposite of 'arrive'?", opts: ["Come", "Reach", "Depart", "Enter"], a: 2 },
-        { q: "Fill: She has ___ apple.", opts: ["a", "an", "two", "many"], a: 1 }
+        { q: "Fill: She has ___ apple.", opts: ["a", "an", "two", "many"], a: 1 },
+        { q: "Synonym of 'happy'?", opts: ["Sad", "Glad", "Angry", "Tired"], a: 1 },
+        { q: "Plural of 'mouse'?", opts: ["Mouses", "Mice", "Mouse", "Meese"], a: 1 },
+        { q: "Which is an adverb?", opts: ["Quick", "Quickly", "Quickness", "Quicken"], a: 1 },
+        { q: "Past of 'eat'?", opts: ["eated", "aten", "ate", "eats"], a: 2 },
+        { q: "Opposite of 'hot'?", opts: ["Warm", "Cold", "Fire", "Heat"], a: 1 },
+        { q: "'I ___ a student.'", opts: ["am", "is", "are", "be"], a: 0 },
+        { q: "Correct: He ___ to school.", opts: ["go", "goes", "going", "gone"], a: 1 },
+        { q: "A sentence ends with a?", opts: ["Comma", "Period", "Colon only", "Dash"], a: 1 },
+        { q: "Synonym of 'begin'?", opts: ["End", "Start", "Stop", "Close"], a: 1 },
+        { q: "Which is a pronoun?", opts: ["Table", "She", "Run", "Blue"], a: 1 },
+        { q: "'Better' is the comparative of?", opts: ["Good", "Best", "Wellest", "Fine"], a: 0 }
       ],
       gk: [
         { q: "What does BTC stand for?", opts: ["Bit Token Cash", "Bitcoin", "Block Transfer Coin", "Binary Trade Credit"], a: 1 },
@@ -4775,7 +5343,18 @@
         { q: "A smart contract is?", opts: ["Paper agreement", "On-chain program", "Mining rig", "Hardware wallet"], a: 1 },
         { q: "Which planet is known as the Red Planet?", opts: ["Venus", "Mars", "Jupiter", "Mercury"], a: 1 },
         { q: "Which token is native to Solana?", opts: ["SOL", "BNB", "ADA", "XRP"], a: 0 },
-        { q: "Halving is associated with?", opts: ["ETH gas", "Bitcoin supply", "USDT mint", "NFT mint"], a: 1 }
+        { q: "Halving is associated with?", opts: ["ETH gas", "Bitcoin supply", "USDT mint", "NFT mint"], a: 1 },
+        { q: "Capital of France?", opts: ["Rome", "Paris", "Madrid", "Berlin"], a: 1 },
+        { q: "ETH stands for?", opts: ["Etherium", "Ethereum", "Ethanol", "Ethic"], a: 1 },
+        { q: "Which is a meme coin?", opts: ["BTC", "DOGE", "USDT", "ETH"], a: 1 },
+        { q: "UN headquarters city?", opts: ["Geneva", "New York", "Paris", "London"], a: 1 },
+        { q: "Fastest land animal?", opts: ["Lion", "Cheetah", "Horse", "Tiger"], a: 1 },
+        { q: "BNB belongs to?", opts: ["Binance", "Coinbase", "Kraken", "PayPal"], a: 0 },
+        { q: "Water freezes at?", opts: ["0C", "10C", "32C", "100C"], a: 0 },
+        { q: "Which is a wallet type?", opts: ["Hardware", "Printer", "Router", "Modem"], a: 0 },
+        { q: "Olympics happen every?", opts: ["2 years", "3 years", "4 years", "5 years"], a: 2 },
+        { q: "ADA is the token of?", opts: ["Cardano", "Solana", "Avalanche", "Polygon"], a: 0 },
+        { q: "Sun rises from?", opts: ["West", "East", "North", "South"], a: 1 }
       ]
     };
     const QuizEngine = {
@@ -4783,11 +5362,22 @@
       idx: 0,
       score: 0,
       playing: false,
+      picking: false,
+      claiming: false,
       cat: null,
+      seen: { bn: [], math: [], en: [], gk: [] },
       titles: { bn: "Bangla Quiz", math: "Math Quiz", en: "English Quiz", gk: "General Knowledge" },
+      catSlot(id) {
+        if (!State.user.quizCats) State.user.quizCats = {};
+        State.user.quizCats[id] = rollLimits(State.user.quizCats[id] || {});
+        return State.user.quizCats[id];
+      },
+      renderCats() {
+        ["bn", "math", "en", "gk"].forEach((id) => this.catSlot(id));
+      },
       renderLimits() {
-        State.user.quizAds = rollLimits(State.user.quizAds);
-        const q = State.user.quizAds;
+        if (!this.cat) return;
+        const q = this.catSlot(this.cat);
         const set = (id, txt) => { const el = document.getElementById(id); if (el) el.innerText = txt; };
         const bar = (id, pct) => { const el = document.getElementById(id); if (el) el.style.width = Math.min(100, pct) + "%"; };
         set("quiz-h-txt", q.hourly + "/" + QUIZ_HOURLY);
@@ -4798,7 +5388,17 @@
         bar("quiz-m-bar", q.monthly / QUIZ_MONTHLY * 100);
         const blocked = q.hourly >= QUIZ_HOURLY || q.daily >= QUIZ_DAILY || q.monthly >= QUIZ_MONTHLY;
         const btn = document.getElementById("quiz-start-btn");
-        if (btn) { btn.disabled = blocked; btn.innerText = blocked ? "LIMIT REACHED" : "START QUIZ"; }
+        if (btn) { btn.disabled = blocked; btn.innerText = blocked ? t("limitReached", "LIMIT REACHED") : t("startQuiz", "START QUIZ"); }
+      },
+      pickFresh(cat) {
+        const bank = QUIZ_BANKS[cat] || QUIZ_BANKS.gk;
+        if (!this.seen[cat]) this.seen[cat] = [];
+        let unused = bank.filter((q) => this.seen[cat].indexOf(q.q) === -1);
+        if (unused.length < 10) { this.seen[cat] = []; unused = bank.slice(); }
+        unused.sort(() => Math.random() - 0.5);
+        const chosen = unused.slice(0, 10);
+        chosen.forEach((q) => this.seen[cat].push(q.q));
+        return chosen;
       },
       openCat(id) {
         this.cat = id;
@@ -4827,31 +5427,32 @@
         App.navigate("view-home");
       },
       start() {
-        State.user.quizAds = rollLimits(State.user.quizAds);
-        const q = State.user.quizAds;
-        if (q.hourly >= QUIZ_HOURLY) { App.toast("Hourly quiz limit reached"); return; }
-        if (q.daily >= QUIZ_DAILY) { App.toast("Daily quiz limit reached"); return; }
-        if (q.monthly >= QUIZ_MONTHLY) { App.toast("Monthly quiz limit reached"); return; }
-        const bank = QUIZ_BANKS[this.cat] || QUIZ_BANKS.gk;
-        const shuffled = bank.slice().sort(() => Math.random() - 0.5).slice(0, 10);
-        this.round = shuffled;
+        if (this.playing || this.claiming) return;
+        const q = this.catSlot(this.cat);
+        if (q.hourly >= QUIZ_HOURLY) { App.toast(t("hourlyLimit", "Hourly quiz limit reached")); return; }
+        if (q.daily >= QUIZ_DAILY) { App.toast(t("dailyLimit", "Daily quiz limit reached")); return; }
+        if (q.monthly >= QUIZ_MONTHLY) { App.toast(t("monthlyLimit", "Monthly quiz limit reached")); return; }
+        this.round = this.pickFresh(this.cat);
         this.idx = 0;
         this.score = 0;
         this.playing = true;
+        this.picking = false;
         document.getElementById("quiz-play-card").style.display = "block";
         this.showQ();
       },
       showQ() {
         const item = this.round[this.idx];
-        document.getElementById("quiz-q-num").innerText = "Question " + (this.idx + 1) + "/10";
-        document.getElementById("quiz-score").innerText = "Score " + this.score;
+        document.getElementById("quiz-q-num").innerText = t("question", "Question") + " " + (this.idx + 1) + "/10";
+        document.getElementById("quiz-score").innerText = t("score", "Score") + " " + this.score;
         document.getElementById("quiz-question").innerText = item.q;
         document.getElementById("quiz-options").innerHTML = item.opts.map((o, i) =>
           `<button class="quiz-opt" onclick="QuizEngine.pick(${i})">${o}</button>`
         ).join("");
+        this.picking = false;
       },
       pick(i) {
-        if (!this.playing) return;
+        if (!this.playing || this.picking) return;
+        this.picking = true;
         const item = this.round[this.idx];
         const opts = document.querySelectorAll("#quiz-options .quiz-opt");
         opts.forEach((el, idx) => {
@@ -4870,35 +5471,190 @@
         this.playing = false;
         document.getElementById("quiz-play-card").style.display = "none";
         if (this.score < 5) {
-          App.toast("Score " + this.score + "/10. Need 5 correct to claim.");
+          App.toast(t("needFive", "Score") + " " + this.score + "/10. " + t("needFiveMore", "Need 5 correct to claim."));
           return;
         }
+        if (this.claiming) return;
+        this.claiming = true;
+        const catId = this.cat;
         AdPlayer.play(async () => {
-          State.user.quizAds = rollLimits(State.user.quizAds);
-          State.user.quizAds.hourly += 1;
-          State.user.quizAds.daily += 1;
-          State.user.quizAds.monthly += 1;
+          const q = this.catSlot(catId);
+          if (q.hourly >= QUIZ_HOURLY || q.daily >= QUIZ_DAILY || q.monthly >= QUIZ_MONTHLY) {
+            this.claiming = false;
+            App.toast(t("limitReached", "LIMIT REACHED"));
+            this.renderLimits();
+            return;
+          }
+          q.hourly += 1; q.daily += 1; q.monthly += 1;
           const cur = State.user.tokenBalances.usdt || 0;
           const next = +(cur + 0.01).toFixed(6);
           State.user.tokenBalances.usdt = next;
           await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", next);
-          await fbSet("users/" + State.user.telegramId + "/quizAds", State.user.quizAds);
-          const tx = { type: "QUIZ_REWARD", desc: "+0.01 USDT quiz " + this.score + "/10", status: "COMPLETED", timestamp: Date.now() };
+          await fbSet("users/" + State.user.telegramId + "/quizCats", State.user.quizCats);
+          const tx = { type: "QUIZ_REWARD", desc: "+0.01 USDT quiz " + catId + " " + this.score + "/10", status: "COMPLETED", timestamp: Date.now() };
           await fbPush("transactions/" + State.user.telegramId, tx);
           pushLocalTx(tx);
+          ReferralEngine.payCommission(0.01);
+          this.claiming = false;
           App.updateUI();
           QuizEngine.renderLimits();
-          App.toast("+0.01 USDT quiz reward");
+          App.toast("+0.01 USDT");
         });
       }
     };
 
+    const I18N_BASE = {
+      adsTitle: "Rewarded Ads Station", adsSub: "Watch 15s ads to earn USDT instantly. Does not fill package missions.",
+      support: "Support", visiting: "Visiting", checkin: "Daily Check", quiz: "Quiz Game", language: "Language",
+      transfer: "Transfer", convert: "Convert", wallet: "My Wallet", watchAds: "Watch Ads", mining: "Mining",
+      packages: "Packages", invite: "Invite", casino: "Casino", casinoTitle: "ZYNEXA Casino",
+      casinoSub: "Premium games. Bet with USDT. Global live rounds.",
+      adminPanel: "Admin Panel", back: "Back", copy: "Copy", start: "START", lobby: "Lobby",
+      inviteTitle: "Invite & Earn", inviteHeroSub: "Share your personal link. Every verified new user is locked to you forever. Fake self-referrals are blocked.",
+      invitePeers: "Peers", inviteEarned: "Earned", invitePerRef: "Per Refer", inviteLinkLab: "Your secure referral link",
+      shareTg: "SHARE ON TELEGRAM", inviteRule1Title: "Per referral reward",
+      inviteRule1Body: "You receive 0.05 USDT instantly when a new Telegram user opens the bot with your link and creates an account. Duplicate or same-device self invites are rejected.",
+      inviteRule2Title: "Lifetime commission",
+      inviteRule2Body: "Level 1: 8% of every USDT your direct invite earns from ads, visits, quiz and check-in. Level 2: 3% from their invites. Commission is paid in USDT to your wallet.",
+      inviteRule3Title: "How the link works",
+      inviteRule3Body: "Your link is t.me/ZynexaFree_Bot?start=ref_YOURID. Telegram sends that start code into the Mini App. We bind the new user to you on first login only.",
+      inviteCountryTitle: "Country point table", inviteCountryBody: "Referral quality score by country. Higher points mean stronger traffic quality for missions.",
+      visitTitle: "Visiting Tasks", visitSub: "Stay the full timer. Each task locks after claim. Fake claims are blocked.",
+      daily: "Daily", weekly: "Weekly", monthly: "Monthly", checkinTitle: "Daily Checking",
+      checkinSub: "One check-in every 24 hours. Streak board of 15 days. Clock time is server-locked.",
+      checkinNow: "CHECK IN NOW", crashGame: "Crash Game", sicboGame: "Sic Bo", blackjackGame: "Blackjack",
+      adminDash: "Admin Dashboard", adminSub: "Control users, balances, tasks, and live casino settings.",
+      adminUsers: "Users", withdraws: "Withdraws", adminFind: "Find user", adminLoad: "LOAD",
+      adminCredit: "Credit / Debit USDT", credit: "CREDIT", debit: "DEBIT", adminTools: "Control tools",
+      resetCheckin: "Reset check-in lock", resetVisits: "Reset visit locks", resetQuiz: "Reset quiz limits",
+      langTitle: "Language", langSub: "Select a language. Layout stays the same. Only text changes.",
+      yield: "Yield", home: "Home", reward: "Reward", timer: "Timer", lock: "Lock", visitNow: "VISIT NOW",
+      locked: "LOCKED", nextIn: "Next in", keepOpen: "Keep this page open", readyVerify: "Ready to verify",
+      ready: "READY", wait24h: "WAIT 24H", startQuiz: "START QUIZ", limitReached: "LIMIT REACHED",
+      question: "Question", score: "Score", deposit: "Deposit", withdraw: "Withdraw", transactions: "Transactions"
+    };
     const I18N = {
-      en: { adsTitle: "Rewarded Ads Station", adsSub: "Watch 15s ads to earn USDT instantly. Does not fill package missions.", support: "Support", visiting: "Visiting", checkin: "Daily Check", quiz: "Quiz Game", language: "Language", transfer: "Transfer", convert: "Convert", wallet: "My Wallet", watchAds: "Watch Ads", mining: "Mining", packages: "Packages", invite: "Invite", casino: "Casino", casinoTitle: "ZYNEXA Casino", casinoSub: "Premium games. Bet with USDT. Global live rounds." },
-      bn: { adsTitle: "রিওয়ার্ডেড অ্যাড স্টেশন", adsSub: "১৫ সেকেন্ড অ্যাড দেখে সাথে সাথে USDT পান। প্যাকেজ মিশনে যোগ হয় না।", support: "সাপোর্ট", visiting: "ভিজিটিং", checkin: "ডেইলি চেক", quiz: "কুইজ গেম", language: "ভাষা", transfer: "ট্রান্সফার", convert: "কনভার্ট", wallet: "মাই ওয়ালেট", watchAds: "ওয়াচ অ্যাডস", mining: "মাইনিং", packages: "প্যাকেজ", invite: "ইনভাইট", casino: "ক্যাসিনো", casinoTitle: "ZYNEXA ক্যাসিনো", casinoSub: "প্রিমিয়াম গেম। USDT দিয়ে বেট। গ্লোবাল লাইভ রাউন্ড।" },
-      hi: { adsTitle: "रिवॉर्डेड ऐड स्टेशन", adsSub: "15 सेकंड ऐड देखकर तुरंत USDT पाएं। पैकेज मिशन नहीं भरता।", support: "सपोर्ट", visiting: "विजिटिंग", checkin: "डेली चेक", quiz: "क्विज गेम", language: "भाषा", transfer: "ट्रांसफर", convert: "कन्वर्ट", wallet: "वॉलेट", watchAds: "विज्ञापन देखें", mining: "माइनिंग", packages: "पैकेज", invite: "इनवाइट", casino: "कैसिनो", casinoTitle: "ZYNEXA कैसिनो", casinoSub: "प्रीमियम गेम। USDT से बेट। ग्लोबल लाइव राउंड।" },
-      ar: { adsTitle: "محطة الإعلانات المكافأة", adsSub: "شاهد إعلاناً لمدة 15 ثانية واحصل على USDT فوراً.", support: "الدعم", visiting: "الزيارات", checkin: "تسجيل يومي", quiz: "اختبار", language: "اللغة", transfer: "تحويل", convert: "تحويل عملة", wallet: "المحفظة", watchAds: "شاهد الإعلانات", mining: "التعدين", packages: "الباقات", invite: "دعوة", casino: "كازينو", casinoTitle: "ZYNEXA كازينو", casinoSub: "ألعاب فاخرة. راهن بـ USDT. جولات عالمية مباشرة." },
-      zh: { adsTitle: "奖励广告站", adsSub: "观看15秒广告即可即时获得USDT，不计入套餐任务。", support: "支持", visiting: "访问任务", checkin: "每日签到", quiz: "问答游戏", language: "语言", transfer: "转账", convert: "兑换", wallet: "钱包", watchAds: "看广告", mining: "挖矿", packages: "套餐", invite: "邀请", casino: "娱乐场", casinoTitle: "ZYNEXA 娱乐场", casinoSub: "精品游戏。使用USDT投注。全球同步局。" }
+      en: I18N_BASE,
+      bn: Object.assign({}, I18N_BASE, {
+        adsTitle: "রিওয়ার্ডেড অ্যাড স্টেশন", adsSub: "১৫ সেকেন্ড অ্যাড দেখে সাথে সাথে USDT পান। প্যাকেজ মিশনে যোগ হয় না।",
+        support: "সাপোর্ট", visiting: "ভিজিটিং", checkin: "ডেইলি চেক", quiz: "কুইজ গেম", language: "ভাষা",
+        transfer: "ট্রান্সফার", convert: "কনভার্ট", wallet: "মাই ওয়ালেট", watchAds: "ওয়াচ অ্যাডস", mining: "মাইনিং",
+        packages: "প্যাকেজ", invite: "ইনভাইট", casino: "ক্যাসিনো", casinoTitle: "ZYNEXA ক্যাসিনো",
+        casinoSub: "প্রিমিয়াম গেম। USDT দিয়ে বেট। গ্লোবাল লাইভ রাউন্ড।", adminPanel: "এডমিন প্যানেল", back: "ফিরে যান",
+        copy: "কপি", start: "শুরু", lobby: "লবি", inviteTitle: "ইনভাইট ও আয়",
+        inviteHeroSub: "আপনার ব্যক্তিগত লিংক শেয়ার করুন। নতুন ইউজার চিরকাল আপনার রেফারেলে বাঁধা থাকবে। ফেক সেলফ রেফার ব্লক।",
+        invitePeers: "পিয়ার", inviteEarned: "আয়", invitePerRef: "প্রতি রেফার", inviteLinkLab: "আপনার সিকিউর রেফারেল লিংক",
+        shareTg: "টেলিগ্রামে শেয়ার", inviteRule1Title: "প্রতি রেফারেলে পুরস্কার",
+        inviteRule1Body: "নতুন ইউজার আপনার লিংক দিয়ে বটে ঢুকলে আপনি সাথে সাথে ০.০৫ USDT পাবেন। নিজেকে রেফার করা যাবে না।",
+        inviteRule2Title: "লাইফটাইম কমিশন",
+        inviteRule2Body: "লেভেল ১: সরাসরি রেফারের অ্যাড, ভিজিট, কুইজ ও চেক-ইন আয়ের ৮%। লেভেল ২: তাদের রেফারের ৩%। কমিশন USDT ওয়ালেটে যায়।",
+        inviteRule3Title: "লিংক কীভাবে কাজ করে",
+        inviteRule3Body: "লিংক t.me/ZynexaFree_Bot?start=ref_YOURID। টেলিগ্রাম স্টার্ট কোড মিনি অ্যাপে পাঠায় এবং প্রথম লগইনে বাঁধে।",
+        inviteCountryTitle: "দেশভিত্তিক পয়েন্ট", inviteCountryBody: "দেশ অনুযায়ী রেফারেল কোয়ালিটি স্কোর। বেশি পয়েন্ট মানে শক্তিশালী ট্রাফিক।",
+        visitTitle: "ভিজিটিং টাস্ক", visitSub: "পুরো টাইমার থাকুন। ক্লেইমের পর টাস্ক লক হয়। ফেক ক্লেইম ব্লক।",
+        daily: "ডেইলি", weekly: "উইকলি", monthly: "মান্থলি", checkinTitle: "ডেইলি চেকিং",
+        checkinSub: "প্রতি ২৪ ঘন্টায় একবার চেক-ইন। ১৫ দিনের স্ট্রিক বোর্ড। সময় লক।", checkinNow: "এখন চেক-ইন",
+        crashGame: "ক্র্যাশ গেম", sicboGame: "সিক বো", blackjackGame: "ব্ল্যাকজ্যাক",
+        adminDash: "এডমিন ড্যাশবোর্ড", adminSub: "ইউজার, ব্যালেন্স, টাস্ক ও ক্যাসিনো নিয়ন্ত্রণ করুন।",
+        adminUsers: "ইউজার", withdraws: "উইথড্র", adminFind: "ইউজার খুঁজুন", adminLoad: "লোড",
+        adminCredit: "USDT ক্রেডিট / ডেবিট", credit: "ক্রেডিট", debit: "ডেবিট", adminTools: "কন্ট্রোল টুলস",
+        resetCheckin: "চেক-ইন লক রিসেট", resetVisits: "ভিজিট লক রিসেট", resetQuiz: "কুইজ লিমিট রিসেট",
+        langTitle: "ভাষা", langSub: "ভাষা বাছুন। লেআউট একই থাকবে, শুধু লেখা বদলাবে।",
+        yield: "ইয়েল্ড", home: "হোম", reward: "রিওয়ার্ড", timer: "টাইমার", lock: "লক", visitNow: "ভিজিট করুন",
+        locked: "লকড", nextIn: "পরবর্তী", keepOpen: "এই পেজ খোলা রাখুন", readyVerify: "ভেরিফাই করতে প্রস্তুত",
+        ready: "প্রস্তুত", wait24h: "২৪ ঘন্টা অপেক্ষা", startQuiz: "কুইজ শুরু", limitReached: "লিমিট শেষ",
+        question: "প্রশ্ন", score: "স্কোর", deposit: "ডিপোজিট", withdraw: "উইথড্র", transactions: "লেনদেন"
+      }),
+      hi: Object.assign({}, I18N_BASE, {
+        adsTitle: "रिवॉर्डेड ऐड स्टेशन", adsSub: "15 सेकंड ऐड देखकर तुरंत USDT पाएं। पैकेज मिशन नहीं भरता।",
+        support: "सपोर्ट", visiting: "विजिटिंग", checkin: "डेली चेक", quiz: "क्विज गेम", language: "भाषा",
+        transfer: "ट्रांसफर", convert: "कन्वर्ट", wallet: "वॉलेट", watchAds: "विज्ञापन देखें", mining: "माइनिंग",
+        packages: "पैकेज", invite: "इनवाइट", casino: "कैसिनो", casinoTitle: "ZYNEXA कैसिनो",
+        casinoSub: "प्रीमियम गेम। USDT से बेट। ग्लोबल लाइव राउंड।", adminPanel: "एडमिन पैनल", back: "वापस",
+        copy: "कॉपी", start: "स्टार्ट", lobby: "लॉबी", inviteTitle: "इनवाइट और कमाई",
+        inviteHeroSub: "अपना पर्सनल लिंक शेयर करें। नया यूजर हमेशा आपके रेफरल से जुड़ता है।",
+        invitePeers: "पीयर्स", inviteEarned: "कमाई", invitePerRef: "प्रति रेफर", inviteLinkLab: "आपका सुरक्षित रेफरल लिंक",
+        shareTg: "टेलीग्राम पर शेयर", inviteRule1Title: "प्रति रेफरल इनाम",
+        inviteRule1Body: "नया यूजर आपके लिंक से बॉट में आए तो आपको तुरंत 0.05 USDT मिलता है। सेल्फ रेफर ब्लॉक है।",
+        inviteRule2Title: "लाइफटाइम कमीशन",
+        inviteRule2Body: "लेवल 1: डायरेक्ट इनवाइट की कमाई का 8%। लेवल 2: 3%। कमीशन USDT वॉलेट में जाता है।",
+        inviteRule3Title: "लिंक कैसे काम करता है",
+        inviteRule3Body: "लिंक t.me/ZynexaFree_Bot?start=ref_YOURID है। टेलीग्राम स्टार्ट कोड मिनी ऐप में भेजता है।",
+        inviteCountryTitle: "देश पॉइंट टेबल", inviteCountryBody: "देश के अनुसार रेफरल क्वालिटी स्कोर।",
+        visitTitle: "विजिटिंग टास्क", visitSub: "पूरा टाइमर रहें। क्लेम के बाद टास्क लॉक होता है।",
+        daily: "डेली", weekly: "वीकली", monthly: "मंथली", checkinTitle: "डेली चेकिंग",
+        checkinSub: "हर 24 घंटे में एक चेक-इन। 15 दिन का स्ट्रीक बोर्ड।", checkinNow: "अभी चेक इन",
+        crashGame: "क्रैश गेम", sicboGame: "सिक बो", blackjackGame: "ब्लैकजैक",
+        adminDash: "एडमिन डैशबोर्ड", adminSub: "यूजर, बैलेंस, टास्क और कैसिनो कंट्रोल करें।",
+        adminUsers: "यूजर्स", withdraws: "विदड्रॉ", adminFind: "यूजर खोजें", adminLoad: "लोड",
+        adminCredit: "USDT क्रेडिट / डेबिट", credit: "क्रेडिट", debit: "डेबिट", adminTools: "कंट्रोल टूल्स",
+        resetCheckin: "चेक-इन लॉक रीसेट", resetVisits: "विजिट लॉक रीसेट", resetQuiz: "क्विज लिमिट रीसेट",
+        langTitle: "भाषा", langSub: "भाषा चुनें। लेआउट वही रहेगा, केवल टेक्स्ट बदलेगा।",
+        yield: "यील्ड", home: "होम", reward: "रिवॉर्ड", timer: "टाइमर", lock: "लॉक", visitNow: "विजिट करें",
+        locked: "लॉक्ड", nextIn: "अगला", keepOpen: "यह पेज खुला रखें", readyVerify: "वेरिफाई के लिए तैयार",
+        ready: "रेडी", wait24h: "24 घंटे प्रतीक्षा", startQuiz: "क्विज शुरू", limitReached: "लिमिट पूरी",
+        question: "प्रश्न", score: "स्कोर", deposit: "डिपॉजिट", withdraw: "विदड्रॉ", transactions: "लेनदेन"
+      }),
+      ar: Object.assign({}, I18N_BASE, {
+        adsTitle: "محطة الإعلانات المكافأة", adsSub: "شاهد إعلاناً لمدة 15 ثانية واحصل على USDT فوراً.",
+        support: "الدعم", visiting: "الزيارات", checkin: "تسجيل يومي", quiz: "اختبار", language: "اللغة",
+        transfer: "تحويل", convert: "تحويل عملة", wallet: "المحفظة", watchAds: "شاهد الإعلانات", mining: "التعدين",
+        packages: "الباقات", invite: "دعوة", casino: "كازينو", casinoTitle: "ZYNEXA كازينو",
+        casinoSub: "ألعاب فاخرة. راهن بـ USDT. جولات عالمية مباشرة.", adminPanel: "لوحة المشرف", back: "رجوع",
+        copy: "نسخ", start: "ابدأ", lobby: "اللوبي", inviteTitle: "ادعُ واربح",
+        inviteHeroSub: "شارك رابطك الشخصي. كل مستخدم جديد يرتبط بك للأبد. الإحالات المزيفة محظورة.",
+        invitePeers: "الأصدقاء", inviteEarned: "الأرباح", invitePerRef: "لكل إحالة", inviteLinkLab: "رابط الإحالة الآمن",
+        shareTg: "شارك على تيليجرام", inviteRule1Title: "مكافأة كل إحالة",
+        inviteRule1Body: "تحصل على 0.05 USDT فوراً عندما يدخل مستخدم جديد عبر رابطك. إحالة النفس مرفوضة.",
+        inviteRule2Title: "عمولة مدى الحياة",
+        inviteRule2Body: "المستوى 1: 8٪ من أرباح المدعوين. المستوى 2: 3٪. العمولة تُدفع إلى محفظة USDT.",
+        inviteRule3Title: "كيف يعمل الرابط",
+        inviteRule3Body: "رابطك t.me/ZynexaFree_Bot?start=ref_YOURID. يرسل تيليجرام رمز البدء إلى التطبيق.",
+        inviteCountryTitle: "جدول نقاط الدول", inviteCountryBody: "درجة جودة الإحالة حسب الدولة.",
+        visitTitle: "مهام الزيارة", visitSub: "ابقَ حتى نهاية المؤقت. تُقفل المهمة بعد المطالبة.",
+        daily: "يومي", weekly: "أسبوعي", monthly: "شهري", checkinTitle: "تسجيل يومي",
+        checkinSub: "تسجيل واحد كل 24 ساعة. لوحة 15 يوماً. الوقت مقفل.", checkinNow: "سجل الآن",
+        crashGame: "كراش", sicboGame: "سيك بو", blackjackGame: "بلاك جاك",
+        adminDash: "لوحة المشرف", adminSub: "تحكم بالمستخدمين والأرصدة والمهام والكازينو.",
+        adminUsers: "مستخدمون", withdraws: "سحوبات", adminFind: "ابحث عن مستخدم", adminLoad: "تحميل",
+        adminCredit: "إضافة / خصم USDT", credit: "إضافة", debit: "خصم", adminTools: "أدوات التحكم",
+        resetCheckin: "إعادة قفل التسجيل", resetVisits: "إعادة قفل الزيارات", resetQuiz: "إعادة حد الاختبار",
+        langTitle: "اللغة", langSub: "اختر لغة. يبقى التصميم كما هو ويتغير النص فقط.",
+        yield: "العائد", home: "الرئيسية", reward: "مكافأة", timer: "مؤقت", lock: "قفل", visitNow: "زر الآن",
+        locked: "مقفل", nextIn: "التالي خلال", keepOpen: "أبقِ هذه الصفحة مفتوحة", readyVerify: "جاهز للتحقق",
+        ready: "جاهز", wait24h: "انتظر 24 ساعة", startQuiz: "ابدأ الاختبار", limitReached: "تم بلوغ الحد",
+        question: "سؤال", score: "النتيجة", deposit: "إيداع", withdraw: "سحب", transactions: "المعاملات"
+      }),
+      zh: Object.assign({}, I18N_BASE, {
+        adsTitle: "奖励广告站", adsSub: "观看15秒广告即可即时获得USDT，不计入套餐任务。",
+        support: "支持", visiting: "访问任务", checkin: "每日签到", quiz: "问答游戏", language: "语言",
+        transfer: "转账", convert: "兑换", wallet: "钱包", watchAds: "看广告", mining: "挖矿",
+        packages: "套餐", invite: "邀请", casino: "娱乐场", casinoTitle: "ZYNEXA 娱乐场",
+        casinoSub: "精品游戏。使用USDT投注。全球同步局。", adminPanel: "管理面板", back: "返回",
+        copy: "复制", start: "开始", lobby: "大厅", inviteTitle: "邀请赚钱",
+        inviteHeroSub: "分享专属链接。新用户永久绑定。禁止自我邀请。",
+        invitePeers: "好友", inviteEarned: "已赚", invitePerRef: "每次邀请", inviteLinkLab: "安全邀请链接",
+        shareTg: "分享到 Telegram", inviteRule1Title: "每次邀请奖励",
+        inviteRule1Body: "新用户通过你的链接进入机器人并开户后，你立即获得 0.05 USDT。禁止自我邀请。",
+        inviteRule2Title: "终身佣金",
+        inviteRule2Body: "一级：直推广告、访问、问答和签到收益的 8%。二级：3%。佣金进入 USDT 钱包。",
+        inviteRule3Title: "链接如何工作",
+        inviteRule3Body: "链接为 t.me/ZynexaFree_Bot?start=ref_YOURID。Telegram 将启动码传入小程序并在首次登录绑定。",
+        inviteCountryTitle: "国家积分表", inviteCountryBody: "按国家计算邀请质量分。",
+        visitTitle: "访问任务", visitSub: "完整等待计时。领取后锁定。禁止虚假领取。",
+        daily: "每日", weekly: "每周", monthly: "每月", checkinTitle: "每日签到",
+        checkinSub: "每 24 小时签到一次。15 日连续看板。时间锁定。", checkinNow: "立即签到",
+        crashGame: "崩溃游戏", sicboGame: "骰宝", blackjackGame: "二十一点",
+        adminDash: "管理后台", adminSub: "控制用户、余额、任务和娱乐场。",
+        adminUsers: "用户", withdraws: "提现", adminFind: "查找用户", adminLoad: "加载",
+        adminCredit: "USDT 加减", credit: "加款", debit: "扣款", adminTools: "控制工具",
+        resetCheckin: "重置签到锁定", resetVisits: "重置访问锁定", resetQuiz: "重置问答限额",
+        langTitle: "语言", langSub: "选择语言。布局不变，只更换文字。",
+        yield: "收益", home: "首页", reward: "奖励", timer: "计时", lock: "锁定", visitNow: "立即访问",
+        locked: "已锁定", nextIn: "下次", keepOpen: "请保持此页打开", readyVerify: "可以验证",
+        ready: "就绪", wait24h: "等待24小时", startQuiz: "开始问答", limitReached: "已达上限",
+        question: "题目", score: "分数", deposit: "充值", withdraw: "提现", transactions: "流水"
+      })
     };
     const I18n = {
       langs: [
@@ -4912,11 +5668,20 @@
         const next = I18N[id] ? id : "en";
         State.user.lang = next;
         document.documentElement.lang = next;
-        document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
+        document.documentElement.dir = "ltr";
+        document.body.dir = "ltr";
         const pack = I18N[next] || I18N.en;
         document.querySelectorAll("[data-i18n]").forEach(el => {
           const k = el.getAttribute("data-i18n");
           if (pack[k]) el.innerText = pack[k];
+        });
+        const navMap = { "tab-yield": "yield", "tab-home": "home", "tab-packages": "packages" };
+        Object.keys(navMap).forEach((tid) => {
+          const el = document.getElementById(tid);
+          if (el) {
+            const span = el.querySelector("span");
+            if (span && pack[navMap[tid]]) span.innerText = pack[navMap[tid]];
+          }
         });
         this.renderList();
       },
@@ -4941,17 +5706,373 @@
       }
     };
 
-    /* REFERRAL ENGINE */
     const ReferralEngine = {
+      pending: "",
+      captureStart() {
+        let code = "";
+        try {
+          const tg = window.Telegram && window.Telegram.WebApp;
+          const unsafe = (tg && tg.initDataUnsafe) || {};
+          code = unsafe.start_param || "";
+          if (!code && tg && tg.initData) {
+            const params = new URLSearchParams(tg.initData);
+            code = params.get("start_param") || "";
+          }
+        } catch (e) {}
+        if (!code) {
+          try {
+            const q = new URLSearchParams((location.search || "").replace(/^\?/, ""));
+            code = q.get("start") || q.get("startapp") || q.get("ref") || q.get("tgWebAppStartParam") || "";
+            const hash = (location.hash || "").replace(/^#/, "");
+            const hp = new URLSearchParams(hash);
+            if (!code) code = hp.get("tgWebAppStartParam") || hp.get("start_param") || hp.get("startapp") || "";
+          } catch (e) {}
+        }
+        code = String(code || "").replace(/^ref[_-]?/i, "").trim();
+        if (code) {
+          this.pending = code;
+          try { localStorage.setItem("zyn_ref", code); } catch (e) {}
+        } else {
+          try { this.pending = localStorage.getItem("zyn_ref") || ""; } catch (e) {}
+        }
+      },
+      linkFor(uid) {
+        return "https://t.me/" + BOT_USERNAME + "?start=ref_" + uid;
+      },
+      refreshPage() {
+        const i = document.getElementById("referral-link-input");
+        if (i) i.value = this.linkFor(State.user.telegramId);
+        const ic = document.getElementById("invite-count");
+        if (ic) ic.innerText = String(State.user.referralCount || 0);
+        const ie = document.getElementById("invite-earn");
+        if (ie) ie.innerText = Number(State.user.referralEarn || 0).toFixed(4);
+      },
+      async bindNewUser(uid) {
+        this.captureStart();
+        let ref = String(this.pending || "").replace(/\D/g, "");
+        if (!ref || ref === String(uid) || ref === "demo_guest") return;
+        const snap = await db.ref("users/" + ref + "/profile/telegramId").once("value");
+        if (!snap.exists()) return;
+        await fbSet("users/" + uid + "/referredBy", ref);
+        State.user.referredBy = ref;
+        const countSnap = await db.ref("users/" + ref + "/stats/referralCount").once("value");
+        const n = Number(countSnap.val() || 0) + 1;
+        await fbSet("users/" + ref + "/stats/referralCount", n);
+        const balSnap = await db.ref("users/" + ref + "/tokenBalances/usdt").once("value");
+        const earnSnap = await db.ref("users/" + ref + "/referralEarn").once("value");
+        const bonus = 0.05;
+        await fbSet("users/" + ref + "/tokenBalances/usdt", +(Number(balSnap.val() || 0) + bonus).toFixed(6));
+        await fbSet("users/" + ref + "/referralEarn", +(Number(earnSnap.val() || 0) + bonus).toFixed(6));
+        await fbPush("transactions/" + ref, { type: "REFERRAL", desc: "+0.05 USDT referral " + uid, status: "COMPLETED", timestamp: Date.now() });
+        try { localStorage.removeItem("zyn_ref"); } catch (e) {}
+        this.pending = "";
+      },
+      async payCommission(amount) {
+        const up = State.user.referredBy;
+        if (!up || !amount) return;
+        const cut = +(Number(amount) * 0.08).toFixed(6);
+        if (cut <= 0) return;
+        const balSnap = await db.ref("users/" + up + "/tokenBalances/usdt").once("value");
+        const earnSnap = await db.ref("users/" + up + "/referralEarn").once("value");
+        await fbSet("users/" + up + "/tokenBalances/usdt", +(Number(balSnap.val() || 0) + cut).toFixed(6));
+        await fbSet("users/" + up + "/referralEarn", +(Number(earnSnap.val() || 0) + cut).toFixed(6));
+        const up2Snap = await db.ref("users/" + up + "/referredBy").once("value");
+        const up2 = up2Snap.val();
+        if (up2) {
+          const cut2 = +(Number(amount) * 0.03).toFixed(6);
+          const b2 = await db.ref("users/" + up2 + "/tokenBalances/usdt").once("value");
+          const e2 = await db.ref("users/" + up2 + "/referralEarn").once("value");
+          await fbSet("users/" + up2 + "/tokenBalances/usdt", +(Number(b2.val() || 0) + cut2).toFixed(6));
+          await fbSet("users/" + up2 + "/referralEarn", +(Number(e2.val() || 0) + cut2).toFixed(6));
+        }
+      },
       copyLink() {
         const i = document.getElementById("referral-link-input");
         i.select();
-        navigator.clipboard.writeText(i.value).then(() => App.toast("Referral link copied!"));
+        navigator.clipboard.writeText(i.value).then(() => App.toast(t("copy", "Copied")));
       },
       shareTelegram() {
         const url = encodeURIComponent(document.getElementById("referral-link-input").value);
         const txt = encodeURIComponent("Claim free 0.30$ bonus & mine 50 top cryptocurrencies on ZYNEXA FREE!");
-        window.open(`https://t.me/share/url?url=${url}&text=${txt}`, "_blank");
+        window.open("https://t.me/share/url?url=" + url + "&text=" + txt, "_blank");
+      }
+    };
+
+    const AdminPanel = {
+      target: "",
+      isAdmin() { return String(State.user.telegramId) === String(SUPER_ADMIN_TELEGRAM_ID); },
+      refreshHomeBtn() {
+        const btn = document.getElementById("admin-home-btn");
+        if (btn) btn.style.display = this.isAdmin() ? "flex" : "none";
+      },
+      open() {
+        if (!this.isAdmin()) return;
+        App.navigate("view-admin");
+      },
+      async renderDash() {
+        if (!this.isAdmin()) { App.navigate("view-home"); return; }
+        this.refreshHomeBtn();
+        const snap = await db.ref("users").once("value");
+        let users = 0, usdt = 0, refs = 0;
+        snap.forEach((ch) => {
+          users += 1;
+          const v = ch.val() || {};
+          usdt += Number((v.tokenBalances && v.tokenBalances.usdt) || 0);
+          refs += Number((v.stats && v.stats.referralCount) || 0);
+        });
+        const set = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+        set("admin-users", users);
+        set("admin-usdt", usdt.toFixed(2));
+        set("admin-refs", refs);
+        const wd = await db.ref("withdrawRequests").once("value");
+        set("admin-wd", wd.exists() ? Object.keys(wd.val() || {}).length : 0);
+      },
+      async loadUser() {
+        if (!this.isAdmin()) return;
+        const uid = (document.getElementById("admin-uid").value || "").trim();
+        if (!uid) return;
+        const snap = await db.ref("users/" + uid).once("value");
+        const box = document.getElementById("admin-user-box");
+        if (!snap.exists()) { box.innerText = "Not found"; this.target = ""; return; }
+        this.target = uid;
+        const v = snap.val() || {};
+        box.innerHTML = "<b>@" + ((v.profile && v.profile.username) || "-") + "</b><br>USDT: " + Number((v.tokenBalances && v.tokenBalances.usdt) || 0).toFixed(4) + "<br>Refs: " + Number((v.stats && v.stats.referralCount) || 0);
+      },
+      async adjust(dir) {
+        if (!this.isAdmin() || !this.target) return;
+        const amt = Math.abs(parseFloat(document.getElementById("admin-amt").value) || 0);
+        if (!amt) return;
+        const snap = await db.ref("users/" + this.target + "/tokenBalances/usdt").once("value");
+        const next = Math.max(0, +(Number(snap.val() || 0) + dir * amt).toFixed(6));
+        await fbSet("users/" + this.target + "/tokenBalances/usdt", next);
+        App.toast("Updated " + this.target);
+        this.loadUser();
+      },
+      async resetCheckin() {
+        if (!this.isAdmin() || !this.target) return;
+        await fbSet("users/" + this.target + "/checkin", { lastDay: "", lastAt: 0, streak: 0, days: {} });
+        App.toast("Check-in reset");
+      },
+      async resetVisits() {
+        if (!this.isAdmin() || !this.target) return;
+        await fbSet("users/" + this.target + "/visitLocks", { daily: {}, weekly: {}, monthly: {} });
+        App.toast("Visits reset");
+      },
+      async resetQuiz() {
+        if (!this.isAdmin() || !this.target) return;
+        await fbSet("users/" + this.target + "/quizCats", {});
+        App.toast("Quiz reset");
+      }
+    };
+
+    const SicBoEngine = {
+      chip: 0.10, pickType: "small", busy: false,
+      enter() {
+        document.body.classList.add("table-immersive");
+        GameSFX.unlock();
+        this.refresh();
+      },
+      leave() {
+        document.body.classList.remove("table-immersive");
+        App.navigate("view-casino");
+      },
+      refresh() {
+        const el = document.getElementById("sicbo-bal");
+        if (el) el.innerText = (State.user.tokenBalances.usdt || 0).toFixed(4) + " USDT";
+      },
+      setChip(v) {
+        this.chip = v;
+        document.querySelectorAll("#view-sicbo .chip").forEach((c) => c.classList.remove("on"));
+        if (window.event && window.event.currentTarget) window.event.currentTarget.classList.add("on");
+      },
+      pick(type) {
+        this.pickType = type;
+        document.querySelectorAll(".sic-bet").forEach((b) => b.classList.remove("on"));
+        if (window.event && window.event.currentTarget) window.event.currentTarget.classList.add("on");
+      },
+      setDie(el, n) {
+        el.className = "die on-" + n;
+      },
+      async roll() {
+        if (this.busy) return;
+        const amt = Number(this.chip);
+        const bal = Number(State.user.tokenBalances.usdt || 0);
+        if (amt > bal + 1e-9) { App.toast("Need USDT"); return; }
+        this.busy = true;
+        State.user.tokenBalances.usdt = +(bal - amt).toFixed(6);
+        await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", State.user.tokenBalances.usdt);
+        this.refresh();
+        const d1 = 1 + Math.floor(Math.random() * 6);
+        const d2 = 1 + Math.floor(Math.random() * 6);
+        const d3 = 1 + Math.floor(Math.random() * 6);
+        const dies = [document.getElementById("die1"), document.getElementById("die2"), document.getElementById("die3")];
+        dies.forEach((d) => d.classList.add("roll"));
+        let n = 0;
+        const spin = setInterval(() => {
+          GameSFX.dice();
+          dies.forEach((d) => this.setDie(d, 1 + Math.floor(Math.random() * 6)));
+          n += 1;
+          if (n > 12) {
+            clearInterval(spin);
+            dies.forEach((d) => d.classList.remove("roll"));
+            this.setDie(dies[0], d1); this.setDie(dies[1], d2); this.setDie(dies[2], d3);
+            const total = d1 + d2 + d3;
+            const triple = d1 === d2 && d2 === d3;
+            let win = 0;
+            if (this.pickType === "small" && total >= 4 && total <= 10 && !triple) win = amt * 2;
+            if (this.pickType === "big" && total >= 11 && total <= 17 && !triple) win = amt * 2;
+            if (this.pickType === "odd" && total % 2 === 1 && !triple) win = amt * 2;
+            if (this.pickType === "even" && total % 2 === 0 && !triple) win = amt * 2;
+            if (this.pickType === "triple" && triple) win = amt * 31;
+            if (this.pickType === "total11" && total === 11) win = amt * 7;
+            const st = document.getElementById("sicbo-status");
+            if (win > 0) {
+              State.user.tokenBalances.usdt = +(Number(State.user.tokenBalances.usdt) + win).toFixed(6);
+              fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", State.user.tokenBalances.usdt);
+              if (st) st.innerText = total + " · WIN +" + win.toFixed(2);
+              GameSFX.win();
+            } else {
+              if (st) st.innerText = total + " · LOSE";
+              GameSFX.lose();
+            }
+            App.updateUI();
+            this.refresh();
+            this.busy = false;
+          }
+        }, 90);
+      }
+    };
+
+    const BlackjackEngine = {
+      chip: 0.10, deck: [], player: [], dealer: [], busy: false, live: false, bet: 0,
+      enter() {
+        document.body.classList.add("table-immersive");
+        GameSFX.unlock();
+        this.refresh();
+        this.render();
+      },
+      leave() {
+        document.body.classList.remove("table-immersive");
+        App.navigate("view-casino");
+      },
+      refresh() {
+        const el = document.getElementById("bj-bal");
+        if (el) el.innerText = (State.user.tokenBalances.usdt || 0).toFixed(4) + " USDT";
+      },
+      setChip(v) {
+        if (this.live) return;
+        this.chip = v;
+        document.querySelectorAll("#view-blackjack .chip").forEach((c) => c.classList.remove("on"));
+        if (window.event && window.event.currentTarget) window.event.currentTarget.classList.add("on");
+      },
+      makeDeck() {
+        const suits = ["S", "H", "D", "C"];
+        const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+        const d = [];
+        suits.forEach((s) => ranks.forEach((r) => d.push({ r, s })));
+        for (let i = d.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const t = d[i]; d[i] = d[j]; d[j] = t;
+        }
+        this.deck = d;
+      },
+      val(hand) {
+        let t = 0, aces = 0;
+        hand.forEach((c) => {
+          if (c.r === "A") { aces += 1; t += 11; }
+          else if (["K", "Q", "J"].indexOf(c.r) >= 0) t += 10;
+          else t += Number(c.r);
+        });
+        while (t > 21 && aces) { t -= 10; aces -= 1; }
+        return t;
+      },
+      cardHtml(c, hide) {
+        if (hide) return '<div class="playing-card back">ZYN</div>';
+        const red = c.s === "H" || c.s === "D";
+        const mark = { S: "S", H: "H", D: "D", C: "C" }[c.s];
+        return '<div class="playing-card ' + (red ? "red" : "") + '"><span>' + c.r + '</span><span>' + mark + '</span><span>' + c.r + '</span></div>';
+      },
+      render(hideDealer) {
+        const p = document.getElementById("bj-player");
+        const d = document.getElementById("bj-dealer");
+        if (p) p.innerHTML = this.player.map((c) => this.cardHtml(c, false)).join("");
+        if (d) d.innerHTML = this.dealer.map((c, i) => this.cardHtml(c, hideDealer && i === 1)).join("");
+        const pt = document.getElementById("bj-player-total");
+        const dt = document.getElementById("bj-dealer-total");
+        if (pt) pt.innerText = this.player.length ? String(this.val(this.player)) : "";
+        if (dt) dt.innerText = this.dealer.length ? (hideDealer ? String(this.val([this.dealer[0]])) : String(this.val(this.dealer))) : "";
+      },
+      setBtns(deal, hit, stand) {
+        const a = document.getElementById("bj-deal");
+        const b = document.getElementById("bj-hit");
+        const c = document.getElementById("bj-stand");
+        if (a) a.disabled = !deal;
+        if (b) b.disabled = !hit;
+        if (c) c.disabled = !stand;
+      },
+      async deal() {
+        if (this.busy || this.live) return;
+        const amt = Number(this.chip);
+        const bal = Number(State.user.tokenBalances.usdt || 0);
+        if (amt > bal + 1e-9) { App.toast("Need USDT"); return; }
+        this.busy = true;
+        this.bet = amt;
+        State.user.tokenBalances.usdt = +(bal - amt).toFixed(6);
+        await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", State.user.tokenBalances.usdt);
+        this.refresh();
+        this.makeDeck();
+        this.player = [this.deck.pop(), this.deck.pop()];
+        this.dealer = [this.deck.pop(), this.deck.pop()];
+        GameSFX.card();
+        this.live = true;
+        this.render(true);
+        document.getElementById("bj-status").innerText = "Your move";
+        if (this.val(this.player) === 21) {
+          await this.settle(true);
+        } else {
+          this.setBtns(false, true, true);
+          this.busy = false;
+        }
+      },
+      hit() {
+        if (!this.live || this.busy) return;
+        this.player.push(this.deck.pop());
+        GameSFX.card();
+        this.render(true);
+        if (this.val(this.player) > 21) this.settle(false);
+      },
+      async stand() {
+        if (!this.live || this.busy) return;
+        this.busy = true;
+        this.setBtns(false, false, false);
+        while (this.val(this.dealer) < 17) {
+          this.dealer.push(this.deck.pop());
+          GameSFX.card();
+          this.render(false);
+        }
+        await this.settle(false);
+      },
+      async settle(playerBj) {
+        this.render(false);
+        const pv = this.val(this.player);
+        const dv = this.val(this.dealer);
+        let win = 0, msg = "PUSH";
+        if (playerBj && this.val(this.dealer) !== 21) { win = +(this.bet * 2.5).toFixed(6); msg = "BLACKJACK"; }
+        else if (pv > 21) { msg = "BUST"; }
+        else if (dv > 21 || pv > dv) { win = +(this.bet * 2).toFixed(6); msg = "YOU WIN"; }
+        else if (pv < dv) { msg = "DEALER WINS"; }
+        else { win = this.bet; msg = "PUSH"; }
+        if (win > 0) {
+          State.user.tokenBalances.usdt = +(Number(State.user.tokenBalances.usdt) + win).toFixed(6);
+          await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", State.user.tokenBalances.usdt);
+          GameSFX.win();
+        } else GameSFX.lose();
+        document.getElementById("bj-status").innerText = msg;
+        this.live = false;
+        this.busy = false;
+        this.setBtns(true, false, false);
+        App.updateUI();
+        this.refresh();
       }
     };
 
