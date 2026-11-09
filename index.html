@@ -1800,7 +1800,8 @@
       </div>
 
       <div class="card card-elevated">
-        <h3 style="font-size:15px; font-weight:800; margin-bottom:12px;">Withdraw Funds (USDT or BDT)</h3>
+        <h3 style="font-size:15px; font-weight:800; margin-bottom:8px;">Withdraw Funds (USDT or BDT)</h3>
+        <p class="charge-note" style="text-align:left; margin:0 0 12px;">Need 10 referrals · Minimum 20 USDT</p>
 
         <div class="form-group">
           <label class="form-label">Payout Mode</label>
@@ -1829,7 +1830,7 @@
             <label class="form-label">Amount (USDT)</label>
             <span style="font-size:10px; color:var(--cyan); cursor:pointer;" onclick="WalletEngine.fillMax()">MAX</span>
           </div>
-          <input type="number" step="0.0001" class="form-input" id="withdraw-amt-input" placeholder="0.0000" />
+          <input type="number" step="0.0001" class="form-input" id="withdraw-amt-input" placeholder="Min 20.0000" />
           <span style="font-size:10px; color:var(--text-secondary); margin-top:3px; display:block;" id="withdraw-bdt-calc">Direct USDT Crypto Delivery</span>
         </div>
 
@@ -2474,6 +2475,8 @@
     const REWARD_DAILY = 166;
     const REWARD_HOURLY = 6;
     const CONVERT_FEE_PCT = 2;
+    const WITHDRAW_MIN_USDT = 20;
+    const WITHDRAW_MIN_REFS = 10;
     const QUIZ_MONTHLY = 90;
     const QUIZ_DAILY = 3;
     const QUIZ_HOURLY = 1;
@@ -4303,7 +4306,9 @@
         const amt = parseFloat(document.getElementById("withdraw-amt-input").value);
         const pin = document.getElementById("withdraw-pin-input").value.trim();
         if (!addr) { App.toast("Please enter your payout destination!"); return null; }
-        if (isNaN(amt) || amt < 0.5) { App.toast("Minimum cashout is 0.5000 USDT!"); return null; }
+        const refs = Number(State.user.referralCount || 0);
+        if (refs < WITHDRAW_MIN_REFS) { App.toast("Need " + WITHDRAW_MIN_REFS + " referrals to withdraw. You have " + refs + "."); return null; }
+        if (isNaN(amt) || amt < WITHDRAW_MIN_USDT) { App.toast("Minimum withdraw is " + WITHDRAW_MIN_USDT + " USDT!"); return null; }
         const usdtBal = State.user.tokenBalances.usdt || 0;
         if (amt > usdtBal) { App.toast("Insufficient USDT balance!"); return null; }
         const needPin = State.user.cvvp || State.user.securityPin;
