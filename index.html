@@ -1514,6 +1514,115 @@
     html, body { direction: ltr !important; }
     .app-container, .view-page { direction: ltr !important; text-align: start; }
 
+    .admin-hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .admin-hub-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 10px;
+      text-align: center;
+      cursor: pointer;
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: var(--shadow-card);
+    }
+    .admin-hub-card:active { transform: scale(0.97); }
+    .admin-hub-ico {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0, 210, 255, 0.12); color: var(--cyan);
+    }
+    .admin-hub-card b { font-size: 12px; font-weight: 800; }
+    .admin-kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .admin-kpi-grid .card { margin: 0; text-align: center; padding: 12px 8px; }
+    .admin-kpi-grid b { display: block; font-size: 16px; color: var(--cyan); word-break: break-word; }
+    .admin-kpi-grid span { font-size: 10px; color: var(--text-secondary); font-weight: 700; }
+    .admin-list-card {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 14px; padding: 10px; margin-bottom: 8px;
+    }
+    .admin-list-photo {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; flex-shrink: 0; overflow: hidden;
+    }
+    .admin-list-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .admin-list-meta { flex: 1; min-width: 0; }
+    .admin-list-meta b { display: block; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .admin-list-meta span { font-size: 11px; color: var(--text-secondary); }
+    .admin-view-btn {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #fff; border: none; border-radius: 10px;
+      padding: 8px 14px; font-size: 11px; font-weight: 800;
+      cursor: pointer; min-height: 44px; min-width: 64px;
+    }
+    .admin-toggle-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: var(--bg-secondary); border-radius: 12px; padding: 12px;
+      margin: 10px 0; min-height: 48px;
+    }
+    .admin-switch {
+      width: 48px; height: 28px; border-radius: 14px; border: none; cursor: pointer;
+      background: #64748b; position: relative; flex-shrink: 0;
+    }
+    .admin-switch.on { background: var(--success); }
+    .admin-switch i {
+      position: absolute; top: 3px; left: 3px; width: 22px; height: 22px;
+      background: #fff; border-radius: 50%; display: block; pointer-events: none;
+      transition: transform 0.2s ease;
+    }
+    .admin-switch.on i { transform: translateX(20px); }
+    .admin-copy {
+      border: 1px solid var(--border-color); background: var(--bg-secondary);
+      color: var(--cyan); border-radius: 8px; padding: 8px 10px;
+      font-size: 10px; font-weight: 800; cursor: pointer; min-height: 44px;
+    }
+    .admin-empty { text-align: center; color: var(--text-secondary); padding: 28px 8px; font-size: 12px; }
+    .admin-status { font-size: 10px; font-weight: 800; text-transform: uppercase; }
+    .admin-status.pending { color: var(--warning); }
+    .admin-status.confirmed { color: var(--success); }
+    .admin-status.rejected, .admin-status.blocked { color: var(--danger); }
+    .admin-detail-row {
+      display: flex; justify-content: space-between; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid var(--border-color); font-size: 12px;
+    }
+    .admin-detail-row span { color: var(--text-secondary); }
+    .admin-detail-row b { text-align: right; word-break: break-all; }
+    .admin-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .btn-danger {
+      width: 100%; border: none; border-radius: var(--radius-sm);
+      padding: 12px; font-size: 13px; font-weight: 800; cursor: pointer;
+      background: var(--danger); color: #fff; min-height: 44px;
+    }
+    .sys-overlay {
+      position: fixed; inset: 0; z-index: 20000;
+      background: var(--bg-primary);
+      display: none; align-items: center; justify-content: center; padding: 24px;
+    }
+    .sys-overlay.show { display: flex; }
+    .sys-overlay-card {
+      max-width: 420px; width: 100%; text-align: center;
+      background: var(--bg-card-elevated); border: 1px solid var(--border-color);
+      border-radius: 20px; padding: 28px 20px;
+    }
+    .sys-overlay-card h2 { font-size: 20px; font-weight: 900; color: var(--cyan); margin-bottom: 10px; }
+    .sys-overlay-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .admin-proof { max-width: 100%; border-radius: 12px; margin-top: 8px; }
+    .form-textarea { min-height: 96px; resize: vertical; }
+    @media (min-width: 768px) {
+      .app-container { max-width: 720px; }
+      .admin-kpi-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    }
+    @media (min-width: 1024px) {
+      .app-container { max-width: 880px; }
+    }
+
     .tile-admin { background: linear-gradient(160deg, rgba(251,191,36,0.32), rgba(127,29,29,0.14)); border-color: rgba(251,191,36,0.55); display: none; }
     .tile-admin .btn-lux-icon { background: rgba(251,191,36,0.2); color: #FBBF24; }
 
@@ -1945,18 +2054,22 @@
         <h3 style="font-size:15px; font-weight:800; color:var(--cyan); margin-bottom:8px;">Deposit USDT (TRC20)</h3>
         <p style="font-size:11px; color:var(--text-secondary); margin-bottom:12px;">Send funds to the address below & submit your Transaction TXID hash:</p>
         
-        <div style="background:var(--bg-secondary); border:1px solid var(--border-color); padding:10px; border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <span style="font-family:monospace; font-size:11px; color:var(--neon); word-break:break-all;">TCW6u9WjZf2VqN1jQ3pM8Xk4kL7dYwJ8hK</span>
-          <button class="btn-secondary" style="padding:6px 10px;" onclick="WalletEngine.copyDepositAddr()">Copy</button>
+        <div id="deposit-methods-box"></div>
+        <div class="form-group">
+          <label class="form-label">Sender Number or Wallet Address</label>
+          <input type="text" class="form-input" id="dep-sender-input" placeholder="Your sending number or wallet" />
         </div>
-
         <div class="form-group">
           <label class="form-label">Transaction Hash (TXID)</label>
-          <input type="text" class="form-input" id="dep-txid-input" placeholder="Paste TRC20 TXID..." />
+          <input type="text" class="form-input" id="dep-txid-input" placeholder="Paste TXID..." />
         </div>
         <div class="form-group">
           <label class="form-label">Amount (USDT)</label>
           <input type="number" step="0.1" class="form-input" id="dep-amount-input" placeholder="Min 1.0 USDT" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Payment Proof URL (optional)</label>
+          <input type="text" class="form-input" id="dep-proof-input" placeholder="https://..." />
         </div>
         <button class="btn-primary" id="btn-next-deposit" onclick="WalletEngine.goReview('deposit')">NEXT</button>
       </div>
@@ -1987,23 +2100,23 @@
 
       <div class="card card-elevated">
         <h3 style="font-size:15px; font-weight:800; margin-bottom:8px;">Withdraw Funds (USDT or BDT)</h3>
-        <p class="charge-note" style="text-align:left; margin:0 0 12px;">Need 10 referrals · Minimum 20 USDT</p>
+        <p class="charge-note" style="text-align:left; margin:0 0 12px;" id="withdraw-rule-note">Need 10 referrals · Minimum 20 USDT</p>
 
         <div class="form-group">
           <label class="form-label">Payout Mode</label>
           <select class="form-select" id="withdraw-type" onchange="WalletEngine.handleWithdrawTypeChange(this.value)">
-            <option value="USDT">USDT (TRC20)</option>
-            <option value="BDT">Bangla Taka (bKash / Nagad / Rocket)</option>
+            <option value="USDT">Cryptocurrency</option>
+            <option value="BDT">Bangladeshi Taka (BDT)</option>
           </select>
         </div>
 
         <div class="form-group" id="bdt-gateway-group" style="display:none;">
           <label class="form-label">Select Mobile Banking</label>
-          <select class="form-select" id="withdraw-mfs-provider">
-            <option value="bKash">bKash (Personal)</option>
-            <option value="Nagad">Nagad (Personal)</option>
-            <option value="Rocket">Rocket (Personal)</option>
-          </select>
+          <select class="form-select" id="withdraw-mfs-provider"></select>
+        </div>
+        <div class="form-group" id="crypto-gateway-group">
+          <label class="form-label">Select Crypto Method</label>
+          <select class="form-select" id="withdraw-crypto-provider"></select>
         </div>
 
         <div class="form-group">
@@ -2298,11 +2411,11 @@
         </p>
       </div>
       <div class="support-contact-grid">
-        <a class="support-contact-btn support-tg" href="https://t.me/ZynexaFree_Bot" target="_blank" rel="noopener">
+        <a class="support-contact-btn support-tg" id="support-tg-btn" href="https://t.me/ZynexaFree_Bot" target="_blank" rel="noopener">
           <div class="support-logo"><i data-lucide="send" style="width:22px;height:22px;"></i></div>
           Telegram
         </a>
-        <a class="support-contact-btn support-wa" href="https://wa.me/8801700000000" target="_blank" rel="noopener">
+        <a class="support-contact-btn support-wa" id="support-wa-btn" href="https://wa.me/8801700000000" target="_blank" rel="noopener">
           <div class="support-logo"><i data-lucide="message-circle" style="width:22px;height:22px;"></i></div>
           WhatsApp
         </a>
@@ -2438,35 +2551,7 @@
         <h2 data-i18n="casinoTitle">ZYNEXA Casino</h2>
         <p data-i18n="casinoSub">Premium games. Bet with USDT. Global live rounds.</p>
       </div>
-      <div class="casino-grid">
-        <article class="casino-game-card">
-          <div class="casino-game-photo">
-            <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=70" alt="Crash Game airplane" />
-          </div>
-          <div class="casino-game-body">
-            <h3 data-i18n="crashGame">Crash Game</h3>
-            <button class="casino-start-btn" type="button" onclick="CasinoHub.startGame('crash')" data-i18n="start">START</button>
-          </div>
-        </article>
-        <article class="casino-game-card">
-          <div class="casino-game-photo">
-            <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4316?auto=format&fit=crop&w=800&q=70" alt="Sic Bo dice table" />
-          </div>
-          <div class="casino-game-body">
-            <h3 data-i18n="sicboGame">Sic Bo</h3>
-            <button class="casino-start-btn" type="button" onclick="CasinoHub.startGame('sicbo')" data-i18n="start">START</button>
-          </div>
-        </article>
-        <article class="casino-game-card">
-          <div class="casino-game-photo">
-            <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=800&q=70" alt="Blackjack table" />
-          </div>
-          <div class="casino-game-body">
-            <h3 data-i18n="blackjackGame">Blackjack</h3>
-            <button class="casino-start-btn" type="button" onclick="CasinoHub.startGame('blackjack')" data-i18n="start">START</button>
-          </div>
-        </article>
-      </div>
+      <div class="casino-grid" id="casino-grid"></div>
     </section>
 
     <section id="view-admin" class="view-page">
@@ -2475,34 +2560,306 @@
         <span style="font-size:12px; font-weight:700; color:var(--cyan);" data-i18n="back">Back</span>
       </div>
       <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
-        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);" data-i18n="adminDash">Admin Dashboard</h2>
-        <p style="font-size:11px; color:var(--text-secondary);" data-i18n="adminSub">Control users, balances, tasks, and live casino settings.</p>
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Admin Dashboard</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">Manage users, wallets, tokens, ads, and live app settings.</p>
       </div>
-      <div class="admin-kpi">
-        <div class="card"><b id="admin-users">0</b><span data-i18n="adminUsers">Users</span></div>
-        <div class="card"><b id="admin-usdt">0</b><span>USDT</span></div>
-        <div class="card"><b id="admin-refs">0</b><span data-i18n="invite">Invite</span></div>
-        <div class="card"><b id="admin-wd">0</b><span data-i18n="withdraws">Withdraws</span></div>
-      </div>
-      <div class="card">
-        <h3 style="font-size:14px; font-weight:900; margin-bottom:8px;" data-i18n="adminFind">Find user</h3>
-        <input class="form-input" id="admin-uid" placeholder="Telegram ID" />
-        <button class="btn-primary" style="margin-top:10px;" onclick="AdminPanel.loadUser()" data-i18n="adminLoad">LOAD</button>
-        <div id="admin-user-box" class="admin-user-card" style="margin-top:10px;"></div>
-      </div>
-      <div class="card">
-        <h3 style="font-size:14px; font-weight:900; margin-bottom:8px;" data-i18n="adminCredit">Credit / Debit USDT</h3>
-        <input class="form-input" id="admin-amt" type="number" step="0.0001" placeholder="Amount" />
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
-          <button class="btn-primary" onclick="AdminPanel.adjust(1)" data-i18n="credit">CREDIT</button>
-          <button class="btn-secondary" onclick="AdminPanel.adjust(-1)" data-i18n="debit">DEBIT</button>
+      <div class="admin-hub-grid">
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-stats')">
+          <div class="admin-hub-ico"><i data-lucide="layout-dashboard" style="width:22px;height:22px;"></i></div>
+          <b>Dashboard</b>
+        </div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-users')">
+          <div class="admin-hub-ico"><i data-lucide="users" style="width:22px;height:22px;"></i></div>
+          <b>User Management</b>
+        </div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-history')">
+          <div class="admin-hub-ico"><i data-lucide="history" style="width:22px;height:22px;"></i></div>
+          <b>History</b>
+        </div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-settings')">
+          <div class="admin-hub-ico"><i data-lucide="settings" style="width:22px;height:22px;"></i></div>
+          <b>Settings</b>
         </div>
       </div>
+    </section>
+
+    <section id="view-admin-stats" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Live Dashboard</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">Realtime platform totals from Firebase.</p>
+      </div>
+      <div class="admin-kpi-grid" id="admin-stats-grid"></div>
+    </section>
+
+    <section id="view-admin-users" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">User Management</h2>
+        <input class="form-input" id="admin-user-search" placeholder="Search name, username or Telegram ID" oninput="AdminPanel.filterUsers()" style="margin-top:10px;" />
+      </div>
+      <div id="admin-user-list"></div>
+    </section>
+
+    <section id="view-admin-user-detail" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-users')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div id="admin-user-detail"></div>
+    </section>
+
+    <section id="view-admin-history" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">History</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">Review deposit and withdraw requests.</p>
+      </div>
+      <div class="admin-hub-grid">
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-withdraws')">
+          <div class="admin-hub-ico"><i data-lucide="arrow-up-right" style="width:22px;height:22px;"></i></div>
+          <b>Withdraw Requests</b>
+        </div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-deposits')">
+          <div class="admin-hub-ico"><i data-lucide="arrow-down-left" style="width:22px;height:22px;"></i></div>
+          <b>Deposit Requests</b>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-admin-withdraws" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-history')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Withdraw Requests</h2>
+        <input class="form-input" id="admin-wd-search" placeholder="Search user or Telegram ID" oninput="AdminPanel.filterWithdraws()" style="margin-top:10px;" />
+      </div>
+      <div id="admin-wd-list"></div>
+    </section>
+
+    <section id="view-admin-wd-detail" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-withdraws')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div id="admin-wd-detail"></div>
+    </section>
+
+    <section id="view-admin-deposits" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-history')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Deposit Requests</h2>
+        <input class="form-input" id="admin-dep-search" placeholder="Search user or Telegram ID" oninput="AdminPanel.filterDeposits()" style="margin-top:10px;" />
+      </div>
+      <div id="admin-dep-list"></div>
+    </section>
+
+    <section id="view-admin-dep-detail" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-deposits')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div id="admin-dep-detail"></div>
+    </section>
+
+    <section id="view-admin-settings" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Settings</h2>
+        <p style="font-size:11px; color:var(--text-secondary);">Control live app configuration.</p>
+      </div>
+      <div class="admin-hub-grid">
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-tokens')"><div class="admin-hub-ico"><i data-lucide="coins" style="width:22px;height:22px;"></i></div><b>Token Management</b></div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-packages')"><div class="admin-hub-ico"><i data-lucide="layers" style="width:22px;height:22px;"></i></div><b>Package Management</b></div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-ads')"><div class="admin-hub-ico"><i data-lucide="megaphone" style="width:22px;height:22px;"></i></div><b>Ads Management</b></div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-referral')"><div class="admin-hub-ico"><i data-lucide="share-2" style="width:22px;height:22px;"></i></div><b>Referral Management</b></div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-casino')"><div class="admin-hub-ico"><i data-lucide="dice-5" style="width:22px;height:22px;"></i></div><b>Casino Management</b></div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-broadcast')"><div class="admin-hub-ico"><i data-lucide="bell" style="width:22px;height:22px;"></i></div><b>Notification</b></div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-wallets')"><div class="admin-hub-ico"><i data-lucide="wallet" style="width:22px;height:22px;"></i></div><b>Wallet Management</b></div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-app')"><div class="admin-hub-ico"><i data-lucide="globe" style="width:22px;height:22px;"></i></div><b>Website & App</b></div>
+      </div>
+    </section>
+
+    <section id="view-admin-tokens" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-settings')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Token Management</h2>
+        <input class="form-input" id="admin-token-search" placeholder="Search token" oninput="AdminPanel.filterTokens()" style="margin-top:10px;" />
+      </div>
+      <div id="admin-token-list"></div>
+    </section>
+
+    <section id="view-admin-token-detail" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-tokens')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div id="admin-token-detail"></div>
+    </section>
+
+    <section id="view-admin-packages" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-settings')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Package Management</h2>
+      </div>
+      <div id="admin-package-list"></div>
+    </section>
+
+    <section id="view-admin-ads" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-settings')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan); margin-bottom:12px;">Ads Management</h2>
+        <div class="form-group"><label class="form-label">Gigapub Zone ID</label><input class="form-input" id="admin-giga-zone" placeholder="Gigapub Zone ID" /></div>
+        <div class="form-group"><label class="form-label">Monetag Zone ID</label><input class="form-input" id="admin-monetag-zone" placeholder="Monetag Zone ID" /></div>
+        <button class="btn-primary" onclick="AdminPanel.saveAds()">SAVE ADS SETTINGS</button>
+      </div>
+    </section>
+
+    <section id="view-admin-referral" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-settings')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan); margin-bottom:12px;">Referral Management</h2>
+        <div class="form-group"><label class="form-label">Referral Reward (USDT)</label><input class="form-input" id="admin-ref-reward" type="number" step="0.0001" /></div>
+        <div class="form-group"><label class="form-label">Minimum Withdraw (USDT)</label><input class="form-input" id="admin-wd-min" type="number" step="0.01" /></div>
+        <div class="form-group"><label class="form-label">Maximum Withdraw (USDT)</label><input class="form-input" id="admin-wd-max" type="number" step="0.01" /></div>
+        <div class="form-group"><label class="form-label">Minimum Referral Count</label><input class="form-input" id="admin-ref-min" type="number" step="1" /></div>
+        <button class="btn-primary" onclick="AdminPanel.saveReferral()">SAVE REFERRAL SETTINGS</button>
+      </div>
+    </section>
+
+    <section id="view-admin-casino" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-settings')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Casino Management</h2>
+      </div>
+      <div id="admin-casino-list"></div>
+    </section>
+
+    <section id="view-admin-casino-detail" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-casino')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div id="admin-casino-detail"></div>
+    </section>
+
+    <section id="view-admin-broadcast" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-settings')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card" style="margin-bottom:12px;">
+        <h3 style="font-size:15px; font-weight:900; margin-bottom:10px;">Message All Users</h3>
+        <textarea class="form-textarea form-input" id="admin-broadcast-all" placeholder="Write announcement for every user"></textarea>
+        <button class="btn-primary" style="margin-top:10px;" onclick="AdminPanel.broadcastAll()">SEND TO ALL</button>
+      </div>
       <div class="card">
-        <h3 style="font-size:14px; font-weight:900; margin-bottom:8px;" data-i18n="adminTools">Control tools</h3>
-        <button class="btn-primary" style="margin-bottom:8px;" onclick="AdminPanel.resetCheckin()" data-i18n="resetCheckin">Reset check-in lock</button>
-        <button class="btn-primary" style="margin-bottom:8px;" onclick="AdminPanel.resetVisits()" data-i18n="resetVisits">Reset visit locks</button>
-        <button class="btn-primary" onclick="AdminPanel.resetQuiz()" data-i18n="resetQuiz">Reset quiz limits</button>
+        <h3 style="font-size:15px; font-weight:900; margin-bottom:10px;">Message Specific User</h3>
+        <div class="form-group"><label class="form-label">Telegram ID</label><input class="form-input" id="admin-broadcast-uid" placeholder="Telegram ID" /></div>
+        <textarea class="form-textarea form-input" id="admin-broadcast-one" placeholder="Write private message"></textarea>
+        <button class="btn-primary" style="margin-top:10px;" onclick="AdminPanel.broadcastOne()">SEND TO USER</button>
+      </div>
+    </section>
+
+    <section id="view-admin-wallets" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-settings')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Wallet Management</h2>
+      </div>
+      <div class="admin-hub-grid">
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-wd-wallets')"><div class="admin-hub-ico"><i data-lucide="arrow-up-right" style="width:22px;height:22px;"></i></div><b>Withdraw Wallet</b></div>
+        <div class="admin-hub-card" onclick="AdminPanel.openPage('view-admin-dep-wallets')"><div class="admin-hub-ico"><i data-lucide="arrow-down-left" style="width:22px;height:22px;"></i></div><b>Deposit Wallet</b></div>
+      </div>
+    </section>
+
+    <section id="view-admin-wd-wallets" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-wallets')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card" style="margin-bottom:12px;">
+        <h3 style="font-size:15px; font-weight:900; margin-bottom:10px;">Add Withdraw Method</h3>
+        <div class="form-group"><label class="form-label">Method Name</label><input class="form-input" id="admin-wdm-name" placeholder="bKash / USDT TRC20" /></div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select class="form-select" id="admin-wdm-cat">
+            <option value="crypto">Cryptocurrency</option>
+            <option value="bdt">Bangladeshi Taka (BDT)</option>
+          </select>
+        </div>
+        <button class="btn-primary" onclick="AdminPanel.addWithdrawMethod()">SAVE METHOD</button>
+      </div>
+      <div id="admin-wdm-list"></div>
+    </section>
+
+    <section id="view-admin-dep-wallets" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-wallets')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card" style="margin-bottom:12px;">
+        <h3 style="font-size:15px; font-weight:900; margin-bottom:10px;">Add Deposit Method</h3>
+        <div class="form-group"><label class="form-label">Method Name</label><input class="form-input" id="admin-dpm-name" placeholder="USDT TRC20 / bKash" /></div>
+        <div class="form-group"><label class="form-label">Deposit Address or Number</label><input class="form-input" id="admin-dpm-addr" placeholder="Wallet or payment number" /></div>
+        <button class="btn-primary" onclick="AdminPanel.addDepositMethod()">SAVE METHOD</button>
+      </div>
+      <div id="admin-dpm-list"></div>
+    </section>
+
+    <section id="view-admin-app" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-settings')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div class="card card-elevated">
+        <h2 style="font-size:18px; font-weight:900; color:var(--cyan); margin-bottom:12px;">Website & App Settings</h2>
+        <div class="form-group"><label class="form-label">App Name</label><input class="form-input" id="admin-app-name" /></div>
+        <div class="form-group"><label class="form-label">Support Telegram Link</label><input class="form-input" id="admin-support-tg" /></div>
+        <div class="form-group"><label class="form-label">Support WhatsApp Link</label><input class="form-input" id="admin-support-wa" /></div>
+        <div class="form-group"><label class="form-label">Bot Token</label><input class="form-input" id="admin-bot-token" type="password" autocomplete="off" /></div>
+        <div class="form-group"><label class="form-label">Bot Username</label><input class="form-input" id="admin-bot-user" /></div>
+        <div class="form-group"><label class="form-label">Mini App Link</label><input class="form-input" id="admin-mini-link" /></div>
+        <div class="form-group"><label class="form-label">Forward Channel ID</label><input class="form-input" id="admin-channel-id" /></div>
+        <div class="admin-toggle-row">
+          <span>Maintenance Mode</span>
+          <button class="admin-switch" id="admin-maint-switch" type="button" onclick="this.classList.toggle('on')"><i></i></button>
+        </div>
+        <button class="btn-primary" onclick="AdminPanel.saveAppSettings()">SAVE APP SETTINGS</button>
       </div>
     </section>
 
@@ -2704,12 +3061,32 @@
         <h3 style="font-size:15px; font-weight:800; color:var(--cyan);"><i data-lucide="bell" style="width:16px; height:16px;"></i> Announcements</h3>
         <button class="btn-icon" style="width:30px; height:30px;" onclick="App.closeNotificationModal()"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
       </div>
-      <div class="card" style="margin:0;">
-        <h4 style="font-size:12px; font-weight:800;">Welcome to ZYNEXA FREE</h4>
-        <p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">
-          Your account is active with 0.30$ bonus. Start mining 50 crypto tokens now!
-        </p>
+      <div id="notif-list"></div>
+    </div>
+  </div>
+
+  <div class="modal-sheet" id="modal-admin-confirm">
+    <div class="modal-sheet-content">
+      <h3 style="font-size:16px; font-weight:900; color:var(--cyan); margin-bottom:8px;" id="admin-confirm-title">Confirm</h3>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:16px;" id="admin-confirm-text"></p>
+      <div class="admin-actions">
+        <button class="btn-secondary" type="button" onclick="AdminPanel.closeConfirm()">Cancel</button>
+        <button class="btn-primary" type="button" id="admin-confirm-ok">Confirm</button>
       </div>
+    </div>
+  </div>
+
+  <div class="sys-overlay" id="maintenance-overlay">
+    <div class="sys-overlay-card">
+      <h2 id="maint-title">Maintenance</h2>
+      <p id="maint-msg">The bot and Mini App are under update and maintenance. Please wait until the service is restored.</p>
+    </div>
+  </div>
+
+  <div class="sys-overlay" id="blocked-overlay">
+    <div class="sys-overlay-card">
+      <h2>Account Blocked</h2>
+      <p>Your account is blocked. Contact support if you believe this is a mistake.</p>
     </div>
   </div>
 
@@ -2718,8 +3095,8 @@
        ====================================================================== -->
   <script>
     const SUPER_ADMIN_TELEGRAM_ID = "5319754808";
-    const FORWARD_CHANNEL_ID = "-1004481065622";
-    const BOT_USERNAME = "ZynexaFree_Bot";
+    let FORWARD_CHANNEL_ID = "-1004481065622";
+    let BOT_USERNAME = "ZynexaFree_Bot";
 
     const firebaseConfig = {
       apiKey: "AIzaSyArniGxxa8Hh8n-a7t7_e98jBLbNEm4330",
@@ -2814,15 +3191,18 @@
     const REWARD_DAILY = 166;
     const REWARD_HOURLY = 6;
     const CONVERT_FEE_PCT = 2;
-    const WITHDRAW_MIN_USDT = 20;
-    const WITHDRAW_MIN_REFS = 10;
+    let WITHDRAW_MIN_USDT = 20;
+    let WITHDRAW_MAX_USDT = 10000;
+    let WITHDRAW_MIN_REFS = 10;
+    let REFERRAL_REWARD = 0.05;
+    let BOT_TOKEN_LIVE = "";
+    let SUPPORT_TG = "https://t.me/ZynexaFree_Bot";
+    let SUPPORT_WA = "https://wa.me/8801700000000";
     const QUIZ_MONTHLY = 90;
     const QUIZ_DAILY = 3;
     const QUIZ_HOURLY = 1;
     const VISIT_LINK = "https://omg10.com/4/10851248";
     const AD_WATCH_SEC = 15;
-    const SUPPORT_TG = "https://t.me/ZynexaFree_Bot";
-    const SUPPORT_WA = "https://wa.me/8801700000000";
 
     const State = {
       user: {
@@ -2856,8 +3236,182 @@
       currentConsoleTokenId: "usdt",
       firebaseReady: false,
       localTxs: [],
-      syncBound: false
+      syncBound: false,
+      blocked: false,
+      liveNotifs: []
     };
+
+    const CASINO_GAMES = [
+      { id: "crash", name: "Crash Game", img: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=70" },
+      { id: "sicbo", name: "Sic Bo", img: "https://images.unsplash.com/photo-1596838132731-3301c3fd4316?auto=format&fit=crop&w=800&q=70" },
+      { id: "blackjack", name: "Blackjack", img: "https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=800&q=70" }
+    ];
+
+    const LiveConfig = {
+      bound: false,
+      data: {},
+      defaults() {
+        const tokens = {};
+        CRYPTO_TOKENS.forEach((t) => {
+          tokens[t.id] = { name: t.name, symbol: t.symbol, img: t.img, baseUsdPrice: t.baseUsdPrice, enabled: true };
+        });
+        const packages = {};
+        CRYPTO_TOKENS.forEach((t) => { packages[t.id] = { enabled: true, name: t.name, img: t.img }; });
+        const casino = {};
+        CASINO_GAMES.forEach((g) => { casino[g.id] = { name: g.name, img: g.img, enabled: true }; });
+        return {
+          appName: "ZYNEXA FREE",
+          supportTg: SUPPORT_TG,
+          supportWa: SUPPORT_WA,
+          botToken: "",
+          botUsername: BOT_USERNAME,
+          miniAppLink: "",
+          channelId: FORWARD_CHANNEL_ID,
+          maintenance: false,
+          ads: { gigapub: "6234", monetag: "9955574" },
+          referral: { reward: 0.05, minWithdraw: 20, maxWithdraw: 10000, minRefs: 10 },
+          tokens,
+          packages,
+          casino,
+          withdrawMethods: {
+            usdt_trc20: { name: "USDT TRC20", category: "crypto" },
+            bkash: { name: "bKash", category: "bdt" },
+            nagad: { name: "Nagad", category: "bdt" },
+            rocket: { name: "Rocket", category: "bdt" }
+          },
+          depositMethods: {
+            usdt_trc20: { name: "USDT TRC20", address: "TCW6u9WjZf2VqN1jQ3pM8Xk4kL7dYwJ8hK" }
+          }
+        };
+      },
+      bind() {
+        if (this.bound) return;
+        this.bound = true;
+        this.data = this.defaults();
+        db.ref("adminSettings").once("value").then((snap) => {
+          if (!snap.exists()) db.ref("adminSettings").set(this.defaults());
+        }).catch(() => {});
+        db.ref("adminSettings").on("value", (snap) => {
+          const raw = snap.exists() ? (snap.val() || {}) : {};
+          this.data = this.merge(this.defaults(), raw);
+          this.apply();
+        }, () => { this.apply(); });
+      },
+      merge(base, raw) {
+        const out = Object.assign({}, base, raw);
+        out.ads = Object.assign({}, base.ads, raw.ads || {});
+        out.referral = Object.assign({}, base.referral, raw.referral || {});
+        out.tokens = Object.assign({}, base.tokens, raw.tokens || {});
+        out.packages = Object.assign({}, base.packages, raw.packages || {});
+        out.casino = Object.assign({}, base.casino, raw.casino || {});
+        out.withdrawMethods = raw.withdrawMethods ? raw.withdrawMethods : base.withdrawMethods;
+        out.depositMethods = raw.depositMethods ? raw.depositMethods : base.depositMethods;
+        return out;
+      },
+      tokenMap() { return this.data.tokens || {}; },
+      tokenEnabled(id) {
+        const t = this.tokenMap()[id];
+        return !t || t.enabled !== false;
+      },
+      packageEnabled(id) {
+        const p = (this.data.packages || {})[id];
+        return !p || p.enabled !== false;
+      },
+      visibleTokens() {
+        return CRYPTO_TOKENS.filter((t) => this.tokenEnabled(t.id)).map((t) => {
+          const o = this.tokenMap()[t.id] || {};
+          return {
+            id: t.id,
+            name: o.name || t.name,
+            symbol: o.symbol || t.symbol,
+            img: o.img || t.img,
+            baseUsdPrice: Number(o.baseUsdPrice != null ? o.baseUsdPrice : t.baseUsdPrice)
+          };
+        });
+      },
+      casinoList() {
+        return CASINO_GAMES.map((g) => {
+          const o = (this.data.casino || {})[g.id] || {};
+          return { id: g.id, name: o.name || g.name, img: o.img || g.img, enabled: o.enabled !== false };
+        });
+      },
+      methods(kind) {
+        const src = kind === "withdraw" ? this.data.withdrawMethods : this.data.depositMethods;
+        const rows = [];
+        Object.keys(src || {}).forEach((id) => {
+          const v = src[id] || {};
+          rows.push(Object.assign({ id }, v));
+        });
+        return rows;
+      },
+      applyTokens() {
+        const map = this.tokenMap();
+        CRYPTO_TOKENS.forEach((t) => {
+          const o = map[t.id];
+          if (!o) return;
+          if (o.name) t.name = o.name;
+          if (o.symbol) t.symbol = o.symbol;
+          if (o.img) t.img = o.img;
+          if (o.baseUsdPrice != null && !isNaN(Number(o.baseUsdPrice))) t.baseUsdPrice = Number(o.baseUsdPrice);
+        });
+      },
+      apply() {
+        this.applyTokens();
+        const d = this.data;
+        WITHDRAW_MIN_USDT = Number(d.referral && d.referral.minWithdraw) || 20;
+        WITHDRAW_MAX_USDT = Number(d.referral && d.referral.maxWithdraw) || 10000;
+        WITHDRAW_MIN_REFS = Number(d.referral && d.referral.minRefs) || 10;
+        REFERRAL_REWARD = Number(d.referral && d.referral.reward) || 0.05;
+        if (d.botUsername) BOT_USERNAME = String(d.botUsername).replace(/^@/, "");
+        if (d.channelId) FORWARD_CHANNEL_ID = String(d.channelId);
+        BOT_TOKEN_LIVE = d.botToken || "";
+        SUPPORT_TG = d.supportTg || SUPPORT_TG;
+        SUPPORT_WA = d.supportWa || SUPPORT_WA;
+        const title = document.querySelector(".header-site-title");
+        if (title) title.innerText = d.appName || "ZYNEXA FREE";
+        if (d.appName) document.title = d.appName + " — 50 Crypto Token Mining & Earning Ecosystem";
+        const tg = document.getElementById("support-tg-btn");
+        const wa = document.getElementById("support-wa-btn");
+        if (tg) tg.href = SUPPORT_TG;
+        if (wa) wa.href = SUPPORT_WA;
+        const note = document.getElementById("withdraw-rule-note");
+        if (note) note.innerText = "Need " + WITHDRAW_MIN_REFS + " referrals · Min " + WITHDRAW_MIN_USDT + " USDT · Max " + WITHDRAW_MAX_USDT + " USDT";
+        WalletEngine.renderDepositMethods();
+        WalletEngine.renderWithdrawMethods();
+        CasinoHub.renderLobby();
+        App.applyGate();
+        if (typeof App.populateTokenSelectors === "function") App.populateTokenSelectors();
+        if (typeof App.render50PackagesPreserving === "function") App.render50PackagesPreserving();
+        else if (typeof App.render50Packages === "function") App.render50Packages();
+        if (typeof App.renderAllTokens === "function") App.renderAllTokens();
+        if (typeof App.updateUI === "function") App.updateUI();
+        if (window.lucide) lucide.createIcons();
+      }
+    };
+
+    function escapeHtml(s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+    function isHttpUrl(u) {
+      try {
+        const x = new URL(String(u || ""));
+        return x.protocol === "http:" || x.protocol === "https:";
+      } catch (e) { return false; }
+    }
+    function photoOrInitial(url, name) {
+      const initial = String(name || "U").charAt(0).toUpperCase();
+      if (url) return `<img src="${escapeHtml(url)}" alt="" />`;
+      return initial;
+    }
+    function fmtTime(ts) {
+      return new Date(Number(ts) || Date.now()).toLocaleString();
+    }
+    function statusClass(st) {
+      const s = String(st || "PENDING").toUpperCase();
+      if (s === "CONFIRMED" || s === "COMPLETED") return "confirmed";
+      if (s === "REJECTED" || s === "BLOCKED") return "rejected";
+      return "pending";
+    }
 
     function pad4(n) { return String(n).padStart(4, "0"); }
     function nowKeys() {
@@ -2960,6 +3514,7 @@
 
     const App = {
       init() {
+        LiveConfig.bind();
         this.initTelegram();
         this.populateTokenSelectors();
         this.render50Packages();
@@ -2978,7 +3533,20 @@
         CrashEngine.bindGlobal();
         ReferralEngine.captureStart();
         AdminPanel.refreshHomeBtn();
+        CasinoHub.renderLobby();
+        WalletEngine.renderDepositMethods();
+        WalletEngine.renderWithdrawMethods();
+        this.applyGate();
         if (window.lucide) lucide.createIcons();
+      },
+      applyGate() {
+        const maint = !!(LiveConfig.data && LiveConfig.data.maintenance);
+        const admin = String(State.user.telegramId) === String(SUPER_ADMIN_TELEGRAM_ID);
+        const overlay = document.getElementById("maintenance-overlay");
+        if (overlay) overlay.classList.toggle("show", maint && !admin);
+        const block = document.getElementById("blocked-overlay");
+        if (block) block.classList.toggle("show", !!State.blocked && !admin);
+        AdminPanel.refreshHomeBtn();
       },
 
       applyTgUser(u) {
@@ -3091,7 +3659,10 @@
               referralEarn: 0,
               lang: "en",
               hidePan: false,
-              hideCvvp: false
+              hideCvvp: false,
+              blocked: false,
+              totalDeposit: 0,
+              totalWithdraw: 0
             });
             ReferralEngine.bindNewUser(uid);
             db.ref("cardIndex/" + cardKey(cardNumber)).set({
@@ -3125,6 +3696,7 @@
             State.user.lang = data.lang || State.user.lang || "en";
             State.user.hidePan = !!data.hidePan;
             State.user.hideCvvp = !!data.hideCvvp;
+            State.blocked = !!data.blocked;
             if (data.profile) {
               if (data.profile.photoUrl) State.user.photoUrl = data.profile.photoUrl;
               if (data.profile.firstName) State.user.firstName = data.profile.firstName;
@@ -3158,6 +3730,7 @@
             CheckinEngine.render();
             QuizEngine.renderLimits();
             I18n.apply(State.user.lang);
+            App.applyGate();
           }
         }, () => {
           State.firebaseReady = false;
@@ -3167,6 +3740,14 @@
         db.ref("transactions/" + uid).on("value", (snap) => {
           renderTxList(snap);
         }, () => { renderTxList(); });
+
+        db.ref("userInbox/" + uid).on("value", (snap) => {
+          const rows = [];
+          if (snap.exists()) snap.forEach((ch) => { rows.push(Object.assign({ id: ch.key }, ch.val() || {})); });
+          rows.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+          State.liveNotifs = rows;
+          App.renderNotifications();
+        });
       },
 
       populateTokenSelectors() {
@@ -3174,10 +3755,11 @@
         const swapFrom = document.getElementById("swap-from-token");
         const swapTo = document.getElementById("swap-to-token");
         if (!picker || !swapFrom || !swapTo) return;
+        const tokens = LiveConfig.visibleTokens ? LiveConfig.visibleTokens() : CRYPTO_TOKENS;
 
-        picker.innerHTML = CRYPTO_TOKENS.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
-        swapFrom.innerHTML = CRYPTO_TOKENS.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
-        swapTo.innerHTML = CRYPTO_TOKENS.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
+        picker.innerHTML = tokens.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
+        swapFrom.innerHTML = tokens.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
+        swapTo.innerHTML = tokens.map(t => `<option value="${t.id}">${t.symbol}</option>`).join("");
 
         picker.value = "usdt";
         swapFrom.value = "btc";
@@ -3235,6 +3817,7 @@
         if (ie) ie.innerText = Number(State.user.referralEarn || 0).toFixed(4);
         AdminPanel.refreshHomeBtn();
         this.renderAllTokens();
+        this.applyGate();
       },
 
       bindCardSwipe() {
@@ -3262,7 +3845,8 @@
       renderAllTokens() {
         const mount = document.getElementById("all-tokens-list");
         if (!mount) return;
-        mount.innerHTML = CRYPTO_TOKENS.map(t => {
+        const tokens = LiveConfig.visibleTokens ? LiveConfig.visibleTokens() : CRYPTO_TOKENS;
+        mount.innerHTML = tokens.map(t => {
           const bal = State.user.tokenBalances[t.id] || 0;
           return `<div class="token-row" onclick="App.handleBalanceTokenChange('${t.id}'); App.navigate('view-home');">
             <img src="${t.img}" alt="${t.symbol}" />
@@ -3316,7 +3900,8 @@
         if (targetPageId === "view-visiting") VisitEngine.renderList();
         if (targetPageId === "view-checkin") CheckinEngine.render();
         if (targetPageId === "view-refer") ReferralEngine.refreshPage();
-        if (targetPageId === "view-admin") AdminPanel.renderDash();
+        if (targetPageId === "view-casino") CasinoHub.renderLobby();
+        if (String(targetPageId || "").indexOf("view-admin") === 0) AdminPanel.onNavigate(targetPageId);
         if (targetPageId === "view-sicbo") SicBoEngine.enter();
         if (targetPageId === "view-blackjack") BlackjackEngine.enter();
         if (targetPageId !== "view-sicbo" && targetPageId !== "view-blackjack") document.body.classList.remove("table-immersive");
@@ -3332,6 +3917,8 @@
         }
         if (targetPageId === "view-language") I18n.renderList();
         if (targetPageId === "view-all-tokens") this.renderAllTokens();
+        if (targetPageId === "view-wallet-deposit") WalletEngine.renderDepositMethods();
+        if (targetPageId === "view-wallet-withdraw") WalletEngine.renderWithdrawMethods();
         if (targetPageId === "view-wallet-tx") renderTxList();
         if (window.lucide) lucide.createIcons();
       },
@@ -3343,10 +3930,11 @@
         const mount = document.getElementById("packages-50-container");
         if (!mount) return;
 
-        let filtered = CRYPTO_TOKENS;
+        let filtered = LiveConfig.visibleTokens ? LiveConfig.visibleTokens() : CRYPTO_TOKENS.slice();
+        filtered = filtered.filter((t) => LiveConfig.packageEnabled ? LiveConfig.packageEnabled(t.id) : true);
         if (filterKeyword) {
           const kw = filterKeyword.toLowerCase();
-          filtered = CRYPTO_TOKENS.filter(t => t.name.toLowerCase().includes(kw) || t.symbol.toLowerCase().includes(kw));
+          filtered = filtered.filter(t => t.name.toLowerCase().includes(kw) || t.symbol.toLowerCase().includes(kw));
         }
 
         const globalRefs = State.user.referralCount;
@@ -3786,7 +4374,21 @@
         ctx.fill();
       },
 
-      openNotificationModal() { document.getElementById("modal-notifications").style.display = "flex"; },
+      renderNotifications() {
+        const box = document.getElementById("notif-list");
+        if (!box) return;
+        const rows = State.liveNotifs || [];
+        if (!rows.length) {
+          box.innerHTML = `<div class="card" style="margin:0;"><h4 style="font-size:12px; font-weight:800;">Welcome</h4><p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">Your account is active. Start mining now.</p></div>`;
+          return;
+        }
+        box.innerHTML = rows.map((n) => `<div class="card" style="margin:0 0 8px;"><h4 style="font-size:12px; font-weight:800;">${escapeHtml(n.title || "Notice")}</h4><p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">${escapeHtml(n.body || "")}</p><div style="font-size:10px; color:var(--text-secondary); margin-top:6px;">${fmtTime(n.timestamp)}</div></div>`).join("");
+      },
+      openNotificationModal() {
+        this.renderNotifications();
+        document.getElementById("modal-notifications").style.display = "flex";
+        if (window.lucide) lucide.createIcons();
+      },
       closeNotificationModal() { document.getElementById("modal-notifications").style.display = "none"; },
       toast(msg) {
         const c = document.getElementById("toast-container");
@@ -3893,7 +4495,27 @@
     };
 
     const CasinoHub = {
+      renderLobby() {
+        const grid = document.getElementById("casino-grid");
+        if (!grid) return;
+        const games = LiveConfig.casinoList ? LiveConfig.casinoList() : CASINO_GAMES;
+        const visible = games.filter((g) => g.enabled !== false);
+        if (!visible.length) {
+          grid.innerHTML = `<p class="admin-empty">Casino games are currently hidden.</p>`;
+          return;
+        }
+        grid.innerHTML = visible.map((g) => `
+          <article class="casino-game-card">
+            <div class="casino-game-photo"><img src="${escapeHtml(g.img)}" alt="${escapeHtml(g.name)}" /></div>
+            <div class="casino-game-body">
+              <h3>${escapeHtml(g.name)}</h3>
+              <button class="casino-start-btn" type="button" onclick="CasinoHub.startGame('${g.id}')">START</button>
+            </div>
+          </article>`).join("");
+      },
       startGame(id) {
+        const game = (LiveConfig.casinoList ? LiveConfig.casinoList() : CASINO_GAMES).find((g) => g.id === id);
+        if (game && game.enabled === false) { App.toast("This game is disabled"); return; }
         const loader = document.getElementById("game-loader");
         if (!loader) return;
         const title = loader.querySelector(".loader-title");
@@ -4536,7 +5158,13 @@
         }, 1000);
         const trySdk = () => {
           try {
-            if (typeof show_9955574 === "function") {
+            const ads = (LiveConfig.data && LiveConfig.data.ads) || {};
+            const monetagFn = window["show_" + (ads.monetag || "9955574")];
+            if (typeof monetagFn === "function") {
+              monetagFn().catch(() => {
+                if (typeof showGigaPubAd === "function") showGigaPubAd();
+              });
+            } else if (typeof show_9955574 === "function") {
               show_9955574().catch(() => {
                 if (typeof showGigaPubAd === "function") showGigaPubAd();
               });
@@ -4652,24 +5280,55 @@
     const WalletEngine = {
       draft: null,
       holds: {},
-      copyDepositAddr() {
-        navigator.clipboard.writeText("TCW6u9WjZf2VqN1jQ3pM8Xk4kL7dYwJ8hK").then(() => App.toast("Deposit address copied!"));
+      copyDepositAddr(addr) {
+        navigator.clipboard.writeText(addr || "").then(() => App.toast("Deposit address copied!"));
+      },
+      renderDepositMethods() {
+        const box = document.getElementById("deposit-methods-box");
+        if (!box) return;
+        const methods = LiveConfig.methods ? LiveConfig.methods("deposit") : [];
+        if (!methods.length) {
+          box.innerHTML = `<p class="admin-empty">No deposit methods available.</p>`;
+          return;
+        }
+        box.innerHTML = methods.map((m) => `
+          <div style="background:var(--bg-secondary); border:1px solid var(--border-color); padding:10px; border-radius:var(--radius-sm); margin-bottom:10px;">
+            <div style="font-size:12px; font-weight:800; margin-bottom:6px;">${escapeHtml(m.name || "Method")}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+              <span style="font-family:monospace; font-size:11px; color:var(--neon); word-break:break-all;">${escapeHtml(m.address || "")}</span>
+              <button class="btn-secondary" style="padding:6px 10px;" onclick="WalletEngine.copyDepositAddr(decodeURIComponent('${encodeURIComponent(m.address || "")}'))">Copy</button>
+            </div>
+          </div>`).join("") + `<div class="form-group"><label class="form-label">Payment Method</label><select class="form-select" id="dep-method-select">${methods.map((m) => `<option value="${escapeHtml(m.id)}">${escapeHtml(m.name)}</option>`).join("")}</select></div>`;
+      },
+      renderWithdrawMethods() {
+        const cryptoSel = document.getElementById("withdraw-crypto-provider");
+        const bdtSel = document.getElementById("withdraw-mfs-provider");
+        const methods = LiveConfig.methods ? LiveConfig.methods("withdraw") : [];
+        const crypto = methods.filter((m) => String(m.category || "") === "crypto");
+        const bdt = methods.filter((m) => String(m.category || "") === "bdt");
+        if (cryptoSel) cryptoSel.innerHTML = crypto.map((m) => `<option value="${escapeHtml(m.name)}">${escapeHtml(m.name)}</option>`).join("") || `<option value="USDT TRC20">USDT TRC20</option>`;
+        if (bdtSel) bdtSel.innerHTML = bdt.map((m) => `<option value="${escapeHtml(m.name)}">${escapeHtml(m.name)}</option>`).join("") || `<option value="bKash">bKash</option>`;
+        const typeEl = document.getElementById("withdraw-type");
+        this.handleWithdrawTypeChange(typeEl ? typeEl.value : "USDT");
       },
       handleWithdrawTypeChange(val) {
         const grp = document.getElementById("bdt-gateway-group");
+        const cryptoGrp = document.getElementById("crypto-gateway-group");
         const lbl = document.getElementById("withdraw-addr-lbl");
         const inp = document.getElementById("withdraw-address-input");
         const calc = document.getElementById("withdraw-bdt-calc");
         if (val === "BDT") {
-          grp.style.display = "block";
-          lbl.innerText = "Personal Mobile Banking Number (017xxxxxxxx)";
-          inp.placeholder = "e.g. 017xxxxxxxx";
-          calc.innerText = "Exchange Rate: 1 USDT = 125.00 BDT";
+          if (grp) grp.style.display = "block";
+          if (cryptoGrp) cryptoGrp.style.display = "none";
+          if (lbl) lbl.innerText = "Personal Mobile Banking Number";
+          if (inp) inp.placeholder = "e.g. 017xxxxxxxx";
+          if (calc) calc.innerText = "Exchange Rate: 1 USDT = 125.00 BDT";
         } else {
-          grp.style.display = "none";
-          lbl.innerText = "Destination TRC20 Address";
-          inp.placeholder = "Enter TRC20 address...";
-          calc.innerText = "Direct USDT Crypto Delivery";
+          if (grp) grp.style.display = "none";
+          if (cryptoGrp) cryptoGrp.style.display = "block";
+          if (lbl) lbl.innerText = "Destination Wallet Address";
+          if (inp) inp.placeholder = "Enter wallet address...";
+          if (calc) calc.innerText = "Direct crypto delivery";
         }
       },
       fillMax() {
@@ -4681,23 +5340,33 @@
       collectDeposit() {
         const txid = document.getElementById("dep-txid-input").value.trim();
         const amt = parseFloat(document.getElementById("dep-amount-input").value);
+        const sender = (document.getElementById("dep-sender-input").value || "").trim();
+        const proof = (document.getElementById("dep-proof-input").value || "").trim();
+        const methodEl = document.getElementById("dep-method-select");
+        const methodId = methodEl ? methodEl.value : "";
+        const method = (LiveConfig.methods("deposit") || []).find((m) => m.id === methodId) || {};
         if (!txid || isNaN(amt) || amt < 1.0) { App.toast("Provide valid TXID and minimum 1.0 USDT!"); return null; }
+        if (proof && !isHttpUrl(proof)) { App.toast("Proof must be a valid URL"); return null; }
         return {
           kind: "deposit",
           amount: amt,
           rows: [
-            { k: "Type", v: "Deposit USDT (TRC20)" },
+            { k: "Type", v: "Deposit" },
+            { k: "Method", v: method.name || "Deposit" },
             { k: "Amount", v: amt.toFixed(4) + " USDT" },
+            { k: "Sender", v: sender || "-" },
             { k: "TXID", v: txid },
-            { k: "Network", v: "TRC20" },
             { k: "Status", v: "Ready to send" }
           ],
-          payload: { txid, amt }
+          payload: { txid, amt, sender, proof, methodName: method.name || "Deposit", methodAddress: method.address || "" }
         };
       },
       collectWithdraw() {
         const type = document.getElementById("withdraw-type").value;
-        const mfs = document.getElementById("withdraw-mfs-provider").value;
+        const mfsEl = document.getElementById("withdraw-mfs-provider");
+        const cryptoEl = document.getElementById("withdraw-crypto-provider");
+        const mfs = mfsEl ? mfsEl.value : "";
+        const cryptoName = cryptoEl ? cryptoEl.value : "USDT TRC20";
         const addr = document.getElementById("withdraw-address-input").value.trim();
         const amt = parseFloat(document.getElementById("withdraw-amt-input").value);
         const pin = document.getElementById("withdraw-pin-input").value.trim();
@@ -4705,12 +5374,14 @@
         const refs = Number(State.user.referralCount || 0);
         if (refs < WITHDRAW_MIN_REFS) { App.toast("Need " + WITHDRAW_MIN_REFS + " referrals to withdraw. You have " + refs + "."); return null; }
         if (isNaN(amt) || amt < WITHDRAW_MIN_USDT) { App.toast("Minimum withdraw is " + WITHDRAW_MIN_USDT + " USDT!"); return null; }
+        if (amt > WITHDRAW_MAX_USDT) { App.toast("Maximum withdraw is " + WITHDRAW_MAX_USDT + " USDT!"); return null; }
         const usdtBal = State.user.tokenBalances.usdt || 0;
         if (amt > usdtBal) { App.toast("Insufficient USDT balance!"); return null; }
         const needPin = State.user.cvvp || State.user.securityPin;
         if (!pin || pin.length !== 4) { App.toast("Enter 4-digit CVVP from your card back."); return null; }
         if (needPin && pin !== String(needPin)) { App.toast("Incorrect CVVP!"); return null; }
-        const methodDesc = type === "BDT" ? mfs + " (" + (amt * 125).toFixed(0) + " BDT)" : "USDT TRC20";
+        const methodName = type === "BDT" ? mfs : cryptoName;
+        const methodDesc = type === "BDT" ? methodName + " (" + (amt * 125).toFixed(0) + " BDT)" : methodName;
         return {
           kind: "withdraw",
           amount: amt,
@@ -4721,7 +5392,7 @@
             { k: "Destination", v: addr },
             { k: "PIN", v: "Verified" }
           ],
-          payload: { type, mfs, addr, amt, methodDesc }
+          payload: { type, mfs: methodName, addr, amt, methodDesc, methodName }
         };
       },
       collectTransfer() {
@@ -4822,16 +5493,35 @@
         this.draft = null;
       },
       async submitDeposit(p) {
-        const req = { userId: State.user.telegramId, username: State.user.username, txid: p.txid, amount: p.amt, timestamp: Date.now(), status: "PENDING" };
-        const tx = { type: "DEPOSIT", desc: "+" + p.amt + " USDT (TXID: " + p.txid.substring(0, 6) + "...)", status: "PENDING", timestamp: Date.now() };
+        const txKey = db.ref("transactions/" + State.user.telegramId).push().key;
+        const req = {
+          userId: State.user.telegramId,
+          username: State.user.username,
+          firstName: State.user.firstName,
+          photoUrl: State.user.photoUrl || "",
+          txid: p.txid,
+          amount: p.amt,
+          sender: p.sender || "",
+          proof: p.proof || "",
+          method: p.methodName || "Deposit",
+          methodAddress: p.methodAddress || "",
+          timestamp: Date.now(),
+          status: "PENDING",
+          txKey
+        };
+        const tx = { type: "DEPOSIT", desc: "+" + p.amt + " USDT (TXID: " + p.txid.substring(0, 6) + "...)", status: "PENDING", timestamp: Date.now(), amount: p.amt };
         await fbPush("depositRequests", req);
-        await fbPush("transactions/" + State.user.telegramId, tx);
+        await fbSet("transactions/" + State.user.telegramId + "/" + txKey, tx);
         pushLocalTx(tx);
         NotificationDispatcher.notifyAll("DEPOSIT SUBMITTED", "User @" + State.user.username + " deposited <b>" + p.amt + " USDT</b>. TXID: <code>" + p.txid + "</code>");
         document.getElementById("dep-txid-input").value = "";
         document.getElementById("dep-amount-input").value = "";
+        const senderEl = document.getElementById("dep-sender-input");
+        const proofEl = document.getElementById("dep-proof-input");
+        if (senderEl) senderEl.value = "";
+        if (proofEl) proofEl.value = "";
         const trx = this.trxId();
-        this.showSlip("Deposit Successful", p.amt.toFixed(2) + " USDT", [
+        this.showSlip("Deposit Submitted", p.amt.toFixed(2) + " USDT", [
           { k: "Type", v: "Deposit" },
           { k: "Amount", v: p.amt.toFixed(4) + " USDT" },
           { k: "TXID", v: p.txid },
@@ -4839,22 +5529,41 @@
         ], trx);
       },
       async submitWithdrawal(p) {
-        const usdtBal = State.user.tokenBalances.usdt || 0;
-        const newBal = +(usdtBal - p.amt).toFixed(6);
-        State.user.tokenBalances.usdt = newBal;
-        await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", newBal);
-        const req = { userId: State.user.telegramId, username: State.user.username, method: p.methodDesc, address: p.addr, amount: p.amt, status: "PENDING", timestamp: Date.now() };
-        const tx = { type: "WITHDRAW", desc: "-" + p.amt + " USDT to " + p.methodDesc, status: "PENDING", timestamp: Date.now() };
+        const uid = State.user.telegramId;
+        const amt = Number(p.amt);
+        let ok = false;
+        await db.ref("users/" + uid + "/tokenBalances/usdt").transaction((cur) => {
+          const bal = Number(cur || 0);
+          if (bal + 1e-9 < amt) return;
+          ok = true;
+          return +(bal - amt).toFixed(6);
+        });
+        if (!ok) { App.toast("Insufficient USDT balance!"); return; }
+        const txKey = db.ref("transactions/" + uid).push().key;
+        const req = {
+          userId: uid,
+          username: State.user.username,
+          firstName: State.user.firstName,
+          photoUrl: State.user.photoUrl || "",
+          method: p.methodDesc,
+          methodName: p.methodName || p.methodDesc,
+          address: p.addr,
+          amount: amt,
+          status: "PENDING",
+          timestamp: Date.now(),
+          txKey
+        };
+        const tx = { type: "WITHDRAW", desc: "-" + amt + " USDT to " + p.methodDesc, status: "PENDING", timestamp: Date.now(), amount: amt };
         await fbPush("withdrawRequests", req);
-        await fbPush("transactions/" + State.user.telegramId, tx);
+        await fbSet("transactions/" + uid + "/" + txKey, tx);
         pushLocalTx(tx);
         App.updateUI();
-        NotificationDispatcher.notifyAll("CASHOUT REQUEST", "User @" + State.user.username + " cashed out <b>" + p.amt + " USDT</b> to " + p.methodDesc);
+        NotificationDispatcher.notifyAll("CASHOUT REQUEST", "User @" + State.user.username + " cashed out <b>" + amt + " USDT</b> to " + p.methodDesc);
         document.getElementById("withdraw-address-input").value = "";
         document.getElementById("withdraw-amt-input").value = "";
         document.getElementById("withdraw-pin-input").value = "";
         const trx = this.trxId();
-        this.showSlip("Withdraw Successful", p.amt.toFixed(2) + " USDT", [
+        this.showSlip("Withdraw Submitted", amt.toFixed(2) + " USDT", [
           { k: "Type", v: "Withdraw" },
           { k: "To", v: p.methodDesc },
           { k: "Destination", v: p.addr },
@@ -5760,10 +6469,10 @@
         await fbSet("users/" + ref + "/stats/referralCount", n);
         const balSnap = await db.ref("users/" + ref + "/tokenBalances/usdt").once("value");
         const earnSnap = await db.ref("users/" + ref + "/referralEarn").once("value");
-        const bonus = 0.05;
+        const bonus = Number(REFERRAL_REWARD) || 0.05;
         await fbSet("users/" + ref + "/tokenBalances/usdt", +(Number(balSnap.val() || 0) + bonus).toFixed(6));
         await fbSet("users/" + ref + "/referralEarn", +(Number(earnSnap.val() || 0) + bonus).toFixed(6));
-        await fbPush("transactions/" + ref, { type: "REFERRAL", desc: "+0.05 USDT referral " + uid, status: "COMPLETED", timestamp: Date.now() });
+        await fbPush("transactions/" + ref, { type: "REFERRAL", desc: "+" + bonus + " USDT referral " + uid, status: "COMPLETED", timestamp: Date.now() });
         try { localStorage.removeItem("zyn_ref"); } catch (e) {}
         this.pending = "";
       },
@@ -5800,7 +6509,16 @@
 
     const AdminPanel = {
       target: "",
+      usersCache: [],
+      wdCache: [],
+      depCache: [],
+      confirmFn: null,
+      busy: false,
       isAdmin() { return String(State.user.telegramId) === String(SUPER_ADMIN_TELEGRAM_ID); },
+      guard() {
+        if (!this.isAdmin()) { App.navigate("view-home"); return false; }
+        return true;
+      },
       refreshHomeBtn() {
         const btn = document.getElementById("admin-home-btn");
         if (btn) btn.style.display = this.isAdmin() ? "flex" : "none";
@@ -5809,59 +6527,599 @@
         if (!this.isAdmin()) return;
         App.navigate("view-admin");
       },
-      async renderDash() {
-        if (!this.isAdmin()) { App.navigate("view-home"); return; }
-        this.refreshHomeBtn();
-        const snap = await db.ref("users").once("value");
-        let users = 0, usdt = 0, refs = 0;
-        snap.forEach((ch) => {
-          users += 1;
-          const v = ch.val() || {};
-          usdt += Number((v.tokenBalances && v.tokenBalances.usdt) || 0);
-          refs += Number((v.stats && v.stats.referralCount) || 0);
-        });
-        const set = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
-        set("admin-users", users);
-        set("admin-usdt", usdt.toFixed(2));
-        set("admin-refs", refs);
-        const wd = await db.ref("withdrawRequests").once("value");
-        set("admin-wd", wd.exists() ? Object.keys(wd.val() || {}).length : 0);
+      openPage(id) {
+        if (!this.guard()) return;
+        App.navigate(id);
       },
-      async loadUser() {
-        if (!this.isAdmin()) return;
-        const uid = (document.getElementById("admin-uid").value || "").trim();
+      onNavigate(id) {
+        if (!this.guard()) return;
+        if (id === "view-admin-stats") this.renderStats();
+        if (id === "view-admin-users") this.renderUsers();
+        if (id === "view-admin-withdraws") this.renderWithdraws();
+        if (id === "view-admin-deposits") this.renderDeposits();
+        if (id === "view-admin-tokens") this.renderTokens();
+        if (id === "view-admin-packages") this.renderPackages();
+        if (id === "view-admin-ads") this.fillAds();
+        if (id === "view-admin-referral") this.fillReferral();
+        if (id === "view-admin-casino") this.renderCasino();
+        if (id === "view-admin-wd-wallets") this.renderWdMethods();
+        if (id === "view-admin-dep-wallets") this.renderDepMethods();
+        if (id === "view-admin-app") this.fillApp();
+      },
+      loading(elId) {
+        const el = document.getElementById(elId);
+        if (el) el.innerHTML = `<p class="admin-empty">Loading...</p>`;
+      },
+      empty(elId, msg) {
+        const el = document.getElementById(elId);
+        if (el) el.innerHTML = `<p class="admin-empty">${escapeHtml(msg || "No data")}</p>`;
+      },
+      confirm(title, text, fn) {
+        this.confirmFn = fn;
+        document.getElementById("admin-confirm-title").innerText = title;
+        document.getElementById("admin-confirm-text").innerText = text;
+        document.getElementById("modal-admin-confirm").style.display = "flex";
+        const ok = document.getElementById("admin-confirm-ok");
+        ok.onclick = async () => {
+          this.closeConfirm();
+          if (typeof this.confirmFn === "function") await this.confirmFn();
+        };
+      },
+      closeConfirm() {
+        document.getElementById("modal-admin-confirm").style.display = "none";
+      },
+      async inbox(uid, title, body) {
         if (!uid) return;
-        const snap = await db.ref("users/" + uid).once("value");
-        const box = document.getElementById("admin-user-box");
-        if (!snap.exists()) { box.innerText = "Not found"; this.target = ""; return; }
+        await fbPush("userInbox/" + uid, { title, body, timestamp: Date.now() });
+      },
+      async renderStats() {
+        if (!this.guard()) return;
+        this.loading("admin-stats-grid");
+        try {
+          const [usersSnap, wdSnap, depSnap] = await Promise.all([
+            db.ref("users").once("value"),
+            db.ref("withdrawRequests").once("value"),
+            db.ref("depositRequests").once("value")
+          ]);
+          let users = 0, active = 0, usdt = 0, refs = 0, totalDep = 0, totalWd = 0, pendingWd = 0, pendingDep = 0;
+          const now = Date.now();
+          usersSnap.forEach((ch) => {
+            users += 1;
+            const v = ch.val() || {};
+            usdt += Number((v.tokenBalances && v.tokenBalances.usdt) || 0);
+            refs += Number((v.stats && v.stats.referralCount) || 0);
+            totalDep += Number(v.totalDeposit || 0);
+            totalWd += Number(v.totalWithdraw || 0);
+            const joined = Number((v.profile && v.profile.joinedAt) || 0);
+            if (!v.blocked && (now - joined < 7 * 86400000 || Number((v.tokenBalances && v.tokenBalances.usdt) || 0) > 0)) active += 1;
+          });
+          wdSnap.forEach((ch) => {
+            const v = ch.val() || {};
+            if (String(v.status || "").toUpperCase() === "PENDING") pendingWd += 1;
+            if (String(v.status || "").toUpperCase() === "CONFIRMED") totalWd += Number(v.amount || 0);
+          });
+          depSnap.forEach((ch) => {
+            const v = ch.val() || {};
+            if (String(v.status || "").toUpperCase() === "PENDING") pendingDep += 1;
+            if (String(v.status || "").toUpperCase() === "CONFIRMED") totalDep += Number(v.amount || 0);
+          });
+          const cards = [
+            ["Total Users", users],
+            ["Active Users", active],
+            ["Total Deposit", totalDep.toFixed(2) + " USDT"],
+            ["Total Withdraw", totalWd.toFixed(2) + " USDT"],
+            ["Pending Withdraw", pendingWd],
+            ["Pending Deposit", pendingDep],
+            ["Token Balance", usdt.toFixed(2) + " USDT"],
+            ["Total Referrals", refs]
+          ];
+          document.getElementById("admin-stats-grid").innerHTML = cards.map((c) => `<div class="card"><b>${escapeHtml(String(c[1]))}</b><span>${c[0]}</span></div>`).join("");
+        } catch (e) {
+          this.empty("admin-stats-grid", "Failed to load dashboard");
+        }
+      },
+      userRow(u) {
+        const name = ((u.firstName || "") + " " + (u.lastName || "")).trim() || u.username || u.id;
+        return `<div class="admin-list-card">
+          <div class="admin-list-photo">${photoOrInitial(u.photoUrl, name)}</div>
+          <div class="admin-list-meta"><b>${escapeHtml(name)}</b><span>@${escapeHtml(u.username || "-")} · ${escapeHtml(u.id)}</span></div>
+          <button class="admin-view-btn" type="button" onclick="AdminPanel.openUser('${escapeHtml(u.id)}')">VIEW</button>
+        </div>`;
+      },
+      async renderUsers() {
+        if (!this.guard()) return;
+        this.loading("admin-user-list");
+        try {
+          const snap = await db.ref("users").once("value");
+          const rows = [];
+          snap.forEach((ch) => {
+            const v = ch.val() || {};
+            const p = v.profile || {};
+            rows.push({
+              id: ch.key,
+              firstName: p.firstName || "",
+              lastName: p.lastName || "",
+              username: p.username || "",
+              photoUrl: p.photoUrl || "",
+              blocked: !!v.blocked
+            });
+          });
+          this.usersCache = rows;
+          this.filterUsers();
+        } catch (e) {
+          this.empty("admin-user-list", "Failed to load users");
+        }
+      },
+      filterUsers() {
+        const q = ((document.getElementById("admin-user-search") || {}).value || "").toLowerCase().trim();
+        const list = (this.usersCache || []).filter((u) => {
+          const hay = (u.firstName + " " + u.lastName + " " + u.username + " " + u.id).toLowerCase();
+          return !q || hay.indexOf(q) >= 0;
+        });
+        const box = document.getElementById("admin-user-list");
+        if (!box) return;
+        box.innerHTML = list.length ? list.map((u) => this.userRow(u)).join("") : `<p class="admin-empty">No users found</p>`;
+        if (window.lucide) lucide.createIcons();
+      },
+      async openUser(uid) {
+        if (!this.guard()) return;
         this.target = uid;
-        const v = snap.val() || {};
-        box.innerHTML = "<b>@" + ((v.profile && v.profile.username) || "-") + "</b><br>USDT: " + Number((v.tokenBalances && v.tokenBalances.usdt) || 0).toFixed(4) + "<br>Refs: " + Number((v.stats && v.stats.referralCount) || 0);
+        App.navigate("view-admin-user-detail");
+        const box = document.getElementById("admin-user-detail");
+        box.innerHTML = `<p class="admin-empty">Loading...</p>`;
+        try {
+          const [uSnap, txSnap] = await Promise.all([
+            db.ref("users/" + uid).once("value"),
+            db.ref("transactions/" + uid).once("value")
+          ]);
+          if (!uSnap.exists()) { box.innerHTML = `<p class="admin-empty">User not found</p>`; return; }
+          const v = uSnap.val() || {};
+          const p = v.profile || {};
+          const name = ((p.firstName || "") + " " + (p.lastName || "")).trim() || p.username || uid;
+          const usdt = Number((v.tokenBalances && v.tokenBalances.usdt) || 0);
+          const refs = Number((v.stats && v.stats.referralCount) || 0);
+          const txs = [];
+          if (txSnap.exists()) txSnap.forEach((ch) => txs.push(ch.val() || {}));
+          txs.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+          const mining = Object.keys(v.activeMiningRigs || {}).length;
+          const blocked = !!v.blocked;
+          box.innerHTML = `
+            <div class="card card-elevated" style="text-align:center; margin-bottom:12px;">
+              <div class="admin-list-photo" style="width:72px;height:72px;margin:0 auto 10px;">${photoOrInitial(p.photoUrl, name)}</div>
+              <h2 style="font-size:18px;font-weight:900;">${escapeHtml(name)}</h2>
+              <p style="font-size:12px;color:var(--text-secondary);">@${escapeHtml(p.username || "-")}</p>
+              <span class="admin-status ${blocked ? "blocked" : "confirmed"}">${blocked ? "BLOCKED" : "ACTIVE"}</span>
+            </div>
+            <div class="card">
+              <div class="admin-detail-row"><span>Telegram ID</span><b>${escapeHtml(uid)}</b></div>
+              <div class="admin-detail-row"><span>Wallet Balance</span><b>${usdt.toFixed(4)} USDT</b></div>
+              <div class="admin-detail-row"><span>Total Deposit</span><b>${Number(v.totalDeposit || 0).toFixed(4)}</b></div>
+              <div class="admin-detail-row"><span>Total Withdraw</span><b>${Number(v.totalWithdraw || 0).toFixed(4)}</b></div>
+              <div class="admin-detail-row"><span>Referrals</span><b>${refs}</b></div>
+              <div class="admin-detail-row"><span>Referral Earn</span><b>${Number(v.referralEarn || 0).toFixed(4)}</b></div>
+              <div class="admin-detail-row"><span>Mining Rigs</span><b>${mining}</b></div>
+            </div>
+            <div class="card">
+              <h3 style="font-size:14px;font-weight:900;margin-bottom:8px;">Adjust Dollar Balance</h3>
+              <div class="form-group"><label class="form-label">Amount</label><input class="form-input" id="admin-amt" type="number" step="0.0001" /></div>
+              <div class="form-group"><label class="form-label">Reason</label><input class="form-input" id="admin-amt-reason" placeholder="Reason required" /></div>
+              <div class="admin-actions">
+                <button class="btn-primary" type="button" onclick="AdminPanel.adjust(1)">CREDIT</button>
+                <button class="btn-secondary" type="button" onclick="AdminPanel.adjust(-1)">DEBIT</button>
+              </div>
+              <button class="btn-danger" style="margin-top:8px;" type="button" onclick="AdminPanel.toggleBlock('${escapeHtml(uid)}', ${blocked ? "false" : "true"})">${blocked ? "UNBLOCK ACCOUNT" : "BLOCK ACCOUNT"}</button>
+            </div>
+            <div class="card">
+              <h3 style="font-size:14px;font-weight:900;margin-bottom:8px;">Transaction History</h3>
+              ${txs.length ? txs.slice(0, 20).map((tx) => `<div class="admin-detail-row"><span>${escapeHtml(tx.type || "TX")}<br><small>${fmtTime(tx.timestamp)}</small></span><b>${escapeHtml(tx.desc || "")}<br><span class="admin-status ${statusClass(tx.status)}">${escapeHtml(tx.status || "")}</span></b></div>`).join("") : `<p class="admin-empty">No transactions</p>`}
+            </div>`;
+        } catch (e) {
+          box.innerHTML = `<p class="admin-empty">Failed to load user</p>`;
+        }
+        if (window.lucide) lucide.createIcons();
       },
       async adjust(dir) {
-        if (!this.isAdmin() || !this.target) return;
-        const amt = Math.abs(parseFloat(document.getElementById("admin-amt").value) || 0);
-        if (!amt) return;
-        const snap = await db.ref("users/" + this.target + "/tokenBalances/usdt").once("value");
-        const next = Math.max(0, +(Number(snap.val() || 0) + dir * amt).toFixed(6));
-        await fbSet("users/" + this.target + "/tokenBalances/usdt", next);
-        App.toast("Updated " + this.target);
-        this.loadUser();
+        if (!this.guard() || !this.target) return;
+        const amt = Math.abs(parseFloat((document.getElementById("admin-amt") || {}).value || 0));
+        const reason = ((document.getElementById("admin-amt-reason") || {}).value || "").trim();
+        if (!amt) { App.toast("Enter a valid amount"); return; }
+        if (!reason) { App.toast("Reason is required"); return; }
+        this.confirm(dir > 0 ? "Credit balance" : "Debit balance", (dir > 0 ? "Add " : "Remove ") + amt + " USDT?", async () => {
+          const path = "users/" + this.target + "/tokenBalances/usdt";
+          let nextBal = 0;
+          await db.ref(path).transaction((cur) => {
+            nextBal = Math.max(0, +(Number(cur || 0) + dir * amt).toFixed(6));
+            return nextBal;
+          });
+          await fbPush("transactions/" + this.target, {
+            type: dir > 0 ? "ADMIN_CREDIT" : "ADMIN_DEBIT",
+            desc: (dir > 0 ? "+" : "-") + amt + " USDT · " + reason,
+            status: "COMPLETED",
+            timestamp: Date.now(),
+            amount: amt,
+            reason
+          });
+          await this.inbox(this.target, dir > 0 ? "Balance credited" : "Balance deducted", amt + " USDT. Reason: " + reason);
+          App.toast("Balance updated");
+          this.openUser(this.target);
+        });
       },
-      async resetCheckin() {
-        if (!this.isAdmin() || !this.target) return;
-        await fbSet("users/" + this.target + "/checkin", { lastDay: "", lastAt: 0, streak: 0, days: {} });
-        App.toast("Check-in reset");
+      toggleBlock(uid, block) {
+        this.confirm(block ? "Block user" : "Unblock user", block ? "Block this account?" : "Unblock this account?", async () => {
+          await fbSet("users/" + uid + "/blocked", !!block);
+          await this.inbox(uid, block ? "Account blocked" : "Account unblocked", block ? "Your account was blocked by admin." : "Your account is active again.");
+          App.toast(block ? "User blocked" : "User unblocked");
+          this.openUser(uid);
+        });
       },
-      async resetVisits() {
-        if (!this.isAdmin() || !this.target) return;
-        await fbSet("users/" + this.target + "/visitLocks", { daily: {}, weekly: {}, monthly: {} });
-        App.toast("Visits reset");
+      reqRow(r, kind) {
+        const name = r.firstName || r.username || r.userId;
+        const fn = kind === "wd" ? "openWithdraw" : "openDeposit";
+        return `<div class="admin-list-card">
+          <div class="admin-list-photo">${photoOrInitial(r.photoUrl, name)}</div>
+          <div class="admin-list-meta"><b>${escapeHtml(name)}</b><span>${Number(r.amount || 0).toFixed(4)} USDT · <span class="admin-status ${statusClass(r.status)}">${escapeHtml(r.status || "PENDING")}</span></span></div>
+          <button class="admin-view-btn" type="button" onclick="AdminPanel.${fn}('${escapeHtml(r.id)}')">VIEW</button>
+        </div>`;
       },
-      async resetQuiz() {
-        if (!this.isAdmin() || !this.target) return;
-        await fbSet("users/" + this.target + "/quizCats", {});
-        App.toast("Quiz reset");
+      async renderWithdraws() {
+        if (!this.guard()) return;
+        this.loading("admin-wd-list");
+        try {
+          const snap = await db.ref("withdrawRequests").once("value");
+          const rows = [];
+          snap.forEach((ch) => rows.push(Object.assign({ id: ch.key }, ch.val() || {})));
+          rows.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+          this.wdCache = rows;
+          this.filterWithdraws();
+        } catch (e) { this.empty("admin-wd-list", "Failed to load withdraws"); }
+      },
+      filterWithdraws() {
+        const q = ((document.getElementById("admin-wd-search") || {}).value || "").toLowerCase().trim();
+        const list = (this.wdCache || []).filter((r) => {
+          const hay = ((r.firstName || "") + " " + (r.username || "") + " " + (r.userId || "")).toLowerCase();
+          return !q || hay.indexOf(q) >= 0;
+        });
+        const box = document.getElementById("admin-wd-list");
+        if (box) box.innerHTML = list.length ? list.map((r) => this.reqRow(r, "wd")).join("") : `<p class="admin-empty">No withdraw requests</p>`;
+      },
+      async openWithdraw(id) {
+        if (!this.guard()) return;
+        App.navigate("view-admin-wd-detail");
+        const box = document.getElementById("admin-wd-detail");
+        box.innerHTML = `<p class="admin-empty">Loading...</p>`;
+        const snap = await db.ref("withdrawRequests/" + id).once("value");
+        if (!snap.exists()) { box.innerHTML = `<p class="admin-empty">Not found</p>`; return; }
+        const r = Object.assign({ id }, snap.val() || {});
+        const pending = String(r.status || "PENDING").toUpperCase() === "PENDING";
+        box.innerHTML = `
+          <div class="card">
+            <div class="admin-detail-row"><span>User</span><b>${escapeHtml(r.firstName || r.username || r.userId)}</b></div>
+            <div class="admin-detail-row"><span>Telegram ID</span><b>${escapeHtml(r.userId || "")}</b></div>
+            <div class="admin-detail-row"><span>Amount</span><b>${Number(r.amount || 0).toFixed(4)} USDT</b></div>
+            <div class="admin-detail-row"><span>Method</span><b>${escapeHtml(r.method || r.methodName || "-")}</b></div>
+            <div class="admin-detail-row"><span>Address / Number</span><b>${escapeHtml(r.address || "")}</b></div>
+            <div class="admin-detail-row"><span>Date</span><b>${fmtTime(r.timestamp)}</b></div>
+            <div class="admin-detail-row"><span>Status</span><b class="admin-status ${statusClass(r.status)}">${escapeHtml(r.status || "PENDING")}</b></div>
+            <button class="admin-copy" type="button" onclick="navigator.clipboard.writeText('${escapeHtml(r.address || "")}').then(()=>App.toast('Copied'))">COPY ADDRESS</button>
+            ${pending ? `<div class="admin-actions"><button class="btn-primary" type="button" onclick="AdminPanel.decideWithdraw('${escapeHtml(id)}','CONFIRMED')">CONFIRM</button><button class="btn-danger" type="button" onclick="AdminPanel.decideWithdraw('${escapeHtml(id)}','REJECTED')">REJECT</button></div>` : ""}
+          </div>`;
+      },
+      decideWithdraw(id, status) {
+        this.confirm(status === "CONFIRMED" ? "Confirm withdraw" : "Reject withdraw", status === "CONFIRMED" ? "Mark this withdraw as paid?" : "Reject and refund the locked USDT?", async () => {
+          if (this.busy) return;
+          this.busy = true;
+          try {
+            const ref = db.ref("withdrawRequests/" + id);
+            const snap = await ref.once("value");
+            if (!snap.exists()) { App.toast("Request missing"); return; }
+            const r = snap.val() || {};
+            if (String(r.status || "").toUpperCase() !== "PENDING") { App.toast("Already processed"); return; }
+            await ref.update({ status, processedAt: Date.now(), processedBy: SUPER_ADMIN_TELEGRAM_ID });
+            if (r.txKey) await fbSet("transactions/" + r.userId + "/" + r.txKey + "/status", status);
+            if (status === "REJECTED") {
+              await db.ref("users/" + r.userId + "/tokenBalances/usdt").transaction((cur) => +(Number(cur || 0) + Number(r.amount || 0)).toFixed(6));
+              await fbPush("transactions/" + r.userId, { type: "WITHDRAW_REFUND", desc: "Refund " + Number(r.amount || 0) + " USDT", status: "COMPLETED", timestamp: Date.now(), amount: Number(r.amount || 0) });
+              await this.inbox(r.userId, "Withdraw rejected", "Your withdraw was rejected and USDT was refunded.");
+            } else {
+              await db.ref("users/" + r.userId + "/totalWithdraw").transaction((cur) => +(Number(cur || 0) + Number(r.amount || 0)).toFixed(6));
+              await this.inbox(r.userId, "Withdraw confirmed", "Your withdraw of " + Number(r.amount || 0) + " USDT was confirmed.");
+            }
+            App.toast("Withdraw " + status.toLowerCase());
+            this.openWithdraw(id);
+          } finally { this.busy = false; }
+        });
+      },
+      async renderDeposits() {
+        if (!this.guard()) return;
+        this.loading("admin-dep-list");
+        try {
+          const snap = await db.ref("depositRequests").once("value");
+          const rows = [];
+          snap.forEach((ch) => rows.push(Object.assign({ id: ch.key }, ch.val() || {})));
+          rows.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+          this.depCache = rows;
+          this.filterDeposits();
+        } catch (e) { this.empty("admin-dep-list", "Failed to load deposits"); }
+      },
+      filterDeposits() {
+        const q = ((document.getElementById("admin-dep-search") || {}).value || "").toLowerCase().trim();
+        const list = (this.depCache || []).filter((r) => {
+          const hay = ((r.firstName || "") + " " + (r.username || "") + " " + (r.userId || "")).toLowerCase();
+          return !q || hay.indexOf(q) >= 0;
+        });
+        const box = document.getElementById("admin-dep-list");
+        if (box) box.innerHTML = list.length ? list.map((r) => this.reqRow(r, "dep")).join("") : `<p class="admin-empty">No deposit requests</p>`;
+      },
+      async openDeposit(id) {
+        if (!this.guard()) return;
+        App.navigate("view-admin-dep-detail");
+        const box = document.getElementById("admin-dep-detail");
+        box.innerHTML = `<p class="admin-empty">Loading...</p>`;
+        const snap = await db.ref("depositRequests/" + id).once("value");
+        if (!snap.exists()) { box.innerHTML = `<p class="admin-empty">Not found</p>`; return; }
+        const r = Object.assign({ id }, snap.val() || {});
+        const pending = String(r.status || "PENDING").toUpperCase() === "PENDING";
+        box.innerHTML = `
+          <div class="card">
+            <div class="admin-detail-row"><span>User</span><b>${escapeHtml(r.firstName || r.username || r.userId)}</b></div>
+            <div class="admin-detail-row"><span>Telegram ID</span><b>${escapeHtml(r.userId || "")}</b></div>
+            <div class="admin-detail-row"><span>Amount</span><b>${Number(r.amount || 0).toFixed(4)} USDT</b></div>
+            <div class="admin-detail-row"><span>Method</span><b>${escapeHtml(r.method || "-")}</b></div>
+            <div class="admin-detail-row"><span>Sender</span><b>${escapeHtml(r.sender || "-")}</b></div>
+            <div class="admin-detail-row"><span>TXID</span><b>${escapeHtml(r.txid || "-")}</b></div>
+            <div class="admin-detail-row"><span>Date</span><b>${fmtTime(r.timestamp)}</b></div>
+            <div class="admin-detail-row"><span>Status</span><b class="admin-status ${statusClass(r.status)}">${escapeHtml(r.status || "PENDING")}</b></div>
+            ${r.proof ? `<img class="admin-proof" src="${escapeHtml(r.proof)}" alt="proof" />` : ""}
+            ${pending ? `<div class="admin-actions"><button class="btn-primary" type="button" onclick="AdminPanel.decideDeposit('${escapeHtml(id)}','CONFIRMED')">CONFIRM</button><button class="btn-danger" type="button" onclick="AdminPanel.decideDeposit('${escapeHtml(id)}','REJECTED')">REJECT</button></div>` : ""}
+          </div>`;
+      },
+      decideDeposit(id, status) {
+        this.confirm(status === "CONFIRMED" ? "Confirm deposit" : "Reject deposit", status === "CONFIRMED" ? "Credit this deposit to the user wallet?" : "Reject this deposit without credit?", async () => {
+          if (this.busy) return;
+          this.busy = true;
+          try {
+            const ref = db.ref("depositRequests/" + id);
+            const snap = await ref.once("value");
+            if (!snap.exists()) { App.toast("Request missing"); return; }
+            const r = snap.val() || {};
+            if (String(r.status || "").toUpperCase() !== "PENDING") { App.toast("Already processed"); return; }
+            await ref.update({ status, processedAt: Date.now(), processedBy: SUPER_ADMIN_TELEGRAM_ID });
+            if (r.txKey) await fbSet("transactions/" + r.userId + "/" + r.txKey + "/status", status);
+            if (status === "CONFIRMED") {
+              await db.ref("users/" + r.userId + "/tokenBalances/usdt").transaction((cur) => +(Number(cur || 0) + Number(r.amount || 0)).toFixed(6));
+              await db.ref("users/" + r.userId + "/totalDeposit").transaction((cur) => +(Number(cur || 0) + Number(r.amount || 0)).toFixed(6));
+              await this.inbox(r.userId, "Deposit confirmed", Number(r.amount || 0) + " USDT was added to your wallet.");
+            } else {
+              await this.inbox(r.userId, "Deposit rejected", "Your deposit request was rejected.");
+            }
+            App.toast("Deposit " + status.toLowerCase());
+            this.openDeposit(id);
+          } finally { this.busy = false; }
+        });
+      },
+      renderTokens() {
+        if (!this.guard()) return;
+        this.filterTokens();
+      },
+      filterTokens() {
+        const q = ((document.getElementById("admin-token-search") || {}).value || "").toLowerCase().trim();
+        const box = document.getElementById("admin-token-list");
+        const tokens = CRYPTO_TOKENS.filter((t) => !q || (t.name + " " + t.symbol).toLowerCase().indexOf(q) >= 0);
+        box.innerHTML = tokens.map((t) => {
+          const on = LiveConfig.tokenEnabled(t.id);
+          return `<div class="admin-list-card">
+            <div class="admin-list-photo"><img src="${escapeHtml(t.img)}" alt="" /></div>
+            <div class="admin-list-meta"><b>${escapeHtml(t.name)}</b><span>${escapeHtml(t.symbol)} · ${on ? "ON" : "OFF"}</span></div>
+            <button class="admin-view-btn" type="button" onclick="AdminPanel.openToken('${t.id}')">VIEW</button>
+          </div>`;
+        }).join("");
+      },
+      openToken(id) {
+        const t = CRYPTO_TOKENS.find((x) => x.id === id);
+        if (!t) return;
+        App.navigate("view-admin-token-detail");
+        const on = LiveConfig.tokenEnabled(id);
+        document.getElementById("admin-token-detail").innerHTML = `
+          <div class="card">
+            <div class="admin-list-photo" style="width:64px;height:64px;margin-bottom:10px;"><img src="${escapeHtml(t.img)}" alt="" /></div>
+            <div class="form-group"><label class="form-label">Token Price (USD)</label><input class="form-input" id="tok-price" type="number" step="0.00000001" value="${t.baseUsdPrice}" /></div>
+            <div class="form-group"><label class="form-label">Token Name</label><input class="form-input" id="tok-name" value="${escapeHtml(t.name)}" /></div>
+            <div class="form-group"><label class="form-label">Symbol</label><input class="form-input" id="tok-sym" value="${escapeHtml(t.symbol)}" /></div>
+            <div class="form-group"><label class="form-label">Logo URL</label><input class="form-input" id="tok-img" value="${escapeHtml(t.img)}" /></div>
+            <div class="admin-toggle-row"><span>Show on user site</span><button class="admin-switch ${on ? "on" : ""}" id="tok-on" type="button" onclick="this.classList.toggle('on')"><i></i></button></div>
+            <button class="btn-primary" type="button" onclick="AdminPanel.saveToken('${id}')">SAVE TOKEN</button>
+          </div>`;
+      },
+      async saveToken(id) {
+        if (!this.guard()) return;
+        const name = (document.getElementById("tok-name").value || "").trim();
+        const symbol = (document.getElementById("tok-sym").value || "").trim();
+        const img = (document.getElementById("tok-img").value || "").trim();
+        const price = parseFloat(document.getElementById("tok-price").value);
+        const enabled = document.getElementById("tok-on").classList.contains("on");
+        if (!name || !symbol) { App.toast("Name and symbol required"); return; }
+        if (isNaN(price) || price < 0) { App.toast("Invalid price"); return; }
+        if (img && !isHttpUrl(img)) { App.toast("Invalid logo URL"); return; }
+        await fbSet("adminSettings/tokens/" + id, { name, symbol, img, baseUsdPrice: price, enabled });
+        App.toast("Token saved");
+      },
+      renderPackages() {
+        const box = document.getElementById("admin-package-list");
+        box.innerHTML = CRYPTO_TOKENS.map((t) => {
+          const on = LiveConfig.packageEnabled(t.id);
+          return `<div class="admin-list-card">
+            <div class="admin-list-photo"><img src="${escapeHtml(t.img)}" alt="" /></div>
+            <div class="admin-list-meta"><b>${escapeHtml(t.name)}</b><span>${on ? "Visible" : "Hidden"}</span></div>
+            <button class="admin-switch ${on ? "on" : ""}" type="button" onclick="AdminPanel.togglePackage('${t.id}', this)"><i></i></button>
+          </div>`;
+        }).join("");
+      },
+      async togglePackage(id, el) {
+        el.classList.toggle("on");
+        const enabled = el.classList.contains("on");
+        const t = CRYPTO_TOKENS.find((x) => x.id === id) || {};
+        await fbSet("adminSettings/packages/" + id, { enabled, name: t.name, img: t.img });
+        App.toast(enabled ? "Package visible" : "Package hidden");
+      },
+      fillAds() {
+        const d = LiveConfig.data.ads || {};
+        document.getElementById("admin-giga-zone").value = d.gigapub || "";
+        document.getElementById("admin-monetag-zone").value = d.monetag || "";
+      },
+      async saveAds() {
+        const gigapub = (document.getElementById("admin-giga-zone").value || "").trim();
+        const monetag = (document.getElementById("admin-monetag-zone").value || "").trim();
+        if (!gigapub || !monetag) { App.toast("Both Zone IDs required"); return; }
+        await fbSet("adminSettings/ads", { gigapub, monetag });
+        App.toast("Ads settings saved");
+      },
+      fillReferral() {
+        const r = LiveConfig.data.referral || {};
+        document.getElementById("admin-ref-reward").value = r.reward;
+        document.getElementById("admin-wd-min").value = r.minWithdraw;
+        document.getElementById("admin-wd-max").value = r.maxWithdraw;
+        document.getElementById("admin-ref-min").value = r.minRefs;
+      },
+      async saveReferral() {
+        const reward = parseFloat(document.getElementById("admin-ref-reward").value);
+        const minWithdraw = parseFloat(document.getElementById("admin-wd-min").value);
+        const maxWithdraw = parseFloat(document.getElementById("admin-wd-max").value);
+        const minRefs = parseInt(document.getElementById("admin-ref-min").value, 10);
+        if ([reward, minWithdraw, maxWithdraw, minRefs].some((n) => isNaN(n) || n < 0)) { App.toast("Invalid values"); return; }
+        if (minWithdraw > maxWithdraw) { App.toast("Min withdraw cannot exceed max"); return; }
+        await fbSet("adminSettings/referral", { reward, minWithdraw, maxWithdraw, minRefs });
+        App.toast("Referral settings saved");
+      },
+      renderCasino() {
+        const box = document.getElementById("admin-casino-list");
+        box.innerHTML = LiveConfig.casinoList().map((g) => `<div class="admin-list-card">
+          <div class="admin-list-photo"><img src="${escapeHtml(g.img)}" alt="" /></div>
+          <div class="admin-list-meta"><b>${escapeHtml(g.name)}</b><span>${g.enabled ? "ON" : "OFF"}</span></div>
+          <button class="admin-view-btn" type="button" onclick="AdminPanel.openCasino('${g.id}')">VIEW</button>
+        </div>`).join("");
+      },
+      openCasino(id) {
+        const g = LiveConfig.casinoList().find((x) => x.id === id);
+        if (!g) return;
+        App.navigate("view-admin-casino-detail");
+        document.getElementById("admin-casino-detail").innerHTML = `
+          <div class="card">
+            <div class="form-group"><label class="form-label">Game Name</label><input class="form-input" id="cas-name" value="${escapeHtml(g.name)}" /></div>
+            <div class="form-group"><label class="form-label">Image URL</label><input class="form-input" id="cas-img" value="${escapeHtml(g.img)}" /></div>
+            <div class="admin-toggle-row"><span>Show on user site</span><button class="admin-switch ${g.enabled ? "on" : ""}" id="cas-on" type="button" onclick="this.classList.toggle('on')"><i></i></button></div>
+            <button class="btn-primary" type="button" onclick="AdminPanel.saveCasino('${id}')">SAVE ALL</button>
+          </div>`;
+      },
+      async saveCasino(id) {
+        const name = (document.getElementById("cas-name").value || "").trim();
+        const img = (document.getElementById("cas-img").value || "").trim();
+        const enabled = document.getElementById("cas-on").classList.contains("on");
+        if (!name) { App.toast("Game name required"); return; }
+        if (img && !isHttpUrl(img)) { App.toast("Invalid image URL"); return; }
+        await fbSet("adminSettings/casino/" + id, { name, img, enabled });
+        App.toast("Game saved");
+      },
+      async broadcastAll() {
+        const msg = (document.getElementById("admin-broadcast-all").value || "").trim();
+        if (!msg) { App.toast("Write a message"); return; }
+        this.confirm("Send to all users", "This notice will appear in every user notification bar.", async () => {
+          const snap = await db.ref("users").once("value");
+          const jobs = [];
+          snap.forEach((ch) => jobs.push(this.inbox(ch.key, "Admin Notice", msg)));
+          await Promise.all(jobs);
+          await NotificationDispatcher.notifyAll("ADMIN BROADCAST", msg);
+          App.toast("Broadcast sent");
+          document.getElementById("admin-broadcast-all").value = "";
+        });
+      },
+      async broadcastOne() {
+        const uid = (document.getElementById("admin-broadcast-uid").value || "").trim();
+        const msg = (document.getElementById("admin-broadcast-one").value || "").trim();
+        if (!uid || !msg) { App.toast("Telegram ID and message required"); return; }
+        const snap = await db.ref("users/" + uid).once("value");
+        if (!snap.exists()) { App.toast("User not found"); return; }
+        await this.inbox(uid, "Admin Message", msg);
+        App.toast("Message sent");
+        document.getElementById("admin-broadcast-one").value = "";
+      },
+      renderWdMethods() {
+        const box = document.getElementById("admin-wdm-list");
+        const rows = LiveConfig.methods("withdraw");
+        box.innerHTML = rows.length ? rows.map((m) => `<div class="admin-list-card"><div class="admin-list-meta"><b>${escapeHtml(m.name)}</b><span>${escapeHtml(m.category)}</span></div><button class="btn-danger" style="width:auto;padding:8px 12px;" type="button" onclick="AdminPanel.deleteWdMethod('${escapeHtml(m.id)}')">DELETE</button></div>`).join("") : `<p class="admin-empty">No withdraw methods</p>`;
+      },
+      async addWithdrawMethod() {
+        const name = (document.getElementById("admin-wdm-name").value || "").trim();
+        const category = document.getElementById("admin-wdm-cat").value;
+        if (!name) { App.toast("Method name required"); return; }
+        const id = name.toLowerCase().replace(/[^a-z0-9]+/g, "_") + "_" + Date.now().toString().slice(-4);
+        if (!LiveConfig.data.withdrawMethods) LiveConfig.data.withdrawMethods = {};
+        LiveConfig.data.withdrawMethods[id] = { name, category };
+        await fbSet("adminSettings/withdrawMethods/" + id, { name, category });
+        document.getElementById("admin-wdm-name").value = "";
+        App.toast("Method saved");
+        this.renderWdMethods();
+      },
+      deleteWdMethod(id) {
+        this.confirm("Delete method", "Remove this withdraw method?", async () => {
+          if (LiveConfig.data.withdrawMethods) delete LiveConfig.data.withdrawMethods[id];
+          await fbSet("adminSettings/withdrawMethods/" + id, null);
+          App.toast("Deleted");
+          this.renderWdMethods();
+        });
+      },
+      renderDepMethods() {
+        const box = document.getElementById("admin-dpm-list");
+        const rows = LiveConfig.methods("deposit");
+        box.innerHTML = rows.length ? rows.map((m) => `<div class="admin-list-card"><div class="admin-list-meta"><b>${escapeHtml(m.name)}</b><span>${escapeHtml(m.address || "")}</span></div><button class="btn-danger" style="width:auto;padding:8px 12px;" type="button" onclick="AdminPanel.deleteDepMethod('${escapeHtml(m.id)}')">DELETE</button></div>`).join("") : `<p class="admin-empty">No deposit methods</p>`;
+      },
+      async addDepositMethod() {
+        const name = (document.getElementById("admin-dpm-name").value || "").trim();
+        const address = (document.getElementById("admin-dpm-addr").value || "").trim();
+        if (!name || !address) { App.toast("Name and address required"); return; }
+        const id = name.toLowerCase().replace(/[^a-z0-9]+/g, "_") + "_" + Date.now().toString().slice(-4);
+        if (!LiveConfig.data.depositMethods) LiveConfig.data.depositMethods = {};
+        LiveConfig.data.depositMethods[id] = { name, address };
+        await fbSet("adminSettings/depositMethods/" + id, { name, address });
+        document.getElementById("admin-dpm-name").value = "";
+        document.getElementById("admin-dpm-addr").value = "";
+        App.toast("Method saved");
+        this.renderDepMethods();
+      },
+      deleteDepMethod(id) {
+        this.confirm("Delete method", "Remove this deposit method?", async () => {
+          if (LiveConfig.data.depositMethods) delete LiveConfig.data.depositMethods[id];
+          await fbSet("adminSettings/depositMethods/" + id, null);
+          App.toast("Deleted");
+          this.renderDepMethods();
+        });
+      },
+      fillApp() {
+        const d = LiveConfig.data;
+        document.getElementById("admin-app-name").value = d.appName || "";
+        document.getElementById("admin-support-tg").value = d.supportTg || "";
+        document.getElementById("admin-support-wa").value = d.supportWa || "";
+        document.getElementById("admin-bot-token").value = d.botToken || "";
+        document.getElementById("admin-bot-user").value = d.botUsername || "";
+        document.getElementById("admin-mini-link").value = d.miniAppLink || "";
+        document.getElementById("admin-channel-id").value = d.channelId || "";
+        const sw = document.getElementById("admin-maint-switch");
+        if (sw) sw.classList.toggle("on", !!d.maintenance);
+      },
+      async saveAppSettings() {
+        const appName = (document.getElementById("admin-app-name").value || "").trim();
+        const supportTg = (document.getElementById("admin-support-tg").value || "").trim();
+        const supportWa = (document.getElementById("admin-support-wa").value || "").trim();
+        const botToken = (document.getElementById("admin-bot-token").value || "").trim();
+        const botUsername = (document.getElementById("admin-bot-user").value || "").trim();
+        const miniAppLink = (document.getElementById("admin-mini-link").value || "").trim();
+        const channelId = (document.getElementById("admin-channel-id").value || "").trim();
+        const maintenance = document.getElementById("admin-maint-switch").classList.contains("on");
+        if (!appName) { App.toast("App name required"); return; }
+        if (supportTg && !isHttpUrl(supportTg)) { App.toast("Invalid Telegram link"); return; }
+        if (supportWa && !isHttpUrl(supportWa)) { App.toast("Invalid WhatsApp link"); return; }
+        if (miniAppLink && !isHttpUrl(miniAppLink)) { App.toast("Invalid Mini App link"); return; }
+        await fbUpdate("adminSettings", { appName, supportTg, supportWa, botToken, botUsername, miniAppLink, channelId, maintenance });
+        App.toast("App settings saved");
       }
     };
 
