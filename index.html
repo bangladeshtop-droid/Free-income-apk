@@ -1801,6 +1801,251 @@
     .chip.c01 { background: #0ea5e9; } .chip.c05 { background: #10b981; } .chip.c1 { background: #ef4444; } .chip.c5 { background: #7c3aed; }
     .chip.on { box-shadow: 0 0 0 3px #FDE68A; }
     .tg-status { text-align: center; font-size: 13px; font-weight: 800; color: #FDE68A; min-height: 22px; margin-top: 8px; }
+
+    .admin-pkg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .admin-pkg-card {
+      background: var(--bg-card-elevated); border: 1px solid var(--border-color);
+      border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .admin-pkg-card img { width: 100%; height: 92px; object-fit: cover; background: var(--bg-secondary); }
+    .admin-pkg-card .apc-body { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+    .admin-pkg-card b { font-size: 12px; line-height: 1.3; min-height: 32px; }
+    .admin-dur-card {
+      background: var(--bg-secondary); border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 10px; margin-bottom: 8px;
+    }
+    .admin-dur-card h4 { font-size: 12px; font-weight: 800; color: var(--cyan); margin-bottom: 8px; }
+    .admin-dur-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    .vpc-cd {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;
+      margin: 8px 0 10px; position: relative; z-index: 1;
+    }
+    .vpc-cd i {
+      display: block; background: var(--bg-secondary); border: 1px solid var(--border-color);
+      border-radius: 8px; padding: 6px 2px; text-align: center;
+    }
+    .vpc-cd b { display: block; font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--warning); }
+    .vpc-cd span { display: block; font-size: 8px; font-weight: 800; color: var(--text-secondary); letter-spacing: 0.4px; text-transform: uppercase; }
+
+    .miner-stage {
+      width: 220px; height: 220px; position: relative; margin: 8px auto 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .miner-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 2px dashed rgba(0,210,255,0.45);
+      animation: minerSpin 12s linear infinite;
+    }
+    .miner-ring.r2 { inset: 18px; border-style: solid; border-color: rgba(34,211,238,0.25); animation-duration: 8s; animation-direction: reverse; }
+    .miner-ring.r3 { inset: 36px; border: 1px solid rgba(251,191,36,0.35); animation-duration: 5s; }
+    .miner-core {
+      width: 108px; height: 108px; border-radius: 50%; position: relative; z-index: 2;
+      background:
+        radial-gradient(circle at 35% 30%, #7dd3fc 0%, #0284c7 38%, #0f172a 72%);
+      box-shadow: 0 0 28px rgba(0,210,255,0.55), inset 0 0 18px rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+      animation: minerPulse 2.4s ease-in-out infinite;
+    }
+    .miner-core.idle { animation: none; filter: grayscale(0.4); box-shadow: none; }
+    .miner-orbit {
+      position: absolute; width: 10px; height: 10px; border-radius: 50%;
+      background: #FDE68A; box-shadow: 0 0 10px #FDE68A;
+      animation: minerOrbit 3.2s linear infinite;
+    }
+    .miner-orbit.o2 { animation-duration: 4.4s; background: #67e8f9; box-shadow: 0 0 10px #67e8f9; }
+    .miner-orbit.o3 { animation-duration: 2.6s; background: #c084fc; box-shadow: 0 0 10px #c084fc; }
+    .miner-live {
+      font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 900;
+      color: var(--neon); margin: 4px 0 2px;
+    }
+    .miner-live-sub { font-size: 11px; color: var(--text-secondary); margin-bottom: 10px; }
+    .miner-actions { display: grid; grid-template-columns: 1fr; gap: 8px; width: 100%; }
+    @keyframes minerSpin { to { transform: rotate(360deg); } }
+    @keyframes minerPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 22px rgba(0,210,255,0.4); }
+      50% { transform: scale(1.06); box-shadow: 0 0 36px rgba(0,210,255,0.75); }
+    }
+    @keyframes minerOrbit {
+      from { transform: rotate(0deg) translateX(92px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(92px) rotate(-360deg); }
+    }
+
+    body.sb-immersive, body.jm-immersive { padding-bottom: 0; }
+    body.sb-immersive .top-header,
+    body.sb-immersive .bottom-nav-premium-wrap,
+    body.jm-immersive .top-header,
+    body.jm-immersive .bottom-nav-premium-wrap { display: none; }
+    body.sb-immersive .app-container,
+    body.jm-immersive .app-container { max-width: 480px; padding: 0 0 12px; }
+
+    .sb-wrap {
+      min-height: 100dvh; color: #FDE68A; padding: 8px 8px 18px;
+      background:
+        radial-gradient(120% 70% at 50% 0%, rgba(251,191,36,0.18), transparent 46%),
+        linear-gradient(180deg, #3b0d16 0%, #1a050a 42%, #2a0a12 100%);
+    }
+    .sb-head { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
+    .sb-title {
+      text-align: center; font-family: "Orbitron", sans-serif; font-size: 28px; font-weight: 900;
+      color: #F5D77F; text-shadow: 0 2px 0 #7a4a0a, 0 0 18px rgba(251,191,36,0.45);
+      letter-spacing: 1px; margin: 4px 0 8px;
+    }
+    .sb-close {
+      width: 78%; margin: 0 auto 10px; background: linear-gradient(180deg, #9f1239, #7f1d1d);
+      border: 1px solid #FDE68A; border-radius: 18px; padding: 6px 10px; text-align: center;
+    }
+    .sb-close span { display: block; font-size: 10px; font-weight: 800; letter-spacing: 1.4px; }
+    .sb-close b {
+      display: inline-flex; min-width: 36px; height: 36px; border-radius: 50%;
+      align-items: center; justify-content: center; background: #FDE68A; color: #7f1d1d;
+      font-size: 16px; margin-top: 4px;
+    }
+    .sb-dome {
+      width: 210px; height: 150px; margin: 0 auto 12px; position: relative;
+      background: radial-gradient(circle at 50% 80%, #7f1d1d, #450a0a 70%);
+      border-radius: 50% 50% 18px 18px; border: 3px solid #D4AF37;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.45), inset 0 0 20px rgba(0,0,0,0.35);
+    }
+    .sb-glass {
+      position: absolute; left: 18px; right: 18px; top: 8px; height: 78px;
+      border-radius: 90px 90px 12px 12px;
+      background: radial-gradient(circle at 50% 20%, rgba(255,255,255,0.35), rgba(255,255,255,0.05) 55%, transparent 70%);
+      border: 2px solid rgba(255,255,255,0.28);
+    }
+    .sb-dice { position: absolute; left: 0; right: 0; bottom: 22px; display: flex; justify-content: center; gap: 8px; }
+    .sb-die {
+      width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(180deg, #ef4444, #b91c1c);
+      color: #fff; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+      padding: 4px; box-shadow: 0 6px 10px rgba(0,0,0,0.4); border: 1px solid #fecaca;
+    }
+    .sb-die .pip { width: 5px; height: 5px; background: #fff; }
+    .sb-die.on-1 .p5, .sb-die.on-2 .p1, .sb-die.on-2 .p9, .sb-die.on-3 .p1, .sb-die.on-3 .p5, .sb-die.on-3 .p9,
+    .sb-die.on-4 .p1, .sb-die.on-4 .p3, .sb-die.on-4 .p7, .sb-die.on-4 .p9,
+    .sb-die.on-5 .p1, .sb-die.on-5 .p3, .sb-die.on-5 .p5, .sb-die.on-5 .p7, .sb-die.on-5 .p9,
+    .sb-die.on-6 .p1, .sb-die.on-6 .p3, .sb-die.on-6 .p4, .sb-die.on-6 .p6, .sb-die.on-6 .p7, .sb-die.on-6 .p9 { opacity: 1; }
+    .sb-die.roll { animation: dieShake 0.1s linear infinite; }
+    .sb-board {
+      background: linear-gradient(180deg, #fff7e8, #f3e0b8);
+      border: 3px solid #D4AF37; border-radius: 16px; padding: 6px; color: #3D2600;
+    }
+    .sb-row { display: grid; gap: 3px; margin-bottom: 3px; }
+    .sb-cell {
+      min-height: 36px; border: 1px solid #d6b36a; border-radius: 8px;
+      background: linear-gradient(180deg, #fffaf0, #f6e7c3); color: #3D2600;
+      font-size: 9px; font-weight: 800; cursor: pointer; padding: 4px 2px; text-align: center;
+      line-height: 1.15;
+    }
+    .sb-cell small { display: block; font-size: 8px; opacity: 0.75; }
+    .sb-cell.on, .sb-cell.has {
+      background: linear-gradient(180deg, #ffe38a, #d4a017); box-shadow: inset 0 0 0 2px #92400e;
+    }
+    .sb-cell .chip-amt { display: block; font-size: 9px; color: #7f1d1d; margin-top: 2px; }
+    .sb-any {
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      background: linear-gradient(180deg, #fff1c2, #e8c56a); font-size: 10px;
+    }
+    .sb-chips {
+      display: flex; justify-content: space-between; gap: 6px; margin: 10px 4px 8px;
+      background: linear-gradient(180deg, #4a0f18, #2a080d); border-radius: 28px; padding: 8px 10px;
+      border: 1px solid #D4AF37;
+    }
+    .sb-chip {
+      width: 42px; height: 42px; border-radius: 50%; border: 3px dashed rgba(255,255,255,0.7);
+      color: #fff; font-size: 9px; font-weight: 900; cursor: pointer;
+    }
+    .sb-chip.on { box-shadow: 0 0 0 3px #FDE68A; transform: translateY(-2px); }
+    .sb-foot {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 8px; align-items: center;
+    }
+    .sb-bal {
+      background: linear-gradient(180deg, #7f1d1d, #4a0b12); border: 1px solid #D4AF37;
+      border-radius: 18px; padding: 10px 12px; font-weight: 800; font-size: 13px; text-align: center;
+    }
+    .sb-place {
+      min-height: 48px; border: none; border-radius: 18px; font-weight: 900; cursor: pointer;
+      background: linear-gradient(180deg, #FFE38A, #C4891A); color: #2A1A00; font-size: 14px;
+    }
+    .sb-place:disabled { opacity: 0.5; cursor: not-allowed; }
+    .sb-hist { display: flex; gap: 6px; overflow-x: auto; margin: 8px 0; min-height: 28px; }
+    .sb-hist span {
+      flex-shrink: 0; font-size: 10px; font-weight: 800; background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(253,230,138,0.35); border-radius: 8px; padding: 4px 7px;
+    }
+    .sb-dots { display: flex; justify-content: center; gap: 3px; }
+    .sb-dots i { width: 7px; height: 7px; border-radius: 50%; background: #b91c1c; display: inline-block; }
+
+    .jm-wrap {
+      min-height: 100dvh; color: #FDE68A; padding: 8px 8px 18px;
+      background:
+        radial-gradient(90% 50% at 50% 0%, rgba(185,28,28,0.35), transparent 50%),
+        linear-gradient(180deg, #4a0b12, #1c0508 40%, #3b0d16);
+    }
+    .jm-title {
+      text-align: center; font-family: "Orbitron", sans-serif; font-size: 24px; font-weight: 900;
+      color: #F5D77F; text-shadow: 0 2px 0 #7a4a0a; margin: 4px 0 10px;
+    }
+    .jm-table {
+      height: 168px; border-radius: 18px; margin: 0 4px 10px; position: relative;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(30,64,175,0.35), transparent 55%),
+        linear-gradient(180deg, #1e3a8a, #172554);
+      border: 3px solid #D4AF37; box-shadow: inset 0 0 30px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    .jm-dice { position: absolute; inset: 12px 18px 12px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; }
+    .jm-die {
+      width: 46px; height: 46px; border-radius: 10px; background: #fff; color: #111;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 14px rgba(0,0,0,0.35); border: 1px solid #e5e7eb;
+    }
+    .jm-die.roll { animation: dieShake 0.12s linear infinite; }
+    .jm-die svg { width: 30px; height: 30px; }
+    .jm-timer {
+      position: absolute; right: 10px; bottom: 10px; width: 42px; height: 42px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fdba74, #9a3412);
+      border: 3px solid #FDE68A; display: flex; align-items: center; justify-content: center;
+      font-weight: 900; color: #fff; font-size: 16px;
+    }
+    .jm-odds {
+      display: flex; justify-content: space-between; gap: 4px; margin: 0 4px 10px;
+      background: #7f1d1d; border-radius: 10px; padding: 7px 8px; font-size: 10px; font-weight: 800;
+    }
+    .jm-odds b { background: #1d4ed8; color: #fff; border-radius: 6px; padding: 1px 5px; margin-right: 3px; }
+    .jm-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 0 4px 10px; }
+    .jm-cell {
+      background: linear-gradient(180deg, #fffaf0, #f4e3bc); border: 2px solid #D4AF37;
+      border-radius: 14px; min-height: 92px; padding: 8px 6px 6px; text-align: center; cursor: pointer;
+      color: #111;
+    }
+    .jm-cell.on { box-shadow: 0 0 0 3px #FDE68A; }
+    .jm-cell svg { width: 42px; height: 42px; }
+    .jm-slots { display: flex; justify-content: center; gap: 3px; margin-top: 6px; }
+    .jm-slots i {
+      width: 16px; height: 16px; border-radius: 4px; background: #d6d3d1; color: #111;
+      font-size: 9px; font-weight: 900; display: flex; align-items: center; justify-content: center;
+    }
+    .jm-slots i.fill { background: #2563eb; color: #fff; }
+    .jm-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 4px 10px; }
+    .jm-meta div {
+      background: linear-gradient(180deg, #9f1239, #7f1d1d); border: 1px solid #D4AF37;
+      border-radius: 16px; padding: 10px 8px; text-align: center; font-size: 12px; font-weight: 800;
+    }
+    .jm-chips {
+      display: flex; justify-content: space-between; gap: 6px; margin: 0 4px 10px;
+      background: linear-gradient(180deg, #4a0f18, #2a080d); border-radius: 28px; padding: 8px 10px;
+      border: 1px solid #D4AF37;
+    }
+    .jm-roll {
+      width: calc(100% - 8px); margin: 0 4px; min-height: 48px; border: none; border-radius: 18px;
+      font-weight: 900; cursor: pointer; background: linear-gradient(180deg, #FFE38A, #C4891A); color: #2A1A00;
+    }
+    .jm-roll:disabled { opacity: 0.5; }
+    .jm-hist { display: flex; gap: 6px; overflow-x: auto; margin: 8px 4px 0; }
+    .jm-hist span {
+      flex-shrink: 0; font-size: 10px; font-weight: 800; background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(253,230,138,0.35); border-radius: 8px; padding: 4px 7px;
+    }
   </style>
 </head>
 <body>
@@ -1972,7 +2217,7 @@
       <div class="card card-elevated" style="text-align:center; margin-bottom:16px;">
         <h2 style="font-size:18px; font-weight:900; color:var(--cyan); margin-bottom:4px;">Active Virtual Mining Rigs</h2>
         <p style="font-size:11px; color:var(--text-secondary);">
-          Your activated cloud rigs mine real crypto. Run individual 8-hour sessions.
+          Your activated cloud rigs mine real crypto. Run individual 24-hour sessions.
         </p>
       </div>
 
@@ -1993,18 +2238,31 @@
         <h3 id="console-token-title" style="font-size:18px; font-weight:900; color:var(--text-primary);">TOKEN MINER</h3>
         <p id="console-token-rate" style="font-size:13px; color:var(--cyan); font-weight:800; margin-top:2px;">Rate: +0.0000 TOKEN/h</p>
 
-        <div style="width:130px; height:130px; border-radius:50%; border:2px dashed var(--cyan); display:flex; align-items:center; justify-content:center; margin:20px 0; box-shadow:0 0 20px var(--cyan-glow);">
-          <div style="width:85px; height:85px; border-radius:50%; background:radial-gradient(circle, var(--cyan), #0a1b32); display:flex; align-items:center; justify-content:center;">
+        <div class="miner-stage" id="miner-stage">
+          <div class="miner-ring"></div>
+          <div class="miner-ring r2"></div>
+          <div class="miner-ring r3"></div>
+          <span class="miner-orbit" id="miner-orb-1"></span>
+          <span class="miner-orbit o2" id="miner-orb-2"></span>
+          <span class="miner-orbit o3" id="miner-orb-3"></span>
+          <div class="miner-core idle" id="miner-core">
             <i data-lucide="cpu" style="width:36px; height:36px; color:#fff;"></i>
           </div>
         </div>
 
         <div class="badge-status badge-pending" id="console-session-badge">IDLE</div>
-        <div style="font-family:monospace; font-size:24px; font-weight:900; color:var(--neon); margin:10px 0;" id="console-countdown">08:00:00</div>
+        <div class="miner-live" id="console-live-tokens">+0.000000</div>
+        <div class="miner-live-sub" id="console-live-sub">Mined this session</div>
+        <div style="font-family:monospace; font-size:24px; font-weight:900; color:var(--neon); margin:10px 0;" id="console-countdown">24:00:00</div>
 
-        <button class="btn-primary" id="console-action-btn" onclick="MultiMinerEngine.handleConsoleAction()">
-          START 8-HOUR SESSION
-        </button>
+        <div class="miner-actions">
+          <button class="btn-primary" id="console-action-btn" onclick="MultiMinerEngine.handleConsoleAction()">
+            START 24-HOUR SESSION
+          </button>
+          <button class="btn-secondary" id="console-claim-btn" onclick="MultiMinerEngine.claimNow()" disabled>
+            CLAIM MINED TOKENS
+          </button>
+        </div>
       </div>
     </section>
 
@@ -2724,8 +2982,17 @@
       </div>
       <div class="card card-elevated" style="margin-bottom:12px;">
         <h2 style="font-size:18px; font-weight:900; color:var(--cyan);">Package Management</h2>
+        <p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">All user-site packages. Open details to edit ads, referrals, commission, and visibility.</p>
       </div>
-      <div id="admin-package-list"></div>
+      <div class="admin-pkg-grid" id="admin-package-list"></div>
+    </section>
+
+    <section id="view-admin-package-detail" class="view-page">
+      <div class="page-back" onclick="App.navigate('view-admin-packages')">
+        <i data-lucide="arrow-left" style="width:18px; height:18px; color:var(--cyan);"></i>
+        <span style="font-size:12px; font-weight:700; color:var(--cyan);">Back</span>
+      </div>
+      <div id="admin-package-detail"></div>
     </section>
 
     <section id="view-admin-ads" class="view-page">
@@ -2864,35 +3131,11 @@
     </section>
 
     <section id="view-sicbo" class="view-page">
-      <div class="table-game-wrap">
-        <div class="tg-top">
-          <div class="tg-back" onclick="SicBoEngine.leave()"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i> <span data-i18n="lobby">Lobby</span></div>
-          <div class="tg-bal" id="sicbo-bal">0.0000 USDT</div>
-        </div>
-        <div class="felt">
-          <div class="dice-row">
-            <div class="die on-1" id="die1"><i class="pip p1"></i><i class="pip p2"></i><i class="pip p3"></i><i class="pip p4"></i><i class="pip p5"></i><i class="pip p6"></i><i class="pip p7"></i><i class="pip p8"></i><i class="pip p9"></i></div>
-            <div class="die on-2" id="die2"><i class="pip p1"></i><i class="pip p2"></i><i class="pip p3"></i><i class="pip p4"></i><i class="pip p5"></i><i class="pip p6"></i><i class="pip p7"></i><i class="pip p8"></i><i class="pip p9"></i></div>
-            <div class="die on-3" id="die3"><i class="pip p1"></i><i class="pip p2"></i><i class="pip p3"></i><i class="pip p4"></i><i class="pip p5"></i><i class="pip p6"></i><i class="pip p7"></i><i class="pip p8"></i><i class="pip p9"></i></div>
-          </div>
-          <div class="tg-status" id="sicbo-status">Place a bet</div>
-          <div class="sic-bets">
-            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('small')">SMALL 1:1</button>
-            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('triple')">ANY TRIPLE 30:1</button>
-            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('big')">BIG 1:1</button>
-            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('odd')">ODD 1:1</button>
-            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('total11')">TOTAL 11 6:1</button>
-            <button class="sic-bet" type="button" onclick="SicBoEngine.pick('even')">EVEN 1:1</button>
-          </div>
-          <div class="chip-row">
-            <button class="chip c01 on" type="button" onclick="SicBoEngine.setChip(0.10)">0.10</button>
-            <button class="chip c05" type="button" onclick="SicBoEngine.setChip(0.50)">0.50</button>
-            <button class="chip c1" type="button" onclick="SicBoEngine.setChip(1)">1</button>
-            <button class="chip c5" type="button" onclick="SicBoEngine.setChip(5)">5</button>
-          </div>
-          <button class="sic-action" id="sicbo-roll" type="button" onclick="SicBoEngine.roll()" style="width:100%;">ROLL DICE</button>
-        </div>
-      </div>
+      <div class="sb-wrap" id="sicbo-root"></div>
+    </section>
+
+    <section id="view-jhandi" class="view-page">
+      <div class="jm-wrap" id="jhandi-root"></div>
     </section>
 
     <section id="view-blackjack" class="view-page">
@@ -3244,8 +3487,70 @@
     const CASINO_GAMES = [
       { id: "crash", name: "Crash Game", img: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=800&q=70" },
       { id: "sicbo", name: "Sic Bo", img: "https://images.unsplash.com/photo-1596838132731-3301c3fd4316?auto=format&fit=crop&w=800&q=70" },
+      { id: "jhandi", name: "Jhandi Munda", img: "https://images.unsplash.com/photo-1511192336575-5a79af67a986?auto=format&fit=crop&w=800&q=70" },
       { id: "blackjack", name: "Blackjack", img: "https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=800&q=70" }
     ];
+    const PKG_DAYS = [3, 7, 15, 30, 60, 90];
+    const MINING_SESSION_MS = 24 * 3600000;
+    function defaultDurations() {
+      const durs = {};
+      PKG_DAYS.forEach((d) => {
+        const s = SPEC_CONFIG[d];
+        durs[d] = { reqAds: s.reqAds, reqRefs: s.reqRefs, returnPct: s.returnPct, usdtCost: s.usdtCost, missionDailyUsd: s.missionDailyUsd };
+      });
+      return durs;
+    }
+    function packageRecord(id) {
+      const t = CRYPTO_TOKENS.find((x) => x.id === id) || {};
+      const saved = (LiveConfig.data && LiveConfig.data.packages && LiveConfig.data.packages[id]) || {};
+      const durs = Object.assign({}, defaultDurations(), saved.durations || {});
+      PKG_DAYS.forEach((d) => { durs[d] = Object.assign({}, defaultDurations()[d], durs[d] || {}); });
+      return {
+        id,
+        name: saved.name || t.name,
+        img: saved.img || t.img,
+        enabled: saved.enabled !== false,
+        durations: durs
+      };
+    }
+    function packageSpec(tokenId, days) {
+      const rec = packageRecord(tokenId);
+      const d = rec.durations[days] || defaultDurations()[days] || SPEC_CONFIG[days] || SPEC_CONFIG[3];
+      const base = SPEC_CONFIG[days] || SPEC_CONFIG[3];
+      return {
+        days: Number(days),
+        reqRefs: Number(d.reqRefs != null ? d.reqRefs : base.reqRefs),
+        reqAds: Number(d.reqAds != null ? d.reqAds : base.reqAds),
+        returnPct: Number(d.returnPct != null ? d.returnPct : base.returnPct),
+        usdtCost: Number(d.usdtCost != null ? d.usdtCost : base.usdtCost),
+        missionDailyUsd: Number(d.missionDailyUsd != null ? d.missionDailyUsd : base.missionDailyUsd)
+      };
+    }
+    function fmtParts(ms) {
+      ms = Math.max(0, Number(ms) || 0);
+      const s = Math.floor(ms / 1000);
+      const mo = Math.floor(s / 2592000);
+      const d = Math.floor((s % 2592000) / 86400);
+      const h = Math.floor((s % 86400) / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sec = s % 60;
+      return { mo, d, h, m, sec };
+    }
+    function cdHtml(ms) {
+      const p = fmtParts(ms);
+      return `<div class="vpc-cd"><i><b>${p.mo}</b><span>Mo</span></i><i><b>${p.d}</b><span>Day</span></i><i><b>${String(p.h).padStart(2,"0")}</b><span>Hr</span></i><i><b>${String(p.m).padStart(2,"0")}</b><span>Min</span></i><i><b>${String(p.sec).padStart(2,"0")}</b><span>Sec</span></i></div>`;
+    }
+    let SERVER_OFFSET = 0;
+    async function fbNow() {
+      try {
+        const offsetSnap = await db.ref(".info/serverTimeOffset").once("value");
+        SERVER_OFFSET = Number(offsetSnap.val() || 0);
+        return Date.now() + SERVER_OFFSET;
+      } catch (e) {
+        return Date.now() + SERVER_OFFSET;
+      }
+    }
+    function nowMs() { return Date.now() + SERVER_OFFSET; }
 
     const LiveConfig = {
       bound: false,
@@ -3256,7 +3561,7 @@
           tokens[t.id] = { name: t.name, symbol: t.symbol, img: t.img, baseUsdPrice: t.baseUsdPrice, enabled: true };
         });
         const packages = {};
-        CRYPTO_TOKENS.forEach((t) => { packages[t.id] = { enabled: true, name: t.name, img: t.img }; });
+        CRYPTO_TOKENS.forEach((t) => { packages[t.id] = { enabled: true, name: t.name, img: t.img, durations: defaultDurations() }; });
         const casino = {};
         CASINO_GAMES.forEach((g) => { casino[g.id] = { name: g.name, img: g.img, enabled: true }; });
         return {
@@ -3303,6 +3608,16 @@
         out.referral = Object.assign({}, base.referral, raw.referral || {});
         out.tokens = Object.assign({}, base.tokens, raw.tokens || {});
         out.packages = Object.assign({}, base.packages, raw.packages || {});
+        Object.keys(out.packages).forEach((id) => {
+          const b = base.packages[id] || {};
+          const r = (raw.packages || {})[id] || {};
+          out.packages[id] = Object.assign({}, b, r);
+          const bd = b.durations || defaultDurations();
+          const rd = r.durations || {};
+          const durs = {};
+          PKG_DAYS.forEach((d) => { durs[d] = Object.assign({}, bd[d] || {}, rd[d] || {}); });
+          out.packages[id].durations = durs;
+        });
         out.casino = Object.assign({}, base.casino, raw.casino || {});
         out.withdrawMethods = raw.withdrawMethods ? raw.withdrawMethods : base.withdrawMethods;
         out.depositMethods = raw.depositMethods ? raw.depositMethods : base.depositMethods;
@@ -3316,6 +3631,9 @@
       packageEnabled(id) {
         const p = (this.data.packages || {})[id];
         return !p || p.enabled !== false;
+      },
+      packageMeta(id) {
+        return packageRecord(id);
       },
       visibleTokens() {
         return CRYPTO_TOKENS.filter((t) => this.tokenEnabled(t.id)).map((t) => {
@@ -3385,6 +3703,12 @@
         else if (typeof App.render50Packages === "function") App.render50Packages();
         if (typeof App.renderAllTokens === "function") App.renderAllTokens();
         if (typeof App.updateUI === "function") App.updateUI();
+        if (typeof AdminPanel !== "undefined") {
+          const pkgList = document.getElementById("view-admin-packages");
+          const pkgDetail = document.getElementById("view-admin-package-detail");
+          if (pkgList && pkgList.classList.contains("active-view")) AdminPanel.renderPackages();
+          if (pkgDetail && pkgDetail.classList.contains("active-view") && AdminPanel.pkgEditId) AdminPanel.openPackage(AdminPanel.pkgEditId);
+        }
         if (window.lucide) lucide.createIcons();
       }
     };
@@ -3515,6 +3839,7 @@
     const App = {
       init() {
         LiveConfig.bind();
+        fbNow();
         this.initTelegram();
         this.populateTokenSelectors();
         this.render50Packages();
@@ -3903,8 +4228,11 @@
         if (targetPageId === "view-casino") CasinoHub.renderLobby();
         if (String(targetPageId || "").indexOf("view-admin") === 0) AdminPanel.onNavigate(targetPageId);
         if (targetPageId === "view-sicbo") SicBoEngine.enter();
+        if (targetPageId === "view-jhandi") JhandiEngine.enter();
         if (targetPageId === "view-blackjack") BlackjackEngine.enter();
         if (targetPageId !== "view-sicbo" && targetPageId !== "view-blackjack") document.body.classList.remove("table-immersive");
+        if (targetPageId !== "view-sicbo") document.body.classList.remove("sb-immersive");
+        if (targetPageId !== "view-jhandi") document.body.classList.remove("jm-immersive");
         if (targetPageId === "view-quiz") {
           QuizEngine.cat = null;
           const catWrap = document.getElementById("quiz-cat-wrap");
@@ -3932,6 +4260,10 @@
 
         let filtered = LiveConfig.visibleTokens ? LiveConfig.visibleTokens() : CRYPTO_TOKENS.slice();
         filtered = filtered.filter((t) => LiveConfig.packageEnabled ? LiveConfig.packageEnabled(t.id) : true);
+        filtered = filtered.map((t) => {
+          const p = packageRecord(t.id);
+          return Object.assign({}, t, { name: p.name || t.name, img: p.img || t.img });
+        });
         if (filterKeyword) {
           const kw = filterKeyword.toLowerCase();
           filtered = filtered.filter(t => t.name.toLowerCase().includes(kw) || t.symbol.toLowerCase().includes(kw));
@@ -3945,7 +4277,7 @@
 
           // Default selection 3 Days
           const defDur = 3;
-          const spec = SPEC_CONFIG[defDur];
+          const spec = packageSpec(t.id, defDur);
 
           // Pay calculations
           const tokenCost = parseFloat((spec.usdtCost / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
@@ -4078,8 +4410,10 @@
       handlePackageConfigChange(tokenId) {
         const dur = parseInt(document.getElementById(`sel-dur-${tokenId}`).value);
         const mode = document.getElementById(`sel-mode-${tokenId}`).value;
-        const spec = SPEC_CONFIG[dur];
+        const spec = packageSpec(tokenId, dur);
         const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
+        const pkg = packageRecord(tokenId);
+        if (t && pkg) { t.displayName = pkg.name; }
 
         // Toggle Views
         const payView = document.getElementById(`view-pay-${tokenId}`);
@@ -4147,7 +4481,7 @@
       /* Direct payment activation */
       async activateViaPayment(tokenId) {
         const dur = parseInt(document.getElementById(`sel-dur-${tokenId}`).value);
-        const spec = SPEC_CONFIG[dur];
+        const spec = packageSpec(tokenId, dur);
         const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
         const tokenCost = parseFloat((spec.usdtCost / t.baseUsdPrice).toFixed(t.baseUsdPrice < 1 ? 2 : 6));
 
@@ -4171,7 +4505,11 @@
           mode: 'pay',
           ratePerHr: ratePerHr,
           expiryTime: expiry,
+          sessionStart: 0,
           sessionEnd: 0,
+          claimedAmount: 0,
+          claimSeq: 0,
+          pendingPayout: 0,
           status: 'IDLE'
         });
         await db.ref(`transactions/${State.user.telegramId}`).push().set({
@@ -4187,7 +4525,7 @@
       /* Mission activation */
       async activateViaMission(tokenId) {
         const dur = parseInt(document.getElementById(`sel-dur-${tokenId}`).value);
-        const spec = SPEC_CONFIG[dur];
+        const spec = packageSpec(tokenId, dur);
         const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
 
         const missionTotalUsd = spec.missionDailyUsd * dur;
@@ -4201,7 +4539,11 @@
           mode: 'mission',
           ratePerHr: ratePerHr,
           expiryTime: expiry,
+          sessionStart: 0,
           sessionEnd: 0,
+          claimedAmount: 0,
+          claimSeq: 0,
+          pendingPayout: 0,
           status: 'IDLE'
         });
 
@@ -4218,7 +4560,7 @@
           State.user.packageAdProgress[tokenId] = next;
           const durEl = document.getElementById("sel-dur-" + tokenId);
           const dur = durEl ? parseInt(durEl.value) : 3;
-          const spec = SPEC_CONFIG[dur] || SPEC_CONFIG[3];
+          const spec = packageSpec(tokenId, dur);
           const adsPercent = next > 0 ? Math.max(1.2, Math.min(100, (next / spec.reqAds) * 100)) : 0;
           const txtAds = document.getElementById("txt-ads-" + tokenId);
           if (txtAds) txtAds.innerText = next + " / " + spec.reqAds + " Ads";
@@ -4240,10 +4582,11 @@
 
       openPkgDetails(tokenId) {
         const dur = parseInt(document.getElementById(`sel-dur-${tokenId}`).value);
-        const spec = SPEC_CONFIG[dur];
+        const spec = packageSpec(tokenId, dur);
         const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
+        const pkg = packageRecord(tokenId);
 
-        document.getElementById("modal-detail-title").innerText = `${t.name} (${spec.days} Days)`;
+        document.getElementById("modal-detail-title").innerText = `${(pkg && pkg.name) || t.name} (${spec.days} Days)`;
         document.getElementById("modal-detail-body").innerHTML = `
           <p><b>Token:</b> ${t.name} (${t.symbol})</p>
           <p><b>Base Price:</b> $${t.baseUsdPrice} USD</p>
@@ -4519,7 +4862,7 @@
         const loader = document.getElementById("game-loader");
         if (!loader) return;
         const title = loader.querySelector(".loader-title");
-        const names = { crash: "LOADING CRASH", sicbo: "LOADING SIC BO", blackjack: "LOADING BLACKJACK" };
+        const names = { crash: "LOADING CRASH", sicbo: "LOADING SIC BO", jhandi: "LOADING JHANDI MUNDA", blackjack: "LOADING BLACKJACK" };
         if (title) title.innerText = names[id] || "LOADING";
         const bar = loader.querySelector(".loader-bar > i");
         if (bar) {
@@ -4534,6 +4877,7 @@
           loader.classList.remove("show");
           if (id === "crash") App.navigate("view-crash");
           if (id === "sicbo") App.navigate("view-sicbo");
+          if (id === "jhandi") App.navigate("view-jhandi");
           if (id === "blackjack") App.navigate("view-blackjack");
         }, ms);
       }
@@ -4742,6 +5086,7 @@
         this.updatePlayerCount();
       },
       leave() {
+        GameSFX.stopFly();
         document.body.classList.remove("crash-immersive");
         App.navigate("view-casino");
       },
@@ -4811,14 +5156,23 @@
           multEl.className = "crash-mult";
           multEl.innerText = "1.00x";
           stEl.innerText = "NEXT ROUND IN " + left + "s";
-          if (this.lastSoundPhase !== "waiting") { this.lastSoundPhase = "waiting"; GameSFX.beep(520, 0.08, "square", 0.04); }
+          if (this.lastSoundPhase !== "waiting") {
+            this.lastSoundPhase = "waiting";
+            GameSFX.stopFly();
+            GameSFX.beep(520, 0.08, "square", 0.04);
+          }
         } else if (r.phase === "flying") {
           multEl.className = "crash-mult fly";
           multEl.innerText = m.toFixed(2) + "x";
           stEl.innerText = "IN FLIGHT";
-          if (this.lastSoundPhase !== "flying") { this.lastSoundPhase = "flying"; GameSFX.crashLift(); }
+          if (this.lastSoundPhase !== "flying") {
+            this.lastSoundPhase = "flying";
+            GameSFX.crashLift();
+            GameSFX.startFly();
+          }
+          GameSFX.updateFly(m);
           this.flyTick = (this.flyTick || 0) + 1;
-          if (this.flyTick % 18 === 0) GameSFX.tick(m);
+          if (this.flyTick % 28 === 0) GameSFX.tick(m);
         } else {
           multEl.className = "crash-mult boom";
           multEl.innerText = Number(r.crashPoint).toFixed(2) + "x";
@@ -5062,76 +5416,176 @@
        ========================================================== */
     const MultiMinerEngine = {
       timer: null,
+      claiming: false,
+      starting: false,
       openConsole(tokenId) {
         State.currentConsoleTokenId = tokenId;
         const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
+        const pkg = packageRecord(tokenId);
         const rig = State.user.activeMiningRigs[tokenId];
-        document.getElementById("console-token-img").src = t.img;
-        document.getElementById("console-token-title").innerText = `${t.name} Miner`;
+        document.getElementById("console-token-img").src = (pkg && pkg.img) || t.img;
+        document.getElementById("console-token-title").innerText = `${(pkg && pkg.name) || t.name} Miner`;
         document.getElementById("console-token-rate").innerText = `Rate: +${rig.ratePerHr} ${t.symbol}/hr`;
-
         App.navigate("view-mining-console");
         this.updateConsoleUI();
         if (this.timer) clearInterval(this.timer);
-        this.timer = setInterval(() => this.updateConsoleUI(), 1000);
+        this.timer = setInterval(() => this.updateConsoleUI(), 250);
+        if (window.lucide) lucide.createIcons();
+      },
+      sessionBounds(rig) {
+        const end = Number(rig && rig.sessionEnd) || 0;
+        let start = Number(rig && rig.sessionStart) || 0;
+        if (end && !start) start = end - MINING_SESSION_MS;
+        return { start, end };
+      },
+      minedAmount(rig, now) {
+        if (!rig) return 0;
+        const { start, end } = this.sessionBounds(rig);
+        const claimed = Number(rig.claimedAmount) || 0;
+        if (!start || !end) return 0;
+        const capped = Math.min(now, end);
+        const hours = Math.max(0, (capped - start) / 3600000);
+        const total = hours * Number(rig.ratePerHr || 0);
+        return Math.max(0, total - claimed);
+      },
+      setAnim(running) {
+        const core = document.getElementById("miner-core");
+        if (core) core.classList.toggle("idle", !running);
+        ["miner-orb-1", "miner-orb-2", "miner-orb-3"].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = running ? "block" : "none";
+        });
       },
       updateConsoleUI() {
         const tokenId = State.currentConsoleTokenId;
         const rig = State.user.activeMiningRigs[tokenId];
         if (!rig) return;
-
-        const now = Date.now();
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId) || { symbol: "TKN" };
+        const now = nowMs();
         const badge = document.getElementById("console-session-badge");
         const btn = document.getElementById("console-action-btn");
+        const claimBtn = document.getElementById("console-claim-btn");
         const cd = document.getElementById("console-countdown");
+        const live = document.getElementById("console-live-tokens");
+        const sub = document.getElementById("console-live-sub");
+        const pending = this.minedAmount(rig, now);
+        const digits = t.baseUsdPrice < 1 ? 6 : 8;
+        if (live) live.innerText = "+" + pending.toFixed(digits);
+        if (sub) sub.innerText = pending > 0 ? ("Unclaimed " + t.symbol) : "Mined this session";
 
         if (rig.sessionEnd && now < rig.sessionEnd) {
           badge.innerText = "MINING RUNNING";
           badge.className = "badge-status badge-pending";
-          btn.innerText = "MINING ACTIVE...";
+          btn.innerText = "MINING 24H ACTIVE";
           btn.disabled = true;
-
+          if (claimBtn) { claimBtn.disabled = pending <= 0 || this.claiming; claimBtn.innerText = "CLAIM MINED TOKENS"; }
           const diff = rig.sessionEnd - now;
           const h = Math.floor(diff / 3600000);
           const m = Math.floor((diff % 3600000) / 60000);
           const s = Math.floor((diff % 60000) / 1000);
           cd.innerText = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+          this.setAnim(true);
         } else if (rig.sessionEnd && now >= rig.sessionEnd) {
-          badge.innerText = "REWARD READY";
+          badge.innerText = pending > 0 ? "SESSION COMPLETE" : "IDLE";
           badge.className = "badge-status badge-completed";
-          btn.innerText = "CLAIM REWARD";
-          btn.disabled = false;
+          btn.innerText = pending > 0 ? "CLAIM & CLOSE SESSION" : "START 24-HOUR SESSION";
+          btn.disabled = this.claiming || this.starting;
+          if (claimBtn) { claimBtn.disabled = pending <= 0 || this.claiming; }
           cd.innerText = "00:00:00";
+          this.setAnim(false);
         } else {
           badge.innerText = "IDLE";
           badge.className = "badge-status badge-completed";
-          btn.innerText = "START 8-HOUR SESSION";
-          btn.disabled = false;
-          cd.innerText = "08:00:00";
+          btn.innerText = "START 24-HOUR SESSION";
+          btn.disabled = this.starting;
+          if (claimBtn) claimBtn.disabled = true;
+          cd.innerText = "24:00:00";
+          if (live) live.innerText = "+0.000000";
+          this.setAnim(false);
+        }
+      },
+      async claimNow() {
+        if (this.claiming) return;
+        const tokenId = State.currentConsoleTokenId;
+        const path = `users/${State.user.telegramId}/activeMiningRigs/${tokenId}`;
+        const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
+        this.claiming = true;
+        this.updateConsoleUI();
+        try {
+          const now = await fbNow();
+          const result = await db.ref(path).transaction((rig) => {
+            if (!rig) return rig;
+            const end = Number(rig.sessionEnd) || 0;
+            let start = Number(rig.sessionStart) || 0;
+            if (end && !start) start = end - MINING_SESSION_MS;
+            const claimed = Number(rig.claimedAmount) || 0;
+            const claimSeq = Number(rig.claimSeq) || 0;
+            if (!start || !end) return rig;
+            const capped = Math.min(now, end);
+            const hours = Math.max(0, (capped - start) / 3600000);
+            const total = hours * Number(rig.ratePerHr || 0);
+            const pending = Math.max(0, total - claimed);
+            if (pending <= 0) return rig;
+            rig.sessionStart = start;
+            rig.claimedAmount = claimed + pending;
+            rig.lastClaimAt = now;
+            rig.claimSeq = claimSeq + 1;
+            rig.pendingPayout = pending;
+            return rig;
+          });
+          const snap = result && result.snapshot && result.snapshot.val();
+          const payout = Number((snap && snap.pendingPayout) || 0);
+          if (!result.committed || payout <= 0) {
+            App.toast("Nothing to claim");
+            return;
+          }
+          await db.ref(`users/${State.user.telegramId}/tokenBalances/${tokenId}`).transaction((cur) => +(Number(cur || 0) + payout).toFixed(8));
+          await db.ref(path + "/pendingPayout").set(0);
+          if (snap.sessionEnd && now >= Number(snap.sessionEnd)) {
+            await db.ref(path).update({ sessionEnd: 0, sessionStart: 0, claimedAmount: 0, claimSeq: 0, status: "IDLE" });
+          }
+          await db.ref(`transactions/${State.user.telegramId}`).push().set({
+            type: "MINING_CLAIM",
+            desc: `+${payout} ${t.symbol}`,
+            status: "COMPLETED",
+            timestamp: now
+          });
+          App.toast(`Claimed +${payout} ${t.symbol}!`);
+          App.updateUI();
+        } finally {
+          this.claiming = false;
+          this.updateConsoleUI();
         }
       },
       async handleConsoleAction() {
         const tokenId = State.currentConsoleTokenId;
         const rig = State.user.activeMiningRigs[tokenId];
         const t = CRYPTO_TOKENS.find(x => x.id === tokenId);
-        const now = Date.now();
-
+        if (!rig) return;
+        const now = await fbNow();
+        if (rig.sessionEnd && now < rig.sessionEnd) return;
         if (rig.sessionEnd && now >= rig.sessionEnd) {
-          const reward = rig.ratePerHr * 8;
-          const cur = State.user.tokenBalances[tokenId] || 0;
-          await db.ref(`users/${State.user.telegramId}/tokenBalances/${tokenId}`).set(cur + reward);
-          await db.ref(`users/${State.user.telegramId}/activeMiningRigs/${tokenId}/sessionEnd`).set(0);
-          await db.ref(`transactions/${State.user.telegramId}`).push().set({
-            type: "MINING_CLAIM",
-            desc: `+${reward} ${t.symbol}`,
-            status: "COMPLETED",
-            timestamp: now
+          await this.claimNow();
+          return;
+        }
+        if (this.starting) return;
+        this.starting = true;
+        try {
+          const sessionStart = now;
+          const sessionEnd = now + MINING_SESSION_MS;
+          await db.ref(`users/${State.user.telegramId}/activeMiningRigs/${tokenId}`).update({
+            sessionStart,
+            sessionEnd,
+            claimedAmount: 0,
+            claimSeq: 0,
+            pendingPayout: 0,
+            lastClaimAt: 0,
+            status: "MINING"
           });
-          App.toast(`Claimed +${reward} ${t.symbol}!`);
-        } else {
-          const sessionEnd = now + (8 * 3600000);
-          await db.ref(`users/${State.user.telegramId}/activeMiningRigs/${tokenId}/sessionEnd`).set(sessionEnd);
-          App.toast(`8-Hour mining started for ${t.name}!`);
+          App.toast(`24-Hour mining started for ${t.name}!`);
+        } finally {
+          this.starting = false;
+          this.updateConsoleUI();
         }
       }
     };
@@ -5687,6 +6141,7 @@
 
     const GameSFX = {
       ctx: null,
+      flyNodes: null,
       unlock() {
         try {
           const AC = window.AudioContext || window.webkitAudioContext;
@@ -5708,15 +6163,110 @@
         o.connect(g); g.connect(this.ctx.destination);
         o.start(); o.stop(this.ctx.currentTime + dur);
       },
+      noise(dur, vol) {
+        if (!this.ctx) this.unlock();
+        if (!this.ctx) return;
+        const len = Math.floor(this.ctx.sampleRate * dur);
+        const buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+        const data = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / len);
+        const src = this.ctx.createBufferSource();
+        const g = this.ctx.createGain();
+        const f = this.ctx.createBiquadFilter();
+        f.type = "bandpass";
+        f.frequency.value = 900;
+        src.buffer = buf;
+        g.gain.setValueAtTime(vol || 0.08, this.ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + dur);
+        src.connect(f); f.connect(g); g.connect(this.ctx.destination);
+        src.start(); src.stop(this.ctx.currentTime + dur);
+      },
       beep(f, d, type, v) { this.tone(f, d || 0.08, type || "square", v || 0.05); },
-      tick(mult) { this.tone(420 + Math.min(900, (mult || 1) * 80), 0.05, "triangle", 0.03); },
-      crashLift() { this.tone(220, 0.35, "sawtooth", 0.04, 520); },
-      crashBoom() { this.tone(180, 0.45, "sawtooth", 0.09, 55); this.tone(90, 0.5, "square", 0.05, 40); },
+      tick(mult) { this.tone(180 + Math.min(420, (mult || 1) * 18), 0.04, "sine", 0.018); },
+      crashLift() {
+        this.noise(0.28, 0.07);
+        this.tone(90, 0.55, "sawtooth", 0.035, 280);
+        this.tone(140, 0.7, "triangle", 0.03, 420);
+      },
+      startFly() {
+        this.stopFly();
+        if (!this.ctx) this.unlock();
+        if (!this.ctx) return;
+        const t = this.ctx.currentTime;
+        const master = this.ctx.createGain();
+        master.gain.setValueAtTime(0.0001, t);
+        master.gain.exponentialRampToValueAtTime(0.09, t + 0.35);
+        master.connect(this.ctx.destination);
+        const noiseBuf = this.ctx.createBuffer(1, this.ctx.sampleRate * 2, this.ctx.sampleRate);
+        const nd = noiseBuf.getChannelData(0);
+        for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+        const nSrc = this.ctx.createBufferSource();
+        nSrc.buffer = noiseBuf;
+        nSrc.loop = true;
+        const nFilter = this.ctx.createBiquadFilter();
+        nFilter.type = "bandpass";
+        nFilter.frequency.setValueAtTime(520, t);
+        nFilter.Q.value = 0.7;
+        const nGain = this.ctx.createGain();
+        nGain.gain.value = 0.55;
+        nSrc.connect(nFilter); nFilter.connect(nGain); nGain.connect(master);
+        nSrc.start();
+        const eng = this.ctx.createOscillator();
+        eng.type = "sawtooth";
+        eng.frequency.setValueAtTime(68, t);
+        const engF = this.ctx.createBiquadFilter();
+        engF.type = "lowpass";
+        engF.frequency.value = 420;
+        const engG = this.ctx.createGain();
+        engG.gain.value = 0.22;
+        eng.connect(engF); engF.connect(engG); engG.connect(master);
+        eng.start();
+        const whine = this.ctx.createOscillator();
+        whine.type = "triangle";
+        whine.frequency.setValueAtTime(240, t);
+        const whineG = this.ctx.createGain();
+        whineG.gain.value = 0.045;
+        whine.connect(whineG); whineG.connect(master);
+        whine.start();
+        this.flyNodes = { master, nSrc, nFilter, eng, engG, whine, whineG };
+      },
+      updateFly(mult) {
+        if (!this.flyNodes || !this.ctx) return;
+        const m = Math.max(1, Number(mult) || 1);
+        const t = this.ctx.currentTime;
+        this.flyNodes.nFilter.frequency.setTargetAtTime(480 + Math.min(1400, m * 90), t, 0.12);
+        this.flyNodes.eng.frequency.setTargetAtTime(64 + Math.min(220, m * 16), t, 0.12);
+        this.flyNodes.whine.frequency.setTargetAtTime(230 + Math.min(520, m * 28), t, 0.12);
+        this.flyNodes.master.gain.setTargetAtTime(0.07 + Math.min(0.08, m * 0.004), t, 0.2);
+      },
+      stopFly() {
+        if (!this.flyNodes) return;
+        try {
+          const t = this.ctx ? this.ctx.currentTime : 0;
+          this.flyNodes.master.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+          this.flyNodes.nSrc.stop(t + 0.2);
+          this.flyNodes.eng.stop(t + 0.2);
+          this.flyNodes.whine.stop(t + 0.2);
+        } catch (e) {}
+        this.flyNodes = null;
+      },
+      crashBoom() {
+        this.stopFly();
+        this.noise(0.45, 0.16);
+        this.tone(160, 0.5, "sawtooth", 0.1, 48);
+        this.tone(70, 0.6, "square", 0.06, 32);
+      },
       cash() { this.tone(880, 0.12, "sine", 0.07); this.tone(1320, 0.18, "triangle", 0.05); },
-      dice() { this.tone(180 + Math.random() * 90, 0.08, "square", 0.05); },
+      bet() { this.tone(640, 0.07, "triangle", 0.05); this.tone(980, 0.09, "sine", 0.03); },
+      dice() {
+        this.noise(0.09, 0.07);
+        this.tone(160 + Math.random() * 110, 0.07, "square", 0.045);
+      },
       card() { this.tone(740, 0.07, "triangle", 0.04); },
-      win() { this.tone(523, 0.12, "sine", 0.06); this.tone(659, 0.16, "sine", 0.05); this.tone(784, 0.2, "sine", 0.05); },
-      lose() { this.tone(220, 0.25, "sawtooth", 0.05, 90); }
+      win() { this.tone(523, 0.12, "sine", 0.06); this.tone(659, 0.16, "sine", 0.05); this.tone(784, 0.22, "sine", 0.05); this.tone(1046, 0.18, "triangle", 0.04); },
+      lose() { this.tone(220, 0.25, "sawtooth", 0.05, 90); this.tone(140, 0.3, "triangle", 0.03, 70); },
+      roundStart() { this.tone(392, 0.1, "sine", 0.05); this.tone(523, 0.14, "triangle", 0.04); },
+      roundEnd() { this.tone(330, 0.12, "sine", 0.04); }
     };
 
     const VISIT_POOL = [
@@ -5731,7 +6281,7 @@
     const VISIT_TABS = {
       daily: { count: 20, minR: 0.0001, maxR: 0.006, minT: 15, maxT: 20, lock: 24 * 3600000, label: "Daily" },
       weekly: { count: 15, minR: 0.007, maxR: 0.01, minT: 25, maxT: 30, lock: 7 * 24 * 3600000, label: "Weekly" },
-      monthly: { count: 10, minR: 0.012, maxR: 0.02, minT: 40, maxT: 50, lock: 30 * 24 * 3600000, label: "Monthly" }
+      monthly: { count: 10, minR: 0.012, maxR: 0.02, minT: 40, maxT: 50, lock: 30 * 24 * 3600000, label: "Monthly" } /* 1 month */
     };
     const VisitEngine = {
       current: null,
@@ -5778,10 +6328,11 @@
         });
         this.renderList();
       },
-      lockLeft(id) {
+      lockLeft(id, tab) {
         this.ensureLocks();
-        const until = Number((State.user.visitLocks[this.tab] || {})[id] || 0);
-        return Math.max(0, until - Date.now());
+        const useTab = tab || this.tab;
+        const until = Number((State.user.visitLocks[useTab] || {})[id] || 0);
+        return Math.max(0, until - nowMs());
       },
       renderList() {
         this.ensurePool(this.tab);
@@ -5790,7 +6341,7 @@
         if (!mount) return;
         const list = this.pools[this.tab] || [];
         mount.innerHTML = list.map((task, idx) => {
-          const left = this.lockLeft(task.id);
+          const left = this.lockLeft(task.id, this.tab);
           const locked = left > 0;
           return `
             <div class="visit-premium-card ${locked ? "lock" : ""}">
@@ -5807,6 +6358,7 @@
                 <div class="vpc-chip"><h6>${t("timer", "Timer")}</h6><p>${task.visitTime}s</p></div>
                 <div class="vpc-chip"><h6>${t("lock", "Lock")}</h6><p>${this.tab === "daily" ? "24h" : (this.tab === "weekly" ? "7d" : "30d")}</p></div>
               </div>
+              ${locked ? cdHtml(left) : ""}
               ${locked ? `<div class="vpc-lock">${t("nextIn", "Next in")} ${fmtDur(left)}</div>` : ""}
               <button class="btn-primary" ${locked ? "disabled" : ""} onclick="VisitEngine.start('${this.tab}', ${idx})">${locked ? t("locked", "LOCKED") : t("visitNow", "VISIT NOW")}</button>
             </div>`;
@@ -5824,7 +6376,7 @@
         this.ensurePool(tab);
         const task = (this.pools[tab] || [])[idx];
         if (!task) return;
-        if (this.lockLeft(task.id) > 0) { App.toast(t("taskLocked", "Task is locked")); return; }
+        if (this.lockLeft(task.id, tab) > 0) { App.toast(t("taskLocked", "Task is locked")); return; }
         this.current = {
           id: task.id, tab, name: task.name, title: task.title, reward: task.reward,
           visitTime: task.visitTime, link: task.link, startedAt: Date.now(), token: nonce(), claimed: false
@@ -5863,7 +6415,7 @@
           return;
         }
         if (this.current.claimed) { App.toast(t("alreadyClaimed", "Already claimed")); return; }
-        if (this.lockLeft(this.current.id) > 0) { App.toast(t("taskLocked", "Task is locked")); return; }
+        if (this.lockLeft(this.current.id, this.current.tab) > 0) { App.toast(t("taskLocked", "Task is locked")); return; }
         this.claiming = true;
         this.current.claimed = true;
         const cfg = VISIT_TABS[this.current.tab];
@@ -5874,7 +6426,8 @@
           return;
         }
         this.ensureLocks();
-        State.user.visitLocks[this.current.tab][this.current.id] = Date.now() + cfg.lock;
+        const serverNow = await fbNow();
+        State.user.visitLocks[this.current.tab][this.current.id] = serverNow + cfg.lock;
         const cur = State.user.tokenBalances.usdt || 0;
         const next = +(cur + reward).toFixed(6);
         State.user.tokenBalances.usdt = next;
@@ -6539,6 +7092,7 @@
         if (id === "view-admin-deposits") this.renderDeposits();
         if (id === "view-admin-tokens") this.renderTokens();
         if (id === "view-admin-packages") this.renderPackages();
+        if (id === "view-admin-package-detail" && this.pkgEditId) this.openPackage(this.pkgEditId);
         if (id === "view-admin-ads") this.fillAds();
         if (id === "view-admin-referral") this.fillReferral();
         if (id === "view-admin-casino") this.renderCasino();
@@ -6943,22 +7497,77 @@
         await fbSet("adminSettings/tokens/" + id, { name, symbol, img, baseUsdPrice: price, enabled });
         App.toast("Token saved");
       },
+      pkgEditId: "",
       renderPackages() {
         const box = document.getElementById("admin-package-list");
+        if (!box) return;
         box.innerHTML = CRYPTO_TOKENS.map((t) => {
-          const on = LiveConfig.packageEnabled(t.id);
-          return `<div class="admin-list-card">
-            <div class="admin-list-photo"><img src="${escapeHtml(t.img)}" alt="" /></div>
-            <div class="admin-list-meta"><b>${escapeHtml(t.name)}</b><span>${on ? "Visible" : "Hidden"}</span></div>
-            <button class="admin-switch ${on ? "on" : ""}" type="button" onclick="AdminPanel.togglePackage('${t.id}', this)"><i></i></button>
+          const p = packageRecord(t.id);
+          return `<div class="admin-pkg-card">
+            <img src="${escapeHtml(p.img)}" alt="" />
+            <div class="apc-body">
+              <b>${escapeHtml(p.name)}</b>
+              <button class="admin-view-btn" type="button" onclick="AdminPanel.openPackage('${t.id}')">VIEW</button>
+            </div>
           </div>`;
         }).join("");
+      },
+      openPackage(id) {
+        if (!this.guard()) return;
+        this.pkgEditId = id;
+        const p = packageRecord(id);
+        App.navigate("view-admin-package-detail");
+        const durs = PKG_DAYS.map((d) => {
+          const s = p.durations[d] || defaultDurations()[d];
+          return `<div class="admin-dur-card">
+            <h4>${d} Day Package</h4>
+            <div class="admin-dur-grid">
+              <div class="form-group"><label class="form-label">Ads Count</label><input class="form-input" id="pkg-ads-${d}" type="number" min="0" value="${s.reqAds}" /></div>
+              <div class="form-group"><label class="form-label">Referral Count</label><input class="form-input" id="pkg-refs-${d}" type="number" min="0" value="${s.reqRefs}" /></div>
+              <div class="form-group"><label class="form-label">Commission %</label><input class="form-input" id="pkg-comm-${d}" type="number" step="0.1" min="0" value="${s.returnPct}" /></div>
+              <div class="form-group"><label class="form-label">Pay Cost (USDT)</label><input class="form-input" id="pkg-cost-${d}" type="number" step="0.01" min="0" value="${s.usdtCost}" /></div>
+            </div>
+          </div>`;
+        }).join("");
+        document.getElementById("admin-package-detail").innerHTML = `
+          <div class="card">
+            <div class="admin-list-photo" style="width:72px;height:72px;margin-bottom:10px;"><img src="${escapeHtml(p.img)}" alt="" /></div>
+            <div class="form-group"><label class="form-label">Package Image URL</label><input class="form-input" id="pkg-img" value="${escapeHtml(p.img)}" /></div>
+            <div class="form-group"><label class="form-label">Package Name</label><input class="form-input" id="pkg-name" value="${escapeHtml(p.name)}" /></div>
+            <div class="admin-toggle-row"><span>Show on user site</span><button class="admin-switch ${p.enabled ? "on" : ""}" id="pkg-on" type="button" onclick="this.classList.toggle('on')"><i></i></button></div>
+            <h3 style="font-size:14px; font-weight:800; color:var(--cyan); margin:12px 0 8px;">Mission Ads, Referral & Commission</h3>
+            ${durs}
+            <button class="btn-primary" type="button" onclick="AdminPanel.savePackage('${id}')">SAVE</button>
+          </div>`;
+      },
+      async savePackage(id) {
+        if (!this.guard()) return;
+        const name = (document.getElementById("pkg-name").value || "").trim();
+        const img = (document.getElementById("pkg-img").value || "").trim();
+        const enabled = document.getElementById("pkg-on").classList.contains("on");
+        if (!name) { App.toast("Package name required"); return; }
+        if (img && !isHttpUrl(img)) { App.toast("Invalid image URL"); return; }
+        const durations = {};
+        for (let i = 0; i < PKG_DAYS.length; i++) {
+          const d = PKG_DAYS[i];
+          const reqAds = parseInt(document.getElementById("pkg-ads-" + d).value, 10);
+          const reqRefs = parseInt(document.getElementById("pkg-refs-" + d).value, 10);
+          const returnPct = parseFloat(document.getElementById("pkg-comm-" + d).value);
+          const usdtCost = parseFloat(document.getElementById("pkg-cost-" + d).value);
+          if ([reqAds, reqRefs, returnPct, usdtCost].some((n) => isNaN(n) || n < 0)) {
+            App.toast("Invalid values for " + d + " day package");
+            return;
+          }
+          durations[d] = { reqAds, reqRefs, returnPct, usdtCost, missionDailyUsd: SPEC_CONFIG[d].missionDailyUsd };
+        }
+        await fbSet("adminSettings/packages/" + id, { enabled, name, img, durations });
+        App.toast("Package saved");
       },
       async togglePackage(id, el) {
         el.classList.toggle("on");
         const enabled = el.classList.contains("on");
-        const t = CRYPTO_TOKENS.find((x) => x.id === id) || {};
-        await fbSet("adminSettings/packages/" + id, { enabled, name: t.name, img: t.img });
+        const p = packageRecord(id);
+        await fbSet("adminSettings/packages/" + id, Object.assign({}, p, { enabled, id: undefined }));
         App.toast(enabled ? "Package visible" : "Package hidden");
       },
       fillAds() {
@@ -7123,79 +7732,444 @@
       }
     };
 
+    function sbPips() {
+      return '<i class="pip p1"></i><i class="pip p2"></i><i class="pip p3"></i><i class="pip p4"></i><i class="pip p5"></i><i class="pip p6"></i><i class="pip p7"></i><i class="pip p8"></i><i class="pip p9"></i>';
+    }
+    function sbMini(n) {
+      const map = { 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6" };
+      return `<span class="sb-dots">${Array.from({ length: n }, (_, i) => "<i></i>").join("")}</span>`;
+    }
+    const SB_TOTAL_ODDS = { 4: 50, 5: 20, 6: 15, 7: 11, 8: 7, 9: 6, 10: 5, 11: 5, 12: 6, 13: 7, 14: 11, 15: 15, 16: 20, 17: 50 };
+    const SB_COMBOS = [[1,2],[1,3],[1,4],[1,5],[1,6],[2,3],[2,4],[2,5],[2,6],[3,4],[3,5],[3,6],[4,5],[4,6],[5,6]];
+
     const SicBoEngine = {
-      chip: 0.10, pickType: "small", busy: false,
+      chip: 0.10,
+      bets: {},
+      busy: false,
+      timer: 15,
+      clock: null,
+      history: [],
+      built: false,
       enter() {
-        document.body.classList.add("table-immersive");
+        document.body.classList.add("sb-immersive");
         GameSFX.unlock();
+        this.build();
         this.refresh();
+        this.startClock();
       },
       leave() {
-        document.body.classList.remove("table-immersive");
+        if (this.clock) { clearInterval(this.clock); this.clock = null; }
+        document.body.classList.remove("sb-immersive");
         App.navigate("view-casino");
+      },
+      startClock() {
+        if (this.clock) return;
+        this.timer = 15;
+        this.clock = setInterval(() => {
+          if (this.busy) return;
+          this.timer -= 1;
+          const el = document.getElementById("sb-timer");
+          if (el) el.innerText = String(Math.max(0, this.timer));
+          if (this.timer <= 0) this.timer = 15;
+        }, 1000);
+      },
+      dieHtml(id, n) {
+        return `<div class="sb-die on-${n}" id="${id}">${sbPips()}</div>`;
+      },
+      cell(key, html, extra) {
+        const amt = Number(this.bets[key] || 0);
+        return `<button class="sb-cell ${extra || ""} ${amt ? "has" : ""}" type="button" data-k="${key}" onclick="SicBoEngine.addBet('${key}')">${html}${amt ? `<span class="chip-amt">${amt.toFixed(2)}</span>` : ""}</button>`;
+      },
+      build() {
+        const root = document.getElementById("sicbo-root");
+        if (!root) return;
+        const chips = [
+          { v: 0.10, l: "10", c: "#16a34a" },
+          { v: 0.50, l: "50", c: "#2563eb" },
+          { v: 1, l: "100", c: "#7c3aed" },
+          { v: 5, l: "500", c: "#dc2626" },
+          { v: 10, l: "1K", c: "#ca8a04" },
+          { v: 50, l: "5K", c: "#111827" }
+        ];
+        const pairRow = [1,2,3,4,5,6].map((n) => this.cell("pair-" + n, sbMini(n) + sbMini(n))).join("");
+        const tripL = [1,2,3].map((n) => this.cell("trip-" + n, sbMini(n) + sbMini(n) + sbMini(n))).join("");
+        const tripR = [4,5,6].map((n) => this.cell("trip-" + n, sbMini(n) + sbMini(n) + sbMini(n))).join("");
+        const tot1 = [4,5,6,7,8,9,10].map((n) => this.cell("tot-" + n, `${n}<small>${SB_TOTAL_ODDS[n]}:1</small>`)).join("");
+        const tot2 = [11,12,13,14,15,16,17].map((n) => this.cell("tot-" + n, `${n}<small>${SB_TOTAL_ODDS[n]}:1</small>`)).join("");
+        const combos = SB_COMBOS.map(([a,b]) => this.cell("c-" + a + "-" + b, sbMini(a) + " " + sbMini(b))).join("");
+        const singles = [1,2,3,4,5,6].map((n) => this.cell("s-" + n, sbMini(n))).join("");
+        root.innerHTML = `
+          <div class="sb-head">
+            <div class="tg-back" onclick="SicBoEngine.leave()"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Lobby</div>
+            <div class="tg-bal" id="sicbo-bal">0.0000 USDT</div>
+          </div>
+          <div class="sb-title">Sic Bo</div>
+          <div class="sb-close"><span>BETS CLOSING</span><b id="sb-timer">${this.timer}</b></div>
+          <div class="sb-dome">
+            <div class="sb-glass"></div>
+            <div class="sb-dice">
+              ${this.dieHtml("die1", 3)}${this.dieHtml("die2", 5)}${this.dieHtml("die3", 2)}
+            </div>
+          </div>
+          <div class="sb-hist" id="sicbo-hist"></div>
+          <div class="sb-board">
+            <div class="sb-row" style="grid-template-columns:1fr 1fr 1fr 1fr;">
+              ${this.cell("small", "SMALL<small>4 - 10</small>")}
+              ${this.cell("odd", "ODD")}
+              ${this.cell("even", "EVEN")}
+              ${this.cell("big", "BIG<small>11 - 17</small>")}
+            </div>
+            <div class="sb-row" style="grid-template-columns:repeat(6,1fr);">${pairRow}</div>
+            <div class="sb-row" style="grid-template-columns:1fr 1fr 1fr 1.4fr 1fr 1fr 1fr;">
+              ${tripL}${this.cell("anytriple", "ANY TRIPLE<small>25:1</small>", "sb-any")}${tripR}
+            </div>
+            <div class="sb-row" style="grid-template-columns:repeat(7,1fr);">${tot1}</div>
+            <div class="sb-row" style="grid-template-columns:repeat(7,1fr);">${tot2}</div>
+            <div class="sb-row" style="grid-template-columns:repeat(5,1fr);">${combos}</div>
+            <div class="sb-row" style="grid-template-columns:repeat(6,1fr);">${singles}</div>
+          </div>
+          <div class="sb-chips">
+            ${chips.map((c, i) => `<button class="sb-chip ${this.chip === c.v ? "on" : ""}" style="background:${c.c}" type="button" onclick="SicBoEngine.setChip(${c.v})">${c.l}</button>`).join("")}
+          </div>
+          <div class="sb-foot">
+            <div class="sb-bal" id="sicbo-stake">Sic Bo · $ 0.00</div>
+            <button class="sb-place" id="sicbo-roll" type="button" onclick="SicBoEngine.roll()">Place Bet</button>
+          </div>
+          <div class="tg-status" id="sicbo-status">Place chips then Place Bet</div>
+        `;
+        this.renderHist();
+        this.built = true;
+        if (window.lucide) lucide.createIcons();
+      },
+      totalStake() {
+        return Object.keys(this.bets).reduce((s, k) => s + Number(this.bets[k] || 0), 0);
+      },
+      addBet(key) {
+        if (this.busy) return;
+        GameSFX.bet();
+        this.bets[key] = +(Number(this.bets[key] || 0) + this.chip).toFixed(4);
+        this.build();
+        this.refresh();
+      },
+      setChip(v) {
+        this.chip = v;
+        this.build();
+        this.refresh();
       },
       refresh() {
         const el = document.getElementById("sicbo-bal");
         if (el) el.innerText = (State.user.tokenBalances.usdt || 0).toFixed(4) + " USDT";
+        const st = document.getElementById("sicbo-stake");
+        if (st) st.innerText = "Sic Bo · $ " + this.totalStake().toFixed(2);
       },
-      setChip(v) {
-        this.chip = v;
-        document.querySelectorAll("#view-sicbo .chip").forEach((c) => c.classList.remove("on"));
-        if (window.event && window.event.currentTarget) window.event.currentTarget.classList.add("on");
-      },
-      pick(type) {
-        this.pickType = type;
-        document.querySelectorAll(".sic-bet").forEach((b) => b.classList.remove("on"));
-        if (window.event && window.event.currentTarget) window.event.currentTarget.classList.add("on");
+      renderHist() {
+        const el = document.getElementById("sicbo-hist");
+        if (!el) return;
+        el.innerHTML = (this.history || []).slice(0, 8).map((h) => `<span>${h.dice.join("-")} · ${h.total}${h.win > 0 ? " W" : ""}</span>`).join("");
       },
       setDie(el, n) {
-        el.className = "die on-" + n;
+        if (!el) return;
+        el.className = "sb-die on-" + n;
+      },
+      settle(d1, d2, d3) {
+        const dice = [d1, d2, d3];
+        const total = d1 + d2 + d3;
+        const counts = [0, 0, 0, 0, 0, 0, 0];
+        dice.forEach((x) => { counts[x] += 1; });
+        const triple = d1 === d2 && d2 === d3;
+        let win = 0;
+        Object.keys(this.bets).forEach((k) => {
+          const amt = Number(this.bets[k] || 0);
+          if (amt <= 0) return;
+          let pay = 0;
+          if (k === "small" && total >= 4 && total <= 10 && !triple) pay = amt * 2;
+          else if (k === "big" && total >= 11 && total <= 17 && !triple) pay = amt * 2;
+          else if (k === "odd" && total % 2 === 1 && !triple) pay = amt * 2;
+          else if (k === "even" && total % 2 === 0 && !triple) pay = amt * 2;
+          else if (k === "anytriple" && triple) pay = amt * 26;
+          else if (k.indexOf("trip-") === 0 && triple && counts[parseInt(k.slice(5), 10)] === 3) pay = amt * 151;
+          else if (k.indexOf("pair-") === 0 && counts[parseInt(k.slice(5), 10)] >= 2) pay = amt * 9;
+          else if (k.indexOf("tot-") === 0 && total === parseInt(k.slice(4), 10)) pay = amt * ((SB_TOTAL_ODDS[total] || 0) + 1);
+          else if (k.indexOf("c-") === 0) {
+            const p = k.split("-");
+            const a = parseInt(p[1], 10), b = parseInt(p[2], 10);
+            if (counts[a] >= 1 && counts[b] >= 1) pay = amt * 6;
+          } else if (k.indexOf("s-") === 0) {
+            const n = counts[parseInt(k.slice(2), 10)] || 0;
+            if (n === 1) pay = amt * 2;
+            if (n === 2) pay = amt * 3;
+            if (n === 3) pay = amt * 4;
+          }
+          win += pay;
+        });
+        return { total, triple, win: +win.toFixed(6) };
       },
       async roll() {
         if (this.busy) return;
-        const amt = Number(this.chip);
+        const amt = +this.totalStake().toFixed(4);
+        if (amt <= 0) { App.toast("Place chips first"); return; }
         const bal = Number(State.user.tokenBalances.usdt || 0);
         if (amt > bal + 1e-9) { App.toast("Need USDT"); return; }
         this.busy = true;
-        State.user.tokenBalances.usdt = +(bal - amt).toFixed(6);
-        await fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", State.user.tokenBalances.usdt);
+        GameSFX.roundStart();
+        const btn = document.getElementById("sicbo-roll");
+        if (btn) btn.disabled = true;
+        const txRes = await db.ref("users/" + State.user.telegramId + "/tokenBalances/usdt").transaction((cur) => {
+          const n = Number(cur || 0);
+          if (n + 1e-9 < amt) return;
+          return +((n - amt).toFixed(6));
+        });
+        if (!txRes.committed) {
+          this.busy = false;
+          if (btn) btn.disabled = false;
+          App.toast("Bet failed");
+          return;
+        }
+        State.user.tokenBalances.usdt = Number(txRes.snapshot.val() || 0);
         this.refresh();
         const d1 = 1 + Math.floor(Math.random() * 6);
         const d2 = 1 + Math.floor(Math.random() * 6);
         const d3 = 1 + Math.floor(Math.random() * 6);
         const dies = [document.getElementById("die1"), document.getElementById("die2"), document.getElementById("die3")];
-        dies.forEach((d) => d.classList.add("roll"));
+        dies.forEach((d) => { if (d) d.classList.add("roll"); });
         let n = 0;
         const spin = setInterval(() => {
           GameSFX.dice();
           dies.forEach((d) => this.setDie(d, 1 + Math.floor(Math.random() * 6)));
           n += 1;
-          if (n > 12) {
+          if (n > 14) {
             clearInterval(spin);
-            dies.forEach((d) => d.classList.remove("roll"));
+            dies.forEach((d) => { if (d) d.classList.remove("roll"); });
             this.setDie(dies[0], d1); this.setDie(dies[1], d2); this.setDie(dies[2], d3);
-            const total = d1 + d2 + d3;
-            const triple = d1 === d2 && d2 === d3;
-            let win = 0;
-            if (this.pickType === "small" && total >= 4 && total <= 10 && !triple) win = amt * 2;
-            if (this.pickType === "big" && total >= 11 && total <= 17 && !triple) win = amt * 2;
-            if (this.pickType === "odd" && total % 2 === 1 && !triple) win = amt * 2;
-            if (this.pickType === "even" && total % 2 === 0 && !triple) win = amt * 2;
-            if (this.pickType === "triple" && triple) win = amt * 31;
-            if (this.pickType === "total11" && total === 11) win = amt * 7;
+            const res = this.settle(d1, d2, d3);
             const st = document.getElementById("sicbo-status");
-            if (win > 0) {
-              State.user.tokenBalances.usdt = +(Number(State.user.tokenBalances.usdt) + win).toFixed(6);
-              fbSet("users/" + State.user.telegramId + "/tokenBalances/usdt", State.user.tokenBalances.usdt);
-              if (st) st.innerText = total + " · WIN +" + win.toFixed(2);
-              GameSFX.win();
-            } else {
-              if (st) st.innerText = total + " · LOSE";
-              GameSFX.lose();
+            (async () => {
+              if (res.win > 0) {
+                await db.ref("users/" + State.user.telegramId + "/tokenBalances/usdt").transaction((cur) => +((Number(cur || 0) + res.win).toFixed(6)));
+                State.user.tokenBalances.usdt = +(Number(State.user.tokenBalances.usdt) + res.win).toFixed(6);
+                if (st) st.innerText = res.total + " · WIN +" + res.win.toFixed(2);
+                GameSFX.win();
+              } else {
+                if (st) st.innerText = res.total + " · LOSE";
+                GameSFX.lose();
+              }
+              GameSFX.roundEnd();
+              const rec = { dice: [d1, d2, d3], total: res.total, stake: amt, win: res.win, timestamp: Date.now() };
+              this.history.unshift(rec);
+              this.history = this.history.slice(0, 20);
+              await fbPush("gameHistory/" + State.user.telegramId + "/sicbo", rec);
+              await fbPush("transactions/" + State.user.telegramId, {
+                type: res.win > 0 ? "SICBO_WIN" : "SICBO_BET",
+                desc: res.win > 0 ? ("Sic Bo +" + res.win.toFixed(4)) : ("Sic Bo -" + amt.toFixed(4)),
+                status: "COMPLETED",
+                timestamp: Date.now()
+              });
+              this.bets = {};
+              this.busy = false;
+              if (btn) btn.disabled = false;
+              this.build();
+              App.updateUI();
+              this.refresh();
+            })();
+          }
+        }, 90);
+      }
+    };
+
+    const JM_SYMS = [
+      { id: "club", name: "Club", color: "#111" },
+      { id: "crown", name: "Crown", color: "#111" },
+      { id: "spade", name: "Spade", color: "#111" },
+      { id: "diamond", name: "Diamond", color: "#b91c1c" },
+      { id: "flag", name: "Flag", color: "#111" },
+      { id: "heart", name: "Heart", color: "#b91c1c" }
+    ];
+    const JM_PAY = { 2: 2.5, 3: 5, 4: 10, 5: 20, 6: 100 };
+    function jmSvg(id, size) {
+      const s = size || 42;
+      if (id === "club") return `<svg viewBox="0 0 64 64" width="${s}" height="${s}"><circle cx="20" cy="28" r="11"/><circle cx="44" cy="28" r="11"/><circle cx="32" cy="16" r="11"/><rect x="28" y="30" width="8" height="22" rx="2"/><path d="M18 54h28l-8-10H26z"/></svg>`;
+      if (id === "crown") return `<svg viewBox="0 0 64 64" width="${s}" height="${s}"><path d="M8 48h48L52 22 40 34 32 12 24 34 12 22z" fill="#111"/><path d="M18 28l14-10 14 10-4 16H22z" fill="#b91c1c"/><rect x="14" y="48" width="36" height="6" rx="2"/><circle cx="32" cy="10" r="3"/></svg>`;
+      if (id === "spade") return `<svg viewBox="0 0 64 64" width="${s}" height="${s}"><path d="M32 6C18 22 8 30 8 40a16 16 0 0 0 32 4c0 8-4 12-8 14h-8c-4-2-8-6-8-14a16 16 0 0 0 32-4c0-10-10-18-24-34z"/><rect x="28" y="40" width="8" height="18"/></svg>`;
+      if (id === "diamond") return `<svg viewBox="0 0 64 64" width="${s}" height="${s}" fill="#b91c1c"><path d="M32 4 58 32 32 60 6 32z"/><circle cx="32" cy="32" r="7" fill="#fff"/></svg>`;
+      if (id === "flag") return `<svg viewBox="0 0 64 64" width="${s}" height="${s}"><path d="M12 58 28 8l8 6 16 40-10 4-10-28-8 22z"/><path d="M22 18h16l-4 14H20z" fill="#b91c1c"/><path d="M30 10h16l-4 14H28z" fill="#b91c1c"/></svg>`;
+      return `<svg viewBox="0 0 64 64" width="${s}" height="${s}" fill="#b91c1c"><path d="M32 58C10 40 6 28 14 18c6-8 14-4 18 4 4-8 12-12 18-4 8 10 4 22-18 40z"/><circle cx="24" cy="24" r="5" fill="#fff"/><circle cx="40" cy="24" r="5" fill="#fff"/></svg>`;
+    }
+
+    const JhandiEngine = {
+      chip: 0.10,
+      bets: {},
+      busy: false,
+      timer: 7,
+      clock: null,
+      history: [],
+      lastDice: null,
+      enter() {
+        document.body.classList.add("jm-immersive");
+        GameSFX.unlock();
+        this.build();
+        this.refresh();
+        if (this.clock) clearInterval(this.clock);
+        this.clock = setInterval(() => {
+          if (this.busy) return;
+          this.timer = this.timer <= 1 ? 7 : this.timer - 1;
+          const el = document.getElementById("jm-timer");
+          if (el) el.innerText = String(this.timer);
+        }, 1000);
+      },
+      leave() {
+        if (this.clock) { clearInterval(this.clock); this.clock = null; }
+        document.body.classList.remove("jm-immersive");
+        App.navigate("view-casino");
+      },
+      slots(id) {
+        const n = Math.min(5, Math.ceil(Number(this.bets[id] || 0) / this.chip));
+        return `<div class="jm-slots">${[0,1,2,3,4].map((i) => `<i class="${i < n ? "fill" : ""}">${i < n ? (i + 1) : "X"}</i>`).join("")}</div>`;
+      },
+      build() {
+        const root = document.getElementById("jhandi-root");
+        if (!root) return;
+        const chips = [
+          { v: 0.10, l: "1", c: "#16a34a" },
+          { v: 0.50, l: "5", c: "#2563eb" },
+          { v: 1, l: "10", c: "#7c3aed" },
+          { v: 5, l: "50", c: "#dc2626" },
+          { v: 10, l: "100", c: "#ca8a04" }
+        ];
+        const dice = (this.lastDice || ["club","crown","spade","diamond","flag","heart"]).map((id, i) => `<div class="jm-die" id="jm-die-${i}">${jmSvg(id, 30)}</div>`).join("");
+        root.innerHTML = `
+          <div class="sb-head">
+            <div class="tg-back" onclick="JhandiEngine.leave()"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Lobby</div>
+            <div class="tg-bal" id="jhandi-status">Place bets</div>
+          </div>
+          <div class="jm-title">Jhandi Munda</div>
+          <div class="jm-table">
+            <div class="jm-dice">${dice}</div>
+            <div class="jm-timer" id="jm-timer">${this.timer}</div>
+          </div>
+          <div class="jm-odds"><span><b>2</b>1:2.5</span><span><b>3</b>1:5</span><span><b>4</b>1:10</span><span><b>5</b>1:20</span><span><b>6</b>1:100</span></div>
+          <div class="jm-grid">
+            ${JM_SYMS.map((s) => `<button class="jm-cell ${this.bets[s.id] ? "on" : ""}" type="button" onclick="JhandiEngine.addBet('${s.id}')">${jmSvg(s.id, 42)}${this.slots(s.id)}</button>`).join("")}
+          </div>
+          <div class="jm-meta">
+            <div>Balance $ <span id="jhandi-bal">0.00</span></div>
+            <div>Total Bet $ <span id="jhandi-stake">0.00</span></div>
+          </div>
+          <div class="jm-chips">
+            ${chips.map((c) => `<button class="sb-chip ${this.chip === c.v ? "on" : ""}" style="background:${c.c}" type="button" onclick="JhandiEngine.setChip(${c.v})">${c.l}</button>`).join("")}
+          </div>
+          <button class="jm-roll" id="jhandi-roll" type="button" onclick="JhandiEngine.roll()">ROLL DICE</button>
+          <div class="jm-hist" id="jhandi-hist"></div>
+        `;
+        this.renderHist();
+        if (window.lucide) lucide.createIcons();
+      },
+      setChip(v) { this.chip = v; this.build(); this.refresh(); },
+      addBet(id) {
+        if (this.busy) return;
+        GameSFX.bet();
+        this.bets[id] = +(Number(this.bets[id] || 0) + this.chip).toFixed(4);
+        this.build();
+        this.refresh();
+      },
+      totalStake() {
+        return Object.keys(this.bets).reduce((s, k) => s + Number(this.bets[k] || 0), 0);
+      },
+      refresh() {
+        const el = document.getElementById("jhandi-bal");
+        if (el) el.innerText = (State.user.tokenBalances.usdt || 0).toFixed(2);
+        const st = document.getElementById("jhandi-stake");
+        if (st) st.innerText = this.totalStake().toFixed(2);
+      },
+      renderHist() {
+        const el = document.getElementById("jhandi-hist");
+        if (!el) return;
+        el.innerHTML = (this.history || []).slice(0, 8).map((h) => `<span>${h.win > 0 ? "W +" + h.win.toFixed(2) : "L"}</span>`).join("");
+      },
+      async roll() {
+        if (this.busy) return;
+        const amt = +this.totalStake().toFixed(4);
+        if (amt <= 0) { App.toast("Place chips first"); return; }
+        const bal = Number(State.user.tokenBalances.usdt || 0);
+        if (amt > bal + 1e-9) { App.toast("Need USDT"); return; }
+        this.busy = true;
+        GameSFX.roundStart();
+        const btn = document.getElementById("jhandi-roll");
+        if (btn) btn.disabled = true;
+        const txRes = await db.ref("users/" + State.user.telegramId + "/tokenBalances/usdt").transaction((cur) => {
+          const n = Number(cur || 0);
+          if (n + 1e-9 < amt) return;
+          return +((n - amt).toFixed(6));
+        });
+        if (!txRes.committed) {
+          this.busy = false;
+          if (btn) btn.disabled = false;
+          App.toast("Bet failed");
+          return;
+        }
+        State.user.tokenBalances.usdt = Number(txRes.snapshot.val() || 0);
+        this.refresh();
+        const result = [0,1,2,3,4,5].map(() => JM_SYMS[Math.floor(Math.random() * 6)].id);
+        let n = 0;
+        const spin = setInterval(() => {
+          GameSFX.dice();
+          for (let i = 0; i < 6; i++) {
+            const el = document.getElementById("jm-die-" + i);
+            if (el) {
+              el.classList.add("roll");
+              el.innerHTML = jmSvg(JM_SYMS[Math.floor(Math.random() * 6)].id, 30);
             }
-            App.updateUI();
-            this.refresh();
-            this.busy = false;
+          }
+          n += 1;
+          if (n > 14) {
+            clearInterval(spin);
+            for (let i = 0; i < 6; i++) {
+              const el = document.getElementById("jm-die-" + i);
+              if (el) {
+                el.classList.remove("roll");
+                el.innerHTML = jmSvg(result[i], 30);
+              }
+            }
+            const counts = {};
+            JM_SYMS.forEach((s) => { counts[s.id] = 0; });
+            result.forEach((id) => { counts[id] += 1; });
+            let win = 0;
+            Object.keys(this.bets).forEach((id) => {
+              const stake = Number(this.bets[id] || 0);
+              const c = counts[id] || 0;
+              const mult = JM_PAY[c] || 0;
+              if (mult) win += stake * mult;
+            });
+            win = +win.toFixed(6);
+            this.lastDice = result;
+            (async () => {
+              const st = document.getElementById("jhandi-status");
+              if (win > 0) {
+                await db.ref("users/" + State.user.telegramId + "/tokenBalances/usdt").transaction((cur) => +((Number(cur || 0) + win).toFixed(6)));
+                State.user.tokenBalances.usdt = +(Number(State.user.tokenBalances.usdt) + win).toFixed(6);
+                if (st) st.innerText = "WIN +" + win.toFixed(2);
+                GameSFX.win();
+              } else {
+                if (st) st.innerText = "LOSE";
+                GameSFX.lose();
+              }
+              GameSFX.roundEnd();
+              const rec = { dice: result, stake: amt, win, timestamp: Date.now() };
+              this.history.unshift(rec);
+              this.history = this.history.slice(0, 20);
+              await fbPush("gameHistory/" + State.user.telegramId + "/jhandi", rec);
+              await fbPush("transactions/" + State.user.telegramId, {
+                type: win > 0 ? "JHANDI_WIN" : "JHANDI_BET",
+                desc: win > 0 ? ("Jhandi +" + win.toFixed(4)) : ("Jhandi -" + amt.toFixed(4)),
+                status: "COMPLETED",
+                timestamp: Date.now()
+              });
+              this.bets = {};
+              this.busy = false;
+              if (btn) btn.disabled = false;
+              this.build();
+              App.updateUI();
+              this.refresh();
+            })();
           }
         }, 90);
       }
